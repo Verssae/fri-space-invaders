@@ -3,7 +3,7 @@
 This is a project that extends the [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders) clone ([RobertoIA/Invaders](https://github.com/RobertoIA/Invaders)).
 
 ## Teams
-_Thursday Class (22-2-23359)_
+_Friday Class (22-2-24469)_
 
 | No. | Name        | Members                     | Requirements      |   
 |-----|-------------|-----------------------------|-------------------|

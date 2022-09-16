@@ -8,7 +8,7 @@ _Friday Class (22-2-24469)_
 | No. | Name        | Members                     | Requirements      |   
 |-----|-------------|-----------------------------|-------------------|
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
-| 1    | [Apple Team](teams/Apple.md)            |                             |                   |
+| 1    | [Apple Team](teams/Apple.md)            | 박정빈, 준휘, 윤다빈, 양재호, 박준철                            |                   |
 
 
 ## Screenshots

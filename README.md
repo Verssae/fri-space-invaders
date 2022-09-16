@@ -8,11 +8,7 @@ _Friday Class (22-2-24469)_
 | No. | Name        | Members                     | Requirements      |   
 |-----|-------------|-----------------------------|-------------------|
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
-| 1    | [Jaeho Yang](https://github.com/Jae12ho/Jae12ho)            | Jaeho Yang                            |                   |
-| 2    | [Jaeho Yang](https://github.com/Jae12ho/Jae12ho)            | Jaeho Yang                            |                   |
-| 3    | [Jaeho Yang](https://github.com/Jae12ho/Jae12ho)            | Jaeho Yang                            |                   |
-| 4    | [Jaeho Yang](https://github.com/Jae12ho/Jae12ho)            | Jaeho Yang                            |                   |
-| 5    | [Jaeho Yang](https://github.com/Jae12ho/Jae12ho)            | Jaeho Yang                            |                   |
+| 1    | [Apple Team](teams/Apple.md)            |                             |                   |
 
 
 ## Screenshots

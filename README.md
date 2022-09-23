@@ -10,7 +10,7 @@ _Friday Class (22-2-24469)_
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
 | 1   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 3   |[Apple Team](teams/Apple.md)    | [박정빈](https://github.com/dev-jjjjjeong-bin/dev-jjjjjeong-bin), [김준휘](https://github.com/kimkimjunjun/kimkimjunjun), [윤다빈](https://github.com/Dabeen-Yun), [양재호](https://github.com/Jae12ho/Jae12ho), [박준철](https://github.com/qkrwnscjf/qkrwnscjf)          | Visual Effect System |
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |

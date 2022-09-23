@@ -9,7 +9,7 @@ _Friday Class (22-2-24469)_
 |-----|-------------|-----------------------------|-------------------|
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
 | 1   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 2   |[Team2](teams/team2.md)    | [JaeJung Doo](https://github.com/gbtwld/gbtwld.git), [Hun Yu](https://github.com/yu00hun/yu00hun), [Carlos Gomez](https://github.com/CarlosGomezT/CarlosGomezT.git), [Tungalagtuya](https://github.com/Tungaa0523/Tuya.git), nurin, [Shurenkhishig](https://github.com/shuree-sour/shuree-sour) | 뭔가를 넣으세요 |
+| 2   |[Team2](teams/team2.md)    | [JaeJung Doo](https://github.com/gbtwld/gbtwld.git), [Hun Yu](https://github.com/yu00hun/yu00hun), [Carlos Gomez](https://github.com/CarlosGomezT/CarlosGomezT.git), [Tungalagtuya](https://github.com/Tungaa0523/Tuya.git), [nurin](https://github.com/Nurin2001/Nurin2001.git), [Shurenkhishig](https://github.com/shuree-sour/shuree-sour) | 뭔가를 넣으세요 |
 | 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |

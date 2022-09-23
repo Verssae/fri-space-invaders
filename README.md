@@ -8,7 +8,15 @@ _Friday Class (22-2-24469)_
 | No. | Name        | Members                     | Requirements      |   
 |-----|-------------|-----------------------------|-------------------|
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
-| 5   | [team6](teams/team6.md) | [온호](https://github.com/1369187714/1369187714), 가보한, 양헌, 조성우| Various player ship&enemies |
+| 1   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 5   |[team6](teams/team6.md)    | [온호](https://github.com/1369187714/1369187714), [가보한](https://github.com/JIABAOHAN6/JIABAOHAN6),[ 양헌](https://github.com/YXUAN14/YXUAN14), [조성우](https://github.com/Zhaoshengyu2021/Zhaoshengyu2021.git)| Various player ship&enemies |
+| 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
+| 9   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 
 
 ## Screenshots

@@ -16,8 +16,8 @@ _Friday Class (22-2-24469)_
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
-[Jeong min Lee] (https://github.com/a-pho/a-pho)
-[Jaemin Kim] (https://github.com/Jaemin0730/Jaemin0730)
+[Jeong min Lee](https://github.com/a-pho/a-pho)
+[Jaemin Kim](https://github.com/Jaemin0730/Jaemin0730)
 | 9   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 
 

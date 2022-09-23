@@ -15,7 +15,9 @@ _Friday Class (22-2-24469)_
 | 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
+| 8   |[Team8](teams/team8.md)    | [Changhyun](https://github.com/Kid-Chang/Kid-Chang), 
+[cah]()
+          | 뭔가를 넣으세요 |
 | 9   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 
 

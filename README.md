@@ -12,7 +12,7 @@ _Friday Class (22-2-24469)_
 | 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 5   |[Team5](teams/team5.md)    | [이민구](https://github.com/dlalsrn/dlalsrn), 오예성, [오유정](https://github.com/21yuyu99/21yuyu99.git), 김민재, 권혁준           | Records System |
+| 5   |[Team5](teams/team5.md)    | [이민구](https://github.com/dlalsrn/dlalsrn), [오예성](https://github.com/yeseong33/yeseong33/blob/main/README.md), [오유정](https://github.com/21yuyu99/21yuyu99.git), 김민재, 권혁준           | Records System |
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 8   |[Team8](teams/team8.md)    | name,           | 뭔가를 넣으세요 |

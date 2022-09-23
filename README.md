@@ -12,11 +12,11 @@ _Friday Class (22-2-24469)_
 | 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 5   |[team6](teams/team6.md)    | [온호](https://github.com/1369187714/1369187714), [가보한](https://github.com/JIABAOHAN6/JIABAOHAN6),[ 양헌](https://github.com/YXUAN14/YXUAN14), [조성우](https://github.com/Zhaoshengyu2021/Zhaoshengyu2021.git)| Various player ship&enemies |
-| 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
-| 9   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 5   |[Team5](teams/team5.md)    | [이민구](https://github.com/dlalsrn/dlalsrn), [오예성](https://github.com/yeseong33/yeseong33/blob/main/README.md), [오유정](https://github.com/21yuyu99/21yuyu99.git), 김민재, 권혁준           | Records System |
+| 6   |[team6](teams/team6.md)    | [온호](https://github.com/1369187714/1369187714), [가보한](https://github.com/JIABAOHAN6/JIABAOHAN6),[ 양헌](https://github.com/YXUAN14/YXUAN14), [조성우](https://github.com/Zhaoshengyu2021/Zhaoshengyu2021.git)| Various player ship&enemies |
+| 7   |[Team7](teams/team7.md)    | [KimUjae](https://github.com/kimujae/kimujae),[Leesoobin](https://github.com/dahlia0916/dahlia0916), [LeeYena](https://github.com/TEDIII/TEDIII.git), [Noeunsol](https://github.com/Noeunsol/No-eunsol), [Parkyongsoo](https://github.com/yppp33/yppp33.git)        | Item System |
+| 8   |[Team8](teams/team8.md)    | [Changhyun Bak](https://github.com/Kid-Chang/Kid-Chang), [Jeong min Lee](https://github.com/a-pho/a-pho), [Jaemin Kim](https://github.com/Jaemin0730/Jaemin0730), [Minjun](https://github.com/iwtkmn0219), [Junho](https://github.com/rhdqor213/rhdqor213)   | Currency System | 
+| 9   |[Team9](teams/team9.md)   | [김택윤](https://github.com/GoodTY/GoodTY), [최수용](https://github.com/dpfprtus/dpfprtus), [박정혁](https://github.com/JHPark0906/JHPark0906), [정호일](https://github.com/lavi02), [장석준](https://github.com/JSeokjun/JSeokjun), [허재원](https://github.com/johnhuh619/johnhuh619) | [Level-Design-System](teams/team9.md) |
 
 
 ## Screenshots

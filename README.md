@@ -14,7 +14,7 @@ _Friday Class (22-2-24469)_
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 7   |[Team7](teams/team7.md)    | [KimUjae](https://github.com/kimujae/kimujae),[Leesoobin](https://github.com/dahlia0916/dahlia0916), [LeeYena](https://github.com/TEDIII/TEDIII.git), [Noeunsol](https://github.com/Noeunsol/No-eunsol), [Parkyongsoo](https://github.com/yppp33/yppp33.git)        | Item System |
 | 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
 | 9   |[Team9](teams/team9.md)    | [GoodTY](https://github.com/GoodTY/GoodTY)           | 뭔가를 넣으세요 |
 

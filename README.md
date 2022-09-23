@@ -8,7 +8,7 @@ _Friday Class (22-2-24469)_
 | No. | Name        | Members                     | Requirements      |   
 |-----|-------------|-----------------------------|-------------------|
 | 0   | [Instructors](teams/instructors.md) | Scott Uk-Jin Lee, [Hansae Ju](https://github.com/Verssae/Verssae) | Instruct students |  
-| 1   |[Team0](teams/team0.md)    | [김예준](https://github.com/dpwns/dpwns/blob/main/README.md),           | 뭔가를 넣으세요 |
+| 1   |[SoundSystem](teams/SoundSystem.md)    | [Byeunghee Choi](https://github.com/Byeunghee02/Byeunghee02), [김예준](https://github.com/dpwns/dpwns/blob/main/README.md),           | Provide dynamic sound effect, system sound effect, BGM |
 | 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |

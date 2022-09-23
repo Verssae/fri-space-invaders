@@ -11,7 +11,7 @@ _Friday Class (22-2-24469)_
 | 1   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 2   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 3   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
-| 4   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
+| 4   |[Team4](teams/team4.md)    | [Jinwoo Kim](https://github.com/KimJinWoo5602/KimJinWoo5602), | Main Menu |
 | 5   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |

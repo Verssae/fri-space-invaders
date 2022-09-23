@@ -16,7 +16,7 @@ _Friday Class (22-2-24469)_
 | 6   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 7   |[Team0](teams/team0.md)    | name,           | 뭔가를 넣으세요 |
 | 8   |[Team8](teams/team8.md)    | Changhyun,           | 뭔가를 넣으세요 |
-| 9   |[Team9](teams/team9.md)    | [GoodTY](https://github.com/GoodTY/GoodTY) [CSY](https://github.com/dpfprtus/dpfprtus )       | 뭔가를 넣으세요 |
+| 9   |[Team9](teams/team9.md)    | [김택윤](https://github.com/GoodTY/GoodTY) [최수용](https://github.com/dpfprtus/dpfprtus )       | 뭔가를 넣으세요 |
 
 
 ## Screenshots

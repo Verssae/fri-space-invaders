@@ -143,6 +143,18 @@ public final class Core {
 					frame.setScreen(currentScreen);
 					LOGGER.info("Closing game screen.");
 
+					/*
+					currentScreen = new GameSaveScreen(width, height, FPS, gamestate);
+					returnCode = frame.setScreen(currentScreen);
+					if (returnCode == 1){
+
+					}
+					else{
+
+					}
+
+					 */
+
 					gameState = ((GameScreen) currentScreen).getGameState();
 
 					gameState = new GameState(gameState.getLevel() + 1,

@@ -1,3 +1,4 @@
+
 package engine;
 
 import java.awt.Color;
@@ -288,10 +289,10 @@ public final class DrawManager {
 
 		backBufferGraphics.setColor(Color.GRAY);
 		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 2);
+				screen.getHeight() / 4);
 
 		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, titleString, screen.getHeight() / 3);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
 
 	/**
@@ -306,25 +307,49 @@ public final class DrawManager {
 		String playString = "Play";
 		String highScoresString = "High scores";
 		String exitString = "exit";
+		String setString = "setting";
+		String loadString = "load";
+		String storeString = "store";
+				
 
 		if (option == 2)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, playString,
-				screen.getHeight() / 3 * 2);
+				screen.getHeight() /2);
 		if (option == 3)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, highScoresString, screen.getHeight()
-				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
+				/ 2 + fontRegularMetrics.getHeight() * 2);
+		if (option == 4)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, storeString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 4);
+		if (option == 5)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, loadString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 6);
+		if (option == 6)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, setString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 8);
+		
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, exitString, screen.getHeight() / 3
-				* 2 + fontRegularMetrics.getHeight() * 4);
+		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 10);
+		
 	}
 
 	/**
@@ -462,6 +487,20 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GRAY);
 		drawCenteredRegularString(screen, instructionsString,
 				screen.getHeight() / 5);
+	}
+	
+	//Draw Setting
+	public void drawSettingMenu(final Screen screen) {
+		String volumeString = "VOLUME";
+		String screenSizeString = "SCREEN SIZE";
+		
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, volumeString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, screenSizeString,
+				screen.getHeight() / 5);
+		
 	}
 
 	/**

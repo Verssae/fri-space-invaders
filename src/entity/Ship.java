@@ -21,7 +21,9 @@ public class Ship extends Entity {
 	private static final int BULLET_SPEED = -6;
 	/** Movement of the ship for each unit of time. */
 	private static final int SPEED = 2;
-	
+	/** The level of the ship. */
+	private static final int shipLevel = 1;
+
 	/** Minimum time between shots. */
 	private Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
@@ -41,6 +43,14 @@ public class Ship extends Entity {
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);
+	}
+
+	/**
+	 *	get level of ship
+	 * @return shipLevel
+	 */
+	public int getShipLevel(){
+		return this.shipLevel;
 	}
 
 	/**

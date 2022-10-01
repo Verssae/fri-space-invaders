@@ -54,6 +54,7 @@ public final class DrawManager {
 	public static enum SpriteType {
 		/** Player ship. */
 		Ship,
+		Ship_2,
 		/** Destroyed player ship. */
 		ShipDestroyed,
 		/** Player bullet. */

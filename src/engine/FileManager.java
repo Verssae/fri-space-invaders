@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
+import engine.DrawManager;
 
 /**
  * Manages files used in the application.
@@ -37,6 +38,8 @@ public final class FileManager {
 	private static Logger logger;
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
+	/** get shipLevel from DrawManager. */
+	public static int shipLevel = DrawManager.getShipLevel();
 
 	/**
 	 * private constructor.
@@ -70,8 +73,15 @@ public final class FileManager {
 		InputStream inputStream = null;
 
 		try {
+			String graphicsName;
+			if(shipLevel == 0){
+				graphicsName = "graphics";
+			}else if(shipLevel == 1){
+				graphicsName = "graphics_1";
+			}else
+				graphicsName = "graphics_2";
 			inputStream = DrawManager.class.getClassLoader()
-					.getResourceAsStream("graphics");
+					.getResourceAsStream(graphicsName);
 			char c;
 
 			// Sprite loading.

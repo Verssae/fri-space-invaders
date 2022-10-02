@@ -4,16 +4,8 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.GameSettings;
-import engine.GameState;
-import entity.Bullet;
-import entity.BulletPool;
-import entity.EnemyShip;
-import entity.EnemyShipFormation;
-import entity.Entity;
-import entity.Ship;
+import engine.*;
+import entity.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -71,6 +63,12 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
+	private ItemManager itemmanager;
+
+	private Item item;
+
+	private ItemPool itempool;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -101,6 +99,8 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
+		this.itemmanager = new ItemManager();
+		this.itempool = new ItemPool();
 	}
 
 	/**
@@ -110,6 +110,7 @@ public class GameScreen extends Screen {
 		super.initialize();
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
+		itemmanager.assignHasItem(enemyShipFormation);
 		enemyShipFormation.attach(this);
 		this.ship = new Ship(this.width / 2, this.height - 30);
 		// Appears each 10-30 seconds.
@@ -193,8 +194,14 @@ public class GameScreen extends Screen {
 			this.ship.update();
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
-		}
 
+			if(this.item != null) {
+				this.item.update();
+			}
+		}
+		if(this.item != null) {
+			manageGetItem();
+		}
 		manageCollisions();
 		cleanBullets();
 		draw();
@@ -215,6 +222,11 @@ public class GameScreen extends Screen {
 	 */
 	private void draw() {
 		drawManager.initDrawing(this);
+
+		if(this.item != null) {
+			drawManager.drawEntity(this.item, this.item.getPositionX(),
+					this.item.getPositionY());
+		}
 
 		drawManager.drawEntity(this.ship, this.ship.getPositionX(),
 				this.ship.getPositionY());
@@ -287,6 +299,13 @@ public class GameScreen extends Screen {
 							&& checkCollision(bullet, enemyShip)) {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
+
+						if(enemyShip.getItemType() != null) {
+							this.item = enemyShip.itemDrop();
+							item.setSprite();
+							item.drop();
+						}
+
 						this.enemyShipFormation.destroy(enemyShip);
 						recyclable.add(bullet);
 					}
@@ -337,5 +356,36 @@ public class GameScreen extends Screen {
 	public final GameState getGameState() {
 		return new GameState(this.level, this.score, this.lives,
 				this.bulletsShot, this.shipsDestroyed);
+	}
+
+
+	private void manageGetItem(){
+		if(checkCollision(this.item, this.ship) && !this.levelFinished){
+
+			//
+			item.isGet(true);
+			item.setSprite();
+			//
+
+			itempool.add(this.item);
+
+			if(itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
+				System.out.println("총알속도아이템");
+				this.ship.setBulletSpeed(-9);//-6보다 큰 음수값
+				this.ship.setShootingInterval(200);//750보다 작은 양수값
+			}
+			else if(itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
+				System.out.println("포인트업아이템");
+			}
+			else if(itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
+				System.out.println("방어아이템");
+			}
+			else if(itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
+				System.out.println("스피드업아이템");
+			}
+			else if(itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
+				System.out.println("생명추가아이템");
+			}
+		}
 	}
 }

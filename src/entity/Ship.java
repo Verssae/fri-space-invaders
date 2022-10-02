@@ -62,7 +62,7 @@ public class Ship extends Entity {
 	public Ship(final int positionX, final int positionY, char shipLevel) {
 		super(positionX, positionY, 13 * 2, 8 * 2, Color.darkGray);
 
-		this.SHOOTING_INTERVAL = 50;
+		this.SHOOTING_INTERVAL = 650;
 		this.BULLET_SPEED = -8;
 		this.SPEED = 3;
 		this.shipLevel = 2;

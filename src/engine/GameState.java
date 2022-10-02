@@ -88,7 +88,9 @@ public class GameState {
 
 
 	public void setCoin(int coin) {
-		coin = this.score * 10;
+		coin = this.score - 500;
+		// 왜 500을 빼지? 
+		// -> 1단계를 깨면 주는 점수가 600, 2단계를 깨면 주는 점수가 1050 등등이니까 500을 빼서 시작 +100, + 550 등등으로 하고자 한다!
 		this.coin += coin;
 	}
 }

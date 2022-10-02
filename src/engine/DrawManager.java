@@ -108,7 +108,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 
-			fileManager.loadSprite(spriteMap, shipLevel);
+			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 
 			// Font loading.

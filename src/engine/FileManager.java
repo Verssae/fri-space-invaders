@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
+import engine.DrawManager;
 
 /**
  * Manages files used in the application.
@@ -37,6 +38,8 @@ public final class FileManager {
 	private static Logger logger;
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
+	/** get shipLevel from DrawManager. */
+	public static int shipLevel = DrawManager.getShipLevel();
 
 	/**
 	 * private constructor.
@@ -65,7 +68,7 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	public void loadSprite(final Map<SpriteType, boolean[][]> spriteMap, int shipLevel)
+	public void loadSprite(final Map<SpriteType, boolean[][]> spriteMap)
 			throws IOException {
 		InputStream inputStream = null;
 

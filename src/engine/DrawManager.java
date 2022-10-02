@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -50,6 +51,10 @@ public final class DrawManager {
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
+
+	/** Random shipLevel. */
+	private static int shipLevel = new Random().nextInt(3);
+
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -116,6 +121,10 @@ public final class DrawManager {
 		} catch (FontFormatException e) {
 			logger.warning("Font formating failed.");
 		}
+	}
+
+	public static int getShipLevel() {
+		return shipLevel;
 	}
 
 	/**
@@ -256,7 +265,13 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
-		Ship dummyShip = new Ship(0, 0);
+		Ship dummyShip;
+		if(shipLevel == 0)
+			dummyShip = new Ship(0, 0);
+		else if(shipLevel == 1)
+			dummyShip = new Ship(0, 0, shipLevel);
+		else
+			dummyShip = new Ship(0, 0, (char)('0'+shipLevel));
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}

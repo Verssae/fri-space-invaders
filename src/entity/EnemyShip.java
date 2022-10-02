@@ -30,6 +30,10 @@ public class EnemyShip extends Entity {
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
 
+	private Item.ItemType itemtype;
+
+	private static int hasItem ;
+
 	/**
 	 * Constructor, establishes the ship's properties.
 	 * 
@@ -78,6 +82,30 @@ public class EnemyShip extends Entity {
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
 	}
+
+	public void setHasItem(int setHasItem){
+
+	}
+
+	public int getHasItem(){
+		return 0;
+	}
+
+	public void setItemType(Item.ItemType itemtype){
+
+	}
+
+	public Item.ItemType getItemType(){
+
+		return this.itemtype;
+	}
+
+	public Item itemDrop(){
+
+		return new Item(0,0, 0,this.getItemType());
+	}
+
+
 
 	/**
 	 * Getter for the score bonus if this ship is destroyed.

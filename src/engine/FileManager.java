@@ -65,13 +65,20 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	public void loadSprite(final Map<SpriteType, boolean[][]> spriteMap)
+	public void loadSprite(final Map<SpriteType, boolean[][]> spriteMap, int shipLevel)
 			throws IOException {
 		InputStream inputStream = null;
 
 		try {
+			String graphicsName;
+			if(shipLevel == 0){
+				graphicsName = "graphics";
+			}else if(shipLevel == 1){
+				graphicsName = "graphics_1";
+			}else
+				graphicsName = "graphics_2";
 			inputStream = DrawManager.class.getClassLoader()
-					.getResourceAsStream("graphics");
+					.getResourceAsStream(graphicsName);
 			char c;
 
 			// Sprite loading.

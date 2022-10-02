@@ -16,13 +16,13 @@ import engine.DrawManager.SpriteType;
 public class Ship extends Entity {
 
 	/** Time between shots. */
-	private static final int SHOOTING_INTERVAL = 750;
+	private static int SHOOTING_INTERVAL;
 	/** Speed of the bullets shot by the ship. */
-	private static final int BULLET_SPEED = -6;
+	private static int BULLET_SPEED;
 	/** Movement of the ship for each unit of time. */
-	private static final int SPEED = 2;
+	private static int SPEED;
 	/** The level of the ship. */
-	private static final int shipLevel = 1;
+	private static int shipLevel;
 
 	/** Minimum time between shots. */
 	private Cooldown shootingCooldown;
@@ -40,6 +40,32 @@ public class Ship extends Entity {
 	public Ship(final int positionX, final int positionY) {
 		super(positionX, positionY, 13 * 2, 8 * 2, Color.GREEN);
 
+		this.SHOOTING_INTERVAL = 750;
+		this.BULLET_SPEED = -6;
+		this.SPEED = 2;
+		this.shipLevel = 0;
+		this.spriteType = SpriteType.Ship;
+		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
+		this.destructionCooldown = Core.getCooldown(1000);
+	}
+	public Ship(final int positionX, final int positionY, int shipLevel) {
+        super(positionX, positionY, 13 * 2, 8 * 2, Color.BLUE);
+
+		this.SHOOTING_INTERVAL = 700;
+		this.BULLET_SPEED = -6;
+		this.SPEED = 3;
+		this.shipLevel = 1;
+		this.spriteType = SpriteType.Ship;
+		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
+		this.destructionCooldown = Core.getCooldown(1000);
+    }
+	public Ship(final int positionX, final int positionY, char shipLevel) {
+		super(positionX, positionY, 13 * 2, 8 * 2, Color.darkGray);
+
+		this.SHOOTING_INTERVAL = 50;
+		this.BULLET_SPEED = -8;
+		this.SPEED = 3;
+		this.shipLevel = 2;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);

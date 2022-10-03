@@ -37,33 +37,32 @@ public class Item extends Entity {
 
 
 
-        public void update () {
 
-        }
-
-
-
-        public void setSprite () {
-
-        }
-
-        public void isGet(boolean bool){
-
-
-        }
-
-
-        public void drop(){
-
-        }
+    public void update () {this.positionY += this.speed;}
 
 
 
-        public ItemType getItemType(){
+    public void setSprite () {
+        if (!this.isget)
+            this.spriteType = DrawManager.SpriteType.ItemDrop;
+        else
+            this.spriteType = DrawManager.SpriteType.ItemGet;
+    }
 
+    public void isGet(boolean bool){
+        this.isget = bool;
+    }
+
+
+    public void drop(){
+
+    }
+
+
+
+    public ItemType getItemType(){
         return this.itemtype;
-
-        }
+    }
 
 
     }

@@ -13,7 +13,17 @@ import engine.DrawManager.SpriteType;
  * 
  */
 public class EnemyShip extends Entity {
-	
+
+	//추가
+	private Item.ItemType itemtype;
+
+	private static int hasItem ;
+	/** Point value of a type A enemy. */
+	//
+
+
+
+
 	/** Point value of a type A enemy. */
 	private static final int A_TYPE_POINTS = 10;
 	/** Point value of a type B enemy. */
@@ -30,10 +40,6 @@ public class EnemyShip extends Entity {
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
 
-	private Item.ItemType itemtype;
-
-	private static int hasItem ;
-
 	/**
 	 * Constructor, establishes the ship's properties.
 	 * 
@@ -47,6 +53,12 @@ public class EnemyShip extends Entity {
 	public EnemyShip(final int positionX, final int positionY,
 			final SpriteType spriteType) {
 		super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
+
+		//추가
+		this.itemtype = null;
+		this.hasItem = 0;
+		//
+
 
 		this.spriteType = spriteType;
 		this.animationCooldown = Core.getCooldown(500);
@@ -71,6 +83,32 @@ public class EnemyShip extends Entity {
 		}
 	}
 
+
+	//추가
+	public void setHasItem(int setHasItem){
+		this.hasItem = setHasItem;
+	}
+
+	public int getHasItem(){
+		return this.hasItem;
+	}
+
+	public void setItemType(Item.ItemType itemtype){
+		this.itemtype = itemtype;
+	}
+
+	public Item.ItemType getItemType(){
+		return this.itemtype;
+	}
+
+	public Item itemDrop(){
+
+		return new Item(this.getPositionX(),this.getPositionY(), 2 ,this.getItemType());
+	}
+
+	//추가
+
+
 	/**
 	 * Constructor, establishes the ship's properties for a special ship, with
 	 * known starting properties.
@@ -82,30 +120,6 @@ public class EnemyShip extends Entity {
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
 	}
-
-	public void setHasItem(int setHasItem){
-
-	}
-
-	public int getHasItem(){
-		return 0;
-	}
-
-	public void setItemType(Item.ItemType itemtype){
-
-	}
-
-	public Item.ItemType getItemType(){
-
-		return this.itemtype;
-	}
-
-	public Item itemDrop(){
-
-		return new Item(0,0, 0,this.getItemType());
-	}
-
-
 
 	/**
 	 * Getter for the score bonus if this ship is destroyed.

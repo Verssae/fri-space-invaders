@@ -406,6 +406,7 @@ public class GameScreen extends Screen {
 			}
 			else if(itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
 				System.out.println("스피드업아이템");
+				this.ship.setShipSpeed(2 * ship.getSpeed());
 			}
 			else if(itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
 				System.out.println("생명추가아이템");

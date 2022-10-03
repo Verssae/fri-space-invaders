@@ -90,6 +90,10 @@ public class Ship extends Entity {
 
 	}
 
+	public void setShipSpeed(int setshipspeed){
+
+		SPEED = setshipspeed;
+	}
 
 	/**
 	 * Moves the ship speed uni ts right, or until the right screen border is

@@ -278,4 +278,22 @@ public final class FileManager {
 				bufferedWriter.close();
 		}
 	}
+
+	private int loadDefaultCoins() throws IOException {
+		int savedCoins = 0;
+		InputStream inputStream = null;
+		BufferedReader reader = null;
+		try {
+			inputStream = FileManager.class.getClassLoader()
+					.getResourceAsStream("coins");
+			reader = new BufferedReader(new InputStreamReader(inputStream));
+
+			savedCoins = Integer.parseInt(reader.readLine());
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+
+		return savedCoins;
+	}
 }

@@ -296,4 +296,37 @@ public final class FileManager {
 
 		return savedCoins;
 	}
+
+	public int loadCoins() throws IOException {
+		int savedCoins = 0;
+		InputStream inputStream = null;
+		BufferedReader bufferedReader = null;
+
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
+			String coinsPath = new File(jarPath).getParent();
+			coinsPath += File.separator;
+			coinsPath += "coins";
+
+			File coinsFile = new File(coinsPath);
+			inputStream = new FileInputStream(coinsFile);
+			bufferedReader = new BufferedReader(new InputStreamReader(
+					inputStream, Charset.forName("UTF-8")));
+
+			logger.info("Loading user coins");
+
+			savedCoins = Integer.parseInt(bufferedReader.readLine());
+		} catch (FileNotFoundException e) {
+			logger.info("Loading default coins.");
+			savedCoins = loadDefaultCoins();
+		} finally {
+			if (bufferedReader != null)
+				bufferedReader.close();
+		}
+
+		return savedCoins;
+	}
 }

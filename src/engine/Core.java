@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -14,6 +15,8 @@ import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
 import screen.GameSaveScreen;
+import screen.SettingScreen;
+import screen.VolumeScreen;
 
 /**
  * Implements core game logic.
@@ -175,6 +178,32 @@ public final class Core {
 				break;
 			default:
 				break;
+				
+			case 4:// Store
+				break;
+				
+
+			case 5:// Load
+				break;
+
+				
+			case 6:
+				// Setting.
+				currentScreen = new SettingScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing setting screen.");
+				break;
+				
+			case 7: //Help
+				break;
+				
+			case 8: //Volume
+				break;
+
+
+
 			}
 
 		} while (returnCode != 0);

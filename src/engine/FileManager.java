@@ -329,4 +329,35 @@ public final class FileManager {
 
 		return savedCoins;
 	}
+
+	public void saveCoins(final int coins) throws IOException {
+		OutputStream outputStream = null;
+		BufferedWriter bufferedWriter = null;
+
+		try	{
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
+			String coinsPath = new File(jarPath).getParent();
+			coinsPath += File.separator;
+			coinsPath += "scores";
+
+			File coinsFile = new File(coinsPath);
+
+			if (!coinsFile.exists())
+				coinsFile.createNewFile();
+
+			outputStream = new FileOutputStream(coinsFile);
+			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+					outputStream, Charset.forName("UTF-8")));
+
+			logger.info("Saving coins");
+
+			bufferedWriter.write(coins);
+		} finally {
+			if (bufferedWriter != null)
+				bufferedWriter.close();
+		}
+	}
 }

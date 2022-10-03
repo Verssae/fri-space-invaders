@@ -20,7 +20,7 @@ public class Ship extends Entity {
 	/** Speed of the bullets shot by the ship. */
 	private static int BULLET_SPEED;
 	/** Movement of the ship for each unit of time. */
-	private static int SPEED;
+	private double SPEED;
 	/** The level of the ship. */
 	private static int shipLevel;
 
@@ -90,7 +90,7 @@ public class Ship extends Entity {
 
 	}
 
-	public void setShipSpeed(int setshipspeed){
+	public void setShipSpeed(double setshipspeed){
 
 		SPEED = setshipspeed;
 	}
@@ -159,7 +159,7 @@ public class Ship extends Entity {
 	 * 
 	 * @return Speed of the ship.
 	 */
-	public final int getSpeed() {
+	public final double getSpeed() {
 		return SPEED;
 	}
 }

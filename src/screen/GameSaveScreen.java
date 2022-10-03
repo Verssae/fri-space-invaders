@@ -16,8 +16,6 @@ public class GameSaveScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
 
-    private static Graphics backBufferGraphics;
-
     /** Current score */
     private int score;
 

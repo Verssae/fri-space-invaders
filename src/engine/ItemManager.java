@@ -52,7 +52,7 @@ public class ItemManager {
 
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
-                    if (Math.random()*10 + 1 < 2.1) {//확률
+                    if (Math.random()*10 + 1 < 2.1) {
                         random[i][j] = 1;
                     } else random[i][j] = 0;
                 }

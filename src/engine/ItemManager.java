@@ -93,6 +93,12 @@ public class ItemManager {
             /*
             아이템타입의 리스트
              */
+            item_list.add(pointupitem);
+            item_list.add(speedupitem);
+            item_list.add(shielditem);
+            item_list.add(extralifeitem);
+            item_list.add(bulletspeeditem);
+
         }
 
         private void addqueue () {
@@ -100,6 +106,11 @@ public class ItemManager {
             /*
             아이템타입들이 셔플된 큐
              */
+            item_queue.add(this.item_list.get(0));
+            item_queue.add(this.item_list.get(1));
+            item_queue.add(this.item_list.get(2));
+            item_queue.add(this.item_list.get(3));
+            item_queue.add(this.item_list.get(4));
         }
 
 

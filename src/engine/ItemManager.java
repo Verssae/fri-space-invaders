@@ -51,6 +51,7 @@ public class ItemManager {
             /*enemyshipformation의 enemyship의 hasItem값이 1이면 item_queue에서 아이템타입 할당
              */
             //
+          //  ggggg
         }
 
 

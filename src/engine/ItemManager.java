@@ -43,6 +43,33 @@ public class ItemManager {
               1이면 hasItem
               30퍼센트의 적이 hasItem값 할당
              */
+            enemyshipssize = enemyshipformation.getEnemyShip().size();
+            final int nShipsWide = enemyshipformation.getnshipsWide();
+            final int nShipsHigh = enemyshipformation.getnShipsHigh();
+
+            Integer[][] random = new Integer[nShipsWide][nShipsHigh];
+
+
+            for (int i = 0; i < nShipsWide; i++) {
+                for (int j = 0; j < nShipsHigh; j++) {
+                    if (Math.random()*10 + 1 < 2.1) {//확률
+                        random[i][j] = 1;
+                    } else random[i][j] = 0;
+                }
+            }
+
+            for (int i = 0; i < nShipsWide; i++) {
+                for (int j = 0; j < nShipsHigh; j++) {
+                    if (random[i][j] == 1) {
+                        // System.out.println("랜덤 1인 경우"); //디버그용
+                        enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(1);
+                        this. assignItem(enemyshipformation, i , j);
+                    }
+                    else enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(0);
+                    System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem());//로그추가
+                }
+
+            }
 
         }
 

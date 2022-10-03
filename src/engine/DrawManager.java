@@ -1,3 +1,4 @@
+
 package engine;
 
 import java.awt.Color;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -49,6 +51,10 @@ public final class DrawManager {
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
+
+	/** Random shipLevel. */
+	private static int shipLevel = new Random().nextInt(3);
+
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -115,6 +121,10 @@ public final class DrawManager {
 		} catch (FontFormatException e) {
 			logger.warning("Font formating failed.");
 		}
+	}
+
+	public static int getShipLevel() {
+		return shipLevel;
 	}
 
 	/**
@@ -255,7 +265,13 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
-		Ship dummyShip = new Ship(0, 0);
+		Ship dummyShip;
+		if(shipLevel == 0)
+			dummyShip = new Ship(0, 0);
+		else if(shipLevel == 1)
+			dummyShip = new Ship(0, 0, shipLevel);
+		else
+			dummyShip = new Ship(0, 0, (char)('0'+shipLevel));
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}
@@ -288,10 +304,10 @@ public final class DrawManager {
 
 		backBufferGraphics.setColor(Color.GRAY);
 		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 2);
+				screen.getHeight() / 4);
 
 		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, titleString, screen.getHeight() / 3);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
 
 	/**
@@ -306,25 +322,49 @@ public final class DrawManager {
 		String playString = "Play";
 		String highScoresString = "High scores";
 		String exitString = "exit";
+		String setString = "setting";
+		String loadString = "load";
+		String storeString = "store";
+				
 
 		if (option == 2)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, playString,
-				screen.getHeight() / 3 * 2);
+				screen.getHeight() /2);
 		if (option == 3)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, highScoresString, screen.getHeight()
-				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
+				/ 2 + fontRegularMetrics.getHeight() * 2);
+		if (option == 4)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, storeString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 4);
+		if (option == 5)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, loadString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 6);
+		if (option == 6)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, setString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 8);
+		
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, exitString, screen.getHeight() / 3
-				* 2 + fontRegularMetrics.getHeight() * 4);
+		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
+				 2 + fontRegularMetrics.getHeight() * 10);
+		
 	}
 
 	/**
@@ -463,6 +503,20 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, instructionsString,
 				screen.getHeight() / 5);
 	}
+	
+	//Draw Setting
+	public void drawSettingMenu(final Screen screen) {
+		String volumeString = "VOLUME";
+		String screenSizeString = "SCREEN SIZE";
+		
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, volumeString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, screenSizeString,
+				screen.getHeight() / 5);
+		
+	}
 
 	/**
 	 * Draws high scores.
@@ -559,4 +613,24 @@ public final class DrawManager {
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
 	}
+
+	public void drawStageClearScreen(final Screen screen, final int option){
+		String continueString = "Continue";
+		String saveString = "Save & Exit";
+
+		if(option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, continueString,
+				screen.getHeight() / 3 * 2);
+
+		if(option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, saveString,
+				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
+	}
+
 }

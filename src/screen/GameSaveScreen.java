@@ -1,9 +1,11 @@
 package screen;
 
 import java.awt.event.KeyEvent;
+import java.awt.Graphics;
 
 import engine.Cooldown;
 import engine.Core;
+import engine.GameState;
 
 public class GameSaveScreen extends Screen {
 
@@ -14,6 +16,14 @@ public class GameSaveScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
 
+    private static Graphics backBufferGraphics;
+
+    /** Current score */
+    private int score;
+
+    /** Current lives remaining */
+    private int lives;
+
     /**
      * Constructor, establishes the properties of the screen.
      *
@@ -21,8 +31,11 @@ public class GameSaveScreen extends Screen {
      * @param height Screen height.
      * @param fps    Frames per second, frame rate at which the game is run.
      */
-    public GameSaveScreen(final int width, final int height, final int fps) {
+    public GameSaveScreen(final GameState gameState, final int width, final int height, final int fps) {
         super(width, height, fps);
+
+        this.score = gameState.getScore();
+        this.lives = gameState.getLivesRemaining();
 
         // Defaults to play.
         this.returnCode = 1;
@@ -79,8 +92,13 @@ public class GameSaveScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
 
-        drawManager.drawTitle(this);
-        drawManager.drawMenu(this, this.returnCode);
+        drawManager.drawScore(this, this.score);
+        drawManager.drawLives(this, this.lives);
+        drawManager.drawHorizontalLine(this, 39);
+
+        drawManager.drawCenteredBigString(this, "Stage clear", this.getHeight() / 3);
+
+        drawManager.drawStageClearScreen(this, this.returnCode);
 
         drawManager.completeDrawing(this);
     }

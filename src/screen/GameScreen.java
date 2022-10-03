@@ -83,6 +83,8 @@ public class GameScreen extends Screen {
 
 	private ItemPool itempool;
 
+	private Item toggle = null;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -229,7 +231,6 @@ public class GameScreen extends Screen {
 		manageCollisions();
 		cleanBullets();
 		draw();
-
 		if ((this.enemyShipFormation.isEmpty() || this.lives == 0)
 				&& !this.levelFinished) {
 			this.levelFinished = true;
@@ -386,30 +387,53 @@ public class GameScreen extends Screen {
 	private void manageGetItem(){
 		if(checkCollision(this.item, this.ship) && !this.levelFinished){
 
-			//
+
 			item.isGet(true);
 			item.setSprite();
-			//
-
 			itempool.add(this.item);
 
-			if(itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
+			if(toggle != this. item &&
+					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
 				System.out.println("총알속도아이템");
-				this.ship.setBulletSpeed(-9);//-6보다 큰 음수값
-				this.ship.setShootingInterval(200);//750보다 작은 양수값
+
+				//코드를 추가해주세요
+
+				//
+
+				toggle = this.item;
+
 			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
-				System.out.println("포인트업아이템");
+			else if(toggle != this. item &&
+					itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
+				     System.out.println("포인트업아이템");
+				//코드를 추가해주세요
+
+				//
+					 toggle = this.item;
 			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
+			else if(toggle != this. item &&
+					itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
 				System.out.println("방어아이템");
+				//코드를 추가해주세요
+
+				//
+				toggle = this.item;
 			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
-				System.out.println("스피드업아이템");
-				this.ship.setShipSpeed(2 * ship.getSpeed());
+			else if(toggle != this. item &&
+					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
+				//코드를 추가해주세요
+					System.out.println("스피드업아이템");
+					this.ship.setShipSpeed(2 * ship.getSpeed());
+					//
+				toggle = this.item;
 			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
+			else if(toggle != this. item &&
+					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
 				System.out.println("생명추가아이템");
+				//코드를 추가해주세요
+
+				//
+				toggle = this.item;
 			}
 		}
 	}

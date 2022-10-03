@@ -4,10 +4,9 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
-<<<<<<< HEAD
+
 import engine.*;
 import entity.*;
-=======
 import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
@@ -19,7 +18,6 @@ import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
->>>>>>> upstreamorigin/main
 
 /**
  * Implements the game screen, where the action happens.

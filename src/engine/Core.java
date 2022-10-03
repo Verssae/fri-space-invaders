@@ -80,7 +80,7 @@ public final class Core {
 	 *            Program args, ignored.
 	 */
 	public static void main(final String[] args) {
-		try {
+		try { //로그파일 기록
 			LOGGER.setUseParentHandlers(false);
 
 			fileHandler = new FileHandler("log");

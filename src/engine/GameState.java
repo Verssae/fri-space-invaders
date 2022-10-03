@@ -1,5 +1,8 @@
 package engine;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 /**
  * Implements an object that stores the state of the game between levels.
  * 
@@ -18,6 +21,8 @@ public class GameState {
 	private int bulletsShot;
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
+	/** Application logger. */
+	private static Logger logger;
 
 	private int coin;
 	/** 게임에서 쓰는 코인 화폐 -> 단계마다 누적되는 코인 수가 변화하도록 */
@@ -44,7 +49,11 @@ public class GameState {
 		this.livesRemaining = livesRemaining;
 		this.bulletsShot = bulletsShot;
 		this.shipsDestroyed = shipsDestroyed;
-		this.coin = 0;
+		try {
+			this.coin = Core.getFileManager().loadCoins();
+		} catch (IOException e) {
+			logger.warning("Couldn't load coins!");
+		}
 	}
 
 	public final int getCoin() {

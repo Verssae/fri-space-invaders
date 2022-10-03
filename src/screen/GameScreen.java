@@ -423,7 +423,7 @@ public class GameScreen extends Screen {
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
 				//코드를 추가해주세요
 					System.out.println("스피드업아이템");
-					this.ship.setShipSpeed(2 * ship.getSpeed());
+					this.ship.setShipSpeed(1.07 * ship.getSpeed());
 					//
 				toggle = this.item;
 			}

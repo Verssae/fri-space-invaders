@@ -341,7 +341,7 @@ public final class FileManager {
 
 			String coinsPath = new File(jarPath).getParent();
 			coinsPath += File.separator;
-			coinsPath += "scores";
+			coinsPath += "coins";
 
 			File coinsFile = new File(coinsPath);
 
@@ -354,7 +354,7 @@ public final class FileManager {
 
 			logger.info("Saving coins");
 
-			bufferedWriter.write(coins);
+			bufferedWriter.write(String.valueOf(coins));
 		} finally {
 			if (bufferedWriter != null)
 				bufferedWriter.close();

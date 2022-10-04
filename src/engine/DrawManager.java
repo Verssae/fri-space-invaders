@@ -110,7 +110,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.Life, new boolean[13][8]);
+			spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -271,7 +271,7 @@ public final class DrawManager {
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
 		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
-			drawEntity(remainLife, 40 + 35 * i, 11);
+			drawEntity(remainLife, 40 + 35 * i, 6);
 	}
 
 	/**

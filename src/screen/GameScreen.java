@@ -83,7 +83,9 @@ public class GameScreen extends Screen {
 
 	private ItemPool itempool;
 
-	private Item toggle = null;
+	private volatile Item toggle = null;	// 원자화
+
+	private Set<Item> itemiterator;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -147,7 +149,7 @@ public class GameScreen extends Screen {
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
-
+		this.itemiterator = new HashSet<Item>();
 		// Special input delay / countdown.
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
@@ -221,13 +223,18 @@ public class GameScreen extends Screen {
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
 
-			if(this.item != null) {
-				this.item.update();
+
+			for(Item item : this.itemiterator) {
+				if(item != null)
+				item.update();
 			}
+
 		}
-		if(this.item != null) {
-			manageGetItem();
+		for(Item item : this.itemiterator){
+			if(item != null)
+			manageGetItem(item);
 		}
+
 		manageCollisions();
 		cleanBullets();
 		draw();
@@ -248,10 +255,13 @@ public class GameScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		if(this.item != null) {
-			drawManager.drawEntity(this.item, this.item.getPositionX(),
-					this.item.getPositionY());
+		for(Item item : this.itemiterator) {
+			if (item != null) {
+				drawManager.drawEntity(item, item.getPositionX(),
+						item.getPositionY());
+			}
 		}
+
 
 		drawManager.drawEntity(this.ship, this.ship.getPositionX(),
 				this.ship.getPositionY());
@@ -325,10 +335,12 @@ public class GameScreen extends Screen {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
+
 						if(enemyShip.getItemType() != null) {
-							this.item = enemyShip.itemDrop();
-							item.setSprite();
-							item.drop();
+						    enemyShip.itemDrop(itemiterator);
+							for(Item item : this.itemiterator)
+								item.setSprite();
+								//item.drop();
 						}
 
 						this.enemyShipFormation.destroy(enemyShip);
@@ -384,57 +396,58 @@ public class GameScreen extends Screen {
 	}
 
 
-	private void manageGetItem(){
-		if(checkCollision(this.item, this.ship) && !this.levelFinished){
+	synchronized private void manageGetItem(Item item){
+			if(checkCollision(item, this.ship) && !this.levelFinished){
 
 
-			item.isGet(true);
-			item.setSprite();
-			itempool.add(this.item);
+				item.isGet(true);
+				item.setSprite();
+				itempool.add(item);
 
-			if(toggle != this. item &&
-					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
-				System.out.println("총알속도아이템");
+				if(toggle != item &&
+						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
+						System.out.println("총알속도아이템");
 
-				//코드를 추가해주세요
+						//코드를 추가해주세요
 
-				//
+						//
 
-				toggle = this.item;
+						toggle = item;
 
-			}
-			else if(toggle != this. item &&
-					itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
-				     System.out.println("포인트업아이템");
-				//코드를 추가해주세요
+				}
+				else if(toggle != item &&
+						itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
+				     	System.out.println("포인트업아이템");
+						//코드를 추가해주세요
 
-				//
-					 toggle = this.item;
-			}
-			else if(toggle != this. item &&
-					itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
-				System.out.println("방어아이템");
-				//코드를 추가해주세요
+						//
+					 	toggle = item;
+				}
+				else if(toggle != item &&
+						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
+						System.out.println("방어아이템");
+						//코드를 추가해주세요
 
-				//
-				toggle = this.item;
-			}
-			else if(toggle != this. item &&
-					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
-				//코드를 추가해주세요
-					System.out.println("스피드업아이템");
-					this.ship.setShipSpeed(1.07 * ship.getSpeed());
+						//
+						toggle = item;
+				}
+				else if(toggle != item &&
+						itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
+						//코드를 추가해주세요
+						System.out.println("스피드업아이템");
+						this.ship.setShipSpeed(2 * ship.getSpeed());
+						//
+						toggle = item;
+				}
+				else if(toggle != item &&
+						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
+						System.out.println("생명추가아이템");
+					//코드를 추가해주세요
+
+
 					//
-				toggle = this.item;
+						toggle = item;
+				}
 			}
-			else if(toggle != this. item &&
-					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
-				System.out.println("생명추가아이템");
-				//코드를 추가해주세요
-
-				//
-				toggle = this.item;
-			}
-		}
 	}
 }

@@ -30,6 +30,7 @@ public class Item extends Entity {
 
     public Item(final int positionX, final int positionY, final int speed, final ItemType itemtype) {
             super(positionX, positionY, 3 * 2, 5 * 2, Color.WHITE);
+            this.setPositionX(positionX -this.getWidth()/2);
             this.speed = speed;
             this.itemtype = itemtype;
             this.isget = false;

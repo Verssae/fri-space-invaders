@@ -80,6 +80,7 @@ public class Ship extends Entity {
 	}
 
 
+
 	public void setShootingInterval(int setshootinterval){
 
 	}

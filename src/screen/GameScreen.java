@@ -83,8 +83,6 @@ public class GameScreen extends Screen {
 
 	private ItemPool itempool;
 
-	private volatile Item toggle = null;	// 원자화
-
 	private Set<Item> itemiterator;
 
 	/**
@@ -338,6 +336,7 @@ public class GameScreen extends Screen {
 
 						if(enemyShip.getItemType() != null) {
 						    enemyShip.itemDrop(itemiterator);
+							//enemyShip.itemDrop(itemiterator);
 							for(Item item : this.itemiterator)
 								item.setSprite();
 								//item.drop();
@@ -396,15 +395,15 @@ public class GameScreen extends Screen {
 	}
 
 
-	synchronized private void manageGetItem(Item item){
+	private void manageGetItem(Item item){
 			if(checkCollision(item, this.ship) && !this.levelFinished){
 
 
-				item.isGet(true);
+
 				item.setSprite();
 				itempool.add(item);
 
-				if(toggle != item &&
+				if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
 						System.out.println("총알속도아이템");
 
@@ -412,41 +411,42 @@ public class GameScreen extends Screen {
 
 						//
 
-						toggle = item;
+
 
 				}
-				else if(toggle != item &&
+				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
 				     	System.out.println("포인트업아이템");
 						//코드를 추가해주세요
 
 						//
-					 	toggle = item;
+
 				}
-				else if(toggle != item &&
+				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
 						System.out.println("방어아이템");
 						//코드를 추가해주세요
 
 						//
-						toggle = item;
+
 				}
-				else if(toggle != item &&
+				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
 						//코드를 추가해주세요
 						System.out.println("스피드업아이템");
 						this.ship.setShipSpeed(2 * ship.getSpeed());
 						//
-						toggle = item;
+
 				}
-				else if(toggle != item &&
+				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");
 					//코드를 추가해주세요
 
 					//
-						toggle = item;
+
 				}
+				item.isGet(true);
 			}
 	}
 }

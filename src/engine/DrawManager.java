@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
+import entity.Life;
 
 /**
  * Manages screen drawing.
@@ -81,7 +82,9 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
-		Explosion
+		Explosion,
+		/** Life shape */
+		Life
 	};
 
 	/**
@@ -107,6 +110,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
+			spriteMap.put(SpriteType.Life, new boolean[13][8]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -265,15 +269,9 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
-		Ship dummyShip;
-		if(shipLevel == 0)
-			dummyShip = new Ship(0, 0);
-		else if(shipLevel == 1)
-			dummyShip = new Ship(0, 0, shipLevel);
-		else
-			dummyShip = new Ship(0, 0, (char)('0'+shipLevel));
+		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
-			drawEntity(dummyShip, 40 + 35 * i, 10);
+			drawEntity(remainLife, 40 + 35 * i, 11);
 	}
 
 	/**

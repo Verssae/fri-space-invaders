@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Color;
+import java.util.Set;
 
 import engine.Cooldown;
 import engine.Core;
@@ -40,6 +41,7 @@ public class EnemyShip extends Entity {
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
 
+	private final int ITEM_SPEED = 2;
 	/**
 	 * Constructor, establishes the ship's properties.
 	 * 
@@ -101,10 +103,11 @@ public class EnemyShip extends Entity {
 		return this.itemtype;
 	}
 
-	public Item itemDrop(){
+	public void itemDrop(final Set<Item> items){
+		items.add(ItemIterator.drop(positionX + this.width/2 , positionY, this.getItemType()));
 
-		return new Item(this.getPositionX(),this.getPositionY(), 2 ,this.getItemType());
 	}
+
 
 	//추가
 

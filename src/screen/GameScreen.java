@@ -459,8 +459,8 @@ public class GameScreen extends Screen {
 						//코드를 추가해주세요
 						//생명 +1
 						this.lives++;
-
 				}
+
 				item.isGet(true);
 				isInitScreen = false;
 				if (!isInitScreen) {

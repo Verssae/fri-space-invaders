@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
 import engine.DrawManager;
-
 /**
  * Manages files used in the application.
  * 
@@ -140,16 +139,13 @@ public final class FileManager {
 		List<Score> highScores = new ArrayList<Score>();
 		InputStream inputStream = null;
 		BufferedReader reader = null;
-
 		try {
 			inputStream = FileManager.class.getClassLoader()
 					.getResourceAsStream("scores");
 			reader = new BufferedReader(new InputStreamReader(inputStream));
-
 			Score highScore = null;
 			String name = reader.readLine();
 			String score = reader.readLine();
-
 			while ((name != null) && (score != null)) {
 				highScore = new Score(name, Integer.parseInt(score));
 				highScores.add(highScore);
@@ -182,11 +178,9 @@ public final class FileManager {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
-
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
-
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
@@ -233,9 +227,8 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+					.getCodeSource().getLocation().getPath();  //현재 파일위치반환
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
-
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
@@ -283,5 +276,18 @@ public final class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	public String[] loadInfo(){
+		String[] array = {"1","0","3","0","0"};
+		File file = new File("res/save");
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String save_info = br.readLine();
+			array = save_info.split(" ");
+			logger.info("Finish loading.");
+		}
+		catch (IOException e) {
+					e.printStackTrace();
+				}
+		return array;
 	}
 }

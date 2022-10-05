@@ -547,7 +547,7 @@ public final class DrawManager {
 	 * @param screen
 	 *            Screen to draw on.
 	 */
-	public void drawStoreMenu(final Screen screen) {
+	public void drawStoreTitle(final Screen screen) {
 		String StoreString = "Store";
 		String instructionsString = "Confirm with space";
 
@@ -558,6 +558,55 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, instructionsString,
 				screen.getHeight() / 5);
 	}
+
+	/**
+	 * Draws store menu.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 * @param option
+	 *            Option selected.
+	 */
+	public void drawStoreMenu(final Screen screen, final int option) {
+		String shipShapeString = "ship shape";
+		String shipColorString = "ship color";
+		String bulletEffectString = "bullet effect";
+		String BGMString = "BGM";
+		String exitString = "exit";
+
+		if (option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, shipShapeString,
+				screen.getHeight() /2);
+		if (option == 3)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, shipColorString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 2);
+		if (option == 4)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, bulletEffectString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 4);
+		if (option == 5)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, BGMString, screen.getHeight() /
+				2 + fontRegularMetrics.getHeight() * 6);
+		if (option == 0)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, exitString, screen.getHeight() /
+				2 + fontRegularMetrics.getHeight() * 8);
+
+	}
+
 	/**
 	 * Draws a centered string on regular font.
 	 * 

@@ -2,17 +2,7 @@ package engine;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -276,6 +266,24 @@ public final class FileManager {
 		} finally {
 			if (bufferedWriter != null)
 				bufferedWriter.close();
+		}
+	}
+
+	public void Savefile(GameState gamestate) {
+		try {
+			File file = new File("./res/save");
+			BufferedWriter save = new BufferedWriter(new FileWriter(file));
+			String state = Integer.toString(gamestate.getLevel()) + ' ' +
+					Integer.toString(gamestate.getScore()) + ' ' +
+					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+					Integer.toString(gamestate.getBulletsShot()) + ' ' +
+					Integer.toString(gamestate.getShipsDestroyed());
+			save.write(state);
+			save.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

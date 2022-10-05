@@ -16,6 +16,10 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.SettingScreen;
 import screen.StoreScreen;
+import screen.BGMScreen;
+import screen.BulletEffectScreen;
+import screen.ShipShapeScreen;
+import screen.ShipColorScreen;
 import screen.VolumeScreen;
 
 /**
@@ -194,15 +198,35 @@ public final class Core {
 							break;
 						case 2:
 							// Ship shape
+							currentScreen = new ShipShapeScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship shape screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship shape screen.");
 							break;
 						case 3:
 							// Ship color
+							currentScreen = new ShipColorScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship color screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship color screen.");
 							break;
 						case 4:
 							// Bullet effect
+							currentScreen = new BulletEffectScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " bullet effect screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing bullet effect screen.");
 							break;
 						case 5:
-							// BGM music
+							// BGM
+							currentScreen = new BGMScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " background music screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing background music screen.");
 							break;
 						default:
 							break;

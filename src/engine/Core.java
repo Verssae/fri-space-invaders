@@ -181,11 +181,35 @@ public final class Core {
 				
 			case 4:
 				// Store
-				currentScreen = new StoreScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " store screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing store screen.");
+				returnCode = 1;
+				do {
+					switch (returnCode) {
+						case 1:
+							// Main store
+							currentScreen = new StoreScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " store screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing store screen.");
+							break;
+						case 2:
+							// Ship shape
+							break;
+						case 3:
+							// Ship color
+							break;
+						case 4:
+							// Bullet effect
+							break;
+						case 5:
+							// BGM music
+							break;
+						default:
+							break;
+					}
+				} while (returnCode != 0);
+
+				returnCode = 1;
 				break;
 
 			case 5:// Load

@@ -187,7 +187,8 @@ public final class Core {
 				break;
 				
 
-			case 5:// Load
+			case 5:
+				// Load
 				File file = new File("res/save");
 				try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 					String save_info = br.readLine();
@@ -198,7 +199,7 @@ public final class Core {
 				catch (IOException e) {
 					e.printStackTrace();
 				}
-				returnCode = frame.setScreen(currentScreen);
+				returnCode = 1;
 				LOGGER.info("Finish loading.");
 				break;
 

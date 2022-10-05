@@ -6,12 +6,13 @@ import engine.FileManager;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.SourceDataLine;
 import java.io.File;
 import java.net.URLDecoder;
 import java.util.logging.Logger;
 
 public class SoundEffect {
-
+    private SourceDataLine line;
 
     protected Logger logger;
     public SoundEffect(String filename){
@@ -42,5 +43,8 @@ public class SoundEffect {
 
     public void play(){}
 
-    public void stop(){}
+    public void stop(){
+        line.drain();
+        line.stop();
+    }
 }

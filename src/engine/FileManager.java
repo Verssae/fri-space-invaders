@@ -261,6 +261,25 @@ public final class FileManager {
 				bufferedWriter.close();
 		}
 	}
+
+	public void Savefile(GameState gamestate) {
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			File file = new File(jarPath + "../save");
+			BufferedWriter save = new BufferedWriter(new FileWriter(file));
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+					Integer.toString(gamestate.getScore()) + ' ' +
+					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+					Integer.toString(gamestate.getBulletsShot()) + ' ' +
+					Integer.toString(gamestate.getShipsDestroyed());
+			save.write(state);
+			save.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public String[] loadInfo(){
 		String[] array = {"1","0","3","0","0"};
 		try {

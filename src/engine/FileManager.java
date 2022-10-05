@@ -227,7 +227,7 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();  //현재 파일위치반환
+					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
@@ -264,7 +264,9 @@ public final class FileManager {
 
 	public void Savefile(GameState gamestate) {
 		try {
-			File file = new File("./res/save");
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			File file = new File(jarPath + "../save");
 			BufferedWriter save = new BufferedWriter(new FileWriter(file));
 			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
 					Integer.toString(gamestate.getScore()) + ' ' +

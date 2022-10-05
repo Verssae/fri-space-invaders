@@ -1,5 +1,5 @@
 package engine;
-
+import java.io.*;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -17,7 +17,6 @@ import screen.TitleScreen;
 import screen.GameSaveScreen;
 import screen.SettingScreen;
 import screen.VolumeScreen;
-
 /**
  * Implements core game logic.
  * 
@@ -84,7 +83,7 @@ public final class Core {
 	 *            Program args, ignored.
 	 */
 	public static void main(final String[] args) {
-		try { //로그파일 기록
+		try {
 			LOGGER.setUseParentHandlers(false);
 
 			fileHandler = new FileHandler("log");
@@ -117,11 +116,11 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		
 		GameState gameState;
+		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+		//level,score,livesRemaining, bulletsShot, shipsDestoryed
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-
 			switch (returnCode) {
 			case 1:
 				// Main menu.
@@ -138,7 +137,6 @@ public final class Core {
 					boolean bonusLife = gameState.getLevel()
 							% EXTRA_LIFE_FRECUENCY == 0
 							&& gameState.getLivesRemaining() < MAX_LIVES;
-					
 					currentScreen = new GameScreen(gameState,
 							gameSettings.get(gameState.getLevel() - 1),
 							bonusLife, width, height, FPS);
@@ -190,6 +188,18 @@ public final class Core {
 				
 
 			case 5:// Load
+				File file = new File("res/save");
+				try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+					String save_info = br.readLine();
+					String array[] = save_info.split(" ");
+					gameState = new GameState(Integer.parseInt(array[0]), Integer.parseInt(array[1]), Integer.parseInt(array[2]), Integer.parseInt(array[3]), Integer.parseInt(array[4]));
+					//level,score,livesRemaining, bulletsShot, shipsDestoryed
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Finish loading.");
 				break;
 
 				

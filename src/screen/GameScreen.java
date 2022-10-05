@@ -116,7 +116,7 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.itemmanager = new ItemManager();
-		this.itempool = new ItemPool();
+		this.itempool = gameState.getItemPool();
 	}
 
 	/**
@@ -336,8 +336,8 @@ public class GameScreen extends Screen {
 
 						if(enemyShip.getItemType() != null) {
 						    enemyShip.itemDrop(itemiterator);
-							//enemyShip.itemDrop(itemiterator);
 							for(Item item : this.itemiterator)
+								if(item != null)
 								item.setSprite();
 								//item.drop();
 						}
@@ -391,16 +391,13 @@ public class GameScreen extends Screen {
 	 */
 	public final GameState getGameState() {
 		return new GameState(this.level, this.score, this.lives,
-				this.bulletsShot, this.shipsDestroyed);
+				this.bulletsShot, this.shipsDestroyed, this.itempool);
 	}
 
 
 	private void manageGetItem(Item item){
 			if(checkCollision(item, this.ship) && !this.levelFinished){
 
-
-
-				item.setSprite();
 				itempool.add(item);
 
 				if(item.getIsget() == false &&

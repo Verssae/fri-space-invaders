@@ -276,6 +276,7 @@ public final class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
 	public String[] loadInfo(){
 		String[] array = {"1","0","3","0","0"};

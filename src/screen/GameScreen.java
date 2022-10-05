@@ -224,13 +224,14 @@ public class GameScreen extends Screen {
 
 			for(Item item : this.itemiterator) {
 				if(item != null)
-				item.update();
+					item.update();
 			}
 
 		}
 		for(Item item : this.itemiterator){
-			if(item != null)
-			manageGetItem(item);
+			if(item != null) {
+				manageGetItem(item);
+			}
 		}
 
 		manageCollisions();

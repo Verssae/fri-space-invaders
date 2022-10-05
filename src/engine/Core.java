@@ -9,6 +9,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import entity.ItemPool;
 import screen.GameScreen;
 import screen.HighScoreScreen;
 import screen.ScoreScreen;
@@ -75,6 +76,8 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
+	private static ItemPool itempool = new ItemPool();
+
 
 	/**
 	 * Test implementation.
@@ -119,7 +122,7 @@ public final class Core {
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, null);
+			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, itempool);
 
 			switch (returnCode) {
 			case 1:

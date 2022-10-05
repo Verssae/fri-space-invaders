@@ -1,4 +1,4 @@
-package engine;
+package sound;
 
 import java.io.File;
 
@@ -9,6 +9,7 @@ import javax.sound.sampled.FloatControl;
 import java.net.URLDecoder;
 import java.util.logging.Logger;
 import engine.Core;
+import engine.FileManager;
 
 public class Sound {
     public Clip c;

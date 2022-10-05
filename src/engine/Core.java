@@ -15,6 +15,7 @@ import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
 import screen.SettingScreen;
+import screen.StoreScreen;
 import screen.VolumeScreen;
 
 /**
@@ -178,9 +179,14 @@ public final class Core {
 			default:
 				break;
 				
-			case 4:// Store
+			case 4:
+				// Store
+				currentScreen = new StoreScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " store screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing store screen.");
 				break;
-				
 
 			case 5:// Load
 				break;

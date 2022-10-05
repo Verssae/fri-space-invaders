@@ -82,13 +82,12 @@ public class Ship extends Entity {
 
 
 	public void setShootingInterval(int setshootinterval){
-
+		SHOOTING_INTERVAL = setshootinterval;
 	}
 
 
 	public void setBulletSpeed(int setbulletspeed){
-
-
+		BULLET_SPEED = setbulletspeed;
 	}
 
 	public void setShipSpeed(double setshipspeed){

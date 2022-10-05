@@ -542,6 +542,23 @@ public final class DrawManager {
 	}
 
 	/**
+	 * Draws store screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void drawStoreMenu(final Screen screen) {
+		String StoreString = "Store";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, StoreString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+	/**
 	 * Draws a centered string on regular font.
 	 * 
 	 * @param screen

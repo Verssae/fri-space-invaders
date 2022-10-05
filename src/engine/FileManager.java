@@ -280,8 +280,6 @@ public final class FileManager {
 					Integer.toString(gamestate.getShipsDestroyed());
 			save.write(state);
 			save.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

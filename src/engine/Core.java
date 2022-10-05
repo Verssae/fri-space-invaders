@@ -1,5 +1,5 @@
 package engine;
-
+import java.io.*;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -17,7 +17,6 @@ import screen.TitleScreen;
 import screen.GameSaveScreen;
 import screen.SettingScreen;
 import screen.VolumeScreen;
-
 /**
  * Implements core game logic.
  * 
@@ -117,11 +116,11 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		
 		GameState gameState;
+		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+		//level,score,livesRemaining, bulletsShot, shipsDestoryed
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-
 			switch (returnCode) {
 			case 1:
 				// Main menu.
@@ -138,7 +137,6 @@ public final class Core {
 					boolean bonusLife = gameState.getLevel()
 							% EXTRA_LIFE_FRECUENCY == 0
 							&& gameState.getLivesRemaining() < MAX_LIVES;
-					
 					currentScreen = new GameScreen(gameState,
 							gameSettings.get(gameState.getLevel() - 1),
 							bonusLife, width, height, FPS);
@@ -189,7 +187,11 @@ public final class Core {
 				break;
 				
 
-			case 5:// Load
+			case 5:
+				// Load
+				String save_info [] = getFileManager().loadInfo();
+				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
+				returnCode = 1;
 				break;
 
 				

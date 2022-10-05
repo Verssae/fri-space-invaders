@@ -189,18 +189,9 @@ public final class Core {
 
 			case 5:
 				// Load
-				File file = new File("res/save");
-				try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-					String save_info = br.readLine();
-					String array[] = save_info.split(" ");
-					gameState = new GameState(Integer.parseInt(array[0]), Integer.parseInt(array[1]), Integer.parseInt(array[2]), Integer.parseInt(array[3]), Integer.parseInt(array[4]));
-					//level,score,livesRemaining, bulletsShot, shipsDestoryed
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+				String save_info [] = getFileManager().loadInfo();
+				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
 				returnCode = 1;
-				LOGGER.info("Finish loading.");
 				break;
 
 				

@@ -20,7 +20,7 @@ public class Ship extends Entity {
 	/** Speed of the bullets shot by the ship. */
 	private static int BULLET_SPEED;
 	/** Movement of the ship for each unit of time. */
-	private static int SPEED;
+	private double SPEED;
 	/** The level of the ship. */
 	private static int shipLevel;
 
@@ -80,6 +80,7 @@ public class Ship extends Entity {
 	}
 
 
+
 	public void setShootingInterval(int setshootinterval){
 
 	}
@@ -90,6 +91,10 @@ public class Ship extends Entity {
 
 	}
 
+	public void setShipSpeed(double setshipspeed){
+
+		SPEED = setshipspeed;
+	}
 
 	/**
 	 * Moves the ship speed uni ts right, or until the right screen border is
@@ -155,7 +160,7 @@ public class Ship extends Entity {
 	 * 
 	 * @return Speed of the ship.
 	 */
-	public final int getSpeed() {
+	public final double getSpeed() {
 		return SPEED;
 	}
 }

@@ -30,6 +30,7 @@ public class Item extends Entity {
 
     public Item(final int positionX, final int positionY, final int speed, final ItemType itemtype) {
             super(positionX, positionY, 3 * 2, 5 * 2, Color.WHITE);
+            this.setPositionX(positionX -this.getWidth()/2);
             this.speed = speed;
             this.itemtype = itemtype;
             this.isget = false;
@@ -37,33 +38,41 @@ public class Item extends Entity {
 
 
 
-        public void update () {
 
-        }
-
-
-
-        public void setSprite () {
-
-        }
-
-        public void isGet(boolean bool){
-
-
-        }
-
-
-        public void drop(){
-
-        }
+    public void update () {this.positionY += this.speed;}
 
 
 
-        public ItemType getItemType(){
+    public void setSprite () {
+        if (!this.isget)
+            this.spriteType = DrawManager.SpriteType.ItemDrop;
+        else
+            this.spriteType = DrawManager.SpriteType.ItemGet;
+    }
 
+    public void isGet(boolean bool){
+        this.isget = bool;
+    }
+
+
+    public boolean getIsget(){
+        return this.isget;
+    }
+
+    public void setIsget(boolean bool){
+        this.isget = bool;
+    }
+
+
+    public void drop(){
+
+    }
+
+
+
+    public ItemType getItemType(){
         return this.itemtype;
-
-        }
+    }
 
 
     }

@@ -77,7 +77,10 @@ public class ItemManager {
             //노은솔
             /*enemyshipformation의 enemyship의 hasItem값이 1이면 item_queue에서 아이템타입 할당
              */
-            //
+            Item.ItemType tmpitem = null;
+            tmpitem = item_queue.remove();
+            enemyshipformation.getEnemyShip().get(i).get(j).setItemType(tmpitem);
+            item_queue.add(tmpitem);
         }
 
 
@@ -112,6 +115,5 @@ public class ItemManager {
             item_queue.add(this.item_list.get(3));
             item_queue.add(this.item_list.get(4));
         }
-
 
     }

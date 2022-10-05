@@ -83,6 +83,12 @@ public class GameScreen extends Screen {
 
 	private ItemPool itempool;
 
+	private Set<Item> itemiterator;
+
+	private boolean isInitScreen;
+
+	private GameState setgamestate;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -114,7 +120,14 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.itemmanager = new ItemManager();
-		this.itempool = new ItemPool();
+
+		if(this.itempool == null){
+			this.itempool = new ItemPool();
+		}
+		else this.itempool = gameState.getItemPool();
+
+		this.isInitScreen = true;
+		this.setgamestate = gameState;
 	}
 
 	/**
@@ -137,6 +150,11 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
 				break;
 		}
+		if (itempool.getItem() != null){
+			itempool.getItem().setIsget(false);
+			this.manageGetItem(itempool.getItem());
+		}
+		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
@@ -145,7 +163,7 @@ public class GameScreen extends Screen {
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
-
+		this.itemiterator = new HashSet<Item>();
 		// Special input delay / countdown.
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
@@ -219,17 +237,22 @@ public class GameScreen extends Screen {
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
 
-			if(this.item != null) {
-				this.item.update();
+
+			for(Item item : this.itemiterator) {
+				if(item != null)
+					item.update();
+			}
+
+		}
+		for(Item item : this.itemiterator){
+			if(item != null) {
+				manageGetItem(item);
 			}
 		}
-		if(this.item != null) {
-			manageGetItem();
-		}
+
 		manageCollisions();
 		cleanBullets();
 		draw();
-
 		if ((this.enemyShipFormation.isEmpty() || this.lives == 0)
 				&& !this.levelFinished) {
 			this.levelFinished = true;
@@ -247,10 +270,13 @@ public class GameScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		if(this.item != null) {
-			drawManager.drawEntity(this.item, this.item.getPositionX(),
-					this.item.getPositionY());
+		for(Item item : this.itemiterator) {
+			if (item != null) {
+				drawManager.drawEntity(item, item.getPositionX(),
+						item.getPositionY());
+			}
 		}
+
 
 		drawManager.drawEntity(this.ship, this.ship.getPositionX(),
 				this.ship.getPositionY());
@@ -324,10 +350,13 @@ public class GameScreen extends Screen {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
+
 						if(enemyShip.getItemType() != null) {
-							this.item = enemyShip.itemDrop();
-							item.setSprite();
-							item.drop();
+						    enemyShip.itemDrop(itemiterator);
+							for(Item item : this.itemiterator)
+								if(item != null)
+								item.setSprite();
+								//item.drop();
 						}
 
 						this.enemyShipFormation.destroy(enemyShip);
@@ -379,37 +408,71 @@ public class GameScreen extends Screen {
 	 */
 	public final GameState getGameState() {
 		return new GameState(this.level, this.score, this.lives,
-				this.bulletsShot, this.shipsDestroyed);
+				this.bulletsShot, this.shipsDestroyed, this.itempool);
 	}
 
 
-	private void manageGetItem(){
-		if(checkCollision(this.item, this.ship) && !this.levelFinished){
+	private void manageGetItem(Item item){
+			if(isInitScreen || (checkCollision(item, this.ship) && !this.levelFinished)){
+				itempool.add(item);
+				item.setSprite();
+				if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
+						System.out.println("총알속도아이템");
+						this.clearItem();//효과초기화
+						//코드를 추가해주세요
+						// ship의 총알속도를 증가시킴
+						//
 
-			//
-			item.isGet(true);
-			item.setSprite();
-			//
 
-			itempool.add(this.item);
 
-			if(itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
-				System.out.println("총알속도아이템");
-				this.ship.setBulletSpeed(-9);//-6보다 큰 음수값
-				this.ship.setShootingInterval(200);//750보다 작은 양수값
+				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
+				     	System.out.println("포인트업아이템");
+						this.clearItem();//효과 초기화
+						//코드를 추가해주세요
+						//적을 죽였을때 얻는 point의 상승
+						//
+
+				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
+						System.out.println("방어아이템");
+						this.clearItem();//효과 초기화
+						//코드를 추가해주세요
+						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
+						//
+
+				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
+						//코드를 추가해주세요
+						System.out.println("스피드업아이템");
+						this.clearItem();//효과 초기화
+						this.ship.setShipSpeed(2 * ship.getSpeed());
+						//
+
+				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
+						System.out.println("생명추가아이템");
+						this.clearItem();// 효과 초기화
+					//코드를 추가해주세요
+					//생명 +1
+
+					//
+
+				}
+				item.isGet(true);
+				isInitScreen = false;
+				if (!isInitScreen) {
+					setgamestate.setItemPool(itempool);
+				}
 			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
-				System.out.println("포인트업아이템");
-			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
-				System.out.println("방어아이템");
-			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
-				System.out.println("스피드업아이템");
-			}
-			else if(itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem){
-				System.out.println("생명추가아이템");
-			}
-		}
+	}
+
+	public void clearItem(){
+
 	}
 }

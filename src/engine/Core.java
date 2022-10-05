@@ -9,6 +9,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import entity.ItemPool;
 import screen.GameScreen;
 import screen.HighScoreScreen;
 import screen.ScoreScreen;
@@ -76,6 +77,7 @@ public final class Core {
 	private static ConsoleHandler consoleHandler;
 
 
+
 	/**
 	 * Test implementation.
 	 * 
@@ -119,7 +121,7 @@ public final class Core {
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, null);
 
 			switch (returnCode) {
 			case 1:
@@ -152,8 +154,8 @@ public final class Core {
 							gameState.getScore(),
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
-							gameState.getShipsDestroyed());
-
+							gameState.getShipsDestroyed(),
+							gameState.getItemPool());
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 

@@ -3,7 +3,11 @@
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="engine.Core" />
+<<<<<<< HEAD
     <module name="fri-space-invaders" />
+=======
+    <module name="팀7 레포" />
+>>>>>>> 9289f498c3bc68c1d335bda735bb9ecad09501ac
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

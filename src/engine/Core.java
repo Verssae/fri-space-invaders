@@ -151,7 +151,7 @@ public final class Core {
 
 					gameState = ((GameScreen) currentScreen).getGameState();
 
-					if (gameState.getLivesRemaining() > 0){
+					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game save screen at " + FPS + " fps.");
 						currentScreen = new GameSaveScreen(gameState, width, height, FPS);

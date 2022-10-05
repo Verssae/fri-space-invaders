@@ -266,7 +266,7 @@ public final class FileManager {
 		try {
 			File file = new File("./res/save");
 			BufferedWriter save = new BufferedWriter(new FileWriter(file));
-			String state = Integer.toString(gamestate.getLevel()) + ' ' +
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
 					Integer.toString(gamestate.getScore()) + ' ' +
 					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
 					Integer.toString(gamestate.getBulletsShot()) + ' ' +

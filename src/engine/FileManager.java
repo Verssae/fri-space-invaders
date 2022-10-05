@@ -280,15 +280,17 @@ public final class FileManager {
 
 	public String[] loadInfo(){
 		String[] array = {"1","0","3","0","0"};
-		File file = new File("res/save");
+		File file = new File("./res/save");
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String save_info = br.readLine();
 			array = save_info.split(" ");
 			logger.info("Finish loading.");
+		} catch (FileNotFoundException e) {
+			logger.info("Save file is not found.");
+			logger.info("Starting New Game.");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		catch (IOException e) {
-					e.printStackTrace();
-				}
 		return array;
 	}
 }

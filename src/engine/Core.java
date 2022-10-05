@@ -205,7 +205,7 @@ public final class Core {
 				// Load
 				String save_info [] = getFileManager().loadInfo();
 				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
-				returnCode = 1;
+				returnCode = 2;
 				break;
 				
 			case 6:

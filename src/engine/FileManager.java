@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
-import engine.DrawManager;
+
 /**
  * Manages files used in the application.
  * 
@@ -282,17 +282,27 @@ public final class FileManager {
 
 	public String[] loadInfo(){
 		String[] array = {"1","0","3","0","0"};
-		File file = new File("./res/save");
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			String savePath = new File(jarPath).getParent();
+			savePath += File.separator;
+			savePath += "save";
+			File saveFile = new File(savePath);
+			BufferedReader br = new BufferedReader(new FileReader(saveFile));
 			String save_info = br.readLine();
 			array = save_info.split(" ");
 			logger.info("Finish loading.");
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e) {
 			logger.info("Save file is not found.");
 			logger.info("Starting New Game.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return array;
+		finally{
+			return array;
+		}
 	}
 }

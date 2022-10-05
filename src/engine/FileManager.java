@@ -227,7 +227,7 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();  //현재 파일위치반환
+					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
@@ -261,17 +261,38 @@ public final class FileManager {
 				bufferedWriter.close();
 		}
 	}
+
+	public void Savefile(GameState gamestate) {
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			File file = new File(jarPath + "../save");
+			BufferedWriter save = new BufferedWriter(new FileWriter(file));
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+					Integer.toString(gamestate.getScore()) + ' ' +
+					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+					Integer.toString(gamestate.getBulletsShot()) + ' ' +
+					Integer.toString(gamestate.getShipsDestroyed());
+			save.write(state);
+			save.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public String[] loadInfo(){
 		String[] array = {"1","0","3","0","0"};
-		File file = new File("res/save");
+		File file = new File("./res/save");
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String save_info = br.readLine();
 			array = save_info.split(" ");
 			logger.info("Finish loading.");
+		} catch (FileNotFoundException e) {
+			logger.info("Save file is not found.");
+			logger.info("Starting New Game.");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		catch (IOException e) {
-					e.printStackTrace();
-				}
 		return array;
 	}
 }

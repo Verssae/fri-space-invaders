@@ -400,6 +400,7 @@ public class GameScreen extends Screen {
 			if(checkCollision(item, this.ship) && !this.levelFinished){
 
 				itempool.add(item);
+				item.setSprite();
 
 				if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){

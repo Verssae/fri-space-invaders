@@ -227,7 +227,7 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();  //현재 파일위치반환
+					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
@@ -262,16 +262,22 @@ public final class FileManager {
 		}
 	}
 	public String[] loadInfo(){
+		InputStream inputStream = null;
+		BufferedReader reader = null;
 		String[] array = {"1","0","3","0","0"};
-		File file = new File("res/save");
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String save_info = br.readLine();
+		try {
+			inputStream = FileManager.class.getClassLoader()
+					.getResourceAsStream("save");
+			reader = new BufferedReader(new InputStreamReader(inputStream));
+			String save_info = reader.readLine();
 			array = save_info.split(" ");
 			logger.info("Finish loading.");
 		}
-		catch (IOException e) {
-					e.printStackTrace();
-				}
-		return array;
+		catch (NullPointerException e){
+			logger.info("Loading failed.");
+		}
+		finally{
+			return array;
+		}
 	}
 }

@@ -16,11 +16,11 @@ import engine.DrawManager.SpriteType;
 public class Ship extends Entity {
 
 	/** Time between shots. */
-	private static int SHOOTING_INTERVAL;
+	private int SHOOTING_INTERVAL, INIT_SHOOTING_INTERVAL;
 	/** Speed of the bullets shot by the ship. */
-	private static int BULLET_SPEED;
+	private int BULLET_SPEED, INIT_BULLET_SPEED;
 	/** Movement of the ship for each unit of time. */
-	private double SPEED;
+	private double SPEED, INIT_SPEED;
 	/** The level of the ship. */
 	private static int shipLevel;
 
@@ -40,9 +40,9 @@ public class Ship extends Entity {
 	public Ship(final int positionX, final int positionY) {
 		super(positionX, positionY, 13 * 2, 8 * 2, Color.GREEN);
 
-		this.SHOOTING_INTERVAL = 750;
-		this.BULLET_SPEED = -6;
-		this.SPEED = 2;
+		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 750;
+		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
+		this.SPEED = INIT_SPEED = 2;
 		this.shipLevel = 0;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
@@ -51,9 +51,9 @@ public class Ship extends Entity {
 	public Ship(final int positionX, final int positionY, int shipLevel) {
         super(positionX, positionY, 13 * 2, 8 * 2, Color.BLUE);
 
-		this.SHOOTING_INTERVAL = 700;
-		this.BULLET_SPEED = -6;
-		this.SPEED = 3;
+		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 700;
+		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
+		this.SPEED = INIT_SPEED = 3;
 		this.shipLevel = 1;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
@@ -62,9 +62,9 @@ public class Ship extends Entity {
 	public Ship(final int positionX, final int positionY, char shipLevel) {
 		super(positionX, positionY, 13 * 2, 8 * 2, Color.darkGray);
 
-		this.SHOOTING_INTERVAL = 650;
-		this.BULLET_SPEED = -8;
-		this.SPEED = 3;
+		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 650;
+		this.BULLET_SPEED = INIT_BULLET_SPEED = -8;
+		this.SPEED = INIT_SPEED = 3;
 		this.shipLevel = 2;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
@@ -81,20 +81,7 @@ public class Ship extends Entity {
 
 
 
-	public void setShootingInterval(int setshootinterval){
 
-	}
-
-
-	public void setBulletSpeed(int setbulletspeed){
-
-
-	}
-
-	public void setShipSpeed(double setshipspeed){
-
-		SPEED = setshipspeed;
-	}
 
 	/**
 	 * Moves the ship speed uni ts right, or until the right screen border is
@@ -163,4 +150,16 @@ public class Ship extends Entity {
 	public final double getSpeed() {
 		return SPEED;
 	}
+	public final int getShootingInterval() {return SHOOTING_INTERVAL;}
+	public final int getBulletSpeed() {return BULLET_SPEED;}
+	public void setShootingInterval(int setshootinterval){SHOOTING_INTERVAL = setshootinterval;}
+	public void setBulletSpeed(int setbulletspeed){BULLET_SPEED = setbulletspeed;}
+	public void setShipSpeed(double setshipspeed) {SPEED = setshipspeed;}
+
+	public void setInitState(){
+		SPEED = INIT_SPEED;
+		SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL;
+		BULLET_SPEED = INIT_BULLET_SPEED;
+	}
+
 }

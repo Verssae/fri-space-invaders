@@ -422,8 +422,7 @@ public class GameScreen extends Screen {
 						this.clearItem();//효과초기화
 						//코드를 추가해주세요
 						// ship의 총알속도를 증가시킴
-						//
-
+						this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
 
 
 				}
@@ -450,20 +449,19 @@ public class GameScreen extends Screen {
 						//코드를 추가해주세요
 						System.out.println("스피드업아이템");
 						this.clearItem();//효과 초기화
-						this.ship.setShipSpeed(2 * ship.getSpeed());
+						this.ship.setShipSpeed(2 * this.ship.getSpeed());
 						//
 
 				}
-				else if(item.getIsget() == false &&
+				else if(!isInitScreen && item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");
 						this.clearItem();// 효과 초기화
-					//코드를 추가해주세요
-					//생명 +1
-
-					//
-
+						//코드를 추가해주세요
+						//생명 +1
+						this.lives++;
 				}
+
 				item.isGet(true);
 				isInitScreen = false;
 				if (!isInitScreen) {
@@ -473,6 +471,6 @@ public class GameScreen extends Screen {
 	}
 
 	public void clearItem(){
-
+		ship.setInitState();
 	}
 }

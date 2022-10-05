@@ -59,6 +59,10 @@ public class Item extends Entity {
         return this.isget;
     }
 
+    public void setIsget(boolean bool){
+        this.isget = bool;
+    }
+
 
     public void drop(){
 

@@ -85,6 +85,10 @@ public class GameScreen extends Screen {
 
 	private Set<Item> itemiterator;
 
+	private boolean isInitScreen;
+
+	private GameState setgamestate;
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -116,7 +120,14 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.itemmanager = new ItemManager();
-		this.itempool = gameState.getItemPool();
+
+		if(this.itempool == null){
+			this.itempool = new ItemPool();
+		}
+		else this.itempool = gameState.getItemPool();
+
+		this.isInitScreen = true;
+		this.setgamestate = gameState;
 	}
 
 	/**
@@ -139,6 +150,11 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
 				break;
 		}
+		if (itempool.getItem() != null){
+			itempool.getItem().setIsget(false);
+			this.manageGetItem(itempool.getItem());
+		}
+		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
@@ -397,17 +413,15 @@ public class GameScreen extends Screen {
 
 
 	private void manageGetItem(Item item){
-			if(checkCollision(item, this.ship) && !this.levelFinished){
-
+			if(isInitScreen || (checkCollision(item, this.ship) && !this.levelFinished)){
 				itempool.add(item);
 				item.setSprite();
-
 				if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
 						System.out.println("총알속도아이템");
-
+						this.clearItem();//효과초기화
 						//코드를 추가해주세요
-
+						// ship의 총알속도를 증가시킴
 						//
 
 
@@ -416,16 +430,18 @@ public class GameScreen extends Screen {
 				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
 				     	System.out.println("포인트업아이템");
+						this.clearItem();//효과 초기화
 						//코드를 추가해주세요
-
+						//적을 죽였을때 얻는 point의 상승
 						//
 
 				}
 				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
 						System.out.println("방어아이템");
+						this.clearItem();//효과 초기화
 						//코드를 추가해주세요
-
+						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
 						//
 
 				}
@@ -433,6 +449,7 @@ public class GameScreen extends Screen {
 						itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
 						//코드를 추가해주세요
 						System.out.println("스피드업아이템");
+						this.clearItem();//효과 초기화
 						this.ship.setShipSpeed(2 * ship.getSpeed());
 						//
 
@@ -440,13 +457,22 @@ public class GameScreen extends Screen {
 				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");
+						this.clearItem();// 효과 초기화
 					//코드를 추가해주세요
-
+					//생명 +1
 
 					//
 
 				}
 				item.isGet(true);
+				isInitScreen = false;
+				if (!isInitScreen) {
+					setgamestate.setItemPool(itempool);
+				}
 			}
+	}
+
+	public void clearItem(){
+
 	}
 }

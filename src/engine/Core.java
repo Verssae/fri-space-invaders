@@ -76,7 +76,6 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
-	private static ItemPool itempool = new ItemPool();
 
 
 	/**
@@ -122,7 +121,7 @@ public final class Core {
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, itempool);
+			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, null);
 
 			switch (returnCode) {
 			case 1:
@@ -157,7 +156,6 @@ public final class Core {
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed(),
 							gameState.getItemPool());
-
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 

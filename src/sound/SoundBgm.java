@@ -11,11 +11,11 @@ import java.util.logging.Logger;
 import engine.Core;
 import engine.FileManager;
 
-public class Sound {
-    public Clip c;
-    public File a;
+public class SoundBgm {
+    public Clip bgmClip;
+    public File bgmFileLoader;
     protected Logger logger;
-    public Sound(String filename){
+    public SoundBgm(String filename){
         this.logger = Core.getLogger();
         try{
             String jarPath = FileManager.class.getProtectionDomain()
@@ -26,10 +26,10 @@ public class Sound {
             soundPath += File.separator;
             soundPath += "fri-space-invaders/" + filename;
 
-            a = new File(soundPath);
-            AudioInputStream b = AudioSystem.getAudioInputStream(a);
-            c = AudioSystem.getClip();
-            c.open(b);
+            bgmFileLoader = new File(soundPath);
+            AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);
+            bgmClip = AudioSystem.getClip();
+            bgmClip.open(bgmInputStream);
             // 볼륨 설정용
 //            FloatControl volumeControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
 //            volumeControl.setValue(-10.0f);
@@ -40,17 +40,17 @@ public class Sound {
         }
     }
     public void play(){
-        c.start();
+        bgmClip.start();
     }
 
     public void setLoop(boolean isLoop){
         if(isLoop){
-            c.loop(-1);
+            bgmClip.loop(-1);
         } else {
-            c.loop(1);
+            bgmClip.loop(1);
         }
     }
-    public void stop(){ c.stop(); }
+    public void stop(){ bgmClip.stop(); }
 
 //    public void random(String fileNames[]){
 //

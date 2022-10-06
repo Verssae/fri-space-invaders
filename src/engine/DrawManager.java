@@ -459,51 +459,6 @@ public final class DrawManager {
 		}
 	}
 
-
-	public void drawPause (final Screen screen, final int score,
-						   final int livesRemaining, final int shipsDestroyed,
-						   final int coin, final boolean isNewRecord) {
-		String scoreString = String.format("score %04d", score);
-		String livesRemainingString = "lives remaining " + livesRemaining;
-		String shipsDestroyedString = "enemies destroyed " + shipsDestroyed;
-		String GetcoinString = "Get coins " + coin;
-
-		int height = isNewRecord ? 4 : 2;
-
-		backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, scoreString, screen.getHeight()
-				/ height);
-		drawCenteredRegularString(screen, livesRemainingString,
-				screen.getHeight() / height + fontRegularMetrics.getHeight()
-						* 2);
-		drawCenteredRegularString(screen, shipsDestroyedString,
-				screen.getHeight() / height + fontRegularMetrics.getHeight()
-						* 4);
-		drawCenteredRegularString(screen, GetcoinString, screen.getHeight()
-				/ height + fontRegularMetrics.getHeight() * 6);
-	}
-
-	public void PauseGame(final Screen screen, final boolean acceptsInput,
-						  final boolean isNewRecord) {
-		String gameOverString = "Stage Clear";
-		String continueOrExitString =
-				"Press Space to play again";
-
-		int height = isNewRecord ? 4 : 2;
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, gameOverString, screen.getHeight()
-				/ height - fontBigMetrics.getHeight() * 2);
-
-		if (acceptsInput)
-			backBufferGraphics.setColor(Color.GREEN);
-		else
-			backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, continueOrExitString,
-				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 10);
-	}
-
-
 	/**
 	 * Draws basic content of game over screen.
 	 * 

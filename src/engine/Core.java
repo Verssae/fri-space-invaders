@@ -160,6 +160,7 @@ public final class Core {
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
+
 					permanentState.setCoin(gameState.getScore());
 					currentScreen = new PauseScreen(width, height, FPS, gameState);
 					returnCode = frame.setScreen(currentScreen);

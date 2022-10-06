@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+
 import engine.*;
 
 public class PauseScreen extends Screen {
@@ -28,6 +29,7 @@ public class PauseScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
 
+
     private static int coin = PermanentState.getInstance().getCoin();
 
     /**
@@ -44,6 +46,7 @@ public class PauseScreen extends Screen {
      */
     public PauseScreen(final int width, final int height, final int fps,
                        final GameState gameState) {
+
         super(width, height, fps);
 
         this.score = gameState.getScore();
@@ -51,6 +54,7 @@ public class PauseScreen extends Screen {
         this.bulletsShot = gameState.getBulletsShot();
         this.shipsDestroyed = gameState.getShipsDestroyed();
         this.isNewRecord = false;
+
         this.coin = PermanentState.getInstance().getCoin();
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();

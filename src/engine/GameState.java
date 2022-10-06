@@ -21,6 +21,7 @@ public class GameState {
 	private int bulletsShot;
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
+
 	/**
 	 * Constructor.
 	 * 
@@ -43,6 +44,7 @@ public class GameState {
 		this.livesRemaining = livesRemaining;
 		this.bulletsShot = bulletsShot;
 		this.shipsDestroyed = shipsDestroyed;
+
 	}
 
 	/**

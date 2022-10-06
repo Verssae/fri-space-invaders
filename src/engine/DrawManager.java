@@ -56,7 +56,8 @@ public final class DrawManager {
 	private static int shipLevel = new Random().nextInt(3);
 
 	/** Coin -> Game money */
-	private static int coin = GameState.getCoin();
+	private static int coin = PermanentState.getInstance().getCoin();
+
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -458,6 +459,51 @@ public final class DrawManager {
 		}
 	}
 
+
+	public void drawPause (final Screen screen, final int score,
+						   final int livesRemaining, final int shipsDestroyed,
+						   final int coin, final boolean isNewRecord) {
+		String scoreString = String.format("score %04d", score);
+		String livesRemainingString = "lives remaining " + livesRemaining;
+		String shipsDestroyedString = "enemies destroyed " + shipsDestroyed;
+		String GetcoinString = "Get coins " + coin;
+
+		int height = isNewRecord ? 4 : 2;
+
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, scoreString, screen.getHeight()
+				/ height);
+		drawCenteredRegularString(screen, livesRemainingString,
+				screen.getHeight() / height + fontRegularMetrics.getHeight()
+						* 2);
+		drawCenteredRegularString(screen, shipsDestroyedString,
+				screen.getHeight() / height + fontRegularMetrics.getHeight()
+						* 4);
+		drawCenteredRegularString(screen, GetcoinString, screen.getHeight()
+				/ height + fontRegularMetrics.getHeight() * 6);
+	}
+
+	public void PauseGame(final Screen screen, final boolean acceptsInput,
+						  final boolean isNewRecord) {
+		String gameOverString = "Stage Clear";
+		String continueOrExitString =
+				"Press Space to play again";
+
+		int height = isNewRecord ? 4 : 2;
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, gameOverString, screen.getHeight()
+				/ height - fontBigMetrics.getHeight() * 2);
+
+		if (acceptsInput)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, continueOrExitString,
+				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 10);
+	}
+
+
 	/**
 	 * Draws basic content of game over screen.
 	 * 
@@ -613,44 +659,61 @@ public final class DrawManager {
 	 * @param option
 	 *            Option selected.
 	 */
-	public void drawStoreMenu(final Screen screen, final int option) {
+	public void drawStoreMenu(final Screen screen, final int menu, final int focus) {
 		String shipShapeString = "ship shape";
 		String shipColorString = "ship color";
 		String bulletEffectString = "bullet effect";
 		String BGMString = "BGM";
 		String exitString = "exit";
 
-		if (option == 2)
+		if (menu == 0 && focus == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, shipShapeString,
+		backBufferGraphics.drawString(shipShapeString, screen.getWidth() / 2 - 170,
 				screen.getHeight() /2);
-		if (option == 3)
+		if (menu == 1 && focus == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, shipColorString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 2);
-		if (option == 4)
+		backBufferGraphics.drawString(shipColorString, screen.getWidth() / 2 - 170,
+				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 2);
+		if (menu == 2 && focus == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, bulletEffectString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 4);
-		if (option == 5)
+		backBufferGraphics.drawString(bulletEffectString, screen.getWidth() / 2 - 170,
+				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 4);
+		if (menu == 3 && focus == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, BGMString, screen.getHeight() /
-				2 + fontRegularMetrics.getHeight() * 6);
-		if (option == 0)
+		backBufferGraphics.drawString(BGMString, screen.getWidth() / 2 - 170,
+				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 6);
+		if (menu == 4 && focus == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, exitString, screen.getHeight() /
-				2 + fontRegularMetrics.getHeight() * 8);
+		backBufferGraphics.drawString(exitString, screen.getWidth() / 2 - 170,
+				screen.getHeight() / 2 + fontRegularMetrics.getHeight() * 8);
+	}
 
+	public void drawStoreGacha(final Screen screen, final int menu, final int focus) {
+		String rerollString = "reroll!";
+		if (focus == 0)
+			backBufferGraphics.setColor(Color.WHITE);
+		else
+			backBufferGraphics.setColor(Color.GREEN);
+		backBufferGraphics.drawRect(screen.getWidth() / 2, screen.getHeight() / 2, 120, 120);
+		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 60 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 140);
+	}
+
+	public void drawCoin(final Screen screen, final int coin) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+		String coinString = String.format("%d", coin);
+		backBufferGraphics.drawString("Coin : ", screen.getWidth() - 140, 25);
+		backBufferGraphics.drawString(coinString, screen.getWidth() - 11 * (coinString.length() + 1), 25);
 	}
 
 	/**

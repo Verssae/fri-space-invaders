@@ -21,11 +21,6 @@ public class GameState {
 	private int bulletsShot;
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
-	/** Application logger. */
-	private static Logger logger;
-
-	private static int coin;
-	/** 게임에서 쓰는 코인 화폐 -> 단계마다 누적되는 코인 수가 변화하도록 */
 
 	/**
 	 * Constructor.
@@ -49,15 +44,7 @@ public class GameState {
 		this.livesRemaining = livesRemaining;
 		this.bulletsShot = bulletsShot;
 		this.shipsDestroyed = shipsDestroyed;
-		try {
-			this.coin = Core.getFileManager().loadCoins();
-		} catch (IOException e) {
-			logger.warning("Couldn't load coins!");
-		}
-	}
 
-	public static int getCoin() {
-		return coin;
 	}
 
 	/**
@@ -93,13 +80,5 @@ public class GameState {
 	 */
 	public final int getShipsDestroyed() {
 		return shipsDestroyed;
-	}
-
-
-	public void setCoin(int Score) {
-		int temp = Score - 500;
-		// 왜 500을 빼지?
-		// -> 1단계를 깨면 주는 점수가 600, 2단계를 깨면 주는 점수가 1050 등등이니까 500을 빼서 시작 +100, + 550 등등으로 하고자 한다!
-		this.coin += temp;
 	}
 }

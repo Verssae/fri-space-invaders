@@ -122,6 +122,7 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		
 		GameState gameState;
+		PermanentState permanentState = PermanentState.getInstance();
 
 		int returnCode = 1;
 		do {
@@ -159,10 +160,10 @@ public final class Core {
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
-							gameState.setCoin(gameState.getScore());
+
+					permanentState.setCoin(gameState.getScore());
 					currentScreen = new PauseScreen(width, height, FPS, gameState);
 					returnCode = frame.setScreen(currentScreen);
-
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 
@@ -189,7 +190,7 @@ public final class Core {
 				
 			case 4:
 				// Store
-				returnCode = 1;
+				/* returnCode = 1;
 				do {
 					switch (returnCode) {
 						case 1:
@@ -237,7 +238,12 @@ public final class Core {
 					}
 				} while (returnCode != 0);
 
-				returnCode = 1;
+				returnCode = 1; */
+				currentScreen = new StoreScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " store screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing store screen.");
 				break;
 
 			case 5:// Load

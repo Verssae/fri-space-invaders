@@ -5,10 +5,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import engine.Cooldown;
-import engine.Core;
-import engine.GameState;
-import engine.Score;
+
+import engine.*;
 
 public class PauseScreen extends Screen {
     /** Milliseconds between changes in user selection. */
@@ -31,7 +29,8 @@ public class PauseScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
 
-    private static int coin = GameState.getCoin();
+
+    private static int coin = PermanentState.getInstance().getCoin();
 
     /**
      * Constructor, establishes the properties of the screen.
@@ -46,7 +45,8 @@ public class PauseScreen extends Screen {
      *            Current game state.
      */
     public PauseScreen(final int width, final int height, final int fps,
-            final GameState gameState) {
+                       final GameState gameState) {
+
         super(width, height, fps);
 
         this.score = gameState.getScore();
@@ -54,7 +54,8 @@ public class PauseScreen extends Screen {
         this.bulletsShot = gameState.getBulletsShot();
         this.shipsDestroyed = gameState.getShipsDestroyed();
         this.isNewRecord = false;
-        this.coin = gameState.getCoin();
+
+        this.coin = PermanentState.getInstance().getCoin();
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();
 

@@ -55,6 +55,8 @@ public final class DrawManager {
 	/** Random shipLevel. */
 	private static int shipLevel = new Random().nextInt(3);
 
+	/** Coin -> Game money */
+	private static int coin = GameState.getCoin();
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -466,6 +468,30 @@ public final class DrawManager {
 	 * @param isNewRecord
 	 *            If the score is a new high score.
 	 */
+
+	public void drawPause (final Screen screen, final int score,
+							final int livesRemaining, final int shipsDestroyed,
+							final int coin, final boolean isNewRecord) {
+		String scoreString = String.format("score %04d", score);
+		String livesRemainingString = "lives remaining " + livesRemaining;
+		String shipsDestroyedString = "enemies destroyed " + shipsDestroyed;
+		String GetcoinString = "Get coins " + coin;
+
+		int height = isNewRecord ? 4 : 2;
+
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, scoreString, screen.getHeight()
+				/ height);
+		drawCenteredRegularString(screen, livesRemainingString,
+				screen.getHeight() / height + fontRegularMetrics.getHeight()
+						* 2);
+		drawCenteredRegularString(screen, shipsDestroyedString,
+				screen.getHeight() / height + fontRegularMetrics.getHeight()
+						* 4);
+		drawCenteredRegularString(screen, GetcoinString, screen.getHeight()
+				/ height + fontRegularMetrics.getHeight() * 6);
+	}  
+
 	public void drawGameOver(final Screen screen, final boolean acceptsInput,
 			final boolean isNewRecord) {
 		String gameOverString = "Game Over";

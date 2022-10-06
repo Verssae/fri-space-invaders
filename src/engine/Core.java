@@ -21,6 +21,7 @@ import screen.BulletEffectScreen;
 import screen.ShipShapeScreen;
 import screen.ShipColorScreen;
 import screen.VolumeScreen;
+import screen.PauseScreen;
 
 /**
  * Implements core game logic.
@@ -159,6 +160,8 @@ public final class Core {
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
 							gameState.setCoin(gameState.getScore());
+					currentScreen = new PauseScreen(width, height, FPS, gameState);
+					returnCode = frame.setScreen(currentScreen);
 
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);

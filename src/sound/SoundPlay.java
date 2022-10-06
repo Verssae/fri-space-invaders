@@ -1,5 +1,7 @@
 package sound;
 
+import java.io.IOException;
+
 public class SoundPlay{
     private String filename;
     private static SoundPlay instance;
@@ -15,5 +17,11 @@ public class SoundPlay{
     public static SoundPlay getInstance(){
         if(instance == null) instance = new SoundPlay();
         return instance;
+    }
+
+    public void playEffect(String filename) throws IOException {
+        SoundEffect se = new SoundEffect(filename);
+        se.play();
+        se.stop();
     }
 }

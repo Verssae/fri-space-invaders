@@ -18,6 +18,7 @@ import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
+//import entity.Shield;
 
 /**
  * Implements the game screen, where the action happens.
@@ -88,6 +89,8 @@ public class GameScreen extends Screen {
 	private boolean isInitScreen;
 
 	private GameState setgamestate;
+
+//	private Shield shield;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -205,9 +208,11 @@ public class GameScreen extends Screen {
 
 				if (moveRight && !isRightBorder) {
 					this.ship.moveRight();
+//					shield.moveRight();
 				}
 				if (moveLeft && !isLeftBorder) {
 					this.ship.moveLeft();
+//					shield.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets))
@@ -285,6 +290,9 @@ public class GameScreen extends Screen {
 					this.enemyShipSpecial.getPositionX(),
 					this.enemyShipSpecial.getPositionY());
 
+//		drawManager.drawEntity(shield, shield.getPositionX(),
+//				shield.getPositionY());
+
 		enemyShipFormation.draw();
 
 		for (Bullet bullet : this.bullets)
@@ -336,6 +344,9 @@ public class GameScreen extends Screen {
 			if (bullet.getSpeed() > 0) {
 				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
 					recyclable.add(bullet);
+//					if(shield.getCnt() > 0) {
+//						shield.setCnt(0);
+//					}
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
 						this.lives--;
@@ -438,10 +449,9 @@ public class GameScreen extends Screen {
 				else if(item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
 						System.out.println("방어아이템");
-						this.clearItem();//효과 초기화
 						//코드를 추가해주세요
 						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
-						//
+//						shield.setCnt(1);
 
 				}
 				else if(item.getIsget() == false &&
@@ -450,13 +460,11 @@ public class GameScreen extends Screen {
 						System.out.println("스피드업아이템");
 						this.clearItem();//효과 초기화
 						this.ship.setShipSpeed(2 * this.ship.getSpeed());
-						//
 
 				}
 				else if(!isInitScreen && item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");
-						this.clearItem();// 효과 초기화
 						//코드를 추가해주세요
 						//생명 +1
 						this.lives++;

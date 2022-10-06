@@ -85,7 +85,9 @@ public final class DrawManager {
 
 		ItemDrop,
 
-		ItemGet
+		ItemGet,
+
+		Shield
 
 	};
 
@@ -114,6 +116,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 			spriteMap.put(SpriteType.ItemDrop, new boolean[3][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[3][5]);
+//			spriteMap.put(SpriteType.Shield, new boolean[3][5]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");

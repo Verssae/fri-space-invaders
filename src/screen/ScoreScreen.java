@@ -163,15 +163,6 @@ public class ScoreScreen extends Screen {
 		}
 	}
 
-	private void saveCoins() {
-		try {
-			int coins = Core.getFileManager().loadCoins();
-			Core.getFileManager().saveCoins(coins + score);
-		} catch (IOException e) {
-			logger.warning("Couldn't load coins!");
-		}
-	}
-
 	/**
 	 * Draws the elements associated with the screen.
 	 */

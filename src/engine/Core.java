@@ -16,11 +16,6 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.SettingScreen;
 import screen.StoreScreen;
-import screen.BGMScreen;
-import screen.BulletEffectScreen;
-import screen.ShipShapeScreen;
-import screen.ShipColorScreen;
-import screen.VolumeScreen;
 import screen.PauseScreen;
 
 /**

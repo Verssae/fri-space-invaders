@@ -176,6 +176,7 @@ public final class Core {
 						&& gameState.getLevel() <= NUM_LEVELS);
 				if (!GO_MAIN)
 					break;
+				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0));
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "
 						+ gameState.getScore() + ", "

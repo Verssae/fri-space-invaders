@@ -133,6 +133,10 @@ public class EnemyShip extends Entity {
 		return this.pointValue;
 	}
 
+	public void setPointValue(int setpointvalue){
+		this.pointValue = setpointvalue;
+	}
+
 	/**
 	 * Moves the ship the specified distance.
 	 * 

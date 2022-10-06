@@ -432,7 +432,8 @@ public class GameScreen extends Screen {
 						this.clearItem();//효과 초기화
 						//코드를 추가해주세요
 						//적을 죽였을때 얻는 point의 상승
-						//
+					    for (EnemyShip enemyShip : this.enemyShipFormation)
+						    enemyShip.setPointValue(2 * enemyShip.getPointValue());
 
 				}
 				else if(item.getIsget() == false &&

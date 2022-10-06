@@ -24,7 +24,7 @@ public class GameState {
 	/** Application logger. */
 	private static Logger logger;
 
-	private int coin;
+	private static int coin;
 	/** 게임에서 쓰는 코인 화폐 -> 단계마다 누적되는 코인 수가 변화하도록 */
 
 	/**

@@ -266,6 +266,7 @@ public final class FileManager {
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			File file = new File(jarPath + "../save");
 			BufferedWriter save = new BufferedWriter(new FileWriter(file));
 			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +

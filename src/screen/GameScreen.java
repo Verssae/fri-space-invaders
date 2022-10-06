@@ -90,7 +90,7 @@ public class GameScreen extends Screen {
 
 	private GameState setgamestate;
 
-//	private Shield shield;
+	private Shield shield;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -208,11 +208,15 @@ public class GameScreen extends Screen {
 
 				if (moveRight && !isRightBorder) {
 					this.ship.moveRight();
-//					shield.moveRight();
+					if(itempool.getItem() != null && shield != null&&
+							itempool.getItem().getItemType() == Item.ItemType.ShieldItem)
+							shield.moveRight();
 				}
 				if (moveLeft && !isLeftBorder) {
 					this.ship.moveLeft();
-//					shield.moveLeft();
+					if(itempool.getItem() != null && shield != null&&
+							itempool.getItem().getItemType() == Item.ItemType.ShieldItem)
+							shield.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets))
@@ -290,8 +294,10 @@ public class GameScreen extends Screen {
 					this.enemyShipSpecial.getPositionX(),
 					this.enemyShipSpecial.getPositionY());
 
-//		drawManager.drawEntity(shield, shield.getPositionX(),
-//				shield.getPositionY());
+		if(itempool.getItem() != null && this.shield != null &&
+				itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
+				drawManager.drawEntity(shield, shield.getPositionX(),
+				shield.getPositionY());}
 
 		enemyShipFormation.draw();
 
@@ -344,15 +350,18 @@ public class GameScreen extends Screen {
 			if (bullet.getSpeed() > 0) {
 				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
 					recyclable.add(bullet);
-//					if(shield.getCnt() > 0) {
-//						shield.setCnt(0);
-//					}
-					if (!this.ship.isDestroyed()) {
-						this.ship.destroy();
-						this.lives--;
-						this.logger.info("Hit on player ship, " + this.lives
-								+ " lives remaining.");
-					}
+
+
+						if(shield == null && !this.ship.isDestroyed()) {
+							this.ship.destroy();
+							this.lives--;
+							this.logger.info("Hit on player ship, " + this.lives
+									+ " lives remaining.");
+
+							}
+							else if(!this.ship.isDestroyed()){
+								shield =null;
+							}
 				}
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
@@ -451,7 +460,8 @@ public class GameScreen extends Screen {
 						System.out.println("방어아이템");
 						//코드를 추가해주세요
 						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
-//						shield.setCnt(1);
+  					shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY()+10,0, this.ship);
+					shield.setCnt(1);
 
 				}
 				else if(item.getIsget() == false &&

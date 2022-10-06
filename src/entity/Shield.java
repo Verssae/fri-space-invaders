@@ -10,18 +10,19 @@ public class Shield extends Entity {
     private int cnt;
     private Ship ship;
 
-    public Shield(final int positionX, final int positionY, final int cnt) {
-        super(positionX + 2, positionY, 5 * 2, 3 * 2, Color.BLUE);
-        this.setPositionX(ship.getPositionX());
-        this.setPositionY(ship.getPositionY());
+    public Shield(final int positionX, final int positionY, final int cnt, Ship ship) {
+        super(positionX + 2, positionY, 5 * 2, 3 * 2, Color.WHITE);
+        //this.setPositionX(ship.getPositionX());
+       // this.setPositionY(ship.getPositionY());
+        this.spriteType = DrawManager.SpriteType.Shield;
         this.cnt = cnt;
+        this.ship = ship;
     }
 
-    public void moveRight(){ this.positionX += ship.getSpeed();}
-    public void moveLeft(){ this.positionX += ship.getSpeed();}
+    public void moveRight(){ this.positionX += this.ship.getSpeed();}
+    public void moveLeft(){ this.positionX -= this.ship.getSpeed();}
 
     public void setSprite(){
-        if(this.cnt > 0)
             this.spriteType = DrawManager.SpriteType.Shield;
     }
 

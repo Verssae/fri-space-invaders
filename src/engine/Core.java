@@ -185,7 +185,7 @@ public final class Core {
 				
 			case 4:
 				// Store
-				returnCode = 1;
+				/* returnCode = 1;
 				do {
 					switch (returnCode) {
 						case 1:
@@ -233,7 +233,12 @@ public final class Core {
 					}
 				} while (returnCode != 0);
 
-				returnCode = 1;
+				returnCode = 1; */
+				currentScreen = new StoreScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " store screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing store screen.");
 				break;
 
 			case 5:// Load

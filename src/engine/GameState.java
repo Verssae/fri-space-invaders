@@ -56,7 +56,7 @@ public class GameState {
 		}
 	}
 
-	public final int getCoin() {
+	public static int getCoin() {
 		return coin;
 	}
 

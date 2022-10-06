@@ -542,6 +542,144 @@ public final class DrawManager {
 	}
 
 	/**
+	 * Draws store screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void drawStoreTitle(final Screen screen) {
+		String StoreString = "Store";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, StoreString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
+	 * Draws store menu.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 * @param option
+	 *            Option selected.
+	 */
+	public void drawStoreMenu(final Screen screen, final int option) {
+		String shipShapeString = "ship shape";
+		String shipColorString = "ship color";
+		String bulletEffectString = "bullet effect";
+		String BGMString = "BGM";
+		String exitString = "exit";
+
+		if (option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, shipShapeString,
+				screen.getHeight() /2);
+		if (option == 3)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, shipColorString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 2);
+		if (option == 4)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, bulletEffectString, screen.getHeight()
+				/ 2 + fontRegularMetrics.getHeight() * 4);
+		if (option == 5)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, BGMString, screen.getHeight() /
+				2 + fontRegularMetrics.getHeight() * 6);
+		if (option == 0)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, exitString, screen.getHeight() /
+				2 + fontRegularMetrics.getHeight() * 8);
+
+	}
+
+	/**
+	 * Draws ship shape screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void ShipShapeTitle(final Screen screen) {
+		String ShipShapeString = "Ship Shape";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, ShipShapeString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
+	 * Draws ship color screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void ShipColorTitle(final Screen screen) {
+		String ShipColorString = "Ship Color";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, ShipColorString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
+	 * Draws ship color screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void BulletEffectTitle(final Screen screen) {
+		String BulletEffectString = "Bullet Effect";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, BulletEffectString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
+	 * Draws ship color screen title and instructions.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void BGMTitle(final Screen screen) {
+		String BGMString = "BGM";
+		String instructionsString = "Confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, BGMString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
 	 * Draws a centered string on regular font.
 	 * 
 	 * @param screen

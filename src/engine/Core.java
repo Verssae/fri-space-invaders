@@ -15,6 +15,11 @@ import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
 import screen.SettingScreen;
+import screen.StoreScreen;
+import screen.BGMScreen;
+import screen.BulletEffectScreen;
+import screen.ShipShapeScreen;
+import screen.ShipColorScreen;
 import screen.VolumeScreen;
 
 /**
@@ -178,9 +183,58 @@ public final class Core {
 			default:
 				break;
 				
-			case 4:// Store
+			case 4:
+				// Store
+				returnCode = 1;
+				do {
+					switch (returnCode) {
+						case 1:
+							// Main store
+							currentScreen = new StoreScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " store screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing store screen.");
+							break;
+						case 2:
+							// Ship shape
+							currentScreen = new ShipShapeScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship shape screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship shape screen.");
+							break;
+						case 3:
+							// Ship color
+							currentScreen = new ShipColorScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship color screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship color screen.");
+							break;
+						case 4:
+							// Bullet effect
+							currentScreen = new BulletEffectScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " bullet effect screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing bullet effect screen.");
+							break;
+						case 5:
+							// BGM
+							currentScreen = new BGMScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " background music screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing background music screen.");
+							break;
+						default:
+							break;
+					}
+				} while (returnCode != 0);
+
+				returnCode = 1;
 				break;
-				
 
 			case 5:// Load
 				break;

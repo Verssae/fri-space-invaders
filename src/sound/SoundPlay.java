@@ -10,8 +10,8 @@ public class SoundPlay{
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
     public void Play(String filename){
-        Sound s = new Sound(filename);
-        s.play();
+        SoundBgm sb = new SoundBgm(filename);
+        sb.play();
     }
 
     public static SoundPlay getInstance(){

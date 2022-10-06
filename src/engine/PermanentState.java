@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public final class PermanentState {
 
 	/** Money used in game. */
-	private int coin = 0;
+	private static int coin = 0;
 	/** Current ship shape. */
 	private int shipShape = 0;
 	/** Current ship color. */
@@ -40,12 +40,15 @@ public final class PermanentState {
 		return ps;
 	}
 
-	public int getCoin() {
+	public static int getCoin() {
 		return coin;
 	}
 
-	public void setCoin(int coin) {
-		this.coin += coin;
+	public void setCoin(int Score) {
+		int temp = Score - 500;
+		// 왜 500을 빼지?
+		// -> 1단계를 깨면 주는 점수가 600, 2단계를 깨면 주는 점수가 1050 등등이니까 500을 빼서 시작 +100, + 550 등등으로 하고자 한다!
+		this.coin += temp;
 	}
 
 	public int getShipShape() {

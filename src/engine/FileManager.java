@@ -2,17 +2,7 @@ package engine;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -149,16 +139,13 @@ public final class FileManager {
 		List<Score> highScores = new ArrayList<Score>();
 		InputStream inputStream = null;
 		BufferedReader reader = null;
-
 		try {
 			inputStream = FileManager.class.getClassLoader()
 					.getResourceAsStream("scores");
 			reader = new BufferedReader(new InputStreamReader(inputStream));
-
 			Score highScore = null;
 			String name = reader.readLine();
 			String score = reader.readLine();
-
 			while ((name != null) && (score != null)) {
 				highScore = new Score(name, Integer.parseInt(score));
 				highScores.add(highScore);
@@ -191,11 +178,9 @@ public final class FileManager {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
-
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
-
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
@@ -244,7 +229,6 @@ public final class FileManager {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
-
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
@@ -277,6 +261,52 @@ public final class FileManager {
 				bufferedWriter.close();
 		}
 	}
+
+	public void Savefile(GameState gamestate) {
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			File file = new File(jarPath + "../save");
+			BufferedWriter save = new BufferedWriter(new FileWriter(file));
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+					Integer.toString(gamestate.getScore()) + ' ' +
+					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+					Integer.toString(gamestate.getBulletsShot()) + ' ' +
+					Integer.toString(gamestate.getShipsDestroyed());
+			save.write(state);
+			save.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String[] loadInfo(){
+		String[] array = {"1","0","3","0","0"};
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			String savePath = new File(jarPath).getParent();
+			savePath += File.separator;
+			savePath += "save";
+			File saveFile = new File(savePath);
+			BufferedReader br = new BufferedReader(new FileReader(saveFile));
+			String save_info = br.readLine();
+			array = save_info.split(" ");
+			logger.info("Finish loading.");
+		}
+		catch (FileNotFoundException e) {
+			logger.info("Save file is not found.");
+			logger.info("Starting New Game.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			return array;
+		}
+	}
+
 	public void readship()
 			throws IOException {
 
@@ -297,3 +327,4 @@ public final class FileManager {
 		return playerShipLevel;
 	}
 }
+

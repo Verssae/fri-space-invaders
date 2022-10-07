@@ -79,8 +79,16 @@ public final class DrawManager {
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
 		Explosion,
-		/** Life shape */
+
+		ItemDrop,
+
+		ItemGet,
+
+		Shield,
+    
+    /** Life shape */
 		Life
+
 	};
 
 	/**
@@ -106,7 +114,10 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.Life, new boolean[13][13]);
+			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
+			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
+			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
+      spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
 			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
@@ -605,4 +616,24 @@ public final class DrawManager {
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
 	}
+
+	public void drawStageClearScreen(final Screen screen, final int option){
+		String continueString = "Continue";
+		String saveString = "Save & Exit";
+
+		if(option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, continueString,
+				screen.getHeight() / 3 * 2);
+
+		if(option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, saveString,
+				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
+	}
+
 }

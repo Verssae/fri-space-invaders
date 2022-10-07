@@ -44,11 +44,13 @@ public final class PermanentState {
 		return coin;
 	}
 
-	public void setCoin(int Score) {
-		int temp = Score - 500;
-		// 왜 500을 빼지?
-		// -> 1단계를 깨면 주는 점수가 600, 2단계를 깨면 주는 점수가 1050 등등이니까 500을 빼서 시작 +100, + 550 등등으로 하고자 한다!
-		this.coin += temp;
+	public void setCoin(int income) {
+		this.coin += income;
+		try {
+			FileManager.getInstance().saveCoins(coin);
+		} catch (IOException e) {
+			logger.warning("Couldn't save coins!");
+		}
 	}
 
 	public int getShipShape() {
@@ -75,5 +77,5 @@ public final class PermanentState {
 		return bulletSFX;
 	}
 
-	public void getBulletSFX(int sfx) { this.bulletSFX = sfx; }
+	public void setBulletSFX(int sfx) { this.bulletSFX = sfx; }
 }

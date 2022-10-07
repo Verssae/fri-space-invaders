@@ -16,11 +16,6 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.SettingScreen;
 import screen.StoreScreen;
-import screen.BGMScreen;
-import screen.BulletEffectScreen;
-import screen.ShipShapeScreen;
-import screen.ShipColorScreen;
-import screen.VolumeScreen;
 import screen.PauseScreen;
 
 /**
@@ -161,7 +156,9 @@ public final class Core {
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
 
-					permanentState.setCoin(gameState.getScore());
+					if (gameState.getScore() > 500)
+						permanentState.setCoin(gameState.getScore() - 500); // earn coin
+
 					currentScreen = new PauseScreen(width, height, FPS, gameState);
 					returnCode = frame.setScreen(currentScreen);
 				} while (gameState.getLivesRemaining() > 0

@@ -161,11 +161,10 @@ public final class Core {
 						permanentState.setCoin(gameState.getScore() - 500); // earn coin
             
             
-          if (gameState.getLivesRemaining() > 0) {         
+                    if (gameState.getLivesRemaining() > 0) {         
 						currentScreen = new PauseScreen(width, height, FPS, gameState);
 						returnCode = frame.setScreen(currentScreen);
 					}
-
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 

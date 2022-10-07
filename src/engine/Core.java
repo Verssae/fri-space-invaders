@@ -176,8 +176,6 @@ public final class Core {
 						&& gameState.getLevel() <= NUM_LEVELS);
 				if (!GO_MAIN)
 					break;
-				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
-					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0));
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "
@@ -188,6 +186,8 @@ public final class Core {
 				currentScreen = new ScoreScreen(width, height, FPS, gameState);
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
+				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
+					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 				break;
 			case 3:
 				// High scores.

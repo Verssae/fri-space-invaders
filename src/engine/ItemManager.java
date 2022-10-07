@@ -52,7 +52,7 @@ public class ItemManager {
 
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
-                    if (Math.random()*10 + 1 < 2.1) {
+                    if (true) {
                         random[i][j] = 1;
                     } else random[i][j] = 0;
                 }
@@ -96,11 +96,15 @@ public class ItemManager {
             /*
             아이템타입의 리스트
              */
-            item_list.add(pointupitem);
-            item_list.add(speedupitem);
+//            item_list.add(pointupitem);
+//            item_list.add(speedupitem);
             item_list.add(shielditem);
-            item_list.add(extralifeitem);
-            item_list.add(bulletspeeditem);
+//            item_list.add(extralifeitem);
+//            item_list.add(bulletspeeditem);
+            item_list.add(shielditem);
+            item_list.add(shielditem);
+            item_list.add(shielditem);
+            item_list.add(shielditem);
 
         }
 

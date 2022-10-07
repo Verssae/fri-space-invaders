@@ -1,9 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="engine.Core" />
-    <module name="Invaders" />
-    <method v="2">
+<!--<<<<<<< HEAD-->
+    <module name="game_code" />
       <option name="Make" enabled="true" />
-    </method>
+=======
+    <module name="Newscreen" />
+<!--&gt;>>>>>> 43c0a6c1f61f71f9d95fdb36328bc29c54cf3d02-->
+<!--    <method v="2">-->
+<!--      <option name="Make" enabled="true" />-->
+<!--    </method>-->
   </configuration>
 </component>

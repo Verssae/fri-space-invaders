@@ -40,7 +40,7 @@ public final class PermanentState {
 		return ps;
 	}
 
-	public static int getCoin() {
+	public int getCoin() {
 		return coin;
 	}
 

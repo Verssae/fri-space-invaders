@@ -309,6 +309,10 @@ public class GameScreen extends Screen {
 			drawManager.drawHorizontalLine(this, this.height / 2 + this.height
 					/ 12);
 		}
+		/*
+		if(itempool.getItem() != null)
+			drawManager.drawGetItem(this, itempool.getItem());
+		*/
 
 		drawManager.completeDrawing(this);
 	}

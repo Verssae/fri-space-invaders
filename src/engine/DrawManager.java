@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import entity.Item;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
@@ -619,5 +620,24 @@ public final class DrawManager {
 		else
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
+	}
+
+
+
+	public void drawGetItem(final Screen screen, final Item item) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.GREEN);
+		String getItemString;
+		if (item.getItemType() == Item.ItemType.PointUpItem) {
+			getItemString = String.format("PointUpItem");
+		} else if (item.getItemType() == Item.ItemType.BulletSpeedItem) {
+			getItemString = String.format("BulletSpeedItem");
+		} else if (item.getItemType() == Item.ItemType.ShieldItem) {
+			getItemString = String.format("ShieldItem");
+		} else if (item.getItemType() == Item.ItemType.ExtraLifeItem) {
+			getItemString = String.format("ExtraLifeItem");
+		} else getItemString = String.format("SpeedUpItem");
+
+		backBufferGraphics.drawString(getItemString, screen.getWidth()/3+5, screen.getHeight()/2+50);
 	}
 }

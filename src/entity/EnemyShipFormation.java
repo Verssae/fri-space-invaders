@@ -166,6 +166,20 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			this.shooters.add(column.get(column.size() - 1));
 	}
 
+	public int getnshipsWide(){
+		return nShipsWide;
+	}
+
+	public int getnShipsHigh() {
+		return nShipsHigh;
+	}
+
+	public List<List<EnemyShip>> getEnemyShip(){
+		return this.enemyShips;
+	}
+
+
+
 	/**
 	 * Associates the formation to a given screen.
 	 * 

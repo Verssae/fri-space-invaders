@@ -27,7 +27,6 @@ public class ItemManager {
 
     private int enemyshipssize;
 
-    //private List<List<>> randomlist;
 
     public ItemManager() {
 
@@ -36,6 +35,8 @@ public class ItemManager {
         this.addqueue();
 
     }
+
+
 
         public void assignHasItem(EnemyShipFormation enemyshipformation) {
             //이예나
@@ -66,12 +67,13 @@ public class ItemManager {
                         this. assignItem(enemyshipformation, i , j);
                     }
                     else enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(0);
-                    System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem());//로그추가
+                    System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem());//로그추가하기
                 }
 
             }
 
         }
+
 
         public void assignItem (EnemyShipFormation enemyshipformation, int i, int j){
             //노은솔
@@ -82,8 +84,6 @@ public class ItemManager {
             enemyshipformation.getEnemyShip().get(i).get(j).setItemType(tmpitem);
             item_queue.add(tmpitem);
         }
-
-
 
 
         public void enenmyhasitem () {
@@ -104,6 +104,7 @@ public class ItemManager {
 
         }
 
+
         private void addqueue () {
             //박용수
             /*
@@ -115,7 +116,4 @@ public class ItemManager {
             item_queue.add(this.item_list.get(3));
             item_queue.add(this.item_list.get(4));
         }
-
-
-        /////
     }

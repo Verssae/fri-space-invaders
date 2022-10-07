@@ -37,10 +37,7 @@ public class Item extends Entity {
         }
 
 
-
-
     public void update () {this.positionY += this.speed;}
-
 
 
     public void setSprite () {
@@ -49,6 +46,7 @@ public class Item extends Entity {
         else
             this.spriteType = DrawManager.SpriteType.ItemGet;
     }
+
 
     public void isGet(boolean bool){
         this.isget = bool;
@@ -59,15 +57,13 @@ public class Item extends Entity {
         return this.isget;
     }
 
+
     public void setIsget(boolean bool){
         this.isget = bool;
     }
 
 
-    public void drop(){
-
-    }
-
+    public void drop(){}
 
 
     public ItemType getItemType(){

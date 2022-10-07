@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -52,9 +51,6 @@ public final class DrawManager {
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
 
-	/** Random shipLevel. */
-	private static int shipLevel = new Random().nextInt(3);
-
 
 
 	/** Sprite types. */
@@ -82,7 +78,14 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
-		Explosion
+		Explosion,
+
+		ItemDrop,
+
+		ItemGet,
+
+		Shield
+
 	};
 
 	/**
@@ -108,7 +111,11 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
+			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
+			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
+			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
 
+			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 
@@ -124,9 +131,6 @@ public final class DrawManager {
 		}
 	}
 
-	public static int getShipLevel() {
-		return shipLevel;
-	}
 
 	/**
 	 * Returns shared instance of DrawManager.
@@ -267,12 +271,13 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
 		Ship dummyShip;
-		if(shipLevel == 0)
+		int playerShipLevel = fileManager.getPlayerShipLevel();
+		if(playerShipLevel == 0)
 			dummyShip = new Ship(0, 0);
-		else if(shipLevel == 1)
-			dummyShip = new Ship(0, 0, shipLevel);
+		else if(playerShipLevel == 1)
+			dummyShip = new Ship(0, 0, playerShipLevel);
 		else
-			dummyShip = new Ship(0, 0, (char)('0'+shipLevel));
+			dummyShip = new Ship(0, 0, (char)('0'+playerShipLevel));
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}
@@ -766,4 +771,24 @@ public final class DrawManager {
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
 	}
+
+	public void drawStageClearScreen(final Screen screen, final int option){
+		String continueString = "Continue";
+		String saveString = "Save & Exit";
+
+		if(option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, continueString,
+				screen.getHeight() / 3 * 2);
+
+		if(option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, saveString,
+				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
+	}
+
 }

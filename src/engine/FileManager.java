@@ -2,17 +2,7 @@ package engine;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -39,7 +29,7 @@ public final class FileManager {
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
 	/** get shipLevel from DrawManager. */
-	public static int shipLevel = DrawManager.getShipLevel();
+	private static int playerShipLevel;
 
 	/**
 	 * private constructor.
@@ -50,7 +40,7 @@ public final class FileManager {
 
 	/**
 	 * Returns shared instance of FileManager.
-	 * 
+	 *
 	 * @return Shared instance of FileManager.
 	 */
 	protected static FileManager getInstance() {
@@ -61,7 +51,7 @@ public final class FileManager {
 
 	/**
 	 * Loads sprites from disk.
-	 * 
+	 *
 	 * @param spriteMap
 	 *            Mapping of sprite type and empty boolean matrix that will
 	 *            contain the image.
@@ -74,9 +64,9 @@ public final class FileManager {
 
 		try {
 			String graphicsName;
-			if(shipLevel == 0){
+			if(playerShipLevel == 0){
 				graphicsName = "graphics";
-			}else if(shipLevel == 1){
+			}else if(playerShipLevel == 1){
 				graphicsName = "graphics_1";
 			}else
 				graphicsName = "graphics_2";
@@ -151,7 +141,7 @@ public final class FileManager {
 
 	/**
 	 * Loads a font of a given size.
-	 * 
+	 *
 	 * @param size
 	 *            Point size of the font.
 	 * @return New font.
@@ -182,7 +172,7 @@ public final class FileManager {
 	/**
 	 * Returns the application default scores if there is no user high scores
 	 * file.
-	 * 
+	 *
 	 * @return Default high scores.
 	 * @throws IOException
 	 *             In case of loading problems.
@@ -218,7 +208,7 @@ public final class FileManager {
 	/**
 	 * Loads high scores from file, and returns a sorted list of pairs score -
 	 * value.
-	 * 
+	 *
 	 * @return Sorted list of scores - players.
 	 * @throws IOException
 	 *             In case of loading problems.
@@ -271,13 +261,13 @@ public final class FileManager {
 
 	/**
 	 * Saves user high scores to disk.
-	 * 
+	 *
 	 * @param highScores
 	 *            High scores to save.
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	public void saveHighScores(final List<Score> highScores) 
+	public void saveHighScores(final List<Score> highScores)
 			throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
@@ -401,4 +391,70 @@ public final class FileManager {
 				bufferedWriter.close();
 		}
 	}
+
+	public void Savefile(GameState gamestate) {
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			File file = new File(jarPath + "../save");
+			BufferedWriter save = new BufferedWriter(new FileWriter(file));
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+					Integer.toString(gamestate.getScore()) + ' ' +
+					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+					Integer.toString(gamestate.getBulletsShot()) + ' ' +
+					Integer.toString(gamestate.getShipsDestroyed());
+			save.write(state);
+			save.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String[] loadInfo(){
+		String[] array = {"1","0","3","0","0"};
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			String savePath = new File(jarPath).getParent();
+			savePath += File.separator;
+			savePath += "save";
+			File saveFile = new File(savePath);
+			BufferedReader br = new BufferedReader(new FileReader(saveFile));
+			String save_info = br.readLine();
+			array = save_info.split(" ");
+			logger.info("Finish loading.");
+		}
+		catch (FileNotFoundException e) {
+			logger.info("Save file is not found.");
+			logger.info("Starting New Game.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			return array;
+		}
+	}
+
+	public void readship()
+			throws IOException {
+
+		InputStream inputStream = null;
+		try {
+			inputStream = DrawManager.class.getClassLoader().getResourceAsStream("ship");
+			playerShipLevel = inputStream.read() - 48 - 1;
+			logger.fine("ship read.");
+			if (inputStream != null)
+				inputStream.close();
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+	}
+
+	public static int getPlayerShipLevel() {
+		return playerShipLevel;
+	}
 }
+

@@ -28,7 +28,7 @@ public final class FileManager {
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
 	/** get shipLevel from DrawManager. */
-	public static int shipLevel = DrawManager.getShipLevel();
+	private static int playerShipLevel;
 
 	/**
 	 * private constructor.
@@ -63,9 +63,9 @@ public final class FileManager {
 
 		try {
 			String graphicsName;
-			if(shipLevel == 0){
+			if(playerShipLevel == 0){
 				graphicsName = "graphics";
-			}else if(shipLevel == 1){
+			}else if(playerShipLevel == 1){
 				graphicsName = "graphics_1";
 			}else
 				graphicsName = "graphics_2";
@@ -306,4 +306,25 @@ public final class FileManager {
 			return array;
 		}
 	}
+
+	public void readship()
+			throws IOException {
+
+		InputStream inputStream = null;
+		try {
+			inputStream = DrawManager.class.getClassLoader().getResourceAsStream("ship");
+			playerShipLevel = inputStream.read() - 48 - 1;
+			logger.fine("ship read.");
+			if (inputStream != null)
+				inputStream.close();
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+	}
+
+	public static int getPlayerShipLevel() {
+		return playerShipLevel;
+	}
 }
+

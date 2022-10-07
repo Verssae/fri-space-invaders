@@ -129,7 +129,7 @@ public class GameScreen extends Screen {
 		}
 		//else this.itempool = gameState.getItemPool();
 
-		this.isInitScreen = true;
+		//this.isInitScreen = true;
 		this.setgamestate = gameState;
 	}
 
@@ -153,10 +153,12 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
 				break;
 		}
+		/*
 		if (itempool.getItem() != null){
 			itempool.getItem().setIsget(false);
 			this.manageGetItem(itempool.getItem());
 		}
+		*/
 		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(

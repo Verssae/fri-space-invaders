@@ -543,9 +543,17 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		if (number >= 4)
 			if (!bonusLife) {
-				drawCenteredBigString(screen, "Level " + level,
-						screen.getHeight() / 2
-						+ fontBigMetrics.getHeight() / 3);
+				if (level == 8){
+					drawCenteredBigString(screen, "Boss Stage",
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+				else {
+					drawCenteredBigString(screen, "Level " + level,
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+
 			} else {
 				drawCenteredBigString(screen, "Level " + level
 						+ " - Bonus life!",

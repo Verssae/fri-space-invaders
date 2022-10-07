@@ -320,6 +320,7 @@ public final class DrawManager {
 		String setString = "setting";
 		String loadString = "load";
 		String storeString = "store";
+		String helpString = "help";
 				
 
 		if (option == 2)
@@ -327,38 +328,43 @@ public final class DrawManager {
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, playString,
-				screen.getHeight() /2);
+				screen.getHeight()/3);
 		if (option == 3)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, highScoresString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 2);
+		drawCenteredRegularString(screen, highScoresString, screen.getHeight()/3
+				 + fontRegularMetrics.getHeight() * 2);
 		if (option == 4)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, storeString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 4);
+				/ 3 + fontRegularMetrics.getHeight() * 4);
 		if (option == 5)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, loadString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 6);
+				 3 + fontRegularMetrics.getHeight() * 6);
 		if (option == 6)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, setString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 8);
-		
+				 3 + fontRegularMetrics.getHeight() * 8);
+		if (option == 7)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, helpString, screen.getHeight() / 
+				 3 + fontRegularMetrics.getHeight() * 10);
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 10);
+				 3 + fontRegularMetrics.getHeight() * 12);
 		
 	}
 

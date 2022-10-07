@@ -518,6 +518,23 @@ public final class DrawManager {
 				screen.getHeight() / 5);
 		
 	}
+	public void drawHelpMenu(final Screen screen) {
+		String helpString = "HELP";
+		String right = "right >";
+		String left = "left <";
+		String shoot = "shoot spacebar";
+		
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, helpString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, right, screen.getHeight() / 3);
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, left, screen.getHeight() / 3 + 20);
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, shoot, screen.getHeight() / 3 + 40);
+		
+	}
 
 	/**
 	 * Draws high scores.

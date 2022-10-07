@@ -16,6 +16,7 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.GameSaveScreen;
 import screen.SettingScreen;
+import screen.HelpScreen;
 import screen.VolumeScreen;
 /**
  * Implements core game logic.
@@ -221,6 +222,11 @@ public final class Core {
 				break;
 				
 			case 7: //Help
+				currentScreen = new HelpScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing help screen.");
 				break;
 				
 			case 8: //Volume

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -52,9 +51,6 @@ public final class DrawManager {
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
-
-	/** Random shipLevel. */
-	private static int shipLevel = new Random().nextInt(3);
 
 
 	/** Sprite types. */
@@ -112,6 +108,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 			spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
+			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 
@@ -127,9 +124,6 @@ public final class DrawManager {
 		}
 	}
 
-	public static int getShipLevel() {
-		return shipLevel;
-	}
 
 	/**
 	 * Returns shared instance of DrawManager.

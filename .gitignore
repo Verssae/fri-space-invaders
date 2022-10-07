@@ -208,3 +208,7 @@ $RECYCLE.BIN/
 #
 # Cusotmized by Hansae Ju
 log
+exit
+output/
+.idea/
+Run.xml

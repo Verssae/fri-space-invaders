@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
+import entity.Life;
 
 /**
  * Manages screen drawing.
@@ -84,7 +85,10 @@ public final class DrawManager {
 
 		ItemGet,
 
-		Shield
+		Shield,
+    
+    /** Life shape */
+		Life
 
 	};
 
@@ -114,6 +118,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
+      spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
 			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
@@ -253,9 +258,16 @@ public final class DrawManager {
 	 */
 	public void drawScore(final Screen screen, final int score) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
-		String scoreString = String.format("%04d", score);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 60, 25);
+		backBufferGraphics.setColor(Color.GREEN);
+		String scoreString = String.format("SCORE %04d", score);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 120, 25);
+	}
+
+	public void drawLevels(final Screen screen, final int level) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.GREEN);
+		String scoreString = String.format("Level: %02d", level);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 25);
 	}
 
 	/**
@@ -270,16 +282,9 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
-		Ship dummyShip;
-		int playerShipLevel = fileManager.getPlayerShipLevel();
-		if(playerShipLevel == 0)
-			dummyShip = new Ship(0, 0);
-		else if(playerShipLevel == 1)
-			dummyShip = new Ship(0, 0, playerShipLevel);
-		else
-			dummyShip = new Ship(0, 0, (char)('0'+playerShipLevel));
+		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
-			drawEntity(dummyShip, 40 + 35 * i, 10);
+			drawEntity(remainLife, 40 + 35 * i, 6);
 	}
 
 	/**

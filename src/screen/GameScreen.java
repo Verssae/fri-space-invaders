@@ -83,10 +83,12 @@ public class GameScreen extends Screen {
 
 	private Set<Item> itemiterator;
 
+	/*
 	private boolean isInitScreen;
 
-	private GameState setgamestate;
 
+	private GameState setgamestate;
+	*/
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -118,12 +120,16 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.itemmanager = new ItemManager();
+		/*
 		if(this.itempool == null){
 			this.itempool = new ItemPool();
 		}
-		else this.itempool = gameState.getItemPool();
+		else
+		this.itempool = gameState.getItemPool();
 		this.isInitScreen = true;
 		this.setgamestate = gameState;
+		 */
+		this.itempool = new ItemPool();
 	}
 
 	/**
@@ -146,11 +152,13 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
 				break;
 		}
+		/*
 		if (itempool.getItem() != null){
 			itempool.getItem().setIsget(false);
 			this.manageGetItem(itempool.getItem());// 스테이지 초기화 시 획득했던 아이템 효과 할당
 		}
 		this.isInitScreen = false;
+		 */
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
@@ -399,12 +407,13 @@ public class GameScreen extends Screen {
 	 */
 	public final GameState getGameState() {
 		return new GameState(this.level, this.score, this.lives,
-				this.bulletsShot, this.shipsDestroyed, this.itempool);
+				this.bulletsShot, this.shipsDestroyed);
 	}
 
 
 	private void manageGetItem(Item item){
-			if(isInitScreen || (checkCollision(item, this.ship) && !this.levelFinished)){
+			if(//isInitScreen ||
+				(checkCollision(item, this.ship) && !this.levelFinished)){
 				itempool.add(item);
 				item.setSprite();
 				if(item.getIsget() == false &&
@@ -445,8 +454,8 @@ public class GameScreen extends Screen {
 						//
 
 				}
-				else if(!isInitScreen && item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
+				else if(//!isInitScreen &&
+					   item.getIsget() == false && itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");
 						this.clearItem();// 효과 초기화
 						//코드를 추가해주세요
@@ -455,10 +464,12 @@ public class GameScreen extends Screen {
 				}
 
 				item.isGet(true);
+				/*
 				isInitScreen = false;
 				if (!isInitScreen) {
 					setgamestate.setItemPool(itempool);
 				}
+				 */
 			}
 	}
 

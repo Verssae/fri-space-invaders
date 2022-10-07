@@ -62,12 +62,12 @@ public class ItemManager {
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
                     if (random[i][j] == 1) {
-                        // System.out.println("랜덤 1인 경우"); //디버그용
+                        // System.out.println("랜덤 1인 경우"); -> 디버그용
                         enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(1);
                         this. assignItem(enemyshipformation, i , j);
                     }
                     else enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(0);
-                    System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem());//로그추가하기
+                    //System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem()); -> 로그추가하기
                 }
 
             }

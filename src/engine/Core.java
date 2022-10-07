@@ -65,7 +65,7 @@ public final class Core {
 	/** add boss stage **/
 	private static final GameSettings SETTINGS_Boss_Stage=
 			new GameSettings(1, 1, 2, 500);
-	
+
 	/** Frame to draw the screen on. */
 	private static Frame frame;
 	/** Screen currently shown. */
@@ -190,7 +190,7 @@ public final class Core {
 				currentScreen = new ScoreScreen(width, height, FPS, gameState);
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
-				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
+				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == NUM_LEVELS + 1)
 					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 				break;
 			case 3:

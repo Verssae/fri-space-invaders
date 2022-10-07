@@ -121,20 +121,28 @@ public class StoreScreen extends Screen {
 
     private void rerollItem() {
         if (menuCode == 0){ // ship shape
-            permanentState.setShipShape(new Random().nextInt(3));
-            permanentState.setCoin(-COST_SHAPE);
+            if (permanentState.getCoin() >= COST_SHAPE) {
+                permanentState.setShipShape(new Random().nextInt(3));
+                permanentState.setCoin(-COST_SHAPE);
+            }
         }
         else if (menuCode == 1){ // ship color
-            permanentState.setShipColor(new Random().nextInt(3));
-            permanentState.setCoin(-COST_COLOR);
+            if (permanentState.getCoin() >= COST_COLOR) {
+                permanentState.setShipColor(new Random().nextInt(3));
+                permanentState.setCoin(-COST_COLOR);
+            }
         }
         else if (menuCode == 2){ // bullet effect
-            permanentState.setBulletSFX(new Random().nextInt(3));
-            permanentState.setCoin(-COST_BULLET);
+            if (permanentState.getCoin() >= COST_BULLET) {
+                permanentState.setBulletSFX(new Random().nextInt(3));
+                permanentState.setCoin(-COST_BULLET);
+            }
         }
         else { // BGM
-            permanentState.setBGM(new Random().nextInt(3));
-            permanentState.setCoin(-COST_BGM);
+            if (permanentState.getCoin() >= COST_BGM) {
+                permanentState.setBGM(new Random().nextInt(3));
+                permanentState.setCoin(-COST_BGM);
+            }
         }
     }
 

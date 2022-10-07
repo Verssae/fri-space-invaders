@@ -660,11 +660,18 @@ public final class DrawManager {
 
 	public void drawStoreGacha(final Screen screen, final int menu, final int focus) {
 		String rerollString = "reroll!(100$)";
+		String coinLackString = "Not enough coins!";
 		PermanentState permanentState = PermanentState.getInstance();
 		if (focus == 0)
 			backBufferGraphics.setColor(Color.WHITE);
-		else
+		else {
 			backBufferGraphics.setColor(Color.GREEN);
+			if (permanentState.getCoin() < 100) {
+				backBufferGraphics.setColor(Color.RED);
+				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
+						screen.getHeight() / 2 + 180);
+			}
+		}
 		backBufferGraphics.drawRect(screen.getWidth() / 2 + 50, screen.getHeight() / 2, 100, 100);
 		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 100 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 180);
 

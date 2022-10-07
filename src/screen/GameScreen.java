@@ -79,8 +79,6 @@ public class GameScreen extends Screen {
 
 	private ItemManager itemmanager;
 
-	private Item item;
-
 	private ItemPool itempool;
 
 	private Set<Item> itemiterator;
@@ -120,12 +118,10 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.itemmanager = new ItemManager();
-
 		if(this.itempool == null){
 			this.itempool = new ItemPool();
 		}
 		else this.itempool = gameState.getItemPool();
-
 		this.isInitScreen = true;
 		this.setgamestate = gameState;
 	}
@@ -152,7 +148,7 @@ public class GameScreen extends Screen {
 		}
 		if (itempool.getItem() != null){
 			itempool.getItem().setIsget(false);
-			this.manageGetItem(itempool.getItem());
+			this.manageGetItem(itempool.getItem());// 스테이지 초기화 시 획득했던 아이템 효과 할당
 		}
 		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
@@ -163,11 +159,11 @@ public class GameScreen extends Screen {
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
-		this.itemiterator = new HashSet<Item>();
 		// Special input delay / countdown.
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+		this.itemiterator = new HashSet<Item>();
 	}
 
 	/**
@@ -237,7 +233,6 @@ public class GameScreen extends Screen {
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
 
-
 			for(Item item : this.itemiterator) {
 				if(item != null)
 					item.update();
@@ -276,8 +271,6 @@ public class GameScreen extends Screen {
 						item.getPositionY());
 			}
 		}
-
-
 		drawManager.drawEntity(this.ship, this.ship.getPositionX(),
 				this.ship.getPositionY());
 		if (this.enemyShipSpecial != null)
@@ -350,13 +343,11 @@ public class GameScreen extends Screen {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
-
 						if(enemyShip.getItemType() != null) {
 						    enemyShip.itemDrop(itemiterator);
 							for(Item item : this.itemiterator)
-								if(item != null)
-								item.setSprite();
-								//item.drop();
+								//if(item != null)
+									item.setSprite();
 						}
 
 						this.enemyShipFormation.destroy(enemyShip);

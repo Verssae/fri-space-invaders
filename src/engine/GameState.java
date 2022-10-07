@@ -1,5 +1,7 @@
 package engine;
 
+import entity.ItemPool;
+
 /**
  * Implements an object that stores the state of the game between levels.
  * 
@@ -19,6 +21,8 @@ public class GameState {
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
 
+	//private ItemPool itempool;
+
 	/**
 	 * Constructor.
 	 * 
@@ -34,8 +38,7 @@ public class GameState {
 	 *            Ships destroyed until now.
 	 */
 	public GameState(final int level, final int score,
-			final int livesRemaining, final int bulletsShot,
-			final int shipsDestroyed) {
+			final int livesRemaining, final int bulletsShot, final int shipsDestroyed) {
 		this.level = level;
 		this.score = score;
 		this.livesRemaining = livesRemaining;
@@ -78,4 +81,16 @@ public class GameState {
 		return shipsDestroyed;
 	}
 
+
+/*
+	public void setItemPool(ItemPool itempool){
+			this.itempool = itempool;
+	}
+
+
+
+	public ItemPool getItemPool(){
+		return this.itempool;
+	}
+*/
 }

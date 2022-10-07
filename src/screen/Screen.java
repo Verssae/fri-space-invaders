@@ -69,9 +69,9 @@ public class Screen {
 	/**
 	 * Initializes basic screen properties.
 	 */
-	public void initialize() {
+		public void initialize() {
 
-	}
+		}
 
 	/**
 	 * Activates the screen.

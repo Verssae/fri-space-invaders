@@ -105,14 +105,12 @@ public class ScoreScreen extends Screen {
 		if (this.inputDelay.checkFinished()) {
 			if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {
 				// Return to main menu.
-				saveCoins();
 				this.returnCode = 1;
 				this.isRunning = false;
 				if (this.isNewRecord)
 					saveScore();
 			} else if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
 				// Play again.
-				saveCoins();
 				this.returnCode = 2;
 				this.isRunning = false;
 				if (this.isNewRecord)
@@ -162,15 +160,6 @@ public class ScoreScreen extends Screen {
 			Core.getFileManager().saveHighScores(highScores);
 		} catch (IOException e) {
 			logger.warning("Couldn't load high scores!");
-		}
-	}
-
-	private void saveCoins() {
-		try {
-			int coins = Core.getFileManager().loadCoins();
-			Core.getFileManager().saveCoins(coins + score);
-		} catch (IOException e) {
-			logger.warning("Couldn't load coins!");
 		}
 	}
 

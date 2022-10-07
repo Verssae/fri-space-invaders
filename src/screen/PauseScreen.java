@@ -55,7 +55,10 @@ public class PauseScreen extends Screen {
         this.shipsDestroyed = gameState.getShipsDestroyed();
         this.isNewRecord = false;
 
-        this.coin = PermanentState.getInstance().getCoin();
+        if (this.score > 500)
+            this.coin = this.score - 500;
+        else
+            this.coin = 0;
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();
 

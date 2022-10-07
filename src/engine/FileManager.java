@@ -108,6 +108,47 @@ public final class FileManager {
 		}
 	}
 
+	public void loadSprite_Temp(final Map<SpriteType, boolean[][]> spriteMap)
+			throws IOException {
+		InputStream inputStream = null;
+		PermanentState permanentState = PermanentState.getInstance();
+
+		try {
+			String graphicsName;
+			if(permanentState.getShipShape() == 0){
+				graphicsName = "graphics";
+			}else if(permanentState.getShipShape() == 1){
+				graphicsName = "graphics_1";
+			}else
+				graphicsName = "graphics_2";
+			inputStream = DrawManager.class.getClassLoader()
+					.getResourceAsStream(graphicsName);
+			char c;
+
+			// Sprite loading.
+			for (Map.Entry<SpriteType, boolean[][]> sprite : spriteMap
+					.entrySet()) {
+				for (int i = 0; i < sprite.getValue().length; i++)
+					for (int j = 0; j < sprite.getValue()[i].length; j++) {
+						do
+							c = (char) inputStream.read();
+						while (c != '0' && c != '1');
+
+						if (c == '1')
+							sprite.getValue()[i][j] = true;
+						else
+							sprite.getValue()[i][j] = false;
+					}
+				logger.fine("Sprite " + sprite.getKey() + " loaded.");
+			}
+			if (inputStream != null)
+				inputStream.close();
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+	}
+
 	/**
 	 * Loads a font of a given size.
 	 * 

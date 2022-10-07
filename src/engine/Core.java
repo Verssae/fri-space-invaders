@@ -156,11 +156,16 @@ public final class Core {
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
 
+
 					if (gameState.getScore() > 500)
 						permanentState.setCoin(gameState.getScore() - 500); // earn coin
+            
+            
+          if (gameState.getLivesRemaining() > 0) {         
+						currentScreen = new PauseScreen(width, height, FPS, gameState);
+						returnCode = frame.setScreen(currentScreen);
+					}
 
-					currentScreen = new PauseScreen(width, height, FPS, gameState);
-					returnCode = frame.setScreen(currentScreen);
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 

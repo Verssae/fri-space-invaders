@@ -14,6 +14,7 @@ import entity.EnemyShip;
 import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
+import engine.DrawManager;
 
 /**
  * Implements the game screen, where the action happens.
@@ -70,6 +71,8 @@ public class GameScreen extends Screen {
 	private boolean levelFinished;
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
+	/** get shipLevel from DrawManager. */
+	public static int shipLevel = DrawManager.getShipLevel();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -111,7 +114,17 @@ public class GameScreen extends Screen {
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		enemyShipFormation.attach(this);
-		this.ship = new Ship(this.width / 2, this.height - 30);
+		switch (shipLevel) {
+			case 0:
+				this.ship = new Ship(this.width / 2, this.height - 30);
+				break;
+			case 1:
+				this.ship = new Ship(this.width / 2, this.height - 30, shipLevel);
+				break;
+			case 2:
+				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
+				break;
+		}
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);

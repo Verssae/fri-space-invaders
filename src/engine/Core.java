@@ -120,7 +120,6 @@ public final class Core {
 		
 		GameState gameState;
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-		//level,score,livesRemaining, bulletsShot, shipsDestoryed
 
 		int returnCode = 1;
 		do {
@@ -161,6 +160,7 @@ public final class Core {
 							getFileManager().Savefile(gameState);
 							LOGGER.info("Complete Save.");
 							GO_MAIN = false;
+							gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 							returnCode = 1;
 							break;
 						}
@@ -176,6 +176,8 @@ public final class Core {
 						&& gameState.getLevel() <= NUM_LEVELS);
 				if (!GO_MAIN)
 					break;
+				if (gameState.getLivesRemaining() == 0)
+					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0));
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "

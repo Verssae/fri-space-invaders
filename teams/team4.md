@@ -1,0 +1,6 @@
+# Team4
+We are Main Menu Team, No. 4
+# Requirements
+Add 'Help' Menu : 'Help' menu include description of each menu, how to manipulate the game, ...
+Add 'Setting' Menu : Set volume and screen size, key setting, ...
+Can be added according to the requirements of other teams

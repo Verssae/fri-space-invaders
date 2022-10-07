@@ -127,7 +127,7 @@ public class GameScreen extends Screen {
 		if(this.itempool == null){
 			this.itempool = new ItemPool();
 		}
-		else this.itempool = gameState.getItemPool();
+		//else this.itempool = gameState.getItemPool();
 
 		this.isInitScreen = true;
 		this.setgamestate = gameState;
@@ -428,7 +428,7 @@ public class GameScreen extends Screen {
 	 */
 	public final GameState getGameState() {
 		return new GameState(this.level, this.score, this.lives,
-				this.bulletsShot, this.shipsDestroyed, this.itempool);
+				this.bulletsShot, this.shipsDestroyed);
 	}
 
 
@@ -461,7 +461,7 @@ public class GameScreen extends Screen {
 						System.out.println("방어아이템");
 						//코드를 추가해주세요
 						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
-  					shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY()+10,0, this.ship);
+  					shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY()-3,0, this.ship);
 					shield.setCnt(1);
 
 				}
@@ -482,10 +482,13 @@ public class GameScreen extends Screen {
 				}
 
 				item.isGet(true);
+				/*
 				isInitScreen = false;
 				if (!isInitScreen) {
 					setgamestate.setItemPool(itempool);
 				}
+
+				 */
 			}
 	}
 

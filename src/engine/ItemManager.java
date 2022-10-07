@@ -27,7 +27,6 @@ public class ItemManager {
 
     private int enemyshipssize;
 
-    //private List<List<>> randomlist;
 
     public ItemManager() {
 
@@ -36,6 +35,8 @@ public class ItemManager {
         this.addqueue();
 
     }
+
+
 
         public void assignHasItem(EnemyShipFormation enemyshipformation) {
             //이예나
@@ -52,7 +53,7 @@ public class ItemManager {
 
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
-                    if (true) {
+                    if (Math.random()*10 + 1 < 1.1) {
                         random[i][j] = 1;
                     } else random[i][j] = 0;
                 }
@@ -61,17 +62,18 @@ public class ItemManager {
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
                     if (random[i][j] == 1) {
-                        // System.out.println("랜덤 1인 경우"); //디버그용
+                        // System.out.println("랜덤 1인 경우"); -> 디버그용
                         enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(1);
                         this. assignItem(enemyshipformation, i , j);
                     }
                     else enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(0);
-                    System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem());//로그추가
+                    //System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem()); -> 로그추가하기
                 }
 
             }
 
         }
+
 
         public void assignItem (EnemyShipFormation enemyshipformation, int i, int j){
             //노은솔
@@ -84,8 +86,6 @@ public class ItemManager {
         }
 
 
-
-
         public void enenmyhasitem () {
             // 임시 토글메서드
         }
@@ -96,17 +96,14 @@ public class ItemManager {
             /*
             아이템타입의 리스트
              */
-//            item_list.add(pointupitem);
-//            item_list.add(speedupitem);
+            item_list.add(pointupitem);
+            item_list.add(speedupitem);
             item_list.add(shielditem);
-//            item_list.add(extralifeitem);
-//            item_list.add(bulletspeeditem);
-            item_list.add(shielditem);
-            item_list.add(shielditem);
-            item_list.add(shielditem);
-            item_list.add(shielditem);
+            item_list.add(extralifeitem);
+            item_list.add(bulletspeeditem);
 
         }
+
 
         private void addqueue () {
             //박용수
@@ -119,7 +116,4 @@ public class ItemManager {
             item_queue.add(this.item_list.get(3));
             item_queue.add(this.item_list.get(4));
         }
-
-
-        /////
     }

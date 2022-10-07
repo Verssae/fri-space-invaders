@@ -21,7 +21,7 @@ public class GameState {
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
 
-	private ItemPool itempool;
+	//private ItemPool itempool;
 
 	/**
 	 * Constructor.
@@ -38,14 +38,12 @@ public class GameState {
 	 *            Ships destroyed until now.
 	 */
 	public GameState(final int level, final int score,
-			final int livesRemaining, final int bulletsShot,
-			final int shipsDestroyed, ItemPool itempool) {
+			final int livesRemaining, final int bulletsShot, final int shipsDestroyed) {
 		this.level = level;
 		this.score = score;
 		this.livesRemaining = livesRemaining;
 		this.bulletsShot = bulletsShot;
 		this.shipsDestroyed = shipsDestroyed;
-		this.itempool = itempool;
 	}
 
 	/**
@@ -84,12 +82,15 @@ public class GameState {
 	}
 
 
+/*
 	public void setItemPool(ItemPool itempool){
 			this.itempool = itempool;
 	}
 
+
+
 	public ItemPool getItemPool(){
 		return this.itempool;
 	}
-
+*/
 }

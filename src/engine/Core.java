@@ -156,6 +156,15 @@ public final class Core {
 
 					gameState = ((GameScreen) currentScreen).getGameState();
 
+					if (gameState.getScore() > 500)
+						permanentState.setCoin(gameState.getScore() - 500); // earn coin
+
+						
+                    if (gameState.getLivesRemaining() > 0) {         
+						currentScreen = new PauseScreen(width, height, FPS, gameState);
+						returnCode = frame.setScreen(currentScreen);
+					}
+
 					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game save screen at " + FPS + " fps.");

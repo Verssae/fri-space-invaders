@@ -242,9 +242,16 @@ public final class DrawManager {
 	 */
 	public void drawScore(final Screen screen, final int score) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
-		String scoreString = String.format("%04d", score);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 60, 25);
+		backBufferGraphics.setColor(Color.GREEN);
+		String scoreString = String.format("SCORE %04d", score);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 120, 25);
+	}
+
+	public void drawLevels(final Screen screen, final int level) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.GREEN);
+		String scoreString = String.format("Level: %02d", level);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 25);
 	}
 
 	/**

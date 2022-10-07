@@ -6,6 +6,7 @@ import java.util.Set;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+//import entity.Shield;
 
 /**
  * Implements a ship, to be controlled by the player.
@@ -28,6 +29,8 @@ public class Ship extends Entity {
 	private Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
 	private Cooldown destructionCooldown;
+
+//	private Shield shield;
 
 	/**
 	 * Constructor, establishes the ship's properties.
@@ -87,16 +90,20 @@ public class Ship extends Entity {
 	 * Moves the ship speed uni ts right, or until the right screen border is
 	 * reached.
 	 */
-	public final void moveRight() {
+	public final void moveRight()
+	{
 		this.positionX += SPEED;
+//		shield.moveRight();
 	}
 
 	/**
 	 * Moves the ship speed units left, or until the left screen border is
 	 * reached.
 	 */
-	public final void moveLeft() {
+	public final void moveLeft()
+	{
 		this.positionX -= SPEED;
+//		shield.moveRight();
 	}
 
 	/**

@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import entity.Item;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
@@ -86,7 +85,9 @@ public final class DrawManager {
 
 		ItemDrop,
 
-		ItemGet
+		ItemGet,
+
+		Shield
 
 	};
 
@@ -113,8 +114,9 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
-			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
+			spriteMap.put(SpriteType.ItemDrop, new boolean[3][5]);
+			spriteMap.put(SpriteType.ItemGet, new boolean[3][5]);
+			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -620,24 +622,5 @@ public final class DrawManager {
 		else
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
-	}
-
-
-
-	public void drawGetItem(final Screen screen, final Item item) {
-		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.GREEN);
-		String getItemString;
-		if (item.getItemType() == Item.ItemType.PointUpItem) {
-			getItemString = String.format("PointUpItem");
-		} else if (item.getItemType() == Item.ItemType.BulletSpeedItem) {
-			getItemString = String.format("BulletSpeedItem");
-		} else if (item.getItemType() == Item.ItemType.ShieldItem) {
-			getItemString = String.format("ShieldItem");
-		} else if (item.getItemType() == Item.ItemType.ExtraLifeItem) {
-			getItemString = String.format("ExtraLifeItem");
-		} else getItemString = String.format("SpeedUpItem");
-
-		backBufferGraphics.drawString(getItemString, screen.getWidth()/3+5, screen.getHeight()/2+50);
 	}
 }

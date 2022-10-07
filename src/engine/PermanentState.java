@@ -18,9 +18,9 @@ public final class PermanentState {
 	/** Current ship color. */
 	private int shipColor = 0;
 	/** Current background Music. */
-	private int BGM = 0;
+	private int BGM = 1;
 	/** Current bullet sound effect. */
-	private int bulletSFX = 0;
+	private int bulletSFX = 1;
 	/** Application logger. */
 	private static Logger logger;
 

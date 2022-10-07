@@ -55,8 +55,6 @@ public final class DrawManager {
 	/** Random shipLevel. */
 	private static int shipLevel = new Random().nextInt(3);
 
-	/** Coin -> Game money */
-	private static int coin = PermanentState.getInstance().getCoin();
 
 
 	/** Sprite types. */
@@ -459,17 +457,6 @@ public final class DrawManager {
 		}
 	}
 
-	/**
-	 * Draws basic content of game over screen.
-	 * 
-	 * @param screen
-	 *            Screen to draw on.
-	 * @param acceptsInput
-	 *            If the screen accepts input.
-	 * @param isNewRecord
-	 *            If the score is a new high score.
-	 */
-
 	public void drawPause (final Screen screen, final int score,
 							final int livesRemaining, final int shipsDestroyed,
 			final int coin, final boolean isNewRecord) {
@@ -492,6 +479,17 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, GetcoinString, screen.getHeight()
 				/ height + fontRegularMetrics.getHeight() * 6);
 	}
+
+	/**
+	 * Draws basic content of game over screen.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 * @param acceptsInput
+	 *            If the screen accepts input.
+	 * @param isNewRecord
+	 *            If the score is a new high score.
+	 */
 	
 	public void PauseGame(final Screen screen, final boolean acceptsInput,
 			final boolean isNewRecord) {
@@ -611,8 +609,10 @@ public final class DrawManager {
 	 *
 	 * @param screen
 	 *            Screen to draw on.
-	 * @param option
-	 *            Option selected.
+	 * @param menu
+	 *            Menu selected.
+	 * @param focus
+	 * 			  Gacha selected.
 	 */
 	public void drawStoreMenu(final Screen screen, final int menu, final int focus) {
 		String shipShapeString = "ship shape";
@@ -654,13 +654,36 @@ public final class DrawManager {
 	}
 
 	public void drawStoreGacha(final Screen screen, final int menu, final int focus) {
-		String rerollString = "reroll!";
+		String rerollString = "reroll!(100$)";
+		PermanentState permanentState = PermanentState.getInstance();
 		if (focus == 0)
 			backBufferGraphics.setColor(Color.WHITE);
 		else
 			backBufferGraphics.setColor(Color.GREEN);
-		backBufferGraphics.drawRect(screen.getWidth() / 2, screen.getHeight() / 2, 120, 120);
-		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 60 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 140);
+		backBufferGraphics.drawRect(screen.getWidth() / 2 + 50, screen.getHeight() / 2, 100, 100);
+		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 100 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 180);
+
+		if(menu < 2) { // shape, color
+			try{
+				fileManager.loadSprite_Temp(spriteMap);
+			}
+			catch (IOException e){
+				logger.warning("Loading failed.");
+			}
+
+			if (permanentState.getShipColor() == 0)
+				drawEntity(new Ship(0, 0), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+			if (permanentState.getShipColor() == 1)
+				drawEntity(new Ship(0, 0, 0), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+			if (permanentState.getShipColor() == 2)
+				drawEntity(new Ship(0, 0, '0'), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+		}
+		else if(menu == 2){ // bullet efx
+
+		}
+		else{ // egm
+
+		}
 	}
 
 	public void drawCoin(final Screen screen, final int coin) {
@@ -669,78 +692,6 @@ public final class DrawManager {
 		String coinString = String.format("%d", coin);
 		backBufferGraphics.drawString("Coin : ", screen.getWidth() - 140, 25);
 		backBufferGraphics.drawString(coinString, screen.getWidth() - 11 * (coinString.length() + 1), 25);
-	}
-
-	/**
-	 * Draws ship shape screen title and instructions.
-	 *
-	 * @param screen
-	 *            Screen to draw on.
-	 */
-	public void ShipShapeTitle(final Screen screen) {
-		String ShipShapeString = "Ship Shape";
-		String instructionsString = "Confirm with space";
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, ShipShapeString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 5);
-	}
-
-	/**
-	 * Draws ship color screen title and instructions.
-	 *
-	 * @param screen
-	 *            Screen to draw on.
-	 */
-	public void ShipColorTitle(final Screen screen) {
-		String ShipColorString = "Ship Color";
-		String instructionsString = "Confirm with space";
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, ShipColorString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 5);
-	}
-
-	/**
-	 * Draws ship color screen title and instructions.
-	 *
-	 * @param screen
-	 *            Screen to draw on.
-	 */
-	public void BulletEffectTitle(final Screen screen) {
-		String BulletEffectString = "Bullet Effect";
-		String instructionsString = "Confirm with space";
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, BulletEffectString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 5);
-	}
-
-	/**
-	 * Draws ship color screen title and instructions.
-	 *
-	 * @param screen
-	 *            Screen to draw on.
-	 */
-	public void BGMTitle(final Screen screen) {
-		String BGMString = "BGM";
-		String instructionsString = "Confirm with space";
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, BGMString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 5);
 	}
 
 	/**

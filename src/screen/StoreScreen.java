@@ -1,6 +1,7 @@
 package screen;
 
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import engine.Cooldown;
 import engine.Core;
@@ -10,6 +11,11 @@ public class StoreScreen extends Screen {
 
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 200;
+
+    private static final int COST_SHAPE = 100;
+    private static final int COST_COLOR = 100;
+    private static final int COST_BULLET = 100;
+    private static final int COST_BGM = 100;
 
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
@@ -88,6 +94,7 @@ public class StoreScreen extends Screen {
                         rerollItem();
                     }
                 }
+                this.selectionCooldown.reset();
             }
         }
     }
@@ -113,7 +120,22 @@ public class StoreScreen extends Screen {
     }
 
     private void rerollItem() {
-        
+        if (menuCode == 0){ // ship shape
+            permanentState.setShipShape(new Random().nextInt(3));
+            permanentState.setCoin(-COST_SHAPE);
+        }
+        else if (menuCode == 1){ // ship color
+            permanentState.setShipColor(new Random().nextInt(3));
+            permanentState.setCoin(-COST_COLOR);
+        }
+        else if (menuCode == 2){ // bullet effect
+            permanentState.setBulletSFX(new Random().nextInt(3));
+            permanentState.setCoin(-COST_BULLET);
+        }
+        else { // BGM
+            permanentState.setBGM(new Random().nextInt(3));
+            permanentState.setCoin(-COST_BGM);
+        }
     }
 
     /**

@@ -304,6 +304,25 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
+	
+	public void drawVolume(final Screen screen, final int volume){
+		String volumeString = "Volume";
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, volumeString, screen.getHeight()/3);
+	}
+
+	public void drawVolumeTitle(final Screen screen){
+		String titleString = "Volume";
+		String instructionsString =
+				"select with w+s / arrows, confirm with space";
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 4);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
+	}
 
 	/**
 	 * Draws main menu.

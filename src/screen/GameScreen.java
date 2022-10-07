@@ -18,7 +18,7 @@ import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
-//import entity.Shield;
+import entity.Shield;
 
 /**
  * Implements the game screen, where the action happens.
@@ -43,6 +43,8 @@ public class GameScreen extends Screen {
 	/** Height of the interface separation line. */
 	private static final int SEPARATION_LINE_HEIGHT = 40;
 
+
+	private static FileManager fileManager;
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
 	/** Current difficulty level number. */
@@ -75,8 +77,6 @@ public class GameScreen extends Screen {
 	private boolean levelFinished;
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
-	/** get shipLevel from DrawManager. */
-	public static int shipLevel = DrawManager.getShipLevel();
 
 	private ItemManager itemmanager;
 
@@ -142,15 +142,16 @@ public class GameScreen extends Screen {
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
 		enemyShipFormation.attach(this);
-		switch (shipLevel) {
+		int playerShipLevel = fileManager.getPlayerShipLevel();
+		switch (playerShipLevel) {
 			case 0:
 				this.ship = new Ship(this.width / 2, this.height - 30);
 				break;
 			case 1:
-				this.ship = new Ship(this.width / 2, this.height - 30, shipLevel);
+				this.ship = new Ship(this.width / 2, this.height - 30, playerShipLevel);
 				break;
 			case 2:
-				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+shipLevel));
+				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipLevel));
 				break;
 		}
 		/*

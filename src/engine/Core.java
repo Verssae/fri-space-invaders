@@ -15,9 +15,9 @@ import screen.HighScoreScreen;
 import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
+import screen.GameSaveScreen;
 import screen.SettingScreen;
 import screen.VolumeScreen;
-
 /**
  * Implements core game logic.
  * 
@@ -39,7 +39,10 @@ public final class Core {
 	private static final int EXTRA_LIFE_FRECUENCY = 3;
 	/** Total number of levels. */
 	private static final int NUM_LEVELS = 7;
-	
+
+	/** Check click on Save & Exit button */
+	private static boolean GO_MAIN;
+
 	/** Difficulty settings for level 1. */
 	private static final GameSettings SETTINGS_LEVEL_1 =
 			new GameSettings(5, 4, 60, 2000);
@@ -118,11 +121,10 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		
 		GameState gameState;
+		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 
 		int returnCode = 1;
 		do {
-			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-
 			switch (returnCode) {
 			case 1:
 				// Main menu.
@@ -134,12 +136,12 @@ public final class Core {
 				break;
 			case 2:
 				// Game & score.
+				GO_MAIN = true;
 				do {
 					// One extra live every few levels.
 					boolean bonusLife = gameState.getLevel()
 							% EXTRA_LIFE_FRECUENCY == 0
 							&& gameState.getLivesRemaining() < MAX_LIVES;
-					
 					currentScreen = new GameScreen(gameState,
 							gameSettings.get(gameState.getLevel() - 1),
 							bonusLife, width, height, FPS);
@@ -150,6 +152,22 @@ public final class Core {
 
 					gameState = ((GameScreen) currentScreen).getGameState();
 
+					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " game save screen at " + FPS + " fps.");
+						currentScreen = new GameSaveScreen(gameState, width, height, FPS);
+						returnCode = frame.setScreen(currentScreen);
+						LOGGER.info("Closing game save screen.");
+						if (returnCode == 2) {
+							getFileManager().Savefile(gameState);
+							LOGGER.info("Complete Save.");
+							GO_MAIN = false;
+							gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+							returnCode = 1;
+							break;
+						}
+					}
+
 					gameState = new GameState(gameState.getLevel() + 1,
 							gameState.getScore(),
 							gameState.getLivesRemaining(),
@@ -158,7 +176,11 @@ public final class Core {
 					);
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
-
+				if (!GO_MAIN)
+					break;
+				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
+					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0));
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "
 						+ gameState.getScore() + ", "
@@ -184,9 +206,12 @@ public final class Core {
 				break;
 				
 
-			case 5:// Load
+			case 5:
+				// Load
+				String save_info [] = getFileManager().loadInfo();
+				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
+				returnCode = 2;
 				break;
-
 				
 			case 6:
 				// Setting.

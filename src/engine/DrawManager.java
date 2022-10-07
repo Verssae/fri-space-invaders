@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -51,9 +50,6 @@ public final class DrawManager {
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
-
-	/** Random shipLevel. */
-	private static int shipLevel = new Random().nextInt(3);
 
 
 	/** Sprite types. */
@@ -108,6 +104,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 
+			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 
@@ -123,9 +120,6 @@ public final class DrawManager {
 		}
 	}
 
-	public static int getShipLevel() {
-		return shipLevel;
-	}
 
 	/**
 	 * Returns shared instance of DrawManager.
@@ -266,12 +260,13 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
 		Ship dummyShip;
-		if(shipLevel == 0)
+		int playerShipLevel = fileManager.getPlayerShipLevel();
+		if(playerShipLevel == 0)
 			dummyShip = new Ship(0, 0);
-		else if(shipLevel == 1)
-			dummyShip = new Ship(0, 0, shipLevel);
+		else if(playerShipLevel == 1)
+			dummyShip = new Ship(0, 0, playerShipLevel);
 		else
-			dummyShip = new Ship(0, 0, (char)('0'+shipLevel));
+			dummyShip = new Ship(0, 0, (char)('0'+playerShipLevel));
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}

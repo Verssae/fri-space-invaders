@@ -14,9 +14,9 @@ public final class PermanentState {
 	/** Money used in game. */
 	private static int coin = 0;
 	/** Current ship shape. */
-	private int shipShape = 0;
+	private int shipShape = FileManager.getPlayerShipShape();
 	/** Current ship color. */
-	private int shipColor = 0;
+	private int shipColor = FileManager.getPlayerShipColor();
 	/** Current background Music. */
 	private int BGM = 1;
 	/** Current bullet sound effect. */

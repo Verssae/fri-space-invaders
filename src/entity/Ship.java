@@ -6,6 +6,7 @@ import java.util.Set;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import engine.FileManager;
 //import entity.Shield;
 
 /**
@@ -22,8 +23,6 @@ public class Ship extends Entity {
 	private int BULLET_SPEED, INIT_BULLET_SPEED;
 	/** Movement of the ship for each unit of time. */
 	private double SPEED, INIT_SPEED;
-	/** The level of the ship. */
-	private static int shipLevel;
 
 	/** Minimum time between shots. */
 	private Cooldown shootingCooldown;
@@ -40,46 +39,35 @@ public class Ship extends Entity {
 	 * @param positionY
 	 *            Initial position of the ship in the Y axis.
 	 */
-	public Ship(final int positionX, final int positionY) {
-		super(positionX, positionY, 13 * 2, 8 * 2, Color.GREEN);
+	public Ship(final int positionX, final int positionY, Color shipColor) {
+		super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
 
 		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 750;
 		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
 		this.SPEED = INIT_SPEED = 2;
-		this.shipLevel = 0;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);
 	}
-	public Ship(final int positionX, final int positionY, int shipLevel) {
-        super(positionX, positionY, 13 * 2, 8 * 2, Color.BLUE);
+	public Ship(final int positionX, final int positionY, int shipShape, Color shipColor) {
+        super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
 
 		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 700;
 		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
 		this.SPEED = INIT_SPEED = 3;
-		this.shipLevel = 1;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);
     }
-	public Ship(final int positionX, final int positionY, char shipLevel) {
-		super(positionX, positionY, 13 * 2, 8 * 2, Color.darkGray);
+	public Ship(final int positionX, final int positionY, char shipShape, Color shipColor) {
+		super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
 
 		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 650;
 		this.BULLET_SPEED = INIT_BULLET_SPEED = -8;
 		this.SPEED = INIT_SPEED = 3;
-		this.shipLevel = 2;
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);
-	}
-
-	/**
-	 *	get level of ship
-	 * @return shipLevel
-	 */
-	public int getShipLevel(){
-		return this.shipLevel;
 	}
 
 

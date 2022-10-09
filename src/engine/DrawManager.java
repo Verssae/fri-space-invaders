@@ -718,17 +718,19 @@ public final class DrawManager {
 		if(menu < 2) { // shape, color
 			try{
 				fileManager.loadSprite_Temp(spriteMap);
+				FileManager.setPlayerShipShape();
 			}
 			catch (IOException e){
 				logger.warning("Loading failed.");
 			}
 
+			FileManager.setPlayerShipColor(permanentState.getShipColor());
 			if (permanentState.getShipColor() == 0)
-				drawEntity(new Ship(0, 0), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+				drawEntity(new Ship(0, 0, FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 			if (permanentState.getShipColor() == 1)
-				drawEntity(new Ship(0, 0, 0), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+				drawEntity(new Ship(0, 0, 0, FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 			if (permanentState.getShipColor() == 2)
-				drawEntity(new Ship(0, 0, '0'), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+				drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 		}
 		else if(menu == 2){ // bullet efx
 

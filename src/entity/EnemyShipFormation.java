@@ -138,7 +138,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 		for (List<EnemyShip> column : this.enemyShips) {
 			for (int i = 0; i < this.nShipsHigh; i++) {
-				if (i / (float) this.nShipsHigh < PROPORTION_C)
+				if (gameSettings.getLevel() == 8)
+					spriteType = SpriteType.EnemyShipSpecial;
+				else if (i / (float) this.nShipsHigh < PROPORTION_C)
 					spriteType = SpriteType.EnemyShipC1;
 				else if (i / (float) this.nShipsHigh < PROPORTION_B
 						+ PROPORTION_C)

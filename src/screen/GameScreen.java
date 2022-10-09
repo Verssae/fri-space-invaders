@@ -262,7 +262,7 @@ public class GameScreen extends Screen {
 			/** add dangerousShip */
 			if (this.enemyShipdangerous != null) {
 				if (!this.enemyShipdangerous.isDestroyed())
-					this.enemyShipdangerous.move(2, 0);
+					this.enemyShipdangerous.move(1, 0);
 				else if (this.enemyShipSpecialExplosionCooldown.checkFinished())
 					this.enemyShipdangerous = null;
 
@@ -275,8 +275,9 @@ public class GameScreen extends Screen {
 			}
 			if (this.enemyShipdangerous != null
 					&& this.enemyShipdangerous.getPositionX() > this.width) {
+				this.lives--;
 				this.enemyShipdangerous = null;
-				this.logger.info("The dangerous ship has escaped");
+				this.logger.info("The dangerous ship has escaped and you has lost lives");
 			}
 
 			this.ship.update();

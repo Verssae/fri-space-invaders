@@ -124,9 +124,7 @@ public final class DrawManager {
       		spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
 			fileManager.readship();//read ship파일
-			logger.info("Finished loading the sprites. 중간1");
 			fileManager.loadSprite(spriteMap);
-			logger.info("Finished loading the sprites. 중간2");
 			logger.info("Finished loading the sprites.");
 
 			// Font loading.

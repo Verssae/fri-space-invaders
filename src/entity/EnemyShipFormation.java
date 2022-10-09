@@ -22,6 +22,7 @@ import engine.GameSettings;
  */
 public class EnemyShipFormation implements Iterable<EnemyShip> {
 
+	private static int Current_Level = 0;
 	/** Initial position in the x-axis. */
 	private static final int INIT_POS_X = 20;
 	/** Initial position in the y-axis. */
@@ -137,6 +138,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			this.enemyShips.add(new ArrayList<EnemyShip>());
 
 		for (List<EnemyShip> column : this.enemyShips) {
+			Current_Level = gameSettings.getLevel();
 			for (int i = 0; i < this.nShipsHigh; i++) {
 				if (gameSettings.getLevel() == 8)
 					spriteType = SpriteType.EnemyShipSpecial;
@@ -291,6 +293,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			for (List<EnemyShip> column : this.enemyShips)
 				for (EnemyShip enemyShip : column) {
+					if(Current_Level == 8)
+						movementY = 1;
 					enemyShip.move(movementX, movementY);
 					enemyShip.update();
 				}

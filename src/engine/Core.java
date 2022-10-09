@@ -64,7 +64,7 @@ public final class Core {
 			new GameSettings(7,1, 1, 2, 500);
 	/** add boss stage **/
 	private static final GameSettings SETTINGS_Boss_Stage=
-			new GameSettings(8, 2,2, 2, 500);
+			new GameSettings(8, 2,2, 1, 200);
 
 	/** Frame to draw the screen on. */
 	private static Frame frame;

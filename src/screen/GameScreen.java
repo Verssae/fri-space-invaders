@@ -177,6 +177,8 @@ public class GameScreen extends Screen {
 		this.enemyShipSpecialExplosionCooldown = Core
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		//add dangerous Ship
+		this.enemyShipdangerousCooldown = Core.getVariableCooldown(BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
+		this.enemyShipdangerousCooldown.reset();
 		this.enemyShipdangerousExplosionCooldown = Core.getCooldown(BONUS_SHIP_EXPLOSION);
 		///////////////////////////////////
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
@@ -266,7 +268,7 @@ public class GameScreen extends Screen {
 
 			}
 			if (this.enemyShipdangerous == null
-					&& this.enemyShipSpecialCooldown.checkFinished()) {
+					&& this.enemyShipdangerousCooldown.checkFinished()) {
 				this.enemyShipdangerous = new dangerousShip();
 				this.enemyShipdangerousCooldown.reset();
 				this.logger.info("A dangerous ship appears");

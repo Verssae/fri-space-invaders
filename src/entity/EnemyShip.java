@@ -120,6 +120,15 @@ public class EnemyShip extends Entity {
 
 	}
 
+	public EnemyShip(final int positionX, final int positionY) {
+		super(positionX, positionY, 16 * 2, 7 * 2, Color.BLUE);
+
+		this.spriteType = SpriteType.EnemyShipdangerous;
+		this.isDestroyed = false;
+		this.pointValue = BONUS_TYPE_POINTS;
+
+	}
+
 	/**
 	 * Getter for the score bonus if this ship is destroyed.
 	 * 

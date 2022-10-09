@@ -6,7 +6,6 @@ import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
 import engine.DrawManager.SpriteType;
-
 /**
  * Implements a enemy ship, to be destroyed by the player.
  *
@@ -19,15 +18,7 @@ public class dangerousShip extends Entity {
 
     private static int hasItem ;
     /** Point value of a type A enemy. */
-    //s
 
-
-    /** Point value of a type A enemy. */
-    private static final int A_TYPE_POINTS = 10;
-    /** Point value of a type B enemy. */
-    private static final int B_TYPE_POINTS = 20;
-    /** Point value of a type C enemy. */
-    private static final int C_TYPE_POINTS = 30;
     /** Point value of a bonus enemy. */
     private static final int BONUS_TYPE_POINTS = 100;
     /** Cooldown between sprite changes. */
@@ -57,6 +48,20 @@ public class dangerousShip extends Entity {
      * Constructor, establishes the ship's properties for a dangerous ship, with
      * known starting properties.
      */
+    public dangerousShip(final int positionX, final int positionY,
+                     final SpriteType spriteType) {
+        super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
+
+        //추가
+        this.itemtype = null;
+        this.hasItem = 0;
+        //
+
+
+        this.spriteType = spriteType;
+        this.animationCooldown = Core.getCooldown(500);
+        this.isDestroyed = false;
+    }
     public dangerousShip() {
         super(-32, 60, 16 * 2, 7 * 2, Color.BLUE);
 
@@ -98,7 +103,6 @@ public class dangerousShip extends Entity {
     public final void update() {
         if (this.animationCooldown.checkFinished()) {
             this.animationCooldown.reset();
-
 
             this.spriteType = spriteType;
             this.animationCooldown = Core.getCooldown(500);

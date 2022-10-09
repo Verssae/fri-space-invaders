@@ -17,7 +17,11 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.GameSaveScreen;
 import screen.SettingScreen;
+import screen.HelpScreen;
 import screen.VolumeScreen;
+import screen.StoreScreen;
+import screen.PauseScreen;
+
 /**
  * Implements core game logic.
  * 
@@ -81,7 +85,6 @@ public final class Core {
 	private static ConsoleHandler consoleHandler;
 
 
-
 	/**
 	 * Test implementation.
 	 * 
@@ -123,10 +126,12 @@ public final class Core {
 		gameSettings.add(SETTINGS_Boss_Stage);
 		
 		GameState gameState;
-		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+		PermanentState permanentState = PermanentState.getInstance();
 
 		int returnCode = 1;
 		do {
+			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+
 			switch (returnCode) {
 			case 1:
 				// Main menu.
@@ -204,7 +209,62 @@ public final class Core {
 			default:
 				break;
 				
-			case 4:// Store
+			case 4:
+				// Store
+				/* returnCode = 1;
+				do {
+					switch (returnCode) {
+						case 1:
+							// Main store
+							currentScreen = new StoreScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " store screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing store screen.");
+							break;
+						case 2:
+							// Ship shape
+							currentScreen = new ShipShapeScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship shape screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship shape screen.");
+							break;
+						case 3:
+							// Ship color
+							currentScreen = new ShipColorScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship color screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship color screen.");
+							break;
+						case 4:
+							// Bullet effect
+							currentScreen = new BulletEffectScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " bullet effect screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing bullet effect screen.");
+							break;
+						case 5:
+							// BGM
+							currentScreen = new BGMScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " background music screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing background music screen.");
+							break;
+						default:
+							break;
+					}
+				} while (returnCode != 0);
+
+				returnCode = 1; */
+				currentScreen = new StoreScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " store screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing store screen.");
 				break;
 				
 
@@ -214,6 +274,7 @@ public final class Core {
 				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
 				returnCode = 2;
 				break;
+
 				
 			case 6:
 				// Setting.
@@ -225,6 +286,11 @@ public final class Core {
 				break;
 				
 			case 7: //Help
+				currentScreen = new HelpScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing help screen.");
 				break;
 				
 			case 8: //Volume

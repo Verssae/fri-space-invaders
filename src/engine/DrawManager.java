@@ -320,6 +320,25 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
+	
+	public void drawVolume(final Screen screen, final int volume){
+		String volumeString = "Volume";
+		backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, volumeString, screen.getHeight()/3);
+	}
+
+	public void drawVolumeTitle(final Screen screen){
+		String titleString = "Volume";
+		String instructionsString =
+				"select with w+s / arrows, confirm with space";
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 4);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
+	}
 
 	/**
 	 * Draws main menu.
@@ -336,6 +355,7 @@ public final class DrawManager {
 		String setString = "setting";
 		String loadString = "load";
 		String storeString = "store";
+		String helpString = "help";
 				
 
 		if (option == 2)
@@ -343,38 +363,43 @@ public final class DrawManager {
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, playString,
-				screen.getHeight() /2);
+				screen.getHeight()/3);
 		if (option == 3)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, highScoresString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 2);
+		drawCenteredRegularString(screen, highScoresString, screen.getHeight()/3
+				 + fontRegularMetrics.getHeight() * 2);
 		if (option == 4)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, storeString, screen.getHeight()
-				/ 2 + fontRegularMetrics.getHeight() * 4);
+				/ 3 + fontRegularMetrics.getHeight() * 4);
 		if (option == 5)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, loadString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 6);
+				 3 + fontRegularMetrics.getHeight() * 6);
 		if (option == 6)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, setString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 8);
-		
+				 3 + fontRegularMetrics.getHeight() * 8);
+		if (option == 7)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, helpString, screen.getHeight() / 
+				 3 + fontRegularMetrics.getHeight() * 10);
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
-				 2 + fontRegularMetrics.getHeight() * 10);
+				 3 + fontRegularMetrics.getHeight() * 12);
 		
 	}
 
@@ -570,6 +595,23 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GRAY);
 		drawCenteredRegularString(screen, screenSizeString,
 				screen.getHeight() / 5);
+		
+	}
+	public void drawHelpMenu(final Screen screen) {
+		String helpString = "HELP";
+		String right = "right >";
+		String left = "left <";
+		String shoot = "shoot spacebar";
+		
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, helpString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, right, screen.getHeight() / 3);
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, left, screen.getHeight() / 3 + 20);
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, shoot, screen.getHeight() / 3 + 40);
 		
 	}
 

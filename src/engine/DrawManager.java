@@ -79,6 +79,8 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
+		EnemyShipdangerous,
+
 		Explosion,
 
 		ItemDrop,
@@ -113,15 +115,18 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipB2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipC1, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
+			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[17][7]);
+			spriteMap.put(SpriteType.EnemyShipdangerous, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
 			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
-      spriteMap.put(SpriteType.Life, new boolean[13][13]);
+      		spriteMap.put(SpriteType.Life, new boolean[13][13]);
 
 			fileManager.readship();//read ship파일
+			logger.info("Finished loading the sprites. 중간1");
 			fileManager.loadSprite(spriteMap);
+			logger.info("Finished loading the sprites. 중간2");
 			logger.info("Finished loading the sprites.");
 
 			// Font loading.

@@ -419,7 +419,7 @@ public class GameScreen extends Screen {
 						    enemyShip.itemDrop(itemiterator);
 							for(Item item : this.itemiterator)
 								if(item != null)
-								item.setSprite();
+									item.setSprite();
 								//item.drop();
 						}
 

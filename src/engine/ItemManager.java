@@ -25,6 +25,8 @@ public class ItemManager {
 
     private Item.ItemType bulletspeeditem = Item.ItemType.BulletSpeedItem;
 
+    private Item.ItemType  enemyshipspeeditem = Item.ItemType.EnemyShipSpeedItem;
+
     private int enemyshipssize;
 
 
@@ -97,11 +99,11 @@ public class ItemManager {
             아이템타입의 리스트
              */
             item_list.add(pointupitem);
-            item_list.add(speedupitem);
-            item_list.add(shielditem);
-            item_list.add(extralifeitem);
-            item_list.add(bulletspeeditem);
-
+            item_list.add(enemyshipspeeditem);
+            item_list.add(enemyshipspeeditem);
+            item_list.add(enemyshipspeeditem);
+            item_list.add(enemyshipspeeditem);
+            item_list.add(enemyshipspeeditem);
         }
 
 
@@ -115,5 +117,6 @@ public class ItemManager {
             item_queue.add(this.item_list.get(2));
             item_queue.add(this.item_list.get(3));
             item_queue.add(this.item_list.get(4));
+            item_queue.add(this.item_list.get(5));
         }
     }

@@ -115,7 +115,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Initial ship speed.
 	 */
-	private int baseSpeed;
+	private double baseSpeed;
 	/**
 	 * Speed of the ships.
 	 */

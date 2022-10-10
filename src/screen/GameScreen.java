@@ -475,6 +475,13 @@ public class GameScreen extends Screen {
 						this.ship.setShipSpeed(2 * this.ship.getSpeed());
 
 				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem){
+					System.out.println("적스피드다운아이템");
+					this.clearItem();//효과 초기화
+					this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
+
+				}
 				else if(!isInitScreen && item.getIsget() == false &&
 						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 						System.out.println("생명추가아이템");

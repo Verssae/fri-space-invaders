@@ -48,20 +48,6 @@ public class dangerousShip extends Entity {
      * Constructor, establishes the ship's properties for a dangerous ship, with
      * known starting properties.
      */
-    public dangerousShip(final int positionX, final int positionY,
-                     final SpriteType spriteType) {
-        super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
-
-        //추가
-        this.itemtype = null;
-        this.hasItem = 0;
-        //
-
-
-        this.spriteType = spriteType;
-        this.animationCooldown = Core.getCooldown(500);
-        this.isDestroyed = false;
-    }
     public dangerousShip() {
         super(-32, 60, 16 * 2, 7 * 2, Color.BLUE);
 
@@ -103,33 +89,9 @@ public class dangerousShip extends Entity {
     public final void update() {
         if (this.animationCooldown.checkFinished()) {
             this.animationCooldown.reset();
-
             this.spriteType = spriteType;
             this.animationCooldown = Core.getCooldown(500);
             this.isDestroyed = false;
-
-            switch (this.spriteType) {
-                case EnemyShipA1:
-                    this.spriteType = SpriteType.EnemyShipA2;
-                    break;
-                case EnemyShipA2:
-                    this.spriteType = SpriteType.EnemyShipA1;
-                    break;
-                case EnemyShipB1:
-                    this.spriteType = SpriteType.EnemyShipB2;
-                    break;
-                case EnemyShipB2:
-                    this.spriteType = SpriteType.EnemyShipB1;
-                    break;
-                case EnemyShipC1:
-                    this.spriteType = SpriteType.EnemyShipC2;
-                    break;
-                case EnemyShipC2:
-                    this.spriteType = SpriteType.EnemyShipC1;
-                    break;
-                default:
-                    break;
-            }
         }
     }
 

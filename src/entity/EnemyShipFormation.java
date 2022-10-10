@@ -395,6 +395,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		this.shipCount--;
+
+		movementInFormation();
 	}
 
 	/**
@@ -440,4 +442,27 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public final boolean isEmpty() {
 		return this.shipCount <= 0;
 	}
+
+	/**
+	 *  Ship moves additionally within formation.
+	 */
+	public void movementInFormation() {
+		if (this.shooters.size() < this.nShipsWide) {
+			this.logger.info(this.shooters.size() + "<" + this.getnshipsWide());
+			for (int i = 0; i < this.shooters.size() - 1; i++) {
+				EnemyShip ship1 = this.shooters.get(i);
+				EnemyShip ship2 = this.shooters.get(i + 1);
+				if (ship1.getPositionX() + SEPARATION_DISTANCE  < ship2.getPositionX()) {
+					// this.logger.info("Distance of " + i +"th ship and " + (i + 1) + "th ship is over 40.");
+					if (i == 0) {
+						ship1.move(40, 0);
+						this.logger.info("(" + i + ", " + this.enemyShips.indexOf(shooters) + ")");
+					} else {
+						ship2.move(-40, 0);
+					}
+				}
+			}
+		}
+	}
+
 }

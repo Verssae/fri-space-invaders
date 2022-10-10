@@ -479,7 +479,7 @@ public class GameScreen extends Screen {
 						itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem){
 					System.out.println("적스피드다운아이템");
 					this.clearItem();//효과 초기화
-					this.enemyShipFormation.setMovementSpeed(2 * this.enemyShipFormation.getMovementSpeed());
+					this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 
 				}
 				else if(!isInitScreen && item.getIsget() == false &&

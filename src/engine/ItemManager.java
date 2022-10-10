@@ -99,10 +99,10 @@ public class ItemManager {
             아이템타입의 리스트
              */
             item_list.add(pointupitem);
-            item_list.add(enemyshipspeeditem);
-            item_list.add(enemyshipspeeditem);
-            item_list.add(enemyshipspeeditem);
-            item_list.add(enemyshipspeeditem);
+            item_list.add(speedupitem);
+            item_list.add(shielditem);
+            item_list.add(extralifeitem);
+            item_list.add(bulletspeeditem);
             item_list.add(enemyshipspeeditem);
         }
 

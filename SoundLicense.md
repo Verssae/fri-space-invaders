@@ -15,9 +15,14 @@ Sound License
    https://freesound.org/people/rap2h/sounds/223195/   
    CC BY 4.0   
 
+* ## BGM_MainGame_002.wav
+   made by Erokia   
+   https://freesound.org/people/rap2h/sounds/223195/   
+   CC BY 4.0   
+
 * ## Hit_001.wav
    made by LittleRobotSoundFactory   
-   https://freesound.org/people/LittleRobotSoundFactory/sounds/270332/   
+   https://freesound.org/people/Erokia/sounds/547866/  
    CC BY 4.0   
 
 * ## MenuClick_001.wav

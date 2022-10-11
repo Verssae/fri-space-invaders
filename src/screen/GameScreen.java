@@ -489,7 +489,9 @@ public class GameScreen extends Screen {
 						System.out.println("생명추가아이템");
 						//코드를 추가해주세요
 						//생명 +1
-						this.lives++;
+						if(this.lives < 5)
+							this.lives++;
+						else System.out.println("생명 수 5개 초과");
 				}
 
 				item.isGet(true);
@@ -500,7 +502,6 @@ public class GameScreen extends Screen {
 				}
 
 				 */
-			}
 	}
 
 	public void clearItem(){

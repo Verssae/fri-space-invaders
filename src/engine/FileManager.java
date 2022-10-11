@@ -249,8 +249,12 @@ public final class FileManager {
 			for (Score score : highScores) {
 				if (savedCount >= MAX_SCORES)
 					break;
+<<<<<<< HEAD
 
 				if(score.getScore() < 0) { continue; }
+=======
+				if (score.getScore() < 0){ continue; }
+>>>>>>> 4fd647b572b0df0e24447b4e8980030baabdf8f0
 				bufferedWriter.write(score.getName());
 				bufferedWriter.newLine();
 				bufferedWriter.write(Integer.toString(score.getScore()));

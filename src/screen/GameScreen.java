@@ -436,65 +436,60 @@ public class GameScreen extends Screen {
 	}
 
 
-	private void manageGetItem(Item item){
-			if(isInitScreen || (checkCollision(item, this.ship) && !this.levelFinished)){
-				itempool.add(item);
-				item.setSprite();
-				if(item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem){
-						System.out.println("총알속도아이템");
-						this.clearItem();//효과초기화
-						//코드를 추가해주세요
-						// ship의 총알속도를 증가시킴
-						this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
+	private void manageGetItem(Item item) {
+		if (isInitScreen || (checkCollision(item, this.ship) && !this.levelFinished)) {
+			itempool.add(item);
+			item.setSprite();
+			if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
+				System.out.println("총알속도아이템");
+				this.clearItem();//효과초기화
+				//코드를 추가해주세요
+				// ship의 총알속도를 증가시킴
+				this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
 
 
-				}
-				else if(item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.PointUpItem){
-				     	System.out.println("포인트업아이템");
-						this.clearItem();//효과 초기화
-						//코드를 추가해주세요
-						//적을 죽였을때 얻는 point의 상승
-					    for (EnemyShip enemyShip : this.enemyShipFormation)
-						    enemyShip.setPointValue(2 * enemyShip.getPointValue());
+			} else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
+				System.out.println("포인트업아이템");
+				this.clearItem();//효과 초기화
+				//코드를 추가해주세요
+				//적을 죽였을때 얻는 point의 상승
+				for (EnemyShip enemyShip : this.enemyShipFormation)
+					enemyShip.setPointValue(2 * enemyShip.getPointValue());
 
-				}
-				else if(item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
-						System.out.println("방어아이템");
-						//코드를 추가해주세요
-						//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
-  					shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY()-3,0, this.ship);
-					shield.setCnt(1);
+			} else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+				System.out.println("방어아이템");
+				//코드를 추가해주세요
+				//쉴드를 형성하여 하나의 총알에 대해 방어막을 형성
+				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, 0, this.ship);
+				shield.setCnt(1);
 
-				}
-				else if(item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem){
-						//코드를 추가해주세요
-						System.out.println("스피드업아이템");
-						this.clearItem();//효과 초기화
-						this.ship.setShipSpeed(2 * this.ship.getSpeed());
+			} else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
+				//코드를 추가해주세요
+				System.out.println("스피드업아이템");
+				this.clearItem();//효과 초기화
+				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 
-				}
-				else if(item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem){
-					System.out.println("적스피드다운아이템");
-					this.clearItem();//효과 초기화
-					this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
+			} else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
+				System.out.println("적스피드다운아이템");
+				this.clearItem();//효과 초기화
+				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 
-				}
-				else if(!isInitScreen && item.getIsget() == false &&
-						itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
-						System.out.println("생명추가아이템");
-						//코드를 추가해주세요
-						//생명 +1
-						if(this.lives < 5)
-							this.lives++;
-						else System.out.println("생명 수 5개 초과");
-				}
+			} else if (!isInitScreen && item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
+				System.out.println("생명추가아이템");
+				//코드를 추가해주세요
+				//생명 +1
+				if (this.lives < 4)
+					this.lives++;
+				else System.out.println("생명 수 4개 초과");
+			}
 
-				item.isGet(true);
+			item.isGet(true);
 				/*
 				isInitScreen = false;
 				if (!isInitScreen) {
@@ -502,8 +497,8 @@ public class GameScreen extends Screen {
 				}
 
 				 */
+		}
 	}
-
 	public void clearItem(){
 		ship.setInitState();
 	}

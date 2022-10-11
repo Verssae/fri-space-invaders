@@ -486,7 +486,8 @@ public class GameScreen extends Screen {
 				//생명 +1
 				if (this.lives < 4)
 					this.lives++;
-				else System.out.println("생명 수 4개 초과");
+				else
+					System.out.println("생명 수 4개 초과");
 			}
 
 			item.isGet(true);

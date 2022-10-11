@@ -13,6 +13,8 @@ public class Score implements Comparable<Score> {
 	/** Score points. */
 	private int score;
 
+	private float per;
+
 	/**
 	 * Constructor.
 	 * 
@@ -21,9 +23,10 @@ public class Score implements Comparable<Score> {
 	 * @param score
 	 *            Player score.
 	 */
-	public Score(final String name, final int score) {
+	public Score(final String name, final int score, final float per) {
 		this.name = name;
 		this.score = score;
+		this.per = per;
 	}
 
 	/**
@@ -44,6 +47,7 @@ public class Score implements Comparable<Score> {
 		return this.score;
 	}
 
+	public final float getPer() {return this.per;}
 	/**
 	 * Orders the scores descending by score.
 	 * 

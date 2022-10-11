@@ -119,7 +119,7 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		
 		GameState gameState;
-		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+		gameState = new GameState(1, 0, MAX_LIVES, 0, 0,0);
 
 		int returnCode = 1;
 		do {
@@ -160,7 +160,7 @@ public final class Core {
 							getFileManager().Savefile(gameState);
 							LOGGER.info("Complete Save.");
 							GO_MAIN = false;
-							gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+							gameState = new GameState(1, 0, MAX_LIVES, 0, 0, 0);
 							returnCode = 1;
 							break;
 						}
@@ -170,24 +170,26 @@ public final class Core {
 							gameState.getScore(),
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
-							gameState.getShipsDestroyed());
+							gameState.getShipsDestroyed(),
+							gameState.getPer());
 
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 				if (!GO_MAIN)
 					break;
-				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
-					gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0));
+				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0,0));
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "
 						+ gameState.getScore() + ", "
 						+ gameState.getLivesRemaining() + " lives remaining, "
 						+ gameState.getBulletsShot() + " bullets shot and "
-						+ gameState.getShipsDestroyed() + " ships destroyed.");
+						+ gameState.getShipsDestroyed() + " ships destroyed."
+						+ gameState.getPer() + " percentage.");
 				currentScreen = new ScoreScreen(width, height, FPS, gameState);
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
+				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
+					gameState = new GameState(1, 0, MAX_LIVES, 0, 0,0);
 				break;
 			case 3:
 				// High scores.
@@ -207,7 +209,7 @@ public final class Core {
 			case 5:
 				// Load
 				String save_info [] = getFileManager().loadInfo();
-				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
+				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]), Float.parseFloat(save_info[5]));
 				returnCode = 2;
 				break;
 				

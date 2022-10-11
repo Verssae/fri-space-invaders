@@ -1,0 +1,1400 @@
+[33mcommit 6649a6ea765f8e558a802c7bb2ec70ac6d362bc2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: MinJae00 <55572577+MinJae00@users.noreply.github.com>
+Date:   Tue Oct 11 17:15:13 2022 +0900
+
+    asdf
+
+[33mcommit 44e2555dcfb713703a812a9051c2461af06ceb9a[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Oct 7 13:29:53 2022 +0900
+
+    [fix] GameClear시에도 gamestate 초기화되게끔 수정
+
+[33mcommit 2bc324596d51d1b76e4d1bfd78df8140756c5198[m
+Merge: abd839c e7122a1
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Oct 7 13:25:03 2022 +0900
+
+    [fix] FileManager conflict 수정
+
+[33mcommit e7122a1a93be125f4a9fa0d1087a71ee78435148[m
+Merge: 3435363 1141727
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Fri Oct 7 12:54:55 2022 +0900
+
+    Merge pull request #29 from 1369187714/main
+    
+    feat:add ship
+    Now select the Player Ship from the ship file
+    1:ship1
+    2:ship2
+    3:ship3
+
+[33mcommit 11417279ef32d3930d1d49ca01590f0f63c4185c[m
+Merge: b46dbe7 3435363
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Fri Oct 7 12:36:44 2022 +0900
+
+    Merge branch 'Verssae:main' into main
+
+[33mcommit abd839cc404813b12ec409cda46f3bfb08619afa[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Oct 7 11:49:04 2022 +0900
+
+    [fix] 죽고 다시 play해도 state남아있던 버그 수정
+
+[33mcommit c426860ff9b08c4e87564f868390c5b93e28b695[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Oct 7 11:34:59 2022 +0900
+
+    [remove] Core.java에 있는 쓸모없는 코드 삭제
+
+[33mcommit 3435363126c76aded9e60b6912b181f0eaaf4ca3[m
+Merge: 50e95f4 d5db2e6
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Fri Oct 7 10:49:16 2022 +0900
+
+    Merge pull request #27 from Byeunghee02/production
+    
+    feat: ADD SoundPlay class, SoundBgm class, SoundEffect class & sound resources
+
+[33mcommit d5db2e6fe854e03313739d11b39bdda56600ca57[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Fri Oct 7 00:44:15 2022 +0900
+
+    docs/update gitignore
+
+[33mcommit c2f011236554aa8a33389cc09bc87e2c445cc668[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Fri Oct 7 00:43:24 2022 +0900
+
+    docs/edit Play method name
+
+[33mcommit c71cf29f33d4983bb53f7bfccec0008c09edafcf[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Fri Oct 7 00:27:12 2022 +0900
+
+    docs/delete Sound.java
+    
+    SoundBgm.java 파일과 겹치는 파일
+
+[33mcommit dc472a6b14680e133e151757cf4bb916941a7fc4[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Thu Oct 6 15:49:48 2022 +0900
+
+    [fix] output경로에 한글이 있을 경우 경로 error 생기는 버그 수정
+
+[33mcommit a5fe67d349c4ea056a0a71915a86824896ccee46[m
+Merge: 8c88e18 c40ce04
+Author: kcyoow <46476820+kcyoow@users.noreply.github.com>
+Date:   Thu Oct 6 14:13:01 2022 +0900
+
+    Merge pull request #2 from Byeunghee02/feature-BgmClass
+    
+    Feature bgm class
+
+[33mcommit c40ce044b72ed5521e9f367bd328febb97236539[m
+Merge: a1e7810 8c88e18
+Author: kcyoow <46476820+kcyoow@users.noreply.github.com>
+Date:   Thu Oct 6 14:11:38 2022 +0900
+
+    Merge branch 'main' into feature-BgmClass
+
+[33mcommit a1e7810981596c90b1668859a2014331f4c0518c[m
+Author: kcyoow <46476820+kcyoow@users.noreply.github.com>
+Date:   Thu Oct 6 04:48:54 2022 +0000
+
+    MODIFY Sound File's Class Name and Variable Name
+
+[33mcommit 8c88e1890de6bca9c042e64c336bc88fd88f3c9c[m
+Merge: c0f92e2 f7f23f4
+Author: Byeunghee02 <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 13:22:57 2022 +0900
+
+    Merge pull request #1 from Byeunghee02/feature-EffectSoundClass
+    
+    Feature effect sound class
+
+[33mcommit aac491522bc01d187f552d33cb3dfa0586ff0f0d[m
+Merge: b53f3d0 75eb452
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Thu Oct 6 12:47:42 2022 +0900
+
+    Merge pull request #5 from MinJae00/main
+    
+    [feat] 게임 플레이하다가 죽었을 때  save 파일 초기화하는 코드 추가
+
+[33mcommit f7f23f48145406c3377194905cff58d74825f2d2[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 12:38:04 2022 +0900
+
+    feat/add playEffect method
+    
+    SoundEffect클래스 구동을 위한 playEffect method 추가
+
+[33mcommit 92de5feb67114083654d5ca4fac5f795f2d15da6[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 12:37:01 2022 +0900
+
+    feat/complete SoundEffect.java
+    
+    SoundEffect.java 기능구현 완료
+
+[33mcommit b34381e903ec8225ff1aa0f9cda5fa67d4da2122[m
+Author: Kimbogyung <novo4756@gmail.com>
+Date:   Thu Oct 6 03:11:30 2022 +0900
+
+    feat/stopSound
+
+[33mcommit a0ddc498639cd667026f01e5b7bd6c2da90abb0c[m
+Author: Kimbogyung <novo4756@gmail.com>
+Date:   Thu Oct 6 03:06:32 2022 +0900
+
+    feat/fileinput
+
+[33mcommit 84969ddf653698ab9b6fbacc807dd087c448616c[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 02:49:10 2022 +0900
+
+    feat/ add SoundEffect.java
+    
+    SoundEffect.java 추가 및 뼈대코드 작성
+
+[33mcommit 587e7b7e1d756ade7cb49640c4cae2d675e0c883[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 02:14:06 2022 +0900
+
+    cherrypicking
+
+[33mcommit bcb1d56f672ece358898e84d85a25ac4f0c9106e[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Thu Oct 6 02:14:06 2022 +0900
+
+    Refactor/ refactoring singleton pattern
+    
+    싱글톤 패턴 수정 및 사운드 관련 파일 분리
+
+[33mcommit b53f3d0d382fe0ad587d5ca0d1cc2cc462f3bd22[m
+Merge: c011800 2be68fd
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Thu Oct 6 00:30:14 2022 +0900
+
+    Merge pull request #7 from 21yuyu99/main
+    
+    충돌해결
+
+[33mcommit ebee13fa34c467cc545002000df04f6f75785883[m
+Author: 김철연 <kcy021012@gmail.com>
+Date:   Thu Oct 6 00:21:28 2022 +0900
+
+    ADD Sound Class
+
+[33mcommit 2be68fd42a5b77495afce95905a9cf3652146c4a[m
+Merge: 85176a8 c011800
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Thu Oct 6 00:10:48 2022 +0900
+
+    conflict해결
+
+[33mcommit c0f92e297a5e66e28f5d3d8a4eebafd2a6eb6fd0[m
+Author: dpwns <dpwns0827@naver.com>
+Date:   Wed Oct 5 23:49:46 2022 +0900
+
+    Update SoundLicense.md
+    
+    Add BGM_MainGame_001.wav license
+
+[33mcommit e7b5ca1ca62b5fa45ba3833baa3abe32ea748637[m
+Author: bigham920 <ksyljh0107@naver.com>
+Date:   Wed Oct 5 23:47:43 2022 +0900
+
+    add BGM_MainGame_001
+
+[33mcommit 75eb452d565ef1f1141f14b5bf313495ec3eaddf[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 23:23:50 2022 +0900
+
+    [feat] 게임 플레이하다가 죽었을 때  save 파일 초기화하는 코드 추가
+
+[33mcommit 85176a87f957afcf5df20d05d3f8d431c66cc085[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 23:19:13 2022 +0900
+
+    load경로변경
+
+[33mcommit c011800a8294f388e96c3b7442673504aa864d91[m
+Merge: a8c27fa ff19046
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Wed Oct 5 23:00:38 2022 +0900
+
+    Merge pull request #3 from MinJae00/main
+    
+    Save, Load, GameSaveScreen 3가지 기능 모두 merge한 version
+
+[33mcommit 3e9ef1ba238c4c4838026c517adb4d1d20343205[m
+Author: dpwns <dpwns0827@naver.com>
+Date:   Wed Oct 5 22:05:57 2022 +0900
+
+    ADD shoot sound file
+    
+    Add shoot sound file
+    Add SoundLicnese.md
+
+[33mcommit ed3894b66180842ce91831549c4571491ce0bc1f[m
+Merge: ab6b683 a8c27fa
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 21:02:48 2022 +0900
+
+    Merge branch 'main' of https://github.com/dlalsrn/fri-space-invaders
+
+[33mcommit ab6b68372e25eecb97abdc6752ac6205793ff3c1[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 21:00:28 2022 +0900
+
+    load기능(경로수정)
+
+[33mcommit ff19046bbc21533f496bd033104c8cff8b4a0741[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 15:24:26 2022 +0900
+
+    [perf] save파일이 생기는 경로를 본인의 output으로 지정한 폴더에 생기게 변경
+
+[33mcommit 478cb1d0d71ced4e0d3a7f9899764fccd9f2e388[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 15:05:53 2022 +0900
+
+    [fix] save시 level 증가 안되던 부분 수정, 마지막 level 클리어하면 savescreen 안뜨게 수정
+
+[33mcommit a8c27fa9fa17afe00cf23c6b4b577a0531c25f8a[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:51:37 2022 +0900
+
+    [remove] 잘못 생성된 production 폴더 삭제
+
+[33mcommit 4f974d82a81ac6ae45966cce6055067c450fb9cc[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:49:03 2022 +0900
+
+    [remove] 잘못 생성한 production 폴더 삭제
+
+[33mcommit 6e625ac49bf223b8712fc4a3ecacb9644727de22[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:34:43 2022 +0900
+
+    [fix] Load시 save file없으면 생기는 에러 exception추가, Core에서 load시 returnCode 2로 변경
+
+[33mcommit 225ea3ec59a7c5df39b7c71dddabfa7f88e3dd33[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:25:11 2022 +0900
+
+    [fix] 중괄호 수정
+
+[33mcommit 9438eefec10b6589c3e1e01251708bc02bba09d8[m
+Merge: 0faf0fa 72cbd35
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:22:07 2022 +0900
+
+    [feat] 모든기능 병합
+
+[33mcommit 72cbd35503fee3898c7e78b7c627de3bf372afc2[m
+Merge: 72b11f4 09a5334
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Wed Oct 5 14:14:58 2022 +0900
+
+    Merge pull request #2 from oncsr/main
+    
+    refactor: remove useless code
+
+[33mcommit 72b11f48aac0844d4efde107e79e6fd175d3d54e[m
+Merge: a2231ad 33e90d1
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Wed Oct 5 14:12:09 2022 +0900
+
+    Merge pull request #1 from 21yuyu99/main
+    
+    load 기능 구현
+
+[33mcommit 0faf0faf2e9f9160e708dfbe52f2ec5ce0498555[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:10:37 2022 +0900
+
+    [feat] Save파일을 만들어 gamestate을 저장하는 기능 구현
+
+[33mcommit 786af76930046bbffd3e36c3f0574744a8b76164[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Wed Oct 5 14:08:06 2022 +0900
+
+    [feat] Core.java 파일에 save 기능 추가
+
+[33mcommit 09a5334dd4f71eb2e1d2308a77f9960f5eb33b1e[m
+Author: Yeseong <ohyeesung@naver.com>
+Date:   Wed Oct 5 13:11:57 2022 +0900
+
+    refactor: remove useless code
+
+[33mcommit 33e90d13c8314ffde3d47fbbc3518a24503b0a33[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 10:21:36 2022 +0900
+
+    load기능구조수정
+
+[33mcommit 0d7076183fe94ce9d6ed2348e815051035f65db6[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 09:35:47 2022 +0900
+
+    load기능
+
+[33mcommit d659b452a23392e62c6184971416443ef4500eb9[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Wed Oct 5 09:25:52 2022 +0900
+
+    load기능
+
+[33mcommit b46dbe7ff2ae2fb254be294a649d3f65fb7e2090[m
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Tue Oct 4 23:26:18 2022 +0900
+
+    Update team6.md
+
+[33mcommit 99a7cef8a94aa5b2fd32a1475f020858002185e2[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Tue Oct 4 22:43:09 2022 +0900
+
+    FEAT: update DrawManager,FileManager,GameScreen add ship
+    ship: Store player levels
+    "Select the Ship by reading the number inside the ship"
+    new variable:playerShipLevel
+
+[33mcommit a2231ad2f202be194b71ffa260355a0448f0fa79[m
+Author: oncsr <khjice1004@gmail.com>
+Date:   Tue Oct 4 00:45:56 2022 +0900
+
+    [refactor] remove useless variable
+
+[33mcommit 655fbb05e3cb001fdfbe439b43281d2469c4f46c[m
+Merge: 65912f0 43c0a6c
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Tue Oct 4 00:41:14 2022 +0900
+
+    .
+
+[33mcommit 65912f092a86bddb26b7e7b1ce81416b521c41b4[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Tue Oct 4 00:34:36 2022 +0900
+
+    .
+
+[33mcommit 43c0a6c1f61f71f9d95fdb36328bc29c54cf3d02[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Tue Oct 4 00:26:39 2022 +0900
+
+    [fix] GameState 갱신 안되는 버그 fix
+
+[33mcommit a6e6c65cd3f0cdb9c0140d5203ae990e6d098e44[m
+Merge: 42043c8 b3b9d8e
+Author: oncsr <khjice1004@gmail.com>
+Date:   Mon Oct 3 23:48:22 2022 +0900
+
+    upstream pull
+
+[33mcommit b3b9d8e003d53aa4a1d1e3b71638543afe7f7ae4[m
+Merge: bb9f7c9 2db54c3
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Mon Oct 3 23:41:08 2022 +0900
+
+    upstream 최신 commit merge
+
+[33mcommit bb9f7c93d5bab90dcda19d8aad8489aa9843a290[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Mon Oct 3 23:32:27 2022 +0900
+
+    [feat] Core.java 조건문 수정
+
+[33mcommit 42043c872e0c96c739c75a46da516556db6245cc[m
+Merge: 989e672 2db54c3
+Author: oncsr <khjice1004@gmail.com>
+Date:   Mon Oct 3 22:18:38 2022 +0900
+
+    upstream pull
+
+[33mcommit 989e672b5100badb34e9a39362abf404f303da9f[m
+Author: Yeseong <ohyeesung@naver.com>
+Date:   Mon Oct 3 20:44:35 2022 +0900
+
+    feat: add drawStageClearScreen function in DrawManager
+
+[33mcommit 26b8ee6a9fa9f165195492a487d343758c94756a[m
+Author: oncsr <khjice1004@gmail.com>
+Date:   Mon Oct 3 20:36:57 2022 +0900
+
+    feat: add drawStageClearScreen function in DrawManager
+
+[33mcommit 57cbc50504a6acba1280c48106d424f01a97c32f[m
+Author: Yeseong <ohyeesung@naver.com>
+Date:   Mon Oct 3 19:40:02 2022 +0900
+
+    feat: add GameSaveScreen
+
+[33mcommit 2db54c361c39eb548ec237e0c5d522b055aa3e16[m
+Merge: b6efd92 50e95f4
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Mon Oct 3 00:20:14 2022 +0900
+
+    upstream 최신 commit origin에 pull
+
+[33mcommit 50e95f4f77076c465e4d020cd03154d7fa9260c2[m
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Sun Oct 2 22:45:50 2022 +0900
+
+    DOCS UPDATE README.md
+
+[33mcommit 9bc20011cdd5cbc2e516e92a9c9ea76ee54c7246[m
+Merge: cb2d9de 37027f4
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Sun Oct 2 21:58:55 2022 +0900
+
+    Merge pull request #21 from 1369187714/main
+    
+    feat:  add team6,graphics_1,graphics_2 & update Ship & edit File/DrawManager,GameScreen
+    Update README.md
+    Add 2 Ship constructor: Different speed,model,bullet speed
+    "At the beginning of the game, the player is randomly given one of three ships"
+
+[33mcommit 37027f4e5745decd06e1e79bcbb30195f19f8cdf[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Sun Oct 2 17:43:05 2022 +0900
+
+    fix bug
+
+[33mcommit 65f4c8b81a77db617515decdc500c9097a22899d[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Sun Oct 2 17:20:50 2022 +0900
+
+    docs:fix bug
+
+[33mcommit 46e563461de3e64e0b09b709bf27c39c805df243[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Sun Oct 2 17:12:51 2022 +0900
+
+    feat add graphics_1 & graphics_2
+    new ship model
+
+[33mcommit 793b480effe5b3508003e49ce66c1c88e95926a0[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Sun Oct 2 16:58:08 2022 +0900
+
+    fix bug
+
+[33mcommit 0c5712b1eec1d2bd54b5cfe30557d50e201a16e5[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Sun Oct 2 16:54:01 2022 +0900
+
+    feat: Drop Ship_2 & add graphics_2 & updata Ship,FileManager,DrawManager,GameScreen
+    graphics_2: new model of Ship
+    other: add the random ship for players
+    "At the beginning of the game, the player is randomly given one of three ships"
+
+[33mcommit 8cf09e99ec2c97658b425f809c8fea61d20a86c3[m
+Merge: 0e8b8d2 cb2d9de
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Sat Oct 1 22:37:47 2022 +0900
+
+    Merge branch 'Verssae:main' into main
+
+[33mcommit 0e8b8d242251f7cd7258d4d149bb4b6cea477f0a[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Sat Oct 1 22:30:23 2022 +0900
+
+    fix: update DrawManager.java
+    add ship_2 on SpriteType
+
+[33mcommit 66aa9a7980458d80e9d5efef98e9c9e33ab5b6d6[m
+Author: WENHAO <w1160730299@hotmail.com>
+Date:   Sat Oct 1 22:03:36 2022 +0900
+
+    feat: add ship_2.java & add graphics_2 & updata ship.java
+    ship.java: add int shipLevel & int getShipLevel()
+    ship_2.java: Higher shipLevel,shorter SHOOTING_INTERVAL,faster spedd,new color Ship
+    graphics_2: new model of Ship
+
+[33mcommit cb2d9deb608413e234ce614f1c201933171a3484[m
+Merge: a3420c8 14dd0dc
+Author: KimJinWoo5602 <113664479+KimJinWoo5602@users.noreply.github.com>
+Date:   Fri Sep 30 19:00:14 2022 +0900
+
+    Merge pull request #8 from KimJinWoo5602/main
+    
+    Update README.md Team4
+
+[33mcommit 14dd0dc030399332c7eaadefc41c3fdeab9647ab[m
+Merge: 318e020 a3420c8
+Author: KimJinWoo5602 <113664479+KimJinWoo5602@users.noreply.github.com>
+Date:   Fri Sep 30 18:59:04 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 318e020d88049fae1a183ffae868f0d7ba03b38a[m
+Author: kseungy <ksyun0615@hanyang.ac.kr>
+Date:   Fri Sep 30 16:47:35 2022 +0900
+
+    [feat] Core, DrawManager
+
+[33mcommit 229664e089435168a4c2091ea1d0bff36008ddef[m
+Author: KimJinWoo <ohdakal2@gmail.com>
+Date:   Fri Sep 30 16:36:49 2022 +0900
+
+    [DOCS]Modify README.md
+
+[33mcommit ccb690a981ffc34e09804e2628815bc85fba4f14[m
+Author: KimJinWoo <ohdakal2@gmail.com>
+Date:   Fri Sep 30 16:33:32 2022 +0900
+
+    [DOCS]Modify README.md
+
+[33mcommit 381e97bdca8a51f32d9b717407b2a9dff7d301be[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 30 16:25:19 2022 +0900
+
+    [feat] 다음 스테이지 넘어가기 전 나오는 Screen에서 버튼 클릭 별 returnCode 분류
+
+[33mcommit 34015102fb11d8235d61507706775dcaa3eb8eab[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 30 16:15:28 2022 +0900
+
+    [docs] Run.xml 파일 수정
+
+[33mcommit b6efd926d71e55093fed8686591aa15e27dff823[m
+Merge: 8aef8e1 a3420c8
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 30 15:44:31 2022 +0900
+
+    upstream에서 origin으로 pull
+
+[33mcommit a3420c81fcaea09519b81bef3bdee07b40f9cb2c[m
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 30 13:03:56 2022 +0900
+
+    Rename Team3.md to teams/team3.md
+
+[33mcommit 89119449d89a976c25236129ae22f30cb9101e63[m
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 30 12:57:09 2022 +0900
+
+    Rename teams/Apple.md to Team3.md
+
+[33mcommit 9d37088204626718c9634dd435e2a91bd368572e[m
+Merge: 55c50e8 6b9c885
+Author: 박창현 <86464544+Kid-Chang@users.noreply.github.com>
+Date:   Fri Sep 30 12:46:35 2022 +0900
+
+    Merge pull request #13 from Byeunghee02/main
+    
+    Update README.md Team1
+
+[33mcommit d4c57d90cd1f10cd2d25e032e81045ee999baff1[m
+Merge: 3bc36f1 55c50e8
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Wed Sep 28 16:48:29 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 55c50e8689b083a9a3d33becc0710fef7435d9e4[m
+Merge: 3108dab bef9cef
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Wed Sep 28 11:04:04 2022 +0900
+
+    Merge pull request #5 from AppleInvaders/main
+    
+    Update README.md Team3
+
+[33mcommit bef9cefb8c9227a19d9d7900f0bc064aa90c0ef6[m
+Merge: 864dd4e 3108dab
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Wed Sep 28 09:31:55 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 8aef8e1319e3d4ba5e5e53385ac336487b0c2e98[m
+Merge: febb12e 6ce9139
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Mon Sep 26 20:08:50 2022 +0900
+
+    [docs] README.md 권혁준, 김민재 링크 추가
+
+[33mcommit 3108dab1392e7d4adafe08a4fcb6949fe94076f9[m
+Merge: 4b9aa57 6ce9139
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Mon Sep 26 20:04:55 2022 +0900
+
+    Merge pull request #18 from dlalsrn/main
+    
+    Update README.md Team5
+
+[33mcommit 6ce9139ee830c2f78fed9cf54275360577bdd0c3[m
+Author: MinJae00 <55572577+MinJae00@users.noreply.github.com>
+Date:   Mon Sep 26 20:03:08 2022 +0900
+
+    Update README.md
+
+[33mcommit c41f0b95aa5d1a6a5ba114fac324792302c38da3[m
+Author: MinJae00 <55572577+MinJae00@users.noreply.github.com>
+Date:   Mon Sep 26 19:46:43 2022 +0900
+
+    Update README.md
+
+[33mcommit febb12eae08fd10584b8efbd4aee20f5192b6738[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Mon Sep 26 16:11:23 2022 +0900
+
+    [UPDATE] Run.xml
+
+[33mcommit e639eadb1202518528350c91586c9684d6f3b4d1[m
+Author: oncsr <khjice1004@gmail.com>
+Date:   Mon Sep 26 15:35:57 2022 +0900
+
+    [Update]
+
+[33mcommit 6b9c8852e92a8224f29a125738f8d94013008e39[m
+Merge: 6895922 4b9aa57
+Author: Byeunghee02 <choibh6258@hanyang.ac.kr>
+Date:   Sat Sep 24 19:39:56 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 3bc36f1e254e93b4bfd45f1f7320eae282a2b071[m
+Merge: a0a42cc 4b9aa57
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Sat Sep 24 17:13:57 2022 +0900
+
+    Merge branch 'Verssae:main' into main
+
+[33mcommit 4b9aa57ee1c7aa35e447f31aae364dd8ab28ce9d[m
+Merge: 51ea572 0bfd00a
+Author: Dryeong <gbtwld@gmail.com>
+Date:   Sat Sep 24 09:49:21 2022 +0900
+
+    Merge pull request #7 from gbtwld/main
+    
+    Update README.md Team2
+
+[33mcommit a0a42cc5b678de32567bf825011a3e44c9856797[m
+Merge: 811d6f1 51ea572
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Fri Sep 23 17:32:01 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 51ea572128fc5c7cd0f938cfe134f887a4096e47[m
+Merge: 759ba31 d3f5bf5
+Author: 박창현 <86464544+Kid-Chang@users.noreply.github.com>
+Date:   Fri Sep 23 16:48:36 2022 +0900
+
+    Update README.md Team8
+    
+    Update README.md Team8
+
+[33mcommit d3f5bf5f400d78175b44262873d617a7375a8530[m
+Merge: 3799e7f 759ba31
+Author: 박창현 <86464544+Kid-Chang@users.noreply.github.com>
+Date:   Fri Sep 23 16:47:41 2022 +0900
+
+    Merge branch 'main' into main
+
+[33mcommit 759ba31790f13feab6b8d41403afa83027922626[m
+Merge: ee87bac 3f86e38
+Author: GoodTY <55177919+GoodTY@users.noreply.github.com>
+Date:   Fri Sep 23 16:30:43 2022 +0900
+
+    Merge pull request #11 from GoodTY/main
+    
+    Update README.md Team9
+
+[33mcommit ee87bac52e8451f47abacab7e7d7f9501387daed[m
+Merge: 65466f5 ad8a6b1
+Author: LeeMingu <56715189+dlalsrn@users.noreply.github.com>
+Date:   Fri Sep 23 16:28:27 2022 +0900
+
+    Merge pull request #9 from dlalsrn/main
+    
+    Update README.md Team5
+
+[33mcommit 3799e7f6ea1666fde5fcf718bfe81135247ee969[m
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 16:27:16 2022 +0900
+
+    [UPDATE] readme.md team8 수정
+
+[33mcommit 811d6f158ba513a2c7d8689b5fccb429594beaa6[m
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Fri Sep 23 16:26:01 2022 +0900
+
+    Update team6.md
+    
+    Update team6.md
+
+[33mcommit 65466f59bf9006d7afef76916aaba7c26be34b2f[m
+Merge: 4d0afec e4b7be9
+Author: kimujae <62458513+kimujae@users.noreply.github.com>
+Date:   Fri Sep 23 16:24:57 2022 +0900
+
+    Merge pull request #6 from kimujae/main
+    
+    Update README.md Team7
+
+[33mcommit 1fb6f6ccc10406bde83a45c3ae9b0203134a8596[m
+Author: wenhao <113236474+1369187714@users.noreply.github.com>
+Date:   Fri Sep 23 16:10:14 2022 +0900
+
+    Update team6.md
+    
+    update team6.md
+
+[33mcommit 56a6970f4aa535e314c85f6fd92e4da35d8c6890[m
+Merge: b72c73d 06ea232
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 16:06:59 2022 +0900
+
+    [UPDATE] readme.md team8 완료
+
+[33mcommit 3f86e3820e1339c00347f2701a1862122d6aa72a[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 16:06:08 2022 +0900
+
+    master push
+
+[33mcommit b72c73d609d4d168e6552428ba3307510e60505d[m
+Merge: 004153f 1ccd0ff
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 16:05:54 2022 +0900
+
+    [UPDATE] readme.md team8 일부수정
+
+[33mcommit 1aba607b0ea0a5ce54b7da6a43586c8958e88240[m
+Author: KimJinWoo <ohdakal2@gmail.com>
+Date:   Fri Sep 23 15:56:28 2022 +0900
+
+    [ADD] teams/team4.md
+
+[33mcommit ad8a6b1275f7899d421ff957c1f6c22aa29d849c[m
+Merge: 7e7d1fc 4d0afec
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 15:55:54 2022 +0900
+
+    [UPDATE] README.md
+
+[33mcommit 004153f93e7105fea02ff5de2347591134ea1aeb[m
+Merge: d5d5ac2 cdce602
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 15:55:09 2022 +0900
+
+    [UPDATE] readme.md team8 일부수정
+
+[33mcommit 0bfd00a90013970f9a30b19e6902783f59efc7e1[m
+Author: gbtwld <gbtwld@gmail.com>
+Date:   Fri Sep 23 15:54:25 2022 +0900
+
+    [ADD] Team2 team information
+
+[33mcommit d5d5ac2841c538a317acefdf03be053e150a5877[m
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 15:53:26 2022 +0900
+
+    [ADD] Team8.md 업데이트
+
+[33mcommit 0fe5d823f8f2b59045ee13c06225d56f4e201177[m
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 15:53:06 2022 +0900
+
+    [UPDATE] readme.md team8 일부 수정
+
+[33mcommit 7e7d1fc0f0dd9f520cc2788854705ae665e01d8d[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 15:52:31 2022 +0900
+
+    [UPDATE] README.md
+
+[33mcommit 2f56f0bc91d923c85fd7d4fecfbc7e75c570707e[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 15:51:41 2022 +0900
+
+    UPDATE: requirement
+
+[33mcommit e4b7be96369f24aa198c02fc185f69579b9a6050[m
+Author: yppp33 <108478949+yppp33@users.noreply.github.com>
+Date:   Fri Sep 23 15:50:18 2022 +0900
+
+    Update team7.md
+
+[33mcommit 9b7421f5d0b0cb6aeeacae4a0d0e46fd1d4fbcba[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 15:49:21 2022 +0900
+
+    UPDATE:requirement
+
+[33mcommit e2f84cd93a1837b3a3568bcc0fc86b13a6535f18[m
+Merge: c5dccc0 f3cceb5
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 15:44:49 2022 +0900
+
+    UPDATE: requirement
+
+[33mcommit f38a77b144242ec0443e9092d91e04ef0fdacffe[m
+Author: Nurin2001 <a182071@siswa.ukm.edu.my>
+Date:   Fri Sep 23 15:44:44 2022 +0900
+
+    [UPDATE]Team2 members information
+
+[33mcommit c5dccc066b1a7dbfeaa8a55ff6a1ddee03fecb6d[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 15:44:03 2022 +0900
+
+    UPDATE: requirement
+
+[33mcommit 6895922b6a510eca2b5911eddd221cc34fb7b486[m
+Author: Byeunghee Choi <choibh6258@hanyang.ac.kr>
+Date:   Fri Sep 23 15:43:12 2022 +0900
+
+    [ADD] SoundSystem.md
+
+[33mcommit c7ddb0a7c759baf81c453c6040e9586e6271aa4f[m
+Author: shuree-sour <shuree20010730@gmail.com>
+Date:   Fri Sep 23 15:39:29 2022 +0900
+
+    [UPDATE]Team2 members information
+
+[33mcommit 381c70c3156da8afae08bb00168aeb1ceb77f5da[m
+Author: Tuya <t_tuya523@yahoo.com>
+Date:   Fri Sep 23 15:33:40 2022 +0900
+
+    [Update] Team2 members information
+
+[33mcommit 3722f7dbc08b9f29102c3ff48484dc53bcc7510b[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 15:32:04 2022 +0900
+
+    [ADD] instructors.md
+
+[33mcommit 4f27baa691726cbab4f3083a0fbd7e6b435fc1bd[m
+Author: Carlos Gomez <carlosyoshy10@gmail.com>
+Date:   Fri Sep 23 15:30:35 2022 +0900
+
+    [UPDATE] Team2 members information
+
+[33mcommit 4db712370267f92d267046a203da9033f7552706[m
+Author: yu00hun <yu00hun@naver.com>
+Date:   Fri Sep 23 15:26:09 2022 +0900
+
+    [UPDATE]Team2 members information
+
+[33mcommit a2d7db8863ae5e19e067f28c99066ce3a287e017[m
+Author: gbtwld <gbtwld@gmail.com>
+Date:   Fri Sep 23 15:22:18 2022 +0900
+
+    [UPDATE]Team2 members information
+
+[33mcommit a9ca7e237afb47e6b26adb48ab79a0b39ca671ab[m
+Author: JaeHyeon Kim <nabul_dabul_@naver.com>
+Date:   Fri Sep 23 15:07:34 2022 +0900
+
+    Team4 김재현
+
+[33mcommit 4004fb1392b4608631be1c4e941affb74e1b4e44[m
+Author: euiyeon <euiyeon1@naver.com>
+Date:   Fri Sep 23 15:03:59 2022 +0900
+
+    team4 Euiyeon Cho
+
+[33mcommit b2554c894a5de68a14326f104dfcb77b8e45b936[m
+Author: kseungy <ksyun0615@hanyang.ac.kr>
+Date:   Fri Sep 23 15:00:43 2022 +0900
+
+    team4 김승연
+
+[33mcommit f3cceb551318965153ea2b43edc3e007aac0e225[m
+Author: GoodTY <egg3153@naver.com>
+Date:   Fri Sep 23 14:57:20 2022 +0900
+
+    add teams/team9
+
+[33mcommit 864dd4ed36c46101f65582c5783d9345b5e6a64f[m
+Merge: 62094b0 891b357
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 23 14:55:04 2022 +0900
+
+    Merge pull request #10 from dev-jjjjjeong-bin/main
+    
+    Update Team name README.md
+
+[33mcommit 891b3575f20207f42c73baef674f3606867d0602[m
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 23 14:54:29 2022 +0900
+
+    Update README.md
+
+[33mcommit 62094b094f9876316d0ef0ead2d00d7b11835149[m
+Merge: 0ba9c31 4d0afec
+Author: kimkimjunjun <91366883+kimkimjunjun@users.noreply.github.com>
+Date:   Fri Sep 23 14:54:11 2022 +0900
+
+    Merge branch 'Verssae:main' into main
+
+[33mcommit 0ba9c310f111a77c7e2b30352f59db25cbdd7293[m
+Merge: df0e24f bf65baf
+Author: Jaeho Yang <ho4121e@gmail.com>
+Date:   Fri Sep 23 14:53:01 2022 +0900
+
+    Merge pull request #9 from Jae12ho/main
+    
+    Chore: Edit README.md
+
+[33mcommit 22d392c814f9c47fb7f9cb47af59620bcbd13147[m
+Author: sang0429 <sang04290@gmail.com>
+Date:   Fri Sep 23 14:52:38 2022 +0900
+
+    Team4 table add
+
+[33mcommit bf65baffd26ce2b5ad2d562bd51888c809cc084f[m
+Author: Jaeho Yang <ho4121e@gmail.com>
+Date:   Fri Sep 23 14:52:27 2022 +0900
+
+    Chore: Edit README.md
+
+[33mcommit df0e24f5286a4a78e8c5e0bd80c780dbe3894e6f[m
+Merge: e2a739d 423e43b
+Author: JunCheol_Park <91944358+qkrwnscjf@users.noreply.github.com>
+Date:   Fri Sep 23 14:51:15 2022 +0900
+
+    Merge pull request #8 from qkrwnscjf/main
+    
+    Update README.md
+
+[33mcommit 423e43bc05073bbc79e6bd9fbf1eea006259df8c[m
+Author: JunCheol_Park <91944358+qkrwnscjf@users.noreply.github.com>
+Date:   Fri Sep 23 14:50:35 2022 +0900
+
+    Update README.md
+
+[33mcommit e2a739d5835745328063f7880b2f77d31e9ecfa1[m
+Merge: 4a9d3d1 9b0e9ca
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 23 14:48:20 2022 +0900
+
+    Merge pull request #7 from dev-jjjjjeong-bin/main
+    
+    Update Jeongbin README.md
+
+[33mcommit 9b0e9cab5a2c886d2f8376a58f489809bfa7d90e[m
+Author: dev-jjjjjeong-bin <86920724+dev-jjjjjeong-bin@users.noreply.github.com>
+Date:   Fri Sep 23 14:47:40 2022 +0900
+
+    Update README.md
+
+[33mcommit cb9075a5be9e18d08a966b4af81d833460dfce17[m
+Author: KimJinWoo <ohdakal2@gmail.com>
+Date:   Fri Sep 23 14:47:27 2022 +0900
+
+    Add TEAM4 Table
+
+[33mcommit 51902af0a804849a1f45a46cd32e0a091c64310d[m
+Author: No eunsol <90243929+Noeunsol@users.noreply.github.com>
+Date:   Fri Sep 23 14:47:17 2022 +0900
+
+    Update README.md
+
+[33mcommit f650d65c1f59144e45f6698b431487de46bcb00c[m
+Merge: a6fd14b ad5c324
+Author: apho <crocus7780@hanyang.ac.kr>
+Date:   Fri Sep 23 14:45:59 2022 +0900
+
+    [Add] 이정민 readme추가, conflict 해결
+
+[33mcommit 710302fb4f9e1a8e6ae86e4331fdf66da173c5aa[m
+Author: johnhuh619 <jaewonheo666@gmail.com>
+Date:   Fri Sep 23 14:45:48 2022 +0900
+
+    jaewonheo
+
+[33mcommit 4a9d3d1d054fc5e83580e53411e4aaa1cf376276[m
+Merge: ead604e e154eee
+Author: kimkimjunjun <91366883+kimkimjunjun@users.noreply.github.com>
+Date:   Fri Sep 23 14:45:44 2022 +0900
+
+    Merge pull request #6 from kimkimjunjun/main
+    
+    junhwi 개인 레포
+
+[33mcommit 090cd09e4a72ece0d4fa5db8195223baebe94010[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Fri Sep 23 14:45:12 2022 +0900
+
+    update README.md
+
+[33mcommit e154eeed8796d9408324efda92bb8a2a8ac45777[m
+Author: kimkimjunjun <91366883+kimkimjunjun@users.noreply.github.com>
+Date:   Fri Sep 23 14:44:56 2022 +0900
+
+    Update README.md
+
+[33mcommit bc52baffb9cc6e6ad887f53edea40fe05fd7493e[m
+Author: kimkimjunjun <91366883+kimkimjunjun@users.noreply.github.com>
+Date:   Fri Sep 23 14:44:45 2022 +0900
+
+    Update README.md
+
+[33mcommit 1eefab7775b578d981d7aa1896a868d0a548bc70[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:41:42 2022 +0900
+
+    delete instructors.md file
+
+[33mcommit 93c8e5b02cda26423ff5d246d423cd914e72eb25[m
+Author: kimujae <62458513+kimujae@users.noreply.github.com>
+Date:   Fri Sep 23 14:41:33 2022 +0900
+
+    Update and rename instructors.md to team7.md
+
+[33mcommit d4f17c83e4624f4f379d64d5306cb02925c62976[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:40:29 2022 +0900
+
+    team 소개글 작성
+
+[33mcommit 399dfc7714c6bdab92aa99182daf087a9f19ac62[m
+Author: JSeokjun <sjjjang00@gmail.com>
+Date:   Fri Sep 23 14:40:22 2022 +0900
+
+    addSeokjun
+
+[33mcommit ead604ec11c3ab11b505a4be4d0c00a7c4cdfe61[m
+Merge: 0772065 962bf57
+Author: Dabeen-Yun <90141741+Dabeen-Yun@users.noreply.github.com>
+Date:   Fri Sep 23 14:39:37 2022 +0900
+
+    Merge pull request #3 from Dabeen-Yun/main
+    
+    Dabeen 개인 레포 추가
+
+[33mcommit ad5c3242dec284e74f9852dac7420b18717ca4f0[m
+Author: Jaemin0730 <jaemkim01@hanyang.ac.kr>
+Date:   Fri Sep 23 14:38:52 2022 +0900
+
+    [Add] 김재민 readme 추가
+
+[33mcommit 82f770e7902b7a16488508e1dc59769fe9ea2ac6[m
+Author: yppp33 <108478949+yppp33@users.noreply.github.com>
+Date:   Fri Sep 23 14:38:27 2022 +0900
+
+    Update README.md
+
+[33mcommit 9b131133f9c79e58433b5b136f16a7d0d038d7c7[m
+Author: lavi02 <18ds10535@dshs.kr>
+Date:   Fri Sep 23 14:38:13 2022 +0900
+
+    3
+
+[33mcommit 962bf574ab77641434830c704322de0fd452ff5a[m
+Author: Dabeen-Yun <90141741+Dabeen-Yun@users.noreply.github.com>
+Date:   Fri Sep 23 14:38:09 2022 +0900
+
+    Dabeen 개인 레포 추가
+
+[33mcommit a6fd14b5888aef34ef782249d67d075eb778a96e[m
+Author: apho <crocus7780@hanyang.ac.kr>
+Date:   Fri Sep 23 14:37:50 2022 +0900
+
+    [Add]이정민 readme추가
+
+[33mcommit 7656e597895c56a740771447062d81f537cc1378[m
+Author: JHPark0906 <riceqo6176@naver.com>
+Date:   Fri Sep 23 14:37:24 2022 +0900
+
+    JungHyuk
+
+[33mcommit fe837f63542364e186ff98052fb691344cc7a28a[m
+Author: No eunsol <90243929+Noeunsol@users.noreply.github.com>
+Date:   Fri Sep 23 14:36:45 2022 +0900
+
+    Update README.md
+
+[33mcommit 0772065a76bd56c5c5b7088e6066d2997395decb[m
+Author: Jaeho Yang <ho4121e@gmail.com>
+Date:   Fri Sep 23 14:36:40 2022 +0900
+
+    Update README.md
+
+[33mcommit 06ea23204b29d6390b874cce9cb81b1dbe857e89[m
+Author: Wish-Upon-A-Star <57494067+Wish-Upon-A-Star@users.noreply.github.com>
+Date:   Fri Sep 23 14:36:01 2022 +0900
+
+    1
+
+[33mcommit 5847c59241e753e5bf11c7dfcafa8647240e6b7f[m
+Author: Yena Lee <67696726+TEDIII@users.noreply.github.com>
+Date:   Fri Sep 23 14:35:42 2022 +0900
+
+    Update README.md
+
+[33mcommit 49a115be78c26ed2b53d6bebbe9cf99bd5ea9bfe[m
+Author: Soo bin <89141681+dahlia0916@users.noreply.github.com>
+Date:   Fri Sep 23 14:33:53 2022 +0900
+
+    Update README.md
+
+[33mcommit c7f8e3ced8d084af7e3d95a029ae7b78caf00cfb[m
+Author: GoodTY <egg3153@naver.com>
+Date:   Fri Sep 23 14:33:19 2022 +0900
+
+    modify mistakes
+
+[33mcommit dda79247ae7b11e51d2757a37285f423e3702752[m
+Author: Soo bin <89141681+dahlia0916@users.noreply.github.com>
+Date:   Fri Sep 23 14:33:06 2022 +0900
+
+    Update README.md
+
+[33mcommit f46585ffb3adbbe93a81e2bd831f37cc453971b4[m
+Author: kimujae <62458513+kimujae@users.noreply.github.com>
+Date:   Fri Sep 23 14:31:35 2022 +0900
+
+    Update README.md
+
+[33mcommit 99b2170271b2bddd5a386a9c68b5c849a89c9d0d[m
+Author: kimujae <62458513+kimujae@users.noreply.github.com>
+Date:   Fri Sep 23 14:31:13 2022 +0900
+
+    Update README.md
+
+[33mcommit 1ccd0ff68bbb64743daa9b02cca824dd8b73524e[m
+Author: iwtkmn0219 <iwtkmn0219@naver.com>
+Date:   Fri Sep 23 14:29:56 2022 +0900
+
+    [Add]최민준 README추가
+
+[33mcommit 5bfc29d2c59e1dd86f9444eb0bad97642d5c923a[m
+Merge: 68516ab 2283bd5
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:29:31 2022 +0900
+
+    README.md
+
+[33mcommit 68516ab8d9d14278ad34f74393f1d5fd8d985e59[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:28:16 2022 +0900
+
+    README.md
+
+[33mcommit cdce60237536640a2ccfe51e293c060c5fedb359[m
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 14:25:19 2022 +0900
+
+    [Add]박창현 readme추가
+
+[33mcommit 44b0cda30f87d82d229a453c895c6a3bed8ea1ff[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 14:24:08 2022 +0900
+
+    add:CSY
+
+[33mcommit 2283bd5694ac3984d2a166b73b0f79fe1f5a8c4d[m
+Author: Yeseong <ohyeesung@naver.com>
+Date:   Fri Sep 23 14:23:37 2022 +0900
+
+    README.md oh
+
+[33mcommit c9cecc6e35a4b63e87334e1dc51da93f023682af[m
+Author: Jaeho Yang <ho4121e@gmail.com>
+Date:   Fri Sep 23 14:21:00 2022 +0900
+
+    Create Apple.md
+
+[33mcommit ff9fe0b4c5c34d354ffa3f92ab781f7ec8bb4047[m
+Author: suyong choi <dpfprtus@gmail.com>
+Date:   Fri Sep 23 14:20:25 2022 +0900
+
+    add:최수용
+
+[33mcommit 9d2d3fd7547e6dfbf21c5536fd8fe65d1eb21818[m
+Author: kcyoow <46476820+kcyoow@users.noreply.github.com>
+Date:   Fri Sep 23 05:20:11 2022 +0000
+
+    Input My Name in Members
+
+[33mcommit 3b480e1848881ff39178acef6d49c8c138f02dcb[m
+Author: Jaeho Yang <ho4121e@gmail.com>
+Date:   Fri Sep 23 14:19:20 2022 +0900
+
+    Chore: Edit README.md
+
+[33mcommit 6fe489d4aae52d1ac54b18fc426e68837d681b35[m
+Author: 서민성 <87956613+minseong0609@users.noreply.github.com>
+Date:   Fri Sep 23 14:19:17 2022 +0900
+
+    Update README.md
+    
+    이름추가
+
+[33mcommit 2ac790ec350d433958742828585877f4124bc72d[m
+Author: Seung-jun <85071693+bigham920@users.noreply.github.com>
+Date:   Fri Sep 23 14:18:24 2022 +0900
+
+    Update README.md
+    
+    이름수정
+
+[33mcommit 29abe950195efa101113e0f2843e5606e42b50e6[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:18:20 2022 +0900
+
+    README.md 수정
+
+[33mcommit 86edfcd0eb1f7f615c8da14e798cfa5c02646a89[m
+Merge: 9753d78 4d0afec
+Author: 최수용 <dpfprtus@gmail.com>
+Date:   Fri Sep 23 14:18:02 2022 +0900
+
+    Merge pull request #1 from Verssae/main
+    
+    Merge pull request #3 from GoodTY/main
+
+[33mcommit 4d0afecafbaf1e26a7cdfbca363ead31bd45b32c[m
+Merge: 89e17b4 9753d78
+Author: GoodTY <55177919+GoodTY@users.noreply.github.com>
+Date:   Fri Sep 23 14:17:34 2022 +0900
+
+    Merge pull request #3 from GoodTY/main
+    
+    dsfa
+
+[33mcommit 43e121f5b83c9b672113e14fdd94f63befe54899[m
+Author: mayb00 <90629220+mayb00@users.noreply.github.com>
+Date:   Fri Sep 23 14:17:16 2022 +0900
+
+    Update README.md
+
+[33mcommit 16346392c97961cb0b7aab982b538d950206463f[m
+Merge: 3c809b9 af64a2f
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:16:19 2022 +0900
+
+    README.md modify
+
+[33mcommit af64a2fc3a07a24ae1aef0d9488c327b0ab8ef35[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Fri Sep 23 14:13:04 2022 +0900
+
+    add_21yuyu99
+
+[33mcommit ac98ee12a8f74ad5b0c0775c66a2f3834eef6d01[m
+Author: Seung-jun <85071693+bigham920@users.noreply.github.com>
+Date:   Fri Sep 23 14:12:48 2022 +0900
+
+    Update README.md
+    
+    이름 추가
+
+[33mcommit 3c809b94508f5adbb0d99df63765ffc605c954e0[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:12:46 2022 +0900
+
+    main README.md 이민구 repo 링크 생성
+
+[33mcommit 6d46851d1b918f3a98f8e84a5be32194887cfab7[m
+Author: 21yuyu99 <yujeong0720@gmail.com>
+Date:   Fri Sep 23 14:11:59 2022 +0900
+
+    add_21yuyu99
+
+[33mcommit 34b65b46f7bfe5abd385344f6a2e1769d8563c14[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:10:50 2022 +0900
+
+    main README.md modify
+
+[33mcommit 9753d78a0d4084ea0d04e5c740b0ddb7e92f9298[m
+Author: GoodTY <egg3153@naver.com>
+Date:   Fri Sep 23 14:10:41 2022 +0900
+
+    a little correction
+
+[33mcommit 79df12976a3faf09431bcf4be83d6d1ba616e052[m
+Author: Byeunghee02 <choibh6258@hanyang.ac.kr>
+Date:   Fri Sep 23 14:10:35 2022 +0900
+
+    Update README.md
+
+[33mcommit d15aa559cdfe6cf2ce701a0e1ddeac4d45d82559[m
+Author: LeeMingu <qazzaq1541@gmail.com>
+Date:   Fri Sep 23 14:08:54 2022 +0900
+
+    team readme 입력
+
+[33mcommit c062468514207aec33c14d87dd8a0ebad6d25e4f[m
+Author: GoodTY <egg3153@naver.com>
+Date:   Fri Sep 23 14:07:38 2022 +0900
+
+    add member in README.md
+
+[33mcommit 351bc5f2eb80d79eb5a85047ab2acbe009eed5e4[m
+Author: dpwns <dpwns0827@naver.com>
+Date:   Fri Sep 23 14:07:27 2022 +0900
+
+    Update README.md
+    
+    이름 추가
+
+[33mcommit 89e17b4edc052a77325ebcae424a10e41ae0e293[m
+Merge: f9e84fd afdba13
+Author: 박창현 <86464544+Kid-Chang@users.noreply.github.com>
+Date:   Fri Sep 23 13:54:03 2022 +0900
+
+    Merge pull request #2 from Kid-Chang/main
+    
+    [Add]Team 테이블
+
+[33mcommit afdba133f9b1356fc4b6023beab2a01efcf325ec[m
+Author: Kid-Chang <pch3310@gmail.com>
+Date:   Fri Sep 23 13:53:27 2022 +0900
+
+    [Add]Team 테이블
+
+[33mcommit cee1f6ab857c8f57b2eb42b3a80eb823e3d68891[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Thu Sep 22 19:19:02 2022 +0900
+
+    update README.md
+
+[33mcommit d886b37bdbb8d0511c5f570d691311afd69d33c8[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Sat Sep 17 02:18:58 2022 +0900
+
+    wenhao new teams/team6.md
+
+[33mcommit c75302f4ed5bb2dbe66dd20cc4109ea91f290961[m
+Author: wenhao <w1160730299@outlook.com>
+Date:   Sat Sep 17 02:18:03 2022 +0900
+
+    wenhao modified README.md
+
+[33mcommit f9e84fd65e91949e9eb658d367cf04afca968f12[m
+Author: Hansae Ju <sparky@hanyang.ac.kr>
+Date:   Thu Sep 15 10:27:05 2022 +0900
+
+    [MODIFY] Thurday->Friday
+
+[33mcommit a533cc72ae01b0f477b78db9a129711742a4567b[m
+Author: Hansae Ju <sparky@hanyang.ac.kr>
+Date:   Thu Sep 15 09:33:23 2022 +0900
+
+    [ADD] runConfiguration & ignore log file
+
+[33mcommit d87da622c47713d7c9001a8a4e07260d208c0fd5[m
+Author: Hansae Ju <sparky@hanyang.ac.kr>
+Date:   Wed Sep 14 21:11:26 2022 +0900
+
+    [UPDATE] README
+
+[33mcommit d475a1d263954723df97ce3ca5ab197876389837[m
+Author: Hansae Ju <sparky@hanyang.ac.kr>
+Date:   Wed Sep 14 20:34:41 2022 +0900
+
+    initial commit

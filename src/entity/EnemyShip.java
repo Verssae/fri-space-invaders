@@ -1,6 +1,6 @@
 package entity;
-
 import java.awt.Color;
+import java.util.Set;
 
 import engine.Cooldown;
 import engine.Core;
@@ -13,7 +13,14 @@ import engine.DrawManager.SpriteType;
  * 
  */
 public class EnemyShip extends Entity {
-	
+	//추가
+	private Item.ItemType itemtype;
+
+	private static int hasItem ;
+	/** Point value of a type A enemy. */
+	//s
+
+
 	/** Point value of a type A enemy. */
 	private static final int A_TYPE_POINTS = 10;
 	/** Point value of a type B enemy. */
@@ -22,7 +29,6 @@ public class EnemyShip extends Entity {
 	private static final int C_TYPE_POINTS = 30;
 	/** Point value of a bonus enemy. */
 	private static final int BONUS_TYPE_POINTS = 100;
-
 	/** Cooldown between sprite changes. */
 	private Cooldown animationCooldown;
 	/** Checks if the ship has been hit by a bullet. */
@@ -30,6 +36,7 @@ public class EnemyShip extends Entity {
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
 
+	private final int ITEM_SPEED = 2;
 	/**
 	 * Constructor, establishes the ship's properties.
 	 * 
@@ -43,6 +50,12 @@ public class EnemyShip extends Entity {
 	public EnemyShip(final int positionX, final int positionY,
 			final SpriteType spriteType) {
 		super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
+
+		//추가
+		this.itemtype = null;
+		this.hasItem = 0;
+		//
+
 
 		this.spriteType = spriteType;
 		this.animationCooldown = Core.getCooldown(500);
@@ -67,6 +80,33 @@ public class EnemyShip extends Entity {
 		}
 	}
 
+
+	//추가
+	public void setHasItem(int setHasItem){
+		this.hasItem = setHasItem;
+	}
+
+	public int getHasItem(){
+		return this.hasItem;
+	}
+
+	public void setItemType(Item.ItemType itemtype){
+		this.itemtype = itemtype;
+	}
+
+	public Item.ItemType getItemType(){
+		return this.itemtype;
+	}
+
+	public void itemDrop(final Set<Item> items){
+		items.add(ItemIterator.drop(positionX + this.width/2 , positionY, this.getItemType()));
+
+	}
+
+
+	//추가
+
+
 	/**
 	 * Constructor, establishes the ship's properties for a special ship, with
 	 * known starting properties.
@@ -77,8 +117,8 @@ public class EnemyShip extends Entity {
 		this.spriteType = SpriteType.EnemyShipSpecial;
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
-	}
 
+	}
 	/**
 	 * Getter for the score bonus if this ship is destroyed.
 	 * 
@@ -86,6 +126,10 @@ public class EnemyShip extends Entity {
 	 */
 	public final int getPointValue() {
 		return this.pointValue;
+	}
+
+	public void setPointValue(int setpointvalue){
+		this.pointValue = setpointvalue;
 	}
 
 	/**
@@ -149,4 +193,6 @@ public class EnemyShip extends Entity {
 	public final boolean isDestroyed() {
 		return this.isDestroyed;
 	}
+
 }
+

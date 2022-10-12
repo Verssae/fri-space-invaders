@@ -1,5 +1,10 @@
 package engine;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import entity.ItemPool;
+
 /**
  * Implements an object that stores the state of the game between levels.
  * 

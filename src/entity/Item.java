@@ -19,7 +19,9 @@ public class Item extends Entity {
 
         SpeedUpItem,
 
-        ExtraLifeItem
+        ExtraLifeItem,
+
+        EnemyShipSpeedItem
 
     };
 

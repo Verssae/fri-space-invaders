@@ -1,5 +1,8 @@
 package engine;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import entity.ItemPool;
 
 /**
@@ -21,8 +24,6 @@ public class GameState {
 	/** Ships destroyed until now. */
 	private int shipsDestroyed;
 
-	//private ItemPool itempool;
-
 	/**
 	 * Constructor.
 	 * 
@@ -38,7 +39,8 @@ public class GameState {
 	 *            Ships destroyed until now.
 	 */
 	public GameState(final int level, final int score,
-			final int livesRemaining, final int bulletsShot, final int shipsDestroyed) {
+			final int livesRemaining, final int bulletsShot,
+			final int shipsDestroyed) {
 		this.level = level;
 		this.score = score;
 		this.livesRemaining = livesRemaining;
@@ -81,16 +83,4 @@ public class GameState {
 		return shipsDestroyed;
 	}
 
-
-/*
-	public void setItemPool(ItemPool itempool){
-			this.itempool = itempool;
-	}
-
-
-
-	public ItemPool getItemPool(){
-		return this.itempool;
-	}
-*/
 }

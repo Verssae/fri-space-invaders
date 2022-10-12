@@ -79,6 +79,8 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
+		EnemyShipdangerous,
+
 		Explosion,
 
 		ItemDrop,
@@ -118,7 +120,8 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
-      spriteMap.put(SpriteType.Life, new boolean[13][13]);
+			spriteMap.put(SpriteType.Life, new boolean[13][13]);
+			spriteMap.put(SpriteType.EnemyShipdangerous, new boolean[16][7]);
 
 			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
@@ -707,11 +710,18 @@ public final class DrawManager {
 
 	public void drawStoreGacha(final Screen screen, final int menu, final int focus) {
 		String rerollString = "reroll!(100$)";
+		String coinLackString = "Not enough coins!";
 		PermanentState permanentState = PermanentState.getInstance();
 		if (focus == 0)
 			backBufferGraphics.setColor(Color.WHITE);
-		else
+		else {
 			backBufferGraphics.setColor(Color.GREEN);
+			if (permanentState.getCoin() < 100) {
+				backBufferGraphics.setColor(Color.RED);
+				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
+						screen.getHeight() / 2 + 180);
+			}
+		}
 		backBufferGraphics.drawRect(screen.getWidth() / 2 + 50, screen.getHeight() / 2, 100, 100);
 		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 100 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 180);
 
@@ -804,9 +814,17 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		if (number >= 4)
 			if (!bonusLife) {
-				drawCenteredBigString(screen, "Level " + level,
-						screen.getHeight() / 2
-						+ fontBigMetrics.getHeight() / 3);
+				if (level == 8){
+					drawCenteredBigString(screen, "Boss Stage",
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+				else {
+					drawCenteredBigString(screen, "Level " + level,
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+
 			} else {
 				drawCenteredBigString(screen, "Level " + level
 						+ " - Bonus life!",

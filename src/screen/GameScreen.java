@@ -19,6 +19,7 @@ import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
 import entity.Shield;
+import entity.dangerousShip;
 
 /**
  * Implements the game screen, where the action happens.
@@ -54,10 +55,16 @@ public class GameScreen extends Screen {
 	private Ship ship;
 	/** Bonus enemy ship that appears sometimes. */
 	private EnemyShip enemyShipSpecial;
+	/** Dangerous enemy ship tahat appears sometimes. */
+	private dangerousShip enemyShipdangerous;
 	/** Minimum time between bonus ship appearances. */
 	private Cooldown enemyShipSpecialCooldown;
+	/** Minimum time between dangerous ship appearances. */
+	private Cooldown enemyShipdangerousCooldown;
 	/** Time until bonus ship explosion disappears. */
 	private Cooldown enemyShipSpecialExplosionCooldown;
+	/** Time until bangerous ship explosion disappears. */
+	private Cooldown enemyShipdangerousExplosionCooldown;
 	/** Time from finishing the level to screen change. */
 	private Cooldown screenFinishedCooldown;
 	/** Set of all bullets fired by on screen ships. */
@@ -90,6 +97,8 @@ public class GameScreen extends Screen {
 	private GameState setgamestate;
 
 	private Shield shield;
+
+	private dangerousShip dangerousShip;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -166,6 +175,11 @@ public class GameScreen extends Screen {
 		this.enemyShipSpecialCooldown.reset();
 		this.enemyShipSpecialExplosionCooldown = Core
 				.getCooldown(BONUS_SHIP_EXPLOSION);
+		//add dangerous Ship
+		this.enemyShipdangerousCooldown = Core.getVariableCooldown(BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
+		this.enemyShipdangerousCooldown.reset();
+		this.enemyShipdangerousExplosionCooldown = Core.getCooldown(BONUS_SHIP_EXPLOSION);
+		///////////////////////////////////
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
 		this.itemiterator = new HashSet<Item>();
@@ -244,6 +258,27 @@ public class GameScreen extends Screen {
 				this.logger.info("The special ship has escaped");
 			}
 
+			/** add dangerousShip */
+			if (this.enemyShipdangerous != null) {
+				if (!this.enemyShipdangerous.isDestroyed())
+					this.enemyShipdangerous.move(1, 0);
+				else if (this.enemyShipSpecialExplosionCooldown.checkFinished())
+					this.enemyShipdangerous = null;
+
+			}
+			if (this.enemyShipdangerous == null
+					&& this.enemyShipdangerousCooldown.checkFinished()) {
+				this.enemyShipdangerous = new dangerousShip();
+				this.enemyShipdangerousCooldown.reset();
+				this.logger.info("A dangerous ship appears");
+			}
+			if (this.enemyShipdangerous != null
+					&& this.enemyShipdangerous.getPositionX() > this.width) {
+				this.lives--;
+				this.enemyShipdangerous = null;
+				this.logger.info("The dangerous ship has escaped and you has lost lives");
+			}
+
 			this.ship.update();
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
@@ -295,6 +330,11 @@ public class GameScreen extends Screen {
 			drawManager.drawEntity(this.enemyShipSpecial,
 					this.enemyShipSpecial.getPositionX(),
 					this.enemyShipSpecial.getPositionY());
+
+		if (this.enemyShipdangerous != null)
+			drawManager.drawEntity(this.enemyShipdangerous,
+					this.enemyShipdangerous.getPositionX(),
+					this.enemyShipdangerous.getPositionY());
 
 		if(itempool.getItem() != null && this.shield != null &&
 				itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
@@ -378,7 +418,7 @@ public class GameScreen extends Screen {
 						    enemyShip.itemDrop(itemiterator);
 							for(Item item : this.itemiterator)
 								if(item != null)
-								item.setSprite();
+									item.setSprite();
 								//item.drop();
 						}
 
@@ -392,6 +432,15 @@ public class GameScreen extends Screen {
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
+					recyclable.add(bullet);
+				}
+				if (this.enemyShipdangerous != null
+						&& !this.enemyShipdangerous.isDestroyed()
+						&& checkCollision(bullet, this.enemyShipdangerous)) {
+					this.score += this.enemyShipdangerous.getPointValue();
+					this.shipsDestroyed++;
+					this.enemyShipdangerous.destroy();
+					this.enemyShipdangerousExplosionCooldown.reset();
 					recyclable.add(bullet);
 				}
 			}
@@ -474,6 +523,13 @@ public class GameScreen extends Screen {
 						System.out.println("스피드업아이템");
 						this.clearItem();//효과 초기화
 						this.ship.setShipSpeed(2 * this.ship.getSpeed());
+
+				}
+				else if(item.getIsget() == false &&
+						itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem){
+					System.out.println("적스피드다운아이템");
+					this.clearItem();//효과 초기화
+					this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 
 				}
 				else if(!isInitScreen && item.getIsget() == false &&

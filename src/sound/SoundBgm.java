@@ -15,7 +15,30 @@ public class SoundBgm {
     public Clip bgmClip;
     public File bgmFileLoader;
     protected Logger logger;
-    public SoundBgm(String filename){
+
+    public static enum SoundType{
+        mainGameBgm,
+        enemyKill,
+        hit,
+        menuClick,
+        shoot
+    }
+
+    public SoundBgm(SoundType type){
+        switch (type){
+            case mainGameBgm:
+                this.LoadBgm("BGM_MainGame_001.wav");
+                break;
+            case enemyKill:
+                this.LoadBgm("EnemyKill_001.wav");
+                break;
+            case hit:
+                this.LoadBgm("Hit_001.wav");
+                break;
+        }
+    }
+
+    public void LoadBgm(String filename){
         this.logger = Core.getLogger();
         try{
             String jarPath = FileManager.class.getProtectionDomain()
@@ -33,7 +56,6 @@ public class SoundBgm {
             // 볼륨 설정용
 //            FloatControl volumeControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
 //            volumeControl.setValue(-10.0f);
-//            Thread.sleep(c.getMicrosecondLength()/1000);
         }
         catch(Exception e){
             e.printStackTrace();

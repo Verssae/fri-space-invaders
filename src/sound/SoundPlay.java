@@ -2,15 +2,16 @@ package sound;
 
 import java.io.IOException;
 
+import sound.SoundBgm.SoundType;
+
 public class SoundPlay{
-    private String filename;
     private static SoundPlay instance;
 
     private SoundPlay(){}
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
-    public void playBgm(String filename){
-        SoundBgm sb = new SoundBgm(filename);
+    public void playBgm(SoundType type){
+        SoundBgm sb = new SoundBgm(type);
         sb.play();
     }
 

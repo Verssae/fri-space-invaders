@@ -49,7 +49,6 @@ public class GameScreen extends Screen {
 			.getSimpleName());
 
 
-	private static FileManager fileManager;
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
 	/** Current difficulty level number. */
@@ -148,16 +147,16 @@ public class GameScreen extends Screen {
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
 		enemyShipFormation.attach(this);
-		int playerShipLevel = fileManager.getPlayerShipLevel();
-		switch (playerShipLevel) {
+		int playerShipShape = FileManager.getPlayerShipShape();
+		switch (playerShipShape) {
 			case 0:
-				this.ship = new Ship(this.width / 2, this.height - 30);
+				this.ship = new Ship(this.width / 2, this.height - 30, FileManager.ChangeIntToColor());
 				break;
 			case 1:
-				this.ship = new Ship(this.width / 2, this.height - 30, playerShipLevel);
+				this.ship = new Ship(this.width / 2, this.height - 30, playerShipShape, FileManager.ChangeIntToColor());
 				break;
 			case 2:
-				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipLevel));
+				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipShape), FileManager.ChangeIntToColor());
 				break;
 		}
 		// Appears each 10-30 seconds.

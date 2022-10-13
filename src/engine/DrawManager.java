@@ -79,6 +79,8 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
+		EnemyShipdangerous,
+
 		Explosion,
 
 		ItemDrop,
@@ -118,7 +120,8 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
-      spriteMap.put(SpriteType.Life, new boolean[13][13]);
+			spriteMap.put(SpriteType.Life, new boolean[13][13]);
+			spriteMap.put(SpriteType.EnemyShipdangerous, new boolean[16][7]);
 
 			fileManager.readship();//read ship파일
 			fileManager.loadSprite(spriteMap);
@@ -809,9 +812,17 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		if (number >= 4)
 			if (!bonusLife) {
-				drawCenteredBigString(screen, "Level " + level,
-						screen.getHeight() / 2
-						+ fontBigMetrics.getHeight() / 3);
+				if (level == 8){
+					drawCenteredBigString(screen, "Boss Stage",
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+				else {
+					drawCenteredBigString(screen, "Level " + level,
+							screen.getHeight() / 2
+									+ fontBigMetrics.getHeight() / 3);
+				}
+
 			} else {
 				drawCenteredBigString(screen, "Level " + level
 						+ " - Bonus life!",

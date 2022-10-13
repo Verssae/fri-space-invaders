@@ -237,20 +237,14 @@ public class GameScreen extends Screen {
 			this.enemyShipFormation.update();
 			this.enemyShipFormation.shoot(this.bullets);
 
-
-			for(Item item : this.itemiterator) {
-				if(item != null)
-					item.update();
-			}
-
 		}
 		for(Item item : this.itemiterator){
 			if(item != null) {
 				manageGetItem(item);
 			}
 		}
-
 		manageCollisions();
+		cleanItems();
 		cleanBullets();
 		draw();
 		if ((this.enemyShipFormation.isEmpty() || this.lives == 0)
@@ -428,7 +422,7 @@ public class GameScreen extends Screen {
 			if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
 
-				LOGGER.info("####BulletSpeedItem####");
+				LOGGER.info("Obtained BulletSpeedItem");
 
 				this.clearItem();//효과초기화
 				this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
@@ -437,7 +431,7 @@ public class GameScreen extends Screen {
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
 
-				LOGGER.info("####PointUpItem####");
+				LOGGER.info("Obtained PointUpItem");
 
 				this.clearItem();//효과 초기화
 				for (EnemyShip enemyShip : this.enemyShipFormation)
@@ -446,7 +440,7 @@ public class GameScreen extends Screen {
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
-				LOGGER.info("####ShieldItem####");
+				LOGGER.info("Obtained ShieldItem");
 
 				this.clearItem();
 				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
@@ -454,7 +448,7 @@ public class GameScreen extends Screen {
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
-				LOGGER.info("####SpeedUpItem####");
+				LOGGER.info("Obtained SpeedUpItem");
 
 				this.clearItem();//효과 초기화
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
@@ -462,7 +456,7 @@ public class GameScreen extends Screen {
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
 
-				LOGGER.info("####EnemyShipSpeedItem####");
+				LOGGER.info("Obtained EnemyShipSpeedItem");
 
 				this.clearItem();//효과 초기화
 				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
@@ -470,13 +464,13 @@ public class GameScreen extends Screen {
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 
-				LOGGER.info("####ExtraLifeItem####");
+				LOGGER.info("Obtained ExtraLifeItem");
 
 				this.clearItem();
 				if (this.lives < 4)
 					this.lives++;
 				else
-					LOGGER.warning("####생명 4개 초과####");
+					LOGGER.warning("생명 4개 초과");
 			}
 
 			item.isGet(true);
@@ -485,5 +479,16 @@ public class GameScreen extends Screen {
 	public void clearItem(){
 		ship.setInitState();
 		shield = null;
+	}
+
+	private void cleanItems() {
+		Set<Item> recyclable = new HashSet<Item>();
+		for (Item item : this.itemiterator) {
+			item.update();
+			if (item.getPositionY() < SEPARATION_LINE_HEIGHT
+					|| item.getPositionY() > this.height)
+				recyclable.add(item);
+		}
+		this.itemiterator.removeAll(recyclable);
 	}
 }

@@ -63,11 +63,8 @@ public class ScoreScreen extends Screen {
 	public ScoreScreen(final int width, final int height, final int fps,
 			final GameState gameState) {
 		super(width, height, fps);
-
-
 		this.score = gameState.getScore();
 		//System.out.println(this.score); --> 0
-		this.per = gameState.getPer();
 		this.livesRemaining = gameState.getLivesRemaining();
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
@@ -76,6 +73,7 @@ public class ScoreScreen extends Screen {
 		this.nameCharSelected = 0;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
+		this.per = shipsDestroyed / bulletsShot;
 
 		try {
 			this.highScores = Core.getFileManager().loadHighScores();

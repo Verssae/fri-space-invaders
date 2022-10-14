@@ -417,8 +417,8 @@ public final class FileManager {
 					Integer.toString(gamestate.getScore()) + ' ' +
 					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
 					Integer.toString(gamestate.getBulletsShot()) + ' ' +
-					Integer.toString(gamestate.getShipsDestroyed()) + ' ' +
-					Float.toString(gamestate.getPer());
+					Integer.toString(gamestate.getShipsDestroyed());
+
 			save.write(state);
 
 			save.close();

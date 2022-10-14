@@ -13,7 +13,7 @@ public class GameSettings {
 	/** Height of the level's enemy formation. */
 	private int formationHeight;
 	/** Speed of the enemies, function of the remaining number. */
-	private int baseSpeed;
+	private double baseSpeed;
 	/** Frequency of enemy shootings, +/- 30%. */
 	private int shootingFrecuency;
 
@@ -30,7 +30,7 @@ public class GameSettings {
 	 *            Frecuency of enemy shootings, +/- 30%.
 	 */
 	public GameSettings(final int formationWidth, final int formationHeight,
-			final int baseSpeed, final int shootingFrecuency) {
+						final int baseSpeed, final int shootingFrecuency) {
 		this.formationWidth = formationWidth;
 		this.formationHeight = formationHeight;
 		this.baseSpeed = baseSpeed;
@@ -54,7 +54,7 @@ public class GameSettings {
 	/**
 	 * @return the baseSpeed
 	 */
-	public final int getBaseSpeed() {
+	public final double getBaseSpeed() {
 		return baseSpeed;
 	}
 

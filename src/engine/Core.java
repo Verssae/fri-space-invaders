@@ -9,6 +9,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import entity.ItemPool;
 import screen.GameScreen;
 import screen.HighScoreScreen;
 import screen.ScoreScreen;
@@ -16,7 +17,11 @@ import screen.Screen;
 import screen.TitleScreen;
 import screen.GameSaveScreen;
 import screen.SettingScreen;
+import screen.HelpScreen;
 import screen.VolumeScreen;
+import screen.StoreScreen;
+import screen.PauseScreen;
+
 /**
  * Implements core game logic.
  * 
@@ -37,11 +42,9 @@ public final class Core {
 	/** Levels between extra life. */
 	private static final int EXTRA_LIFE_FRECUENCY = 3;
 	/** Total number of levels. */
-	private static final int NUM_LEVELS = 7;
-
+	private static final int NUM_LEVELS = 8;
 	/** Check click on Save & Exit button */
 	private static boolean GO_MAIN;
-
 	/** Difficulty settings for level 1. */
 	private static final GameSettings SETTINGS_LEVEL_1 =
 			new GameSettings(5, 4, 60, 2000);
@@ -63,7 +66,10 @@ public final class Core {
 	/** Difficulty settings for level 7. */
 	private static final GameSettings SETTINGS_LEVEL_7 =
 			new GameSettings(8, 7, 2, 500);
-	
+	/** add boss stage **/
+	private static final GameSettings SETTINGS_Boss_Stage=
+			new GameSettings(1, 1, 2, 500);
+
 	/** Frame to draw the screen on. */
 	private static Frame frame;
 	/** Screen currently shown. */
@@ -117,9 +123,12 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_5);
 		gameSettings.add(SETTINGS_LEVEL_6);
 		gameSettings.add(SETTINGS_LEVEL_7);
+		gameSettings.add(SETTINGS_Boss_Stage);
 		
 		GameState gameState;
+		PermanentState permanentState = PermanentState.getInstance();
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0,0);
+
 
 		int returnCode = 1;
 		do {
@@ -150,6 +159,15 @@ public final class Core {
 
 					gameState = ((GameScreen) currentScreen).getGameState();
 
+					if (gameState.getScore() > 500)
+						permanentState.setCoin(gameState.getScore() - 500); // earn coin
+
+						
+                    if (gameState.getLivesRemaining() > 0) {         
+						currentScreen = new PauseScreen(width, height, FPS, gameState);
+						returnCode = frame.setScreen(currentScreen);
+					}
+
 					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game save screen at " + FPS + " fps.");
@@ -173,11 +191,15 @@ public final class Core {
 							gameState.getShipsDestroyed(),
 							gameState.getPer());
 
+
+
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 				if (!GO_MAIN)
 					break;
+
 				getFileManager().Savefile(new GameState(0, 0, 3, 0, 0,0));
+
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " score screen at " + FPS + " fps, with a score of "
 						+ gameState.getScore() + ", "
@@ -188,8 +210,10 @@ public final class Core {
 				currentScreen = new ScoreScreen(width, height, FPS, gameState);
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
-				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == 8)
+
+				if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == NUM_LEVELS + 1)
 					gameState = new GameState(1, 0, MAX_LIVES, 0, 0,0);
+
 				break;
 			case 3:
 				// High scores.
@@ -202,7 +226,62 @@ public final class Core {
 			default:
 				break;
 				
-			case 4:// Store
+			case 4:
+				// Store
+				/* returnCode = 1;
+				do {
+					switch (returnCode) {
+						case 1:
+							// Main store
+							currentScreen = new StoreScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " store screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing store screen.");
+							break;
+						case 2:
+							// Ship shape
+							currentScreen = new ShipShapeScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship shape screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship shape screen.");
+							break;
+						case 3:
+							// Ship color
+							currentScreen = new ShipColorScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " ship color screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing ship color screen.");
+							break;
+						case 4:
+							// Bullet effect
+							currentScreen = new BulletEffectScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " bullet effect screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing bullet effect screen.");
+							break;
+						case 5:
+							// BGM
+							currentScreen = new BGMScreen(width, height, FPS);
+							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+									+ " background music screen at " + FPS + " fps.");
+							returnCode = frame.setScreen(currentScreen);
+							LOGGER.info("Closing background music screen.");
+							break;
+						default:
+							break;
+					}
+				} while (returnCode != 0);
+
+				returnCode = 1; */
+				currentScreen = new StoreScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " store screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing store screen.");
 				break;
 				
 
@@ -212,6 +291,7 @@ public final class Core {
 				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]), Float.parseFloat(save_info[5]));
 				returnCode = 2;
 				break;
+
 				
 			case 6:
 				// Setting.
@@ -223,6 +303,11 @@ public final class Core {
 				break;
 				
 			case 7: //Help
+				currentScreen = new HelpScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing help screen.");
 				break;
 				
 			case 8: //Volume

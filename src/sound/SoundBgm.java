@@ -31,6 +31,7 @@ public class SoundBgm {
             AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);
             bgmClip = AudioSystem.getClip();
             bgmClip.open(bgmInputStream);
+            bgmClip.loop(-1);
             // 볼륨 설정용
 //            FloatControl volumeControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
 //            volumeControl.setValue(-10.0f);

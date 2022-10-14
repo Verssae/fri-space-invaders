@@ -201,5 +201,11 @@ public class EnemyShip extends Entity {
 		return this.isDestroyed;
 	}
 
+	public void setInitPointValue(){
+		if(this.spriteType == spriteType.EnemyShipA1 || this.spriteType == spriteType.EnemyShipA2) setPointValue(A_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipB1 || this.spriteType == spriteType.EnemyShipB2) setPointValue(B_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipC1 || this.spriteType == spriteType.EnemyShipC2) setPointValue(C_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipSpecial) setPointValue(BONUS_TYPE_POINTS);
+	}
 }
 

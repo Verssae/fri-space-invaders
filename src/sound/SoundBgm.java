@@ -16,21 +16,7 @@ public class SoundBgm {
     public File bgmFileLoader;
     protected Logger logger;
 
-    public SoundBgm(SoundType type){
-        switch (type){
-            case mainGameBgm:
-                this.LoadBgm("BGM_MainGame_001.wav");
-                break;
-            case enemyKill:
-                this.LoadBgm("EnemyKill_001.wav");
-                break;
-            case hit:
-                this.LoadBgm("Hit_001.wav");
-                break;
-        }
-    }
-
-    public void LoadBgm(String filename){
+    public SoundBgm(String filename){
         this.logger = Core.getLogger();
         try{
             String jarPath = FileManager.class.getProtectionDomain()

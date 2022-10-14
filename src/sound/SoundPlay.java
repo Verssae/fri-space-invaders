@@ -15,7 +15,7 @@ public class SoundPlay{
     public void play(SoundType type){
         switch (type){
             case hit:
-
+            
             case shoot:
 
             case enemyKill:
@@ -30,8 +30,8 @@ public class SoundPlay{
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
-    public void playBgm(SoundType type){
-        SoundBgm sb = new SoundBgm(type);
+    public void playBgm(String filename){
+        SoundBgm sb = new SoundBgm(filename);
         sb.play();
     }
 

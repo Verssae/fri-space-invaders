@@ -8,6 +8,7 @@ package engine;
  */
 public class GameSettings {
 
+	private int level;
 	/** Width of the level's enemy formation. */
 	private int formationWidth;
 	/** Height of the level's enemy formation. */
@@ -29,14 +30,16 @@ public class GameSettings {
 	 * @param shootingFrecuency
 	 *            Frecuency of enemy shootings, +/- 30%.
 	 */
-	public GameSettings(final int formationWidth, final int formationHeight,
-						final int baseSpeed, final int shootingFrecuency) {
+	public GameSettings(final int level, final int formationWidth, final int formationHeight,
+			final int baseSpeed, final int shootingFrecuency) {
+		this.level = level;
 		this.formationWidth = formationWidth;
 		this.formationHeight = formationHeight;
 		this.baseSpeed = baseSpeed;
 		this.shootingFrecuency = shootingFrecuency; //적군
 	}
 
+	public final int getLevel() { return level; }
 	/**
 	 * @return the formationWidth
 	 */

@@ -23,14 +23,10 @@ import engine.GameSettings;
  */
 public class EnemyShipFormation implements Iterable<EnemyShip> {
 
-<<<<<<< HEAD
+
 	private static int Current_Level = 0;
 	/** Initial position in the x-axis. */
-=======
-	/**
-	 * Initial position in the x-axis.
-	 */
->>>>>>> b8570893a1ec3872d946a24e086305329505f226
+
 	private static final int INIT_POS_X = 20;
 	/**
 	 * Initial position in the y-axis.
@@ -183,21 +179,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		 * Movement to the left side of the screen.
 		 */
 		LEFT,
-<<<<<<< HEAD
 		/** Movement to the bottom of the screen. */
 		DOWN,
 
 		UP
 	};
-=======
-		/**
-		 * Movement to the bottom of the screen.
-		 */
-		DOWN
-	}
-
-	;
->>>>>>> b8570893a1ec3872d946a24e086305329505f226
 
 	/**
 	 * Constructor, sets the initial conditions.

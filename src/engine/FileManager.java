@@ -1,7 +1,6 @@
 package engine;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
+import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -12,6 +11,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
+import engine.DrawManager;
 
 /**
  * Manages files used in the application.
@@ -27,8 +27,10 @@ public final class FileManager {
 	private static Logger logger;
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
-	/** get shipLevel from DrawManager. */
-	private static int playerShipLevel;
+
+	private static int playerShipShape,playerShipColor;
+
+	private static int shipShape;
 
 	/**
 	 * private constructor.
@@ -39,7 +41,7 @@ public final class FileManager {
 
 	/**
 	 * Returns shared instance of FileManager.
-	 * 
+	 *
 	 * @return Shared instance of FileManager.
 	 */
 	protected static FileManager getInstance() {
@@ -50,7 +52,7 @@ public final class FileManager {
 
 	/**
 	 * Loads sprites from disk.
-	 * 
+	 *
 	 * @param spriteMap
 	 *            Mapping of sprite type and empty boolean matrix that will
 	 *            contain the image.
@@ -63,9 +65,51 @@ public final class FileManager {
 
 		try {
 			String graphicsName;
-			if(playerShipLevel == 0){
+			if(playerShipShape == 0){
 				graphicsName = "graphics";
-			}else if(playerShipLevel == 1){
+			}else if(playerShipShape == 1){
+				graphicsName = "graphics_1";
+			}else
+				graphicsName = "graphics_2";
+			inputStream = DrawManager.class.getClassLoader()
+					.getResourceAsStream(graphicsName);
+			char c;
+
+			// Sprite loading.
+			for (Map.Entry<SpriteType, boolean[][]> sprite : spriteMap
+					.entrySet()) {
+				for (int i = 0; i < sprite.getValue().length; i++)
+					for (int j = 0; j < sprite.getValue()[i].length; j++) {
+						do
+							c = (char) inputStream.read();
+						while (c != '0' && c != '1');
+
+						if (c == '1')
+							sprite.getValue()[i][j] = true;
+						else
+							sprite.getValue()[i][j] = false;
+					}
+				logger.fine("Sprite " + sprite.getKey() + " loaded.");
+			}
+			if (inputStream != null)
+				inputStream.close();
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+	}
+
+	public void loadSprite_Temp(final Map<SpriteType, boolean[][]> spriteMap)
+			throws IOException {
+		InputStream inputStream = null;
+		PermanentState permanentState = PermanentState.getInstance();
+		shipShape = permanentState.getShipShape();
+
+		try {
+			String graphicsName;
+			if(shipShape == 0){
+				graphicsName = "graphics";
+			}else if(shipShape == 1){
 				graphicsName = "graphics_1";
 			}else
 				graphicsName = "graphics_2";
@@ -99,7 +143,7 @@ public final class FileManager {
 
 	/**
 	 * Loads a font of a given size.
-	 * 
+	 *
 	 * @param size
 	 *            Point size of the font.
 	 * @return New font.
@@ -130,7 +174,7 @@ public final class FileManager {
 	/**
 	 * Returns the application default scores if there is no user high scores
 	 * file.
-	 * 
+	 *
 	 * @return Default high scores.
 	 * @throws IOException
 	 *             In case of loading problems.
@@ -139,13 +183,16 @@ public final class FileManager {
 		List<Score> highScores = new ArrayList<Score>();
 		InputStream inputStream = null;
 		BufferedReader reader = null;
+
 		try {
 			inputStream = FileManager.class.getClassLoader()
 					.getResourceAsStream("scores");
 			reader = new BufferedReader(new InputStreamReader(inputStream));
+
 			Score highScore = null;
 			String name = reader.readLine();
 			String score = reader.readLine();
+
 			while ((name != null) && (score != null)) {
 				highScore = new Score(name, Integer.parseInt(score));
 				highScores.add(highScore);
@@ -163,7 +210,7 @@ public final class FileManager {
 	/**
 	 * Loads high scores from file, and returns a sorted list of pairs score -
 	 * value.
-	 * 
+	 *
 	 * @return Sorted list of scores - players.
 	 * @throws IOException
 	 *             In case of loading problems.
@@ -178,9 +225,11 @@ public final class FileManager {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
+
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
@@ -214,13 +263,13 @@ public final class FileManager {
 
 	/**
 	 * Saves user high scores to disk.
-	 * 
+	 *
 	 * @param highScores
 	 *            High scores to save.
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	public void saveHighScores(final List<Score> highScores) 
+	public void saveHighScores(final List<Score> highScores)
 			throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
@@ -229,6 +278,7 @@ public final class FileManager {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
 			scoresPath += "scores";
@@ -256,6 +306,88 @@ public final class FileManager {
 				savedCount++;
 			}
 
+		} finally {
+			if (bufferedWriter != null)
+				bufferedWriter.close();
+		}
+	}
+
+	private int loadDefaultCoins() throws IOException {
+		int savedCoins = 0;
+		InputStream inputStream = null;
+		BufferedReader reader = null;
+		try {
+			inputStream = FileManager.class.getClassLoader()
+					.getResourceAsStream("coins");
+			reader = new BufferedReader(new InputStreamReader(inputStream));
+
+			savedCoins = Integer.parseInt(reader.readLine());
+		} finally {
+			if (inputStream != null)
+				inputStream.close();
+		}
+
+		return savedCoins;
+	}
+
+	public int loadCoins() throws IOException {
+		int savedCoins = 0;
+		InputStream inputStream = null;
+		BufferedReader bufferedReader = null;
+
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
+			String coinsPath = new File(jarPath).getParent();
+			coinsPath += File.separator;
+			coinsPath += "coins";
+
+			File coinsFile = new File(coinsPath);
+			inputStream = new FileInputStream(coinsFile);
+			bufferedReader = new BufferedReader(new InputStreamReader(
+					inputStream, Charset.forName("UTF-8")));
+
+			logger.info("Loading user coins");
+
+			savedCoins = Integer.parseInt(bufferedReader.readLine());
+		} catch (FileNotFoundException e) {
+			logger.info("Loading default coins.");
+			savedCoins = loadDefaultCoins();
+		} finally {
+			if (bufferedReader != null)
+				bufferedReader.close();
+		}
+
+		return savedCoins;
+	}
+
+	public void saveCoins(final int coins) throws IOException {
+		OutputStream outputStream = null;
+		BufferedWriter bufferedWriter = null;
+
+		try	{
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+
+			String coinsPath = new File(jarPath).getParent();
+			coinsPath += File.separator;
+			coinsPath += "coins";
+
+			File coinsFile = new File(coinsPath);
+
+			if (!coinsFile.exists())
+				coinsFile.createNewFile();
+
+			outputStream = new FileOutputStream(coinsFile);
+			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+					outputStream, Charset.forName("UTF-8")));
+
+			logger.info("Saving coins");
+
+			bufferedWriter.write(String.valueOf(coins));
 		} finally {
 			if (bufferedWriter != null)
 				bufferedWriter.close();
@@ -313,7 +445,8 @@ public final class FileManager {
 		InputStream inputStream = null;
 		try {
 			inputStream = DrawManager.class.getClassLoader().getResourceAsStream("ship");
-			playerShipLevel = inputStream.read() - 48 - 1;
+			playerShipShape = inputStream.read() - 48 - 1;
+			playerShipColor = inputStream.read() - 48 - 1;
 			logger.fine("ship read.");
 			if (inputStream != null)
 				inputStream.close();
@@ -323,8 +456,45 @@ public final class FileManager {
 		}
 	}
 
-	public static int getPlayerShipLevel() {
-		return playerShipLevel;
+	public static int getPlayerShipShape() {
+		return playerShipShape;
+	}
+
+	public static void setPlayerShipShape() throws IOException {
+		FileReader fileReader = new FileReader("res/ship");
+		fileReader.read();
+		int colorNum = fileReader.read();
+		fileReader.close();
+		FileWriter fileWriter = new FileWriter("res/ship");
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+		printWriter.print(shipShape+1);
+		playerShipShape = shipShape;
+		printWriter.print(colorNum - 48);
+		fileWriter.close();
+	}
+
+	public static int getPlayerShipColor() {
+		return playerShipColor;
+	}
+	public static void setPlayerShipColor(int shipColor) {
+		try {
+			FileReader fileReader = new FileReader("res/ship");
+			int shapeNum = fileReader.read();
+			fileReader.close();
+			FileWriter fileWriter = new FileWriter("res/ship");
+			PrintWriter printWriter = new PrintWriter(fileWriter);
+			printWriter.print(shapeNum - 48);
+			printWriter.print(shipColor+1);
+			playerShipColor = shipColor;
+			fileWriter.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static Color ChangeIntToColor(){
+		if(playerShipColor == 1) return Color.blue;
+		else if(playerShipColor == 2) return Color.darkGray;
+		else return Color.GREEN;
 	}
 }
 

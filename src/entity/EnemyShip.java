@@ -1,5 +1,4 @@
 package entity;
-
 import java.awt.Color;
 import java.util.Set;
 
@@ -14,15 +13,12 @@ import engine.DrawManager.SpriteType;
  * 
  */
 public class EnemyShip extends Entity {
-
 	//추가
 	private Item.ItemType itemtype;
 
 	private static int hasItem ;
 	/** Point value of a type A enemy. */
-	//
-
-
+	//s
 
 
 	/** Point value of a type A enemy. */
@@ -33,7 +29,6 @@ public class EnemyShip extends Entity {
 	private static final int C_TYPE_POINTS = 30;
 	/** Point value of a bonus enemy. */
 	private static final int BONUS_TYPE_POINTS = 100;
-
 	/** Cooldown between sprite changes. */
 	private Cooldown animationCooldown;
 	/** Checks if the ship has been hit by a bullet. */
@@ -122,8 +117,15 @@ public class EnemyShip extends Entity {
 		this.spriteType = SpriteType.EnemyShipSpecial;
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
-	}
 
+	}
+	public EnemyShip (Color color) {
+		super(-32,60,16*2,7*2, color);
+
+		this.spriteType = SpriteType.EnemyShipSpecial;
+		this.isDestroyed = false;
+		this.pointValue = BONUS_TYPE_POINTS;
+	}
 	/**
 	 * Getter for the score bonus if this ship is destroyed.
 	 * 
@@ -198,4 +200,6 @@ public class EnemyShip extends Entity {
 	public final boolean isDestroyed() {
 		return this.isDestroyed;
 	}
+
 }
+

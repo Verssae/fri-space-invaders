@@ -12,10 +12,28 @@ import java.util.logging.Logger;
 public class SoundEffect {
     private static int volume = 70;
     private SourceDataLine line;
+
+    public File effectFileLoader;
     private AudioInputStream stream;
 
     protected Logger logger;
-    public SoundEffect(String filename){
+
+    public enum SoundType{
+        enemyKill,
+        hit
+    }
+
+    public  SoundEffect(SoundType type){
+        switch (type){
+            case enemyKill:
+                this.LoadEffect("EnemyKill_001.wav");
+                break;
+            case hit:
+                this.LoadEffect("Hit_001.wav");
+                break;
+        }
+    }
+    public void LoadEffect(String filename){
         this.logger = Core.getLogger();
 
         try{
@@ -27,17 +45,20 @@ public class SoundEffect {
             soundPath += File.separator;
             soundPath += "fri-space-invaders/" + filename;
 
-            stream = AudioSystem.getAudioInputStream(new File(soundPath));
-            AudioFormat format = stream.getFormat();
-            if (format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
-                format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, format.getSampleRate(),
-                        format.getSampleSizeInBits() * 2, format.getChannels(), format.getFrameSize() * 2,
-                        format.getFrameRate(), true); // big endian
-                stream = AudioSystem.getAudioInputStream(format, stream);
+
+            effectFileLoader = new File(soundPath);
+
+            stream = AudioSystem.getAudioInputStream(effectFileLoader);
+            AudioFormat effectFormat = stream.getFormat();
+            if (effectFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
+                effectFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, effectFormat.getSampleRate(),
+                        effectFormat.getSampleSizeInBits() * 2, effectFormat.getChannels(), effectFormat.getFrameSize() * 2,
+                        effectFormat.getFrameRate(), true); // big endian
+                stream = AudioSystem.getAudioInputStream(effectFormat, stream);
             }
 
             SourceDataLine.Info info = new DataLine.Info(SourceDataLine.class, stream.getFormat(),
-                    ((int) stream.getFrameLength() * format.getFrameSize()));
+                    ((int) stream.getFrameLength() * effectFormat.getFrameSize()));
             line = (SourceDataLine) AudioSystem.getLine(info);
 
             //set volume

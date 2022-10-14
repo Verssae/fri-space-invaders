@@ -20,8 +20,8 @@ public class SoundPlay{
         return instance;
     }
 
-    public void playEffect(String filename) throws IOException {
-        SoundEffect se = new SoundEffect(filename);
+    public void playEffect(SoundEffect.SoundType type) throws IOException {
+        SoundEffect se = new SoundEffect(type);
         se.play();
         se.stop();
     }

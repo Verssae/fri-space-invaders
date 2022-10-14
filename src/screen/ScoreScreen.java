@@ -73,7 +73,7 @@ public class ScoreScreen extends Screen {
 		this.nameCharSelected = 0;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
-		this.per = shipsDestroyed / bulletsShot;
+		this.per = (float)shipsDestroyed / bulletsShot;
 
 		try {
 			this.highScores = Core.getFileManager().loadHighScores();

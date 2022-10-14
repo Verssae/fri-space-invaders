@@ -253,8 +253,10 @@ public final class FileManager {
 				score = bufferedReader.readLine();
 				per = bufferedReader.readLine();
 			}
-
-
+		} catch (NumberFormatException e) {
+			// loads default if there's no latest scores file
+			logger.info("Loading default high scores");
+			highScores = loadDefaultHighScores();
 		} catch (FileNotFoundException e) {
 			// loads default if there's no user scores.
 			logger.info("Loading default high scores.");

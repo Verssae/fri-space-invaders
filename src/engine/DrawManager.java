@@ -635,8 +635,8 @@ public final class DrawManager {
 		
 		for (Score score : highScores) {
 
-			scoreString = String.format("%s        %04d        %.2f", score.getName(),
-					score.getScore(), score.getPer());
+			scoreString = String.format("%s        %04d        %.2f%%", score.getName(),
+					score.getScore(), score.getPer() * 100);
 			drawCenteredRegularString(screen, scoreString, screen.getHeight()
 					/ 4 + fontRegularMetrics.getHeight() * (i + 1) * 2);
 			i++;

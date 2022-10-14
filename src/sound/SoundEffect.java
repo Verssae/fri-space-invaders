@@ -10,6 +10,7 @@ import java.net.URLDecoder;
 import java.util.logging.Logger;
 
 public class SoundEffect {
+    private static int volume = 70;
     private SourceDataLine line;
     private AudioInputStream stream;
 
@@ -38,8 +39,15 @@ public class SoundEffect {
             SourceDataLine.Info info = new DataLine.Info(SourceDataLine.class, stream.getFormat(),
                     ((int) stream.getFrameLength() * format.getFrameSize()));
             line = (SourceDataLine) AudioSystem.getLine(info);
-            line.open(stream.getFormat());
 
+            //set volume
+            if (line.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                FloatControl volumeControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+                volumeControl.setValue(20.0f * (float) Math.log10(volume / 100.0));
+
+            }
+
+            line.open(stream.getFormat());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -61,4 +69,7 @@ public class SoundEffect {
         line.drain();
         line.stop();
     }
+
+    public void setVolume(int value){volume = value;}
+    public int getVolume(){return volume;}
 }

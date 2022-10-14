@@ -36,7 +36,7 @@ public class GameSettings {
 		this.formationWidth = formationWidth;
 		this.formationHeight = formationHeight;
 		this.baseSpeed = baseSpeed;
-		this.shootingFrecuency = shootingFrecuency;
+		this.shootingFrecuency = shootingFrecuency; //적군
 	}
 
 	public final int getLevel() { return level; }

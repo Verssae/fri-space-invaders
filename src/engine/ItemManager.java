@@ -56,24 +56,10 @@ public class ItemManager {
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
                     if (Math.random()*10 + 1 < 2.1) {
-                        random[i][j] = 1;
-                    } else random[i][j] = 0;
-                }
-            }
-
-            for (int i = 0; i < nShipsWide; i++) {
-                for (int j = 0; j < nShipsHigh; j++) {
-                    if (random[i][j] == 1) {
-                        // System.out.println("랜덤 1인 경우"); -> 디버그용
-                        enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(1);
                         this. assignItem(enemyshipformation, i , j);
                     }
-                    else enemyshipformation.getEnemyShip().get(i).get(j).setHasItem(0);
-                    //System.out.println(enemyshipformation.getEnemyShip().get(i).get(j).getHasItem()); -> 로그추가하기
                 }
-
             }
-
         }
 
 
@@ -112,11 +98,8 @@ public class ItemManager {
             /*
             아이템타입들이 셔플된 큐
              */
-            item_queue.add(this.item_list.get(0));
-            item_queue.add(this.item_list.get(1));
-            item_queue.add(this.item_list.get(2));
-            item_queue.add(this.item_list.get(3));
-            item_queue.add(this.item_list.get(4));
-            item_queue.add(this.item_list.get(5));
+            for(int i = 0; i < 6 ; i ++) {
+                item_queue.add(this.item_list.get(i));
+            }
         }
     }

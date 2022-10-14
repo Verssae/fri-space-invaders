@@ -15,22 +15,21 @@ public class ItemPool {
         this.item = item;
     }
 
+
     public Item getItem(){
         return item[0];
     }
+
 
     public void add(Item item){
         this.item[0] = item;
     }
 
-
-/*
-
-public ItemPool setNullItem(){
-    //return this.getInstance();
-    // 쿨타임 이후 아이템객체 초기화
-}
-
-*/
+    /*
+    public ItemPool setNullItem(){
+        return this.getInstance();
+        // 쿨타임 이후 아이템객체 초기화
+    }
+    */
 
 }

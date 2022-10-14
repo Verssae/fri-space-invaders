@@ -317,7 +317,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 						else if(inverse == 1) {
 							movementY = ((int) Math.random() * 3 + 1) * (-1);
 							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-
+						}
 
 					}
 					enemyShip.move(movementX, movementY);

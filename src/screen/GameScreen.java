@@ -202,7 +202,6 @@ public class GameScreen extends Screen {
 		super.update();
 
 		if (this.inputDelay.checkFinished() && !this.levelFinished) {
-
 			if (!this.ship.isDestroyed()) {
 				boolean moveRight = inputManager.isKeyDown(KeyEvent.VK_RIGHT)
 						|| inputManager.isKeyDown(KeyEvent.VK_D);
@@ -481,8 +480,8 @@ public class GameScreen extends Screen {
 				this.clearItem();//효과초기화
 				this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
 
-
-			} else if (item.getIsget() == false &&
+			}
+			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
 
 				LOGGER.info("Obtained PointUpItem");
@@ -490,6 +489,15 @@ public class GameScreen extends Screen {
 				this.clearItem();//효과 초기화
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					enemyShip.setPointValue(2 * enemyShip.getPointValue());
+			}
+			else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
+
+				LOGGER.info("Obtained MachineGun");
+
+				this.clearItem();//효과 초기화
+
+				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
 
 			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
@@ -507,15 +515,17 @@ public class GameScreen extends Screen {
 				this.clearItem();//효과 초기화
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 
-			} else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
-
-				LOGGER.info("Obtained EnemyShipSpeedItem");
-
-				this.clearItem();//효과 초기화
-				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
-
-			} else if (item.getIsget() == false &&
+			}
+//			else if (item.getIsget() == false &&
+//					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
+//
+//				LOGGER.info("Obtained EnemyShipSpeedItem");
+//
+//				this.clearItem();//효과 초기화
+//				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
+//
+//			}
+			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 
 				LOGGER.info("Obtained ExtraLifeItem");
@@ -530,6 +540,7 @@ public class GameScreen extends Screen {
 			item.isGet(true);
 		}
 	}
+
 	public void clearItem(){
 		ship.setInitState();
 		shield = null;

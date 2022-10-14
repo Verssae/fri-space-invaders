@@ -17,6 +17,7 @@ import engine.FileManager;
  */
 public class Ship extends Entity {
 
+	private static engine.Core Core;
 	/** Time between shots. */
 	private int SHOOTING_INTERVAL, INIT_SHOOTING_INTERVAL;
 	/** Speed of the bullets shot by the ship. */
@@ -147,7 +148,10 @@ public class Ship extends Entity {
 	}
 	public final int getShootingInterval() {return SHOOTING_INTERVAL;}
 	public final int getBulletSpeed() {return BULLET_SPEED;}
-	public void setShootingInterval(int setshootinterval){SHOOTING_INTERVAL = setshootinterval;}
+	public void setShootingInterval(double setshootinterval){
+		SHOOTING_INTERVAL = (int)setshootinterval;
+		this.shootingCooldown = Core.getCooldown((int)setshootinterval);
+	}
 	public void setBulletSpeed(int setbulletspeed){BULLET_SPEED = setbulletspeed;}
 	public void setShipSpeed(double setshipspeed) {SPEED = setshipspeed;}
 

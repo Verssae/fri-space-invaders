@@ -18,22 +18,7 @@ public class SoundEffect {
 
     protected Logger logger;
 
-    public enum SoundType{
-        enemyKill,
-        hit
-    }
-
-    public  SoundEffect(SoundType type){
-        switch (type){
-            case enemyKill:
-                this.LoadEffect("EnemyKill_001.wav");
-                break;
-            case hit:
-                this.LoadEffect("Hit_001.wav");
-                break;
-        }
-    }
-    public void LoadEffect(String filename){
+    public SoundEffect(String filename){
         this.logger = Core.getLogger();
 
         try{

@@ -56,7 +56,7 @@ public class ItemManager {
 
             for (int i = 0; i < nShipsWide; i++) {
                 for (int j = 0; j < nShipsHigh; j++) {
-                    if (true) {
+                    if (Math.random()*10 + 1 < 2.1) {
                         this. assignItem(enemyshipformation, i , j);
                     }
                 }

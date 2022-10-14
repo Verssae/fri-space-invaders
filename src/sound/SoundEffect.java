@@ -70,6 +70,15 @@ public class SoundEffect {
         line.stop();
     }
 
+    /**
+     * Setting volume
+     * @param value
+     */
     public void setVolume(int value){volume = value;}
+
+    /**
+     * getting volume
+     * @return volume
+     */
     public int getVolume(){return volume;}
 }

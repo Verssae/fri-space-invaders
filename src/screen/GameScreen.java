@@ -383,6 +383,7 @@ public class GameScreen extends Screen {
 							this.lives--;
 							this.logger.info("Hit on player ship, " + this.lives
 									+ " lives remaining.");
+							this.clearItem();
 
 							}
 							else if(!this.ship.isDestroyed()){

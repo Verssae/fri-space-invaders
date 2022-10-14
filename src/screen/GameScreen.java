@@ -202,6 +202,7 @@ public class GameScreen extends Screen {
 		super.update();
 
 		if (this.inputDelay.checkFinished() && !this.levelFinished) {
+
 			if (!this.ship.isDestroyed()) {
 				boolean moveRight = inputManager.isKeyDown(KeyEvent.VK_RIGHT)
 						|| inputManager.isKeyDown(KeyEvent.VK_D);
@@ -479,6 +480,7 @@ public class GameScreen extends Screen {
 				LOGGER.info("Obtained BulletSpeedItem");
 
 				this.clearItem();//효과초기화
+				this.clearPointUp();
 				this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
 
 			}
@@ -500,20 +502,24 @@ public class GameScreen extends Screen {
 
 				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
 
-			} else if (item.getIsget() == false &&
+			}
+			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
 				LOGGER.info("Obtained ShieldItem");
 
 				this.clearItem();
+				this.clearPointUp();
 				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
 
-			} else if (item.getIsget() == false &&
+			}
+			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
 				LOGGER.info("Obtained SpeedUpItem");
 
 				this.clearItem();//효과 초기화
+				this.clearPointUp();
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 
 			}
@@ -523,6 +529,7 @@ public class GameScreen extends Screen {
 //				LOGGER.info("Obtained EnemyShipSpeedItem");
 //
 //				this.clearItem();//효과 초기화
+//				this.clearPointUp();
 //				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 //
 //			}
@@ -532,6 +539,7 @@ public class GameScreen extends Screen {
 				LOGGER.info("Obtained ExtraLifeItem");
 
 				this.clearItem();
+				this.clearPointUp();
 				if (this.lives < 4)
 					this.lives++;
 				else
@@ -556,5 +564,10 @@ public class GameScreen extends Screen {
 				recyclable.add(item);
 		}
 		this.itemiterator.removeAll(recyclable);
+	}
+
+	public void clearPointUp(){
+		for (EnemyShip enemyShip : this.enemyShipFormation)
+			enemyShip.setInitPointValue();
 	}
 }

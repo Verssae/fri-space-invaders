@@ -16,14 +16,6 @@ public class SoundBgm {
     public File bgmFileLoader;
     protected Logger logger;
 
-    public static enum SoundType{
-        mainGameBgm,
-        enemyKill,
-        hit,
-        menuClick,
-        shoot
-    }
-
     public SoundBgm(SoundType type){
         switch (type){
             case mainGameBgm:

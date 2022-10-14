@@ -2,7 +2,6 @@ package sound;
 
 import java.io.IOException;
 
-import sound.SoundBgm.SoundType;
 
 public class SoundPlay{
     private static SoundPlay instance;

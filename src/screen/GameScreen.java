@@ -89,8 +89,6 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
-	private float per;
-
 	private ItemManager itemmanager;
 
 
@@ -134,8 +132,6 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
-
-		this.per = gameState.getPer();
 
 		this.itemmanager = new ItemManager();
 

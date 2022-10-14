@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class SoundPlay{
     private static SoundPlay instance;
-
+    private int effectVolume = 70;
     private SoundPlay(){}
     public static SoundPlay getInstance(){
         if(instance == null) instance = new SoundPlay();
@@ -38,6 +38,7 @@ public class SoundPlay{
 
     public void playEffect(String filename) throws IOException {
         SoundEffect se = new SoundEffect(filename);
+        se.setVolume(effectVolume);
         se.play();
         se.stop();
     }

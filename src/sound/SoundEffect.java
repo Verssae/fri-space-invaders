@@ -82,9 +82,4 @@ public class SoundEffect {
      */
     public void setVolume(int value){volume = value;}
 
-    /**
-     * getting volume
-     * @return volume
-     */
-    public int getVolume(){return volume;}
 }

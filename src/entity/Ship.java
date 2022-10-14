@@ -157,7 +157,7 @@ public class Ship extends Entity {
 
 	public void setInitState(){
 		SPEED = INIT_SPEED;
-		SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL;
+		this.shootingCooldown = engine.Core.getCooldown(INIT_SHOOTING_INTERVAL);
 		BULLET_SPEED = INIT_BULLET_SPEED;
 	}
 

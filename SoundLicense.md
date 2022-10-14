@@ -44,3 +44,13 @@ Sound License
    made by Blackie666   
    https://freesound.org/people/Blackie666/sounds/85282/   
    CC0 1.0   
+
+* ## Bonus_EnemyKill_001.wav
+   made by jeremysykes   
+   https://freesound.org/people/jeremysykes/sounds/341231/   
+   CC0 1.0 
+
+* ## GameOver_001.wav
+   made by Euphrosyyn   
+   https://freesound.org/people/Euphrosyyn/sounds/442127/   
+   CC BY 4.0   

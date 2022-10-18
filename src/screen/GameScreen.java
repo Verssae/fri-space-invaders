@@ -101,6 +101,7 @@ public class GameScreen extends Screen {
 	private Shield shield;
 
 
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -131,11 +132,13 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
+
 		this.itemmanager = new ItemManager();
 
 		if(this.itempool == null){
 			this.itempool = new ItemPool();
 		}
+
 	}
 
 	/**
@@ -190,8 +193,7 @@ public class GameScreen extends Screen {
 		super.run();
 
 		this.score += LIFE_SCORE * (this.lives - 1);
-		this.logger.info("Screen cleared with a score of " + this.score);
-
+		this.logger.info("Screen cleared with a score of " + this.score); // 정상 출력
 		return this.returnCode;
 	}
 
@@ -413,6 +415,7 @@ public class GameScreen extends Screen {
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
+
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();

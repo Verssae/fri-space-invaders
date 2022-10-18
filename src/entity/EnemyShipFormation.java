@@ -1,5 +1,6 @@
 package entity;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,9 +23,10 @@ import engine.GameSettings;
  */
 public class EnemyShipFormation implements Iterable<EnemyShip> {
 
-	/**
-	 * Initial position in the x-axis.
-	 */
+
+	private static int Current_Level = 0;
+	/** Initial position in the x-axis. */
+
 	private static final int INIT_POS_X = 20;
 	/**
 	 * Initial position in the y-axis.
@@ -177,13 +179,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		 * Movement to the left side of the screen.
 		 */
 		LEFT,
-		/**
-		 * Movement to the bottom of the screen.
-		 */
-		DOWN
-	}
+		/** Movement to the bottom of the screen. */
+		DOWN,
 
-	;
+		UP
+	};
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -216,8 +216,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			this.enemyShips.add(new ArrayList<EnemyShip>());
 
 		for (List<EnemyShip> column : this.enemyShips) {
+			Current_Level = gameSettings.getLevel();
 			for (int i = 0; i < this.nShipsHigh; i++) {
-				if (i / (float) this.nShipsHigh < PROPORTION_C)
+				if (gameSettings.getLevel() == 8)
+					spriteType = SpriteType.EnemyShipSpecial;
+				else if (i / (float) this.nShipsHigh < PROPORTION_C)
 					spriteType = SpriteType.EnemyShipC1;
 				else if (i / (float) this.nShipsHigh < PROPORTION_B
 						+ PROPORTION_C)
@@ -288,7 +291,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		cleanUp();
-
+		int inverse = 0;
 		int movementX = 0;
 		int movementY = 0;
 		double remainingProportion = (double) this.shipCount
@@ -301,6 +304,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		if (movementInterval >= this.movementSpeed) {
 			movementInterval = 0;
 
+			boolean isAtTop = positionY + this.height <= BOTTOM_MARGIN;
 			boolean isAtBottom = positionY
 					+ this.height > screen.getHeight() - BOTTOM_MARGIN;
 			boolean isAtRightSide = positionX
@@ -319,17 +323,18 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					}
 			} else if (currentDirection == Direction.LEFT) {
 				if (isAtLeftSide)
-					if (!isAtBottom) {
+					if (!isAtBottom && Current_Level != 8) {
 						previousDirection = currentDirection;
 						currentDirection = Direction.DOWN;
 						this.logger.info("Formation now moving down 3");
 					} else {
+
 						currentDirection = Direction.RIGHT;
 						this.logger.info("Formation now moving right 4");
 					}
 			} else {
 				if (isAtRightSide)
-					if (!isAtBottom) {
+					if (!isAtBottom && Current_Level != 8) {
 						previousDirection = currentDirection;
 						currentDirection = Direction.DOWN;
 						this.logger.info("Formation now moving down 5");
@@ -343,6 +348,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				movementX = X_SPEED;
 			else if (currentDirection == Direction.LEFT)
 				movementX = -X_SPEED;
+			else if (currentDirection == Direction.UP)
+				movementY =-Y_SPEED;
 			else
 				movementY = Y_SPEED;
 
@@ -366,6 +373,26 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			for (List<EnemyShip> column : this.enemyShips)
 				for (EnemyShip enemyShip : column) {
+					if(Current_Level == 8) {
+
+						if(isAtBottom) {
+							inverse = 1;
+							this.logger.info("Inverse:" + inverse);
+						}
+						else if (isAtTop) {
+							inverse = 0;
+							this.logger.info("Inverse:" + inverse);
+						}
+						if(inverse == 0) {
+							movementY = (int) Math.random() * 3 + 1;
+							this.logger.info("moveY:" + movementY + " > current:" + positionY);
+						}
+						else if(inverse == 1) {
+							movementY = ((int) Math.random() * 3 + 1) * (-1);
+							this.logger.info("moveY:" + movementY + " > current:" + positionY);
+						}
+
+					}
 					enemyShip.move(movementX, movementY);
 					enemyShip.update();
 				}

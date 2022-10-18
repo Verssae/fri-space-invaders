@@ -192,12 +192,15 @@ public final class FileManager {
 			Score highScore = null;
 			String name = reader.readLine();
 			String score = reader.readLine();
+			String per = reader.readLine();
 
-			while ((name != null) && (score != null)) {
-				highScore = new Score(name, Integer.parseInt(score));
+			while ((name != null) && (score != null) && (per != null)) {
+
+				highScore = new Score(name, Integer.parseInt(score), Float.parseFloat(per));
 				highScores.add(highScore);
 				name = reader.readLine();
 				score = reader.readLine();
+				per = reader.readLine();
 			}
 		} finally {
 			if (inputStream != null)
@@ -240,14 +243,20 @@ public final class FileManager {
 			Score highScore = null;
 			String name = bufferedReader.readLine();
 			String score = bufferedReader.readLine();
+			String per = bufferedReader.readLine();
 
-			while ((name != null) && (score != null)) {
-				highScore = new Score(name, Integer.parseInt(score));
+			while ((name != null) && (score != null) && (per != null)) {
+
+				highScore = new Score(name, Integer.parseInt(score), Float.parseFloat(per));
 				highScores.add(highScore);
 				name = bufferedReader.readLine();
 				score = bufferedReader.readLine();
+				per = bufferedReader.readLine();
 			}
-
+		} catch (NumberFormatException e) {
+			// loads default if there's no latest scores file
+			logger.info("Loading default high scores");
+			highScores = loadDefaultHighScores();
 		} catch (FileNotFoundException e) {
 			// loads default if there's no user scores.
 			logger.info("Loading default high scores.");
@@ -299,9 +308,13 @@ public final class FileManager {
 			for (Score score : highScores) {
 				if (savedCount >= MAX_SCORES)
 					break;
+				if(score.getScore() < 0 ){continue;}
+
 				bufferedWriter.write(score.getName());
 				bufferedWriter.newLine();
 				bufferedWriter.write(Integer.toString(score.getScore()));
+				bufferedWriter.newLine();
+				bufferedWriter.write(Float.toString(score.getPer()));
 				bufferedWriter.newLine();
 				savedCount++;
 			}
@@ -401,12 +414,15 @@ public final class FileManager {
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			File file = new File(jarPath + "../save");
 			BufferedWriter save = new BufferedWriter(new FileWriter(file));
-			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+
+					String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
 					Integer.toString(gamestate.getScore()) + ' ' +
 					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
 					Integer.toString(gamestate.getBulletsShot()) + ' ' +
 					Integer.toString(gamestate.getShipsDestroyed());
+
 			save.write(state);
+
 			save.close();
 		} catch (Exception e) {
 			e.printStackTrace();

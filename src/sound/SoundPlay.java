@@ -35,7 +35,11 @@ public class SoundPlay{
             case mainGameBgm:
                 playBgm("MainScreen_BGM_001.wav");
                 break;
+
+            case roundClear:
+                playEffect("sound/RoundClear_001.wav");
             case roundStart:
+
         }
     }
 

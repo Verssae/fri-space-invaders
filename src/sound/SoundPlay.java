@@ -31,9 +31,9 @@ public class SoundPlay{
 
             case mainGameBgm:
 
+            case roundClear:
+                playEffect("sound/RoundClear_001.wav");
             case roundStart:
-
-
 
         }
     }

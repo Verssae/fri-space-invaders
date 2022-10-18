@@ -73,7 +73,7 @@ public class SoundPlay{
 
     public void stopBgm(){
         if(sb.bgmClip.isActive()){
-            sb.stop();   
+            sb.stop();
         }
     }
 

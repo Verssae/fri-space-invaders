@@ -69,3 +69,8 @@ Sound License
   made by steel2008
   https://freesound.org/people/steel2008/sounds/231277/
   CC0 1.0
+
+* ## RoundClear_001.wav , RoundCounting_001.wav
+  made by HenryRichard
+  https://freesound.org/people/HenryRichard/sounds/448266/
+  CC0 1.0

@@ -40,19 +40,15 @@ public class SoundPlay{
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
                 break;
-            case gameOverBGM:
-                playBgmLoop("GameOver_001.wav", false);
-                break;
             case roundStart:
                 playEffect("sound/RoundStart_001.wav");
-                break;
-            case bonusEnemyKill:
-                playEffect("sound/bonusEnemyKill_001.wav");
                 break;
             case roundCounting:
                 playEffect("sound/RoundCounting_001.wav");
                 break;
-
+            case bonusEnemyKill:
+                playEffect("sound/bonusEnemyKill_001.wav");
+        }
     }
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생

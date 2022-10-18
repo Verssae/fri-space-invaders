@@ -16,19 +16,26 @@ public class SoundPlay{
     }
 
     public void play(SoundType type){
-        switch (type){
-            case hit:
-                
-            case shoot:
+        try{
+            switch (type){
+                case hit:
 
-            case enemyKill:
+                case shoot:
 
-            case menuClick:
+                case enemyKill:
 
-            case mainGameBgm:
+                case menuClick:
 
+                case mainGameBgm:
 
+                case roundClear:
+                    playEffect("sound/RoundClear_001.wav");
+            }
         }
+        catch (IOException e1){
+            return;
+        }
+
     }
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생

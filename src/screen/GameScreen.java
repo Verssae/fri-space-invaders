@@ -21,7 +21,7 @@ import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
 import entity.Shield;
-
+import sound.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -294,6 +294,10 @@ public class GameScreen extends Screen {
 		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
 			this.isRunning = false;
 
+		if(this.enemyShipFormation.isEmpty()){
+			sound.SoundPlay.getInstance().play(SoundType.roundClear);
+			this.isRunning = false;
+		}
 	}
 
 	/**

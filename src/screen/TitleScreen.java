@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import engine.Cooldown;
 import engine.Core;
 import engine.PermanentState;
-
+import sound.*;
 /**
  * Implements the title screen.
  * 
@@ -70,8 +70,12 @@ public class TitleScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
 				this.isRunning = false;
+				sound.SoundPlay.getInstance().play(SoundType.menuClick);
+			}
+
+
 		}
 	}
 

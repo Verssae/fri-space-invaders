@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,7 +52,6 @@ public class GameScreen extends Screen {
 
 	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
-
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -102,7 +103,7 @@ public class GameScreen extends Screen {
 
 	private Shield shield;
 
-
+	private int past_countdown=4;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -368,6 +369,15 @@ public class GameScreen extends Screen {
 					/ 12);
 			drawManager.drawHorizontalLine(this, this.height / 2 + this.height
 					/ 12);
+			if ((past_countdown > countdown)) {
+				ExecutorService executorService = Executors.newCachedThreadPool();
+				executorService.submit(() -> {
+					past_countdown = countdown;
+					if(countdown==0) sound.SoundPlay.getInstance().play(SoundType.roundStart);
+					if(countdown>0) sound.SoundPlay.getInstance().play(SoundType.roundCounting);
+				});
+				executorService.shutdown();
+			}
 		}
 
 		drawManager.completeDrawing(this);

@@ -9,7 +9,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import engine.*;
 import entity.*;
 import engine.Cooldown;
@@ -124,6 +123,7 @@ public class GameScreen extends Screen {
 			final GameSettings gameSettings, final boolean bonusLife,
 			final int width, final int height, final int fps) {
 		super(width, height, fps);
+
 		this.gameSettings = gameSettings;
 		this.bonusLife = bonusLife;
 		this.level = gameState.getLevel();
@@ -205,6 +205,7 @@ public class GameScreen extends Screen {
 	 */
 	public final int run() {
 		super.run();
+
 		SoundPlay.getInstance().stopBgm();
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score); // 정상 출력

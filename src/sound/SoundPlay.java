@@ -15,7 +15,7 @@ public class SoundPlay{
     }
 
     public void play(SoundType type){
-        switch (type){
+        switch (type) {
             case hit:
                 playEffect("sound/Hit_001.wav");
                 break;
@@ -48,6 +48,7 @@ public class SoundPlay{
                 break;
             case bonusEnemyKill:
                 playEffect("sound/bonusEnemyKill_001.wav");
+                break;
         }
     }
 

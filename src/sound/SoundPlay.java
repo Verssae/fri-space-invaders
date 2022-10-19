@@ -1,7 +1,6 @@
 package sound;
 
 import engine.PermanentState;
-
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -28,6 +27,9 @@ public class SoundPlay{
             case menuClick:
                 playEffect("sound/MenuClick_001.wav");
                 break;
+            case menuSelect:
+                playEffect("sound/MenuSelect_001.wav");
+                break;
             case mainGameBgm:
                 playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
                 break;
@@ -39,12 +41,6 @@ public class SoundPlay{
                 break;
             case roundStart:
                 playEffect("sound/RoundStart_001.wav");
-                break;
-            case menuSelect:
-                playEffect("sound/MenuSelect_001.wav");
-                break;
-            case roundCounting:
-                playEffect("sound/RoundCounting_001.wav");
                 break;
             case bonusEnemyKill:
                 playEffect("sound/bonusEnemyKill_001.wav");

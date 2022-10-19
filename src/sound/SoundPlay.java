@@ -2,7 +2,6 @@ package sound;
 
 import java.io.IOException;
 
-
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -30,6 +29,14 @@ public class SoundPlay{
 
                 case roundClear:
                     playEffect("sound/RoundClear_001.wav");
+                    break;
+                case roundStart:
+                    playEffect("sound/RoundStart_001.wav");
+                    break;
+
+                case roundCounting:
+                    playEffect("sound/RoundCounting_001.wav");
+                    break;
             }
         }
         catch (IOException e1){

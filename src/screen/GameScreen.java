@@ -125,6 +125,7 @@ public class GameScreen extends Screen {
 			final GameSettings gameSettings, final boolean bonusLife,
 			final int width, final int height, final int fps) {
 		super(width, height, fps);
+
 		this.gameSettings = gameSettings;
 		this.bonusLife = bonusLife;
 		this.level = gameState.getLevel();
@@ -132,9 +133,6 @@ public class GameScreen extends Screen {
 		this.lives = gameState.getLivesRemaining();
 		if (this.bonusLife)
 			this.lives++;
-		if(lives == 0){
-			SoundPlay.getInstance().stopBgm();
-		}
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 
@@ -151,16 +149,6 @@ public class GameScreen extends Screen {
 	 */
 	public final void initialize() {
 		super.initialize();
-
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				SoundPlay.getInstance().play(SoundType.mainGameBgm);
-			}
-		};
-		Timer timer = new Timer("Timer");
-		long delay = 5800L;
-		timer.schedule(task, delay);
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
@@ -206,7 +194,7 @@ public class GameScreen extends Screen {
 	 */
 	public final int run() {
 		super.run();
-		SoundPlay.getInstance().stopBgm();
+
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score); // 정상 출력
 		return this.returnCode;

@@ -35,6 +35,7 @@ public class TitleScreen extends Screen {
 		super(width, height, fps);
 
 		// Defaults to play.
+		SoundPlay.getInstance().play(SoundType.mainGameBgm);
 		this.returnCode = 2;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
@@ -72,6 +73,9 @@ public class TitleScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
 				this.isRunning = false;
+				if(this.returnCode == 2 || this.returnCode == 5){
+					SoundPlay.getInstance().stopBgm();
+				}
 				sound.SoundPlay.getInstance().play(SoundType.menuClick);
 			}
 

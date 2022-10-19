@@ -26,8 +26,10 @@ public class SoundPlay{
 
                 case menuClick:
                     playEffect("sound/MenuClick_001.wav");
-
+                    break;
                 case mainGameBgm:
+                    playBgm("MainScreen_BGM_001.wav");
+                    break;
             }
         }
         catch (IOException e1){
@@ -39,7 +41,7 @@ public class SoundPlay{
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
     public void playBgm(String filename){
-        if(sb == null){
+        if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
             sb.play();
         }

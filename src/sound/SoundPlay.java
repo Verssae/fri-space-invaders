@@ -4,7 +4,6 @@ import engine.PermanentState;
 
 import java.io.IOException;
 
-
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -20,7 +19,7 @@ public class SoundPlay{
     public void play(SoundType type){
         switch (type){
             case hit:
-                
+
             case shoot:
                 playEffect("sound/Shoot_00"+ PermanentState.getInstance().getBulletSFX() +".wav");
             case enemyKill:
@@ -38,7 +37,14 @@ public class SoundPlay{
 
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
+                break;
             case roundStart:
+                playEffect("sound/RoundStart_001.wav");
+                break;
+
+            case roundCounting:
+                playEffect("sound/RoundCounting_001.wav");
+                break;
 
         }
     }

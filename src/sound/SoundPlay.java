@@ -53,7 +53,7 @@ public class SoundPlay{
     }
 
     public void stopBgm(){
-        sb.stop();   
+        sb.stop();
     }
 
 

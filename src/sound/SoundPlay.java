@@ -48,7 +48,7 @@ public class SoundPlay{
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
     public void playBgm(String filename){
-        if(sb == null){
+        if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
             sb.bgmVolume(bgmVolume);
             sb.play();
@@ -56,7 +56,7 @@ public class SoundPlay{
     }
 
     public void stopBgm(){
-        sb.stop();   
+        sb.stop();
     }
 
 

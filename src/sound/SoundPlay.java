@@ -1,6 +1,6 @@
 package sound;
 
-import engine.PermanentState;
+import java.io.IOException;
 
 public class SoundPlay{
     private static SoundPlay instance;
@@ -15,43 +15,39 @@ public class SoundPlay{
     }
 
     public void play(SoundType type){
-        switch (type){
-            case hit:
-                playEffect("sound/Hit_001.wav");
-            case shoot:
-                playEffect("sound/Shoot_00"+ PermanentState.getInstance().getBulletSFX() +".wav");
-            case enemyKill:
-                playEffect("sound/EnemyKill_001.wav");
-                break;
-            case menuClick:
-                playEffect("sound/MenuClick_001.wav");
-                break;
+        try{
+            switch (type){
+                case hit:
 
-            case menuSelect:
-                playEffect("sound/MenuSelect_001.wav");
-                break;
-            case mainGameBgm:
-                playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
-                break;
-            case roundClear:
-                playEffect("sound/RoundClear_001.wav");
-                break;
-            case roundStart:
-                playEffect("sound/RoundStart_001.wav");
-                break;
+                case shoot:
 
-            case roundCounting:
-                playEffect("sound/RoundCounting_001.wav");
-                break;
-            case bonusEnemyKill:
-                playEffect("sound/bonusEnemyKill_001.wav");
+                case enemyKill:
 
+                case menuClick:
+
+                case mainGameBgm:
+
+                case roundClear:
+                    playEffect("sound/RoundClear_001.wav");
+                    break;
+                case roundStart:
+                    playEffect("sound/RoundStart_001.wav");
+                    break;
+
+                case roundCounting:
+                    playEffect("sound/RoundCounting_001.wav");
+                    break;
+            }
         }
+        catch (IOException e1){
+            return;
+        }
+
     }
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
-    private void playBgm(String filename){
+    public void playBgm(String filename){
         if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
             sb.bgmVolume(bgmVolume);

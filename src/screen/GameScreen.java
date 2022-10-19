@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.Timer;
@@ -137,6 +139,9 @@ public class GameScreen extends Screen {
 		this.lives = gameState.getLivesRemaining();
 		if (this.bonusLife)
 			this.lives++;
+		if(lives == 0){
+			SoundPlay.getInstance().stopBgm();
+		}
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 
@@ -153,6 +158,16 @@ public class GameScreen extends Screen {
 	 */
 	public final void initialize() {
 		super.initialize();
+
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				SoundPlay.getInstance().play(SoundType.mainGameBgm);
+			}
+		};
+		Timer timer = new Timer("Timer");
+		long delay = 5800L;
+		timer.schedule(task, delay);
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
@@ -199,6 +214,7 @@ public class GameScreen extends Screen {
 	public final int run() {
 		super.run();
 
+		SoundPlay.getInstance().stopBgm();
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score); // 정상 출력
 		return this.returnCode;

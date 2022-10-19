@@ -64,6 +64,7 @@ public class SoundPlay{
     public void playBgmLoop(String filename, boolean isLoop){
         if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
+            sb.bgmVolume(bgmVolume);
             sb.setLoop(isLoop);
             sb.play();
         }

@@ -1,5 +1,6 @@
 package entity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -369,6 +370,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					column.get(i).destroy();
 					this.logger.info("Destroyed ship in ("
 							+ this.enemyShips.indexOf(column) + "," + i + ")");
+					moving();
 				}
 
 		// Updates the list of ships that can shoot the player.
@@ -395,8 +397,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		this.shipCount--;
-
-		movementInFormation();
 	}
 
 	/**
@@ -446,23 +446,52 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 *  Ship moves additionally within formation.
 	 */
-	public void movementInFormation() {
+	private void moving() {
+		int rand;
+		int[] movableColumn = new int[this.nShipsWide];
+		int cnt;
+
 		if (this.shooters.size() < this.nShipsWide) {
+			for (int j = 0; j < this.nShipsWide; j++) {
+				movableColumn[j] = 0;
+			}
 			this.logger.info(this.shooters.size() + "<" + this.getnshipsWide());
 			for (int i = 0; i < this.shooters.size() - 1; i++) {
-				EnemyShip ship1 = this.shooters.get(i);
-				EnemyShip ship2 = this.shooters.get(i + 1);
-				if (ship1.getPositionX() + SEPARATION_DISTANCE  < ship2.getPositionX()) {
-					// this.logger.info("Distance of " + i +"th ship and " + (i + 1) + "th ship is over 40.");
-					if (i == 0) {
-						ship1.move(40, 0);
-						this.logger.info("(" + i + ", " + this.enemyShips.indexOf(shooters) + ")");
-					} else {
-						ship2.move(-40, 0);
-					}
+				if (this.enemyShips.get(i).get(0).getPositionX() + 40
+						!= this.enemyShips.get(i + 1).get(0).getPositionX()) {
+					// i열은 오른쪽으로, i + 1열은 왼쪽으로 이동 가능
+					movableColumn[i] += 1;
+					movableColumn[i + 1] += 2;
 				}
 			}
+
+			// 랜덤 선택
+			cnt = 0;
+			while (true) {
+				rand = (int) (Math.random() * this.shooters.size());
+				cnt++;
+				this.logger.info("rand is " + rand + ", and mC[r] is " + movableColumn[rand]);
+				if (movableColumn[rand] != 0 || cnt > 10)
+					break;
+			}
+
+			// 이동
+			if (movableColumn[rand] == 1) {
+				this.enemyShips.get(rand).get(0).move(40, 0);
+			} else if (movableColumn[rand] == 2) {
+				this.enemyShips.get(rand).get(0).move(-40, 0);
+			} else if (movableColumn[rand] == 3) {
+				if (Math.random() >= 0.5) {
+					this.enemyShips.get(rand).get(0).move(40, 0);
+				} else {
+					this.enemyShips.get(rand).get(0).move(-40, 0);
+				}
+			}
+
+			// 재 넘버링
+
 		}
+
 	}
 
 }

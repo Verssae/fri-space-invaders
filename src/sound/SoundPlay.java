@@ -31,8 +31,11 @@ public class SoundPlay{
             case menuSelect:
                 playEffect("sound/MenuSelect_001.wav");
                 break;
-            case mainGameBgm:
+            case inGameBGM:
                 playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
+                break;
+            case mainGameBgm:
+                playBgm("MainScreen_BGM_001.wav");
                 break;
             case gameOverBGM:
                 playBgmLoop("GameOver_001.wav", false);

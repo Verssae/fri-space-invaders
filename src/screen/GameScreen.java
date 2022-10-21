@@ -156,7 +156,7 @@ public class GameScreen extends Screen {
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				SoundPlay.getInstance().play(SoundType.mainGameBgm);
+				SoundPlay.getInstance().play(SoundType.inGameBGM);
 			}
 		};
 		Timer timer = new Timer("Timer");

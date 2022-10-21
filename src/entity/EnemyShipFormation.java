@@ -445,7 +445,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					this.logger.info("Destroyed ship in ("
 							+ this.enemyShips.indexOf(column) + "," + i + ")");
 				}
-
 		// Updates the list of ships that can shoot the player.
 		if (this.shooters.contains(destroyedShip)) {
 			int destroyedShipIndex = this.shooters.indexOf(destroyedShip);

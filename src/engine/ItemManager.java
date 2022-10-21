@@ -24,6 +24,7 @@ public class ItemManager {
     private Item.ItemType extralifeitem = Item.ItemType.ExtraLifeItem;
 
     private Item.ItemType bulletspeeditem = Item.ItemType.BulletSpeedItem;
+    private Item.ItemType machinegun = Item.ItemType.MachineGun;
 
     private Item.ItemType  enemyshipspeeditem = Item.ItemType.EnemyShipSpeedItem;
 
@@ -80,7 +81,6 @@ public class ItemManager {
 
 
         private void addlist () {
-            //박용수
             /*
             아이템타입의 리스트
              */
@@ -89,7 +89,7 @@ public class ItemManager {
             item_list.add(shielditem);
             item_list.add(extralifeitem);
             item_list.add(bulletspeeditem);
-            item_list.add(enemyshipspeeditem);
+            item_list.add(machinegun);
         }
 
 

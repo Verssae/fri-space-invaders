@@ -89,8 +89,6 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
-	private boolean isInitScreen;
-
 	private ItemManager itemmanager;
 
 
@@ -164,8 +162,6 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipShape), FileManager.ChangeIntToColor());
 				break;
 		}
-
-		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
@@ -475,7 +471,7 @@ public class GameScreen extends Screen {
 
 
 	private void manageGetItem(Item item) {
-		if (isInitScreen || checkCollision(item, this.ship) && !this.levelFinished) {
+		if (checkCollision(item, this.ship) && !this.levelFinished) {
 
 			itempool.add(item);
 			item.setSprite();
@@ -522,7 +518,7 @@ public class GameScreen extends Screen {
 				this.clearItem();//효과 초기화
 				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 
-			} else if (!isInitScreen && item.getIsget() == false &&
+			} else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 
 				LOGGER.info("Obtained ExtraLifeItem");

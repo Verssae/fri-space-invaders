@@ -63,7 +63,6 @@ public class SoundPlay{
         SoundEffect se = new SoundEffect(filename);
         se.setVolume(effectVolume);
         se.play();
-        se.stop();
     }
 
     public void setEffectVolume(int value){

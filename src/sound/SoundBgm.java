@@ -49,7 +49,7 @@ public class SoundBgm {
         if(isLoop){
             bgmClip.loop(-1);
         } else {
-            bgmClip.loop(1);
+            bgmClip.loop(0);
         }
     }
     public void stop(){ bgmClip.stop(); }

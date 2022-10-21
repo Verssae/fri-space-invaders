@@ -30,6 +30,9 @@ public class SoundPlay{
             case mainGameBgm:
                 playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
                 break;
+            case gameOverBGM:
+                playBgmLoop("GameOver_001.wav", false);
+                break;
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
                 break;
@@ -58,8 +61,18 @@ public class SoundPlay{
         }
     }
 
+    public void playBgmLoop(String filename, boolean isLoop){
+        if(sb == null || !sb.bgmClip.isActive()){
+            sb = new SoundBgm(filename);
+            sb.setLoop(isLoop);
+            sb.play();
+        }
+    }
+
     public void stopBgm(){
-        sb.stop();
+        if(sb.bgmClip.isActive()){
+            sb.stop();   
+        }
     }
 
 

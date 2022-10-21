@@ -1,7 +1,5 @@
 package sound;
 
-import java.io.IOException;
-
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -15,35 +13,29 @@ public class SoundPlay{
     }
 
     public void play(SoundType type){
-        try{
-            switch (type){
-                case hit:
+        switch (type){
+            case hit:
 
-                case shoot:
+            case shoot:
 
-                case enemyKill:
+            case enemyKill:
 
-                case menuClick:
+            case menuClick:
 
-                case mainGameBgm:
-                    playBgm("BGM_MainGame_001.wav");
-                    break;
-                case roundClear:
-                    playEffect("sound/RoundClear_001.wav");
-                    break;
-                case roundStart:
-                    playEffect("sound/RoundStart_001.wav");
-                    break;
+            case mainGameBgm:
+                playBgm("BGM_MainGame_001.wav");
+                break;
+            case roundClear:
+                playEffect("sound/RoundClear_001.wav");
+                break;
+            case roundStart:
+                playEffect("sound/RoundStart_001.wav");
+                break;
 
-                case roundCounting:
-                    playEffect("sound/RoundCounting_001.wav");
-                    break;
-            }
+            case roundCounting:
+                playEffect("sound/RoundCounting_001.wav");
+                break;
         }
-        catch (IOException e1){
-            return;
-        }
-
     }
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생

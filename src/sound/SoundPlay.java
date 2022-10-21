@@ -18,8 +18,10 @@ public class SoundPlay{
         switch (type){
             case hit:
                 playEffect("sound/Hit_001.wav");
+                break;
             case shoot:
-                playEffect("sound/Shoot_00"+ PermanentState.getInstance().getBulletSFX() +".wav");
+                playEffect("sound/Shoot_00" + PermanentState.getInstance().getBulletSFX() + ".wav");
+                break;
             case enemyKill:
                 playEffect("sound/EnemyKill_001.wav");
                 break;
@@ -41,6 +43,7 @@ public class SoundPlay{
                 break;
             case bonusEnemyKill:
                 playEffect("sound/bonusEnemyKill_001.wav");
+                break;
 
         }
     }

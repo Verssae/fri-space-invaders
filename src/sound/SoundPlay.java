@@ -48,7 +48,6 @@ public class SoundPlay{
                 break;
             case bonusEnemyKill:
                 playEffect("sound/bonusEnemyKill_001.wav");
-                break;
         }
     }
 

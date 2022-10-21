@@ -27,6 +27,9 @@ public class SoundPlay{
 
             case mainGameBgm:
 
+            case gameOverBGM:
+                playBgmLoop("GameOver_001.wav", false);
+                break;
 
         }
     }
@@ -36,6 +39,14 @@ public class SoundPlay{
     public void playBgm(String filename){
         if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
+            sb.play();
+        }
+    }
+
+    public void playBgmLoop(String filename, boolean isLoop){
+        if(sb == null || !sb.bgmClip.isActive()){
+            sb = new SoundBgm(filename);
+            sb.setLoop(isLoop);
             sb.play();
         }
     }

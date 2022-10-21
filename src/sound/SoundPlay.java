@@ -27,6 +27,10 @@ public class SoundPlay{
                 case menuClick:
                     playEffect("sound/MenuClick_001.wav");
                     break;
+
+                case menuSelect:
+                    playEffect("sound/MenuSelect_001.wav");
+                    break;
                 case mainGameBgm:
                     playBgm("MainScreen_BGM_001.wav");
                     break;

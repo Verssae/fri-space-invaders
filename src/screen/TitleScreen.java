@@ -93,6 +93,7 @@ public class TitleScreen extends Screen {
 			this.returnCode = 2;
 		else
 			this.returnCode++;
+		SoundPlay.getInstance().play(SoundType.menuSelect);
 	}
 
 	/**
@@ -105,6 +106,7 @@ public class TitleScreen extends Screen {
 			this.returnCode = 0;
 		else
 			this.returnCode--;
+		SoundPlay.getInstance().play(SoundType.menuSelect);
 	}
 
 	/**

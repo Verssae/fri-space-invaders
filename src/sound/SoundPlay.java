@@ -1,5 +1,7 @@
 package sound;
 
+import engine.PermanentState;
+
 import java.io.IOException;
 
 
@@ -20,7 +22,7 @@ public class SoundPlay{
             case hit:
                 
             case shoot:
-                playEffect("sound/Shoot_001.wav");
+                playEffect("sound/Shoot_00"+ PermanentState.getInstance().getBulletSFX() +".wav");
             case enemyKill:
 
             case menuClick:

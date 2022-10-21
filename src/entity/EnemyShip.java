@@ -197,9 +197,6 @@ public class EnemyShip extends Entity {
 		this.spriteType = SpriteType.Explosion;*/
 		this.isDestroyed = true;
 		this.spriteType = spriteType.Explosion;
-		/*this.spriteType = spriteType.EnemyShipA1;
-		this.spriteType = spriteType.EnemyShipB1;
-		this.spriteType = spriteType.EnemyShipA2;*/
 		this.animationCooldown = Core.getCooldown(1000);
 		this.setColor(color_dead);
 	}

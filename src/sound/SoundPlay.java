@@ -1,7 +1,6 @@
 package sound;
 
-import java.io.IOException;
-
+import engine.PermanentState;
 
 public class SoundPlay{
     private static SoundPlay instance;
@@ -18,17 +17,35 @@ public class SoundPlay{
     public void play(SoundType type){
         switch (type){
             case hit:
-                
+                playEffect("sound/Hit_001.wav");
+                break;
             case shoot:
-
+                playEffect("sound/Shoot_00" + PermanentState.getInstance().getBulletSFX() + ".wav");
+                break;
             case enemyKill:
-
+                playEffect("sound/EnemyKill_001.wav");
+                break;
             case menuClick:
 
             case mainGameBgm:
-
+                playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
+                break;
             case gameOverBGM:
                 playBgmLoop("GameOver_001.wav", false);
+                break;
+            case roundClear:
+                playEffect("sound/RoundClear_001.wav");
+                break;
+            case roundStart:
+                playEffect("sound/RoundStart_001.wav");
+                break;
+            case menuSelect:
+
+            case roundCounting:
+                playEffect("sound/RoundCounting_001.wav");
+                break;
+            case bonusEnemyKill:
+                playEffect("sound/bonusEnemyKill_001.wav");
                 break;
 
         }
@@ -36,9 +53,10 @@ public class SoundPlay{
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생
     //음악은 res폴더안에
-    public void playBgm(String filename){
+    private void playBgm(String filename){
         if(sb == null || !sb.bgmClip.isActive()){
             sb = new SoundBgm(filename);
+            sb.bgmVolume(bgmVolume);
             sb.play();
         }
     }
@@ -58,11 +76,10 @@ public class SoundPlay{
     }
 
 
-    public void playEffect(String filename) throws IOException {
+    private void playEffect(String filename) {
         SoundEffect se = new SoundEffect(filename);
         se.setVolume(effectVolume);
         se.play();
-        se.stop();
     }
 
     public void setEffectVolume(int value){

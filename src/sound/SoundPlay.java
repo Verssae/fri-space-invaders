@@ -26,16 +26,16 @@ public class SoundPlay{
 
             case menuClick:
 
-            case menuSelect:
-
             case mainGameBgm:
-
+                playBgm("BGM_MainGame_001.wav");
+                break;
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
                 break;
             case roundStart:
                 playEffect("sound/RoundStart_001.wav");
                 break;
+            case menuSelect:
 
             case roundCounting:
                 playEffect("sound/RoundCounting_001.wav");

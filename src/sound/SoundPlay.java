@@ -45,6 +45,9 @@ public class SoundPlay{
             case bonusEnemyKill:
                 playEffect("sound/bonusEnemyKill_001.wav");
                 break;
+            case roundCounting:
+                playEffect("sound/RoundCounting_001.wav");
+                break;
 
         }
     }

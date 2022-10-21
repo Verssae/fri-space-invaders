@@ -32,9 +32,8 @@ public class SoundPlay{
                 playEffect("sound/MenuSelect_001.wav");
                 break;
             case mainGameBgm:
-                playBgm("MainScreen_BGM_001.wav");
+                playBgm("BGM_MainGame_001.wav");
                 break;
-
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
                 break;

@@ -7,6 +7,8 @@ import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
 import engine.FileManager;
+import sound.SoundPlay;
+import sound.SoundType;
 //import entity.Shield;
 
 /**
@@ -106,6 +108,7 @@ public class Ship extends Entity {
 			this.shootingCooldown.reset();
 			bullets.add(BulletPool.getBullet(positionX + this.width / 2,
 					positionY, BULLET_SPEED));
+			SoundPlay.getInstance().play(SoundType.shoot);
 			return true;
 		}
 		return false;

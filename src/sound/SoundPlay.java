@@ -16,30 +16,25 @@ public class SoundPlay{
     }
 
     public void play(SoundType type){
-        try{
-            switch (type){
-                case hit:
+        switch (type){
+            case hit:
+                
+            case shoot:
+                playEffect("sound/Shoot_001.wav");
+            case enemyKill:
 
-                case shoot:
+            case menuClick:
+                playEffect("sound/MenuClick_001.wav");
+                break;
 
-                case enemyKill:
-
-                case menuClick:
-                    playEffect("sound/MenuClick_001.wav");
-                    break;
-
-                case menuSelect:
-                    playEffect("sound/MenuSelect_001.wav");
-                    break;
-                case mainGameBgm:
-                    playBgm("MainScreen_BGM_001.wav");
-                    break;
-            }
+            case menuSelect:
+                playEffect("sound/MenuSelect_001.wav");
+                break;
+            case mainGameBgm:
+                playBgm("MainScreen_BGM_001.wav");
+                break;
+            case roundStart:
         }
-        catch (IOException e1){
-            return;
-        }
-
     }
 
     //SoundPlay.getInstance().Play("파일명.wav"); 로 음악 재생

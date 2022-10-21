@@ -6,7 +6,7 @@ public enum SoundType{
     enemyKill,
     hit,
     gameOverBGM,
-    ingameBGM,
+    inGameBGM,
     roundStart,
     menuSelect,
     roundCounting,

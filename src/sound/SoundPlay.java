@@ -1,5 +1,7 @@
 package sound;
 
+import engine.PermanentState;
+
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -24,7 +26,7 @@ public class SoundPlay{
             case menuClick:
 
             case mainGameBgm:
-                playBgm("BGM_MainGame_001.wav");
+                playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
                 break;
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");

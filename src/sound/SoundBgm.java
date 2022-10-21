@@ -26,7 +26,7 @@ public class SoundBgm {
 
             String soundPath = new File(jarPath).getParent();
             soundPath += File.separator;
-            soundPath += "fri-space-invaders/" + filename;
+            soundPath += "fri-space-invaders/sound/" + filename;
 
             bgmFileLoader = new File(soundPath);
             AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);

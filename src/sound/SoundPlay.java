@@ -26,7 +26,8 @@ public class SoundPlay{
                 case menuClick:
 
                 case mainGameBgm:
-
+                    playBgm("BGM_MainGame_001.wav");
+                    break;
                 case roundClear:
                     playEffect("sound/RoundClear_001.wav");
                     break;

@@ -1,6 +1,7 @@
 package sound;
 
 import engine.PermanentState;
+
 public class SoundPlay{
     private static SoundPlay instance;
     private int effectVolume = 70;
@@ -38,6 +39,9 @@ public class SoundPlay{
                 break;
             case roundClear:
                 playEffect("sound/RoundClear_001.wav");
+                break;
+            case gameOverBGM:
+                playBgmLoop("GameOver_001.wav", false);
                 break;
             case roundStart:
                 playEffect("sound/RoundStart_001.wav");

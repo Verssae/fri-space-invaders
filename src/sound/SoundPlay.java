@@ -17,19 +17,19 @@ public class SoundPlay{
     public void play(SoundType type){
         switch (type) {
             case hit:
-                playEffect("sound/Hit_001.wav");
+                playEffect("Hit_001.wav");
                 break;
             case shoot:
-                playEffect("sound/Shoot_" + String.format("%03d",PermanentState.getInstance().getBulletSFX()) + ".wav");
+                playEffect("Shoot_" + String.format("%03d",PermanentState.getInstance().getBulletSFX()) + ".wav");
                 break;
             case enemyKill:
-                playEffect("sound/EnemyKill_001.wav");
+                playEffect("EnemyKill_001.wav");
                 break;
             case menuClick:
-                playEffect("sound/MenuClick_001.wav");
+                playEffect("MenuClick_001.wav");
                 break;
             case menuSelect:
-                playEffect("sound/MenuSelect_001.wav");
+                playEffect("MenuSelect_001.wav");
                 break;
             case inGameBGM:
                 playBgm("BGM_MainGame_" + String.format("%03d",PermanentState.getInstance().getBGM()) + ".wav");
@@ -41,16 +41,16 @@ public class SoundPlay{
                 playBgmLoop("GameOver_001.wav", false);
                 break;
             case roundClear:
-                playEffect("sound/RoundClear_001.wav");
+                playEffect("RoundClear_001.wav");
                 break;
             case roundStart:
-                playEffect("sound/RoundStart_001.wav");
+                playEffect("RoundStart_001.wav");
                 break;
             case roundCounting:
-                playEffect("sound/RoundCounting_001.wav");
+                playEffect("RoundCounting_001.wav");
                 break;
             case bonusEnemyKill:
-                playEffect("sound/bonusEnemyKill_001.wav");
+                playEffect("bonusEnemyKill_001.wav");
                 break;
         }
     }

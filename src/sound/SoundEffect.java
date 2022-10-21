@@ -26,7 +26,7 @@ public class SoundEffect {
 
             String soundPath = new File(jarPath).getParent();
             soundPath += File.separator;
-            soundPath += "fri-space-invaders/" + filename;
+            soundPath += "fri-space-invaders/sound/" + filename;
 
 
             effectFileLoader = new File(soundPath);

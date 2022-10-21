@@ -413,21 +413,22 @@ public class GameScreen extends Screen {
 					recyclable.add(bullet);
 
 
-						if(shield == null && !this.ship.isDestroyed()) {
-							this.ship.destroy();
-							this.lives--;
-							this.logger.info("Hit on player ship, " + this.lives
-									+ " lives remaining.");
+					if (shield == null && !this.ship.isDestroyed()) {
+						SoundPlay.getInstance().play(SoundType.hit);
+						this.ship.destroy();
+						this.lives--;
+						this.logger.info("Hit on player ship, " + this.lives
+								+ " lives remaining.");
 
-							}
-							else if(!this.ship.isDestroyed()){
-								shield =null;
-							}
+					} else if (!this.ship.isDestroyed()) {
+						shield = null;
+					}
 				}
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
+						SoundPlay.getInstance().play(SoundType.enemyKill);
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
@@ -445,6 +446,7 @@ public class GameScreen extends Screen {
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
+					SoundPlay.getInstance().play(SoundType.bonusEnemyKill);
 					this.score += this.enemyShipSpecial.getPointValue();
 
 					this.shipsDestroyed++;

@@ -19,11 +19,12 @@ public class SoundPlay{
     public void play(SoundType type){
         switch (type){
             case hit:
-
+                playEffect("sound/Hit_001.wav");
             case shoot:
                 playEffect("sound/Shoot_00"+ PermanentState.getInstance().getBulletSFX() +".wav");
             case enemyKill:
-
+                playEffect("sound/EnemyKill_001.wav");
+                break;
             case menuClick:
 
             case mainGameBgm:
@@ -40,6 +41,8 @@ public class SoundPlay{
             case roundCounting:
                 playEffect("sound/RoundCounting_001.wav");
                 break;
+            case bonusEnemyKill:
+                playEffect("sound/bonusEnemyKill_001.wav");
 
         }
     }

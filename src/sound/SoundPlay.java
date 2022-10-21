@@ -20,12 +20,17 @@ public class SoundPlay{
             case hit:
                 
             case shoot:
-
+                playEffect("sound/Shoot_001.wav");
             case enemyKill:
 
             case menuClick:
 
+            case menuSelect:
+
             case mainGameBgm:
+
+            case roundStart:
+
 
 
         }

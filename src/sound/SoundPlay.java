@@ -26,7 +26,8 @@ public class SoundPlay{
                 playEffect("sound/EnemyKill_001.wav");
                 break;
             case menuClick:
-
+                playEffect("sound/MenuClick_001.wav");
+                break;
             case mainGameBgm:
                 playBgm("BGM_MainGame_00" + PermanentState.getInstance().getBGM() + ".wav");
                 break;
@@ -40,7 +41,8 @@ public class SoundPlay{
                 playEffect("sound/RoundStart_001.wav");
                 break;
             case menuSelect:
-
+                playEffect("sound/MenuSelect_001.wav");
+                break;
             case roundCounting:
                 playEffect("sound/RoundCounting_001.wav");
                 break;

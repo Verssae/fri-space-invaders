@@ -744,11 +744,15 @@ public final class DrawManager {
 			if (permanentState.getShipColor() == 2)
 				drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 		}
-		else if(menu == 2){ // bullet efx
-
+		else if(menu == 2){ // bullet sfx
+			backBufferGraphics.setFont(fontBig);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getBulletSFX()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.setFont(fontRegular);
 		}
-		else{ // egm
-
+		else if(menu == 3){ // bgm
+			backBufferGraphics.setFont(fontBig);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getBGM()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.setFont(fontRegular);
 		}
 	}
 

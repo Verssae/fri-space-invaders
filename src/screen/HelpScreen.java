@@ -1,6 +1,7 @@
 package screen;
 
 import java.awt.event.KeyEvent;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import engine.Score;
 public class HelpScreen extends Screen {
 
 	/** List of past high scores. */
-	
+	static int page_num = 1;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -47,15 +48,23 @@ public class HelpScreen extends Screen {
 	}
 
 	/**
-	 * Updates the elements on screen and checks for events.
+	 * Updates the elements on screen and checks for events. 
 	 */
 	protected final void update() {
 		super.update();
-
 		draw();
 		if (inputManager.isKeyDown(KeyEvent.VK_SPACE)
 				&& this.inputDelay.checkFinished())
 			this.isRunning = false;
+		else if(inputManager.isKeyDown(KeyEvent.VK_1)&& this.inputDelay.checkFinished()) {
+			page_num = 1;
+			
+		}
+		else if(inputManager.isKeyDown(KeyEvent.VK_2)&& this.inputDelay.checkFinished()) {
+			page_num = 2;
+		}
+		
+				
 	}
 
 	/**
@@ -64,7 +73,7 @@ public class HelpScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		drawManager.drawHelpMenu(this);
+		drawManager.drawHelpMenu(this, page_num);
 
 		drawManager.completeDrawing(this);
 	}

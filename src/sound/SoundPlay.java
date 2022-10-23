@@ -50,7 +50,7 @@ public class SoundPlay{
                 playEffect("RoundCounting_001.wav");
                 break;
             case bonusEnemyKill:
-                playEffect("bonusEnemyKill_001.wav");
+                playEffect("Bonus_EnemyKill_001.wav");
                 break;
         }
     }

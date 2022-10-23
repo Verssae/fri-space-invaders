@@ -15,6 +15,7 @@ public class SoundBgm {
     public Clip bgmClip;
     public File bgmFileLoader;
     protected Logger logger;
+
     public SoundBgm(String filename){
         this.logger = Core.getLogger();
         try{
@@ -30,10 +31,10 @@ public class SoundBgm {
             AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);
             bgmClip = AudioSystem.getClip();
             bgmClip.open(bgmInputStream);
+            bgmClip.loop(-1);
             // 볼륨 설정용
 //            FloatControl volumeControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
 //            volumeControl.setValue(-10.0f);
-//            Thread.sleep(c.getMicrosecondLength()/1000);
         }
         catch(Exception e){
             e.printStackTrace();

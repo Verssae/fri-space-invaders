@@ -21,6 +21,8 @@ public class Item extends Entity {
 
         ExtraLifeItem,
 
+        MachineGun,
+
         EnemyShipSpeedItem
 
     };

@@ -88,11 +88,11 @@ public class SoundPlay{
     }
 
     public void setEffectVolume(int value){
-        this.effectVolume = value;
+        this.effectVolume += value;
     }
 
     public void setBgmVolume(int value){
-        this.bgmVolume = value;
+        this.bgmVolume += value;
     }
 
     public int getEffectVolume(){

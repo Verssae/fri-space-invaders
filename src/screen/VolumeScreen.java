@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+import sound.SoundPlay;
 
 /**
  * Implements the title screen.
@@ -68,7 +69,27 @@ public class VolumeScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+			if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
+					|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+				if(isBgm()){
+					bgmVolumeControl(1);
+				}
+				if(isEffect()){
+					effectVolumeControl(1);
+				}
+				this.selectionCooldown.reset();
+			}
+			if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
+					|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+				if(isBgm()){
+					bgmVolumeControl(-1);
+				}
+				if(isEffect()){
+					effectVolumeControl(-1);
+				}
+				this.selectionCooldown.reset();
+			}
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)&&this.returnCode==6)
 				this.isRunning = false;
 		}
 	}
@@ -95,6 +116,22 @@ public class VolumeScreen extends Screen {
 			this.returnCode = 6;
 		else
 			this.returnCode--;
+	}
+
+	private void bgmVolumeControl(int value){
+		SoundPlay.getInstance().setBgmVolume(value);
+	}
+
+	private void effectVolumeControl(int value) {
+		SoundPlay.getInstance().setEffectVolume(value);
+	}
+
+	private boolean isBgm(){
+		return this.returnCode == 100;
+	}
+
+	private boolean isEffect(){
+		return this.returnCode == 101;
 	}
 
 	/**

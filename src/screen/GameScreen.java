@@ -93,15 +93,6 @@ public class GameScreen extends Screen {
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
 
-
-	/** Milliseconds that time to display the item info. */
-	private static final int SELECTION_TIME = 200;
-
-	/** Time between info of be obtained item. */
-	private Cooldown selectionCooldown;
-
-	private boolean isInitScreen;
-
 	private ItemManager itemmanager;
 
 
@@ -152,9 +143,6 @@ public class GameScreen extends Screen {
 			this.itempool = new ItemPool();
 		}
 
-		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
-		this.selectionCooldown.reset();
-
 	}
 
 	/**
@@ -178,8 +166,6 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipShape), FileManager.ChangeIntToColor());
 				break;
 		}
-
-		this.isInitScreen = false;
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
@@ -497,7 +483,7 @@ public class GameScreen extends Screen {
 
 
 	private void manageGetItem(Item item) {
-		if (isInitScreen || checkCollision(item, this.ship) && !this.levelFinished) {
+		if (checkCollision(item, this.ship) && !this.levelFinished) {
 
 			itempool.add(item);
 			item.setSprite();

@@ -118,7 +118,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.ItemDrop, new boolean[16][16]);
+			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
 			spriteMap.put(SpriteType.Life, new boolean[13][13]);
@@ -464,6 +464,50 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, BackString, screen.getHeight()/3
 				 + fontRegularMetrics.getHeight() * 2);
 		
+	}
+
+	/**
+	 * Draws main menu.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 * @param option
+	 *            Option selected.
+	 */
+	public void drawItemInfo(final Screen screen, final int option) {
+		String bulletSpeedString = "Bullet Speed Up!";
+		String pointUpString = "Point Up!";
+		String shieldString = "Shield!";
+		String speedUpString = "Speed Up!";
+		String enemySpeedString = "Enemy Faster!";
+		String lifeString = "Extra Life!";
+
+		if (option == 0) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, bulletSpeedString,
+					screen.getHeight()*2/12);
+		} else if (option == 1) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, pointUpString,
+					screen.getHeight()*2/12);
+		} else if (option == 2) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, shieldString,
+					screen.getHeight()*2/12);
+		} else if (option == 3) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, speedUpString,
+					screen.getHeight()*2/12);
+		} else if (option == 4) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, enemySpeedString,
+					screen.getHeight()*2/12);
+		} else if (option == 5) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, lifeString,
+					screen.getHeight()*2/12);
+		}
+
 	}
 
 	/**

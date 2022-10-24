@@ -479,7 +479,7 @@ public final class DrawManager {
 		String pointUpString = "Point Up!";
 		String shieldString = "Shield!";
 		String speedUpString = "Speed Up!";
-		String enemySpeedString = "Enemy Faster!";
+		String MachineGun = "Machine Gun!";
 		String lifeString = "Extra Life!";
 
 		if (option == 0) {
@@ -500,7 +500,7 @@ public final class DrawManager {
 					screen.getHeight()*2/12);
 		} else if (option == 4) {
 			backBufferGraphics.setColor(Color.WHITE);
-			drawCenteredRegularString(screen, enemySpeedString,
+			drawCenteredRegularString(screen, MachineGun,
 					screen.getHeight()*2/12);
 		} else if (option == 5) {
 			backBufferGraphics.setColor(Color.WHITE);

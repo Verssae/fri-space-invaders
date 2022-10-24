@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
-import engine.PermanentState;
 
 /**
  * Implements the title screen.
@@ -19,7 +18,6 @@ public class TitleScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
-	private PermanentState permanentState = PermanentState.getInstance(); //
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -108,8 +106,6 @@ public class TitleScreen extends Screen {
 		drawManager.drawTitle(this);
 		drawManager.drawMenu(this, this.returnCode);
 
-		drawManager.drawCoin(this, permanentState.getCoin());
 		drawManager.completeDrawing(this);
-
 	}
 }

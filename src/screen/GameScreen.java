@@ -5,8 +5,10 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
-
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.Timer;
+import java.util.TimerTask;
 import engine.*;
 import entity.*;
 import engine.Cooldown;
@@ -21,7 +23,7 @@ import entity.Entity;
 import entity.Ship;
 import engine.DrawManager;
 import entity.Shield;
-
+import sound.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -50,7 +52,6 @@ public class GameScreen extends Screen {
 
 	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
-
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -104,7 +105,7 @@ public class GameScreen extends Screen {
 
 	private Shield shield;
 
-
+	private int past_countdown=4;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -134,6 +135,9 @@ public class GameScreen extends Screen {
 		this.lives = gameState.getLivesRemaining();
 		if (this.bonusLife)
 			this.lives++;
+		if(lives == 0){
+			SoundPlay.getInstance().stopBgm();
+		}
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 
@@ -150,6 +154,16 @@ public class GameScreen extends Screen {
 	 */
 	public final void initialize() {
 		super.initialize();
+
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				SoundPlay.getInstance().play(SoundType.inGameBGM);
+			}
+		};
+		Timer timer = new Timer("Timer");
+		long delay = 5800L;
+		timer.schedule(task, delay);
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
@@ -198,6 +212,7 @@ public class GameScreen extends Screen {
 	public final int run() {
 		super.run();
 
+		SoundPlay.getInstance().stopBgm();
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score); // 정상 출력
 		return this.returnCode;
@@ -300,6 +315,10 @@ public class GameScreen extends Screen {
 		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
 			this.isRunning = false;
 
+		if(this.enemyShipFormation.isEmpty()){
+			sound.SoundPlay.getInstance().play(SoundType.roundClear);
+			this.isRunning = false;
+		}
 	}
 
 	/**
@@ -357,6 +376,15 @@ public class GameScreen extends Screen {
 					/ 12);
 			drawManager.drawHorizontalLine(this, this.height / 2 + this.height
 					/ 12);
+			if ((past_countdown > countdown)) {
+				ExecutorService executorService = Executors.newCachedThreadPool();
+				executorService.submit(() -> {
+					past_countdown = countdown;
+					if(countdown==0) sound.SoundPlay.getInstance().play(SoundType.roundStart);
+					if(countdown>0) sound.SoundPlay.getInstance().play(SoundType.roundCounting);
+				});
+				executorService.shutdown();
+			}
 		}
 
 		if(!this.itemInfoCooldown.checkFinished()){
@@ -392,22 +420,23 @@ public class GameScreen extends Screen {
 					recyclable.add(bullet);
 
 
-						if(shield == null && !this.ship.isDestroyed()) {
-							this.ship.destroy();
-							this.lives--;
-							this.logger.info("Hit on player ship, " + this.lives
-									+ " lives remaining.");
+					if (shield == null && !this.ship.isDestroyed()) {
+						SoundPlay.getInstance().play(SoundType.hit);
+						this.ship.destroy();
+						this.lives--;
+						this.logger.info("Hit on player ship, " + this.lives
+								+ " lives remaining.");
 							this.clearItem();
 
-							}
-							else if(!this.ship.isDestroyed()){
-								shield =null;
-							}
+					} else if (!this.ship.isDestroyed()) {
+						shield = null;
+					}
 				}
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
+						SoundPlay.getInstance().play(SoundType.enemyKill);
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
@@ -425,6 +454,7 @@ public class GameScreen extends Screen {
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
+					SoundPlay.getInstance().play(SoundType.bonusEnemyKill);
 					this.score += this.enemyShipSpecial.getPointValue();
 
 					this.shipsDestroyed++;
@@ -435,6 +465,7 @@ public class GameScreen extends Screen {
 				if (this.enemyShipDangerous != null
 						&& !this.enemyShipDangerous.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipDangerous)) {
+					SoundPlay.getInstance().play(SoundType.bonusEnemyKill);
 					this.score += this.enemyShipDangerous.getPointValue();
 					this.shipsDestroyed++;
 					this.enemyShipDangerous.destroy();

@@ -30,9 +30,9 @@ Sound License
    https://freesound.org/people/geerterig/sounds/160434/   
    CC0 1.0   
 
-* ## MainScreen_BGM_002.wav
+* ## MainScreen_BGM_001.wav
    made by annoyedCactus   
-   https://freesound.org/people/annoyedCactus/sounds/455017/ 
+   https://freesound.org/people/annoyedCactus/sounds/455017/   
    CC0 1.0  
 
 * ## Hit_001.wav
@@ -42,7 +42,7 @@ Sound License
 
 * ## MenuClick_001.wav
    made by LittleRobotSoundFactory   
-   https://freesound.org/people/LittleRobotSoundFactory/sounds/270324/   
+   https://freesound.org/people/LittleRobotSoundFactory/sounds/270324/    
    CC BY 4.0   
 
 * ## MenuSelect_001.wav
@@ -66,6 +66,11 @@ Sound License
    CC BY 4.0   
 
 * ## RoundStart_001.wav , RoundCounting_001.wav
-  made by steel2008
-  https://freesound.org/people/steel2008/sounds/231277/
+  made by steel2008   
+  https://freesound.org/people/steel2008/sounds/231277/   
+  CC0 1.0
+
+* ## RoundClear_001.wav   
+  made by HenryRichard   
+  https://freesound.org/people/HenryRichard/sounds/448266/   
   CC0 1.0

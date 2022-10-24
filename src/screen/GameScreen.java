@@ -47,6 +47,8 @@ public class GameScreen extends Screen {
 	private static final int SCREEN_CHANGE_INTERVAL = 1500;
 	/** Height of the interface separation line. */
 	private static final int SEPARATION_LINE_HEIGHT = 40;
+	/** Milliseconds during the screen display the item info. */
+	private static final int ITEM_DISPLAY_TIME = 2000;
 
 	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
@@ -73,12 +75,14 @@ public class GameScreen extends Screen {
 	private Cooldown enemyShipdangerousExplosionCooldown;
 	/** Time from finishing the level to screen change. */
 	private Cooldown screenFinishedCooldown;
+	/** */
+	private Cooldown itemInfoCooldown;
 	/** Set of all bullets fired by on screen ships. */
 	private Set<Bullet> bullets;
 	/** Current score. */
 	private int score;
 	/** Player lives left. */
-	private int lives;
+	public static int lives;
 	/** Total bullets shot by the player. */
 	private int bulletsShot;
 	/** Total ships destroyed by the player. */
@@ -196,6 +200,8 @@ public class GameScreen extends Screen {
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+
+		this.itemInfoCooldown = Core.getCooldown(ITEM_DISPLAY_TIME);
 	}
 
 	/**
@@ -321,6 +327,7 @@ public class GameScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
+
 		for(Item item : this.itemiterator) {
 			if (item != null) {
 				drawManager.drawEntity(item, item.getPositionX(),
@@ -378,6 +385,10 @@ public class GameScreen extends Screen {
 				});
 				executorService.shutdown();
 			}
+		}
+
+		if(!this.itemInfoCooldown.checkFinished()){
+			drawManager.drawItemInfo(this, this.returnCode);
 		}
 
 		drawManager.completeDrawing(this);
@@ -511,19 +522,20 @@ public class GameScreen extends Screen {
 			if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
 
-				LOGGER.info("Obtained BulletSpeedItem");
-
+				this.returnCode = 0;
 				this.clearItem();//효과초기화
 				this.clearPointUp();
+				this.itemInfoCooldown.reset();
+
 				this.ship.setBulletSpeed(2 * ship.getBulletSpeed());
 
 			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
 
-				LOGGER.info("Obtained PointUpItem");
-
+				this.returnCode = 1;
 				this.clearItem();//효과 초기화
+				this.itemInfoCooldown.reset();
 				for (EnemyShip enemyShip : this.enemyShipFormation)
 					enemyShip.setPointValue(2 * enemyShip.getPointValue());
 			}
@@ -540,42 +552,42 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
-				LOGGER.info("Obtained ShieldItem");
-
+				this.returnCode = 2;
 				this.clearItem();
 				this.clearPointUp();
+				this.itemInfoCooldown.reset();
 				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
 
 			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
-				LOGGER.info("Obtained SpeedUpItem");
-
+				this.returnCode = 3;
 				this.clearItem();//효과 초기화
 				this.clearPointUp();
+				this.itemInfoCooldown.reset();
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
-
 			}
 //			else if (item.getIsget() == false &&
 //					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
 //
-//				LOGGER.info("Obtained EnemyShipSpeedItem");
-//
+//				this.returnCode = 4;
 //				this.clearItem();//효과 초기화
 //				this.clearPointUp();
+//				this.itemInfoCooldown.reset();
 //				this.enemyShipFormation.setMovementSpeed(5 * this.enemyShipFormation.getMovementSpeed());
 //
 //			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 
-				LOGGER.info("Obtained ExtraLifeItem");
-
 				this.clearItem();
 				this.clearPointUp();
-				if (this.lives < 4)
+				if (this.lives < 4) {
 					this.lives++;
+					this.returnCode = 5;
+					this.itemInfoCooldown.reset();
+				}
 				else
 					LOGGER.warning("생명 4개 초과");
 			}

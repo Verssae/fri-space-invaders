@@ -21,7 +21,6 @@ public class SoundBgm {
         this.logger = Core.getLogger();
         try{
             String soundPath = "res/sound/" + filename;
-
             bgmFileLoader = new File(soundPath);
             AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);
             bgmClip = AudioSystem.getClip();

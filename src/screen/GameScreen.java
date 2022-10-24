@@ -542,17 +542,16 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
 
-				LOGGER.info("Obtained MachineGun");
-
+				this.returnCode = 2;
 				this.clearItem();//효과 초기화
-
+				this.itemInfoCooldown.reset();
 				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
 
 			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
-				this.returnCode = 2;
+				this.returnCode = 3;
 				this.clearItem();
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();
@@ -562,7 +561,7 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
-				this.returnCode = 3;
+				this.returnCode = 4;
 				this.clearItem();//효과 초기화
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();

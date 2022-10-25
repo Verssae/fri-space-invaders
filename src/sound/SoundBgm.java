@@ -15,7 +15,7 @@ public class SoundBgm {
     public Clip bgmClip;
     public File bgmFileLoader;
     private FloatControl volumeControl;
-    private int volume = 50;
+    private int volume;
     protected Logger logger;
 
     public SoundBgm(String filename){

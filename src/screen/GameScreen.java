@@ -540,16 +540,6 @@ public class GameScreen extends Screen {
 					enemyShip.setPointValue(2 * enemyShip.getPointValue());
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
-
-				LOGGER.info("Obtained MachineGun");
-
-				this.clearItem();//효과 초기화
-
-				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
-
-			}
-			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
 				this.returnCode = 2;
@@ -568,10 +558,19 @@ public class GameScreen extends Screen {
 				this.itemInfoCooldown.reset();
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 			}
+			else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
+				this.returnCode = 4;
+				LOGGER.info("Obtained MachineGun");
+				this.clearItem();//효과 초기화
+				this.itemInfoCooldown.reset();
+				this.ship.setShootingInterval(0.1 * this.ship.getInitShootingInterval());
+
+			}
 //			else if (item.getIsget() == false &&
 //					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
 //
-//				this.returnCode = 4;
+//
 //				this.clearItem();//효과 초기화
 //				this.clearPointUp();
 //				this.itemInfoCooldown.reset();

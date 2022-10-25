@@ -17,6 +17,7 @@ public class Bullet extends Entity {
 	 * positive is down.
 	 */
 	private int speed;
+	Color[] colors = {Color.WHITE, Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY, Color.RED, Color.PINK, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN, Color.BLUE};
 
 	/**
 	 * Constructor, establishes the bullet's properties.
@@ -40,10 +41,14 @@ public class Bullet extends Entity {
 	 * Sets correct sprite for the bullet, based on speed.
 	 */
 	public final void setSprite() {
-		if (speed < 0)
+		if (speed < 0) {
 			this.spriteType = SpriteType.Bullet;
-		else
+			this.setColor(colors[(int) ((Math.random() * (12 - 1)) + 1)]);
+		}
+		else {
 			this.spriteType = SpriteType.EnemyBullet;
+			this.setColor(Color.WHITE);
+		}
 	}
 
 	/**

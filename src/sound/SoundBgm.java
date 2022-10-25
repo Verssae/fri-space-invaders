@@ -20,13 +20,7 @@ public class SoundBgm {
     public SoundBgm(String filename){
         this.logger = Core.getLogger();
         try{
-            String jarPath = FileManager.class.getProtectionDomain()
-                    .getCodeSource().getLocation().getPath();
-            jarPath = URLDecoder.decode(jarPath, "UTF-8");
-
-            String soundPath = new File(jarPath).getParent();
-            soundPath += File.separator;
-            soundPath += "fri-space-invaders/sound/" + filename;
+            String soundPath = "res/sound/" + filename;
 
             bgmFileLoader = new File(soundPath);
             AudioInputStream bgmInputStream = AudioSystem.getAudioInputStream(bgmFileLoader);

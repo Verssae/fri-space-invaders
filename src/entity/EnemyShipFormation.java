@@ -1,6 +1,5 @@
 package entity;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,7 +21,6 @@ import engine.GameSettings;
  * 
  */
 public class EnemyShipFormation implements Iterable<EnemyShip> {
-
 
 	private static int Current_Level = 0;
 	/** Initial position in the x-axis. */
@@ -55,7 +53,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Speed of the bullets shot by the members.
 	 */
-	private static final int BULLET_SPEED = 4;
 	/**
 	 * Proportion of differences between shooting times.
 	 */
@@ -230,8 +227,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 				column.add(new EnemyShip((SEPARATION_DISTANCE
 						* this.enemyShips.indexOf(column))
-						+ positionX, (SEPARATION_DISTANCE * i)
-						+ positionY, spriteType));
+						+ positionX,
+						(SEPARATION_DISTANCE * i)
+								+ positionY,
+						spriteType));
 				this.shipCount++;
 			}
 		}
@@ -259,7 +258,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public List<List<EnemyShip>> getEnemyShip() {
 		return this.enemyShips;
 	}
-
 
 	/**
 	 * Associates the formation to a given screen.
@@ -349,7 +347,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			else if (currentDirection == Direction.LEFT)
 				movementX = -X_SPEED;
 			else if (currentDirection == Direction.UP)
-				movementY =-Y_SPEED;
+				movementY = -Y_SPEED;
 			else
 				movementY = Y_SPEED;
 
@@ -373,21 +371,19 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			for (List<EnemyShip> column : this.enemyShips)
 				for (EnemyShip enemyShip : column) {
-					if(Current_Level == 8) {
+					if (Current_Level == 8) {
 
-						if(isAtBottom) {
+						if (isAtBottom) {
 							inverse = 1;
 							this.logger.info("Inverse:" + inverse);
-						}
-						else if (isAtTop) {
+						} else if (isAtTop) {
 							inverse = 0;
 							this.logger.info("Inverse:" + inverse);
 						}
-						if(inverse == 0) {
+						if (inverse == 0) {
 							movementY = (int) Math.random() * 3 + 1;
 							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-						}
-						else if(inverse == 1) {
+						} else if (inverse == 1) {
 							movementY = ((int) Math.random() * 3 + 1) * (-1);
 							this.logger.info("moveY:" + movementY + " > current:" + positionY);
 						}
@@ -447,15 +443,43 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 *
 	 * @param bullets Bullets set to add the bullet being shot.
 	 */
-	public final void shoot(final Set<Bullet> bullets) {
+	public final void shoot(final Set<Bullet> bullets, final int typeNumber) {
 		// For now, only ships in the bottom row are able to shoot.
 		int index = (int) (Math.random() * this.shooters.size());
 		EnemyShip shooter = this.shooters.get(index);
 
-		if (this.shootingCooldown.checkFinished()) {
-			this.shootingCooldown.reset();
-			bullets.add(BulletPool.getBullet(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED));
+		switch (typeNumber) {
+			case 11:
+			case 12:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), Current_Level + 3));
+				}
+				break;
+			case 21:
+			case 22:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), Current_Level + 3));
+				}
+				break;
+			case 31:
+			case 32:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), Current_Level + 3));
+				}
+				break;
+			default:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), 4));
+				}
+				break;
 		}
 	}
 
@@ -541,7 +565,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public final boolean isEmpty() {
 		return this.shipCount <= 0;
 	}
-
 
 	/**
 	 * Getter for the enemyship's speed.

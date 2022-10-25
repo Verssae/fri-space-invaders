@@ -15,11 +15,11 @@ import sound.SoundPlay;
 public class VolumeScreen extends Screen {
 
 	/** Milliseconds between changes in user selection. */
-	private static final int SELECTION_TIME = 200;
+	private static final int SELECTION_TIME = 150;
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
-
+	private SoundPlay soundPlay = SoundPlay.getInstance();
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -119,11 +119,15 @@ public class VolumeScreen extends Screen {
 	}
 
 	private void bgmVolumeControl(int value){
-		SoundPlay.getInstance().setBgmVolume(value);
+		if((soundPlay.getBgmVolume()<100||value==-1)&&(soundPlay.getBgmVolume()>0||value==1)) {
+			soundPlay.setBgmVolume(value);
+		}
 	}
 
 	private void effectVolumeControl(int value) {
-		SoundPlay.getInstance().setEffectVolume(value);
+		if((soundPlay.getEffectVolume()<100||value==-1)&&(soundPlay.getEffectVolume()>0||value==1)) {
+			soundPlay.setEffectVolume(value);
+		}
 	}
 
 	private boolean isBgm(){

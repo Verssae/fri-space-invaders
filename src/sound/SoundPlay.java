@@ -99,8 +99,6 @@ public class SoundPlay{
         return effectVolume;
     }
 
-    public int getBgmVolume(){
-        return bgmVolume;
-    }
+    public int getBgmVolume(){ return bgmVolume; }
 
 }

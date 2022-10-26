@@ -6,6 +6,8 @@ import java.util.Random;
 import engine.Cooldown;
 import engine.Core;
 import engine.PermanentState;
+import sound.SoundPlay;
+import sound.SoundType;
 
 public class StoreScreen extends Screen {
 
@@ -20,6 +22,8 @@ public class StoreScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
     private PermanentState permanentState = PermanentState.getInstance();
+
+    private SoundPlay soundPlay = SoundPlay.getInstance();
 
     private int menuCode = 0;
     private int focusReroll = 0;
@@ -94,6 +98,7 @@ public class StoreScreen extends Screen {
                         rerollItem();
                     }
                 }
+                soundPlay.play(SoundType.menuClick);
                 this.selectionCooldown.reset();
             }
         }
@@ -107,6 +112,7 @@ public class StoreScreen extends Screen {
             menuCode = 0;
         else
             menuCode++;
+        soundPlay.play(SoundType.menuSelect);
     }
 
     /**
@@ -117,6 +123,7 @@ public class StoreScreen extends Screen {
             menuCode = 4;
         else
             menuCode--;
+        soundPlay.play(SoundType.menuSelect);
     }
 
     private void rerollItem() {

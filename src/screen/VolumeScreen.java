@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+import sound.SoundPlay;
+import sound.SoundType;
 
 /**
  * Implements the title screen.
@@ -14,11 +16,11 @@ import engine.Core;
 public class VolumeScreen extends Screen {
 
 	/** Milliseconds between changes in user selection. */
-	private static final int SELECTION_TIME = 200;
+	private static final int SELECTION_TIME = 150;
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
-
+	private SoundPlay soundPlay = SoundPlay.getInstance();
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -68,8 +70,33 @@ public class VolumeScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+			if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
+					|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+				soundPlay.play(SoundType.menuSelect);
+				if(isBgm()){
+					bgmVolumeControl(1);
+				}
+				if(isEffect()){
+					effectVolumeControl(1);
+				}
+				this.selectionCooldown.reset();
+			}
+			if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
+					|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+				soundPlay.play(SoundType.menuSelect);
+				if(isBgm()){
+					bgmVolumeControl(-1);
+				}
+				if(isEffect()){
+					effectVolumeControl(-1);
+				}
+				this.selectionCooldown.reset();
+			}
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)&&this.returnCode==6){
 				this.isRunning = false;
+				soundPlay.play(SoundType.menuClick);
+			}
+
 		}
 	}
 
@@ -83,6 +110,7 @@ public class VolumeScreen extends Screen {
 			this.returnCode = 100;
 		else
 			this.returnCode++;
+		soundPlay.play(SoundType.menuSelect);
 	}
 
 	/**
@@ -95,6 +123,27 @@ public class VolumeScreen extends Screen {
 			this.returnCode = 6;
 		else
 			this.returnCode--;
+		soundPlay.play(SoundType.menuSelect);
+	}
+
+	private void bgmVolumeControl(int value){
+		if((soundPlay.getBgmVolume()<100||value==-1)&&(soundPlay.getBgmVolume()>0||value==1)) {
+			soundPlay.setBgmVolume(value);
+		}
+	}
+
+	private void effectVolumeControl(int value) {
+		if((soundPlay.getEffectVolume()<100||value==-1)&&(soundPlay.getEffectVolume()>0||value==1)) {
+			soundPlay.setEffectVolume(value);
+		}
+	}
+
+	private boolean isBgm(){
+		return this.returnCode == 100;
+	}
+
+	private boolean isEffect(){
+		return this.returnCode == 101;
 	}
 
 	/**

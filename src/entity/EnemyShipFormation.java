@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -105,6 +106,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		/** Movement to the bottom of the screen. */
 		DOWN
 	};
+
+	private int movingCooldown = 0;
+	private int movingShipx;
+	private int movingCount = 0;
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -294,6 +299,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					enemyShip.update();
 				}
 		}
+
+		if (movingCooldown <= 0) {
+			moving();
+			movingCooldown = 90;
+		}
+		moving2();
+		movingCooldown--;
 	}
 
 	/**
@@ -396,8 +408,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		this.shipCount--;
-
-		moving();
 	}
 
 	/**
@@ -454,6 +464,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		int direction = 0;
 		boolean canMove = false;
 
+		this.logger.info("moving()");
+
 		// 이동 가능 확인
 		if (this.shooters.size() < this.nShipsWide) {
 
@@ -496,8 +508,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				}
 
 				// 이동
-				this.enemyShips.get(rand).get(0).move((int) (-1 * (direction - 1.5) * 80), 0);
+				this.enemyShips.get(rand).get(0).move((int) ((direction - 1.5) * -2), 0);
 				this.logger.info("Enemy ship (" + rand + ", 0) moves.");
+				movingCount =  (2 * direction - 3) * 39;
 
 				// 인덱싱
 				List<EnemyShip> newColumn = new ArrayList<EnemyShip>();
@@ -515,11 +528,28 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					enemyShips.set(rand + 1, changedColumn);
 					this.shooters.add(rand, this.enemyShips.get(rand).get(0));
 				}
+
+				movingShipx = rand;
+				this.logger.info("New movingShipx " + movingShipx);
 			}
 		}
-
-
 	}
+
+
+	private void moving2() {
+		if (movingCount != 0) {
+			this.logger.info("movingCount " + movingCount);
+			this.logger.info("movingShipx " + movingShipx);
+			if (movingShipx < 0) {
+				this.enemyShips.get(movingShipx).get(0).move(1, 0);
+				movingCount++;
+			} else if (movingShipx > 0) {
+				this.enemyShips.get(movingShipx).get(0).move(- 1, 0);
+				movingCount--;
+			}
+		}
+	}
+
 
 
 }

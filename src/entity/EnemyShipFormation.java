@@ -23,7 +23,9 @@ import engine.GameSettings;
 public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 	private static int Current_Level = 0;
-	/** Initial position in the x-axis. */
+	/**
+	 * Initial position in the x-axis.
+	 */
 
 	private static final int INIT_POS_X = 20;
 	/**
@@ -73,6 +75,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 * Minimum speed allowed.
 	 */
 	private static final int MINIMUM_SPEED = 10;
+	/**
+	 * Speed control in update
+	 */
+	private static int SPEED_CONTROL = 1;
 
 	/**
 	 * DrawManager instance.
@@ -176,11 +182,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		 * Movement to the left side of the screen.
 		 */
 		LEFT,
-		/** Movement to the bottom of the screen. */
-		DOWN,
 
-		UP
-	};
+
+		/**
+		 * Movement to the bottom of the screen.
+		 */
+		DOWN
+	}
+
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -292,11 +301,15 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		int inverse = 0;
 		int movementX = 0;
 		int movementY = 0;
+
 		double remainingProportion = (double) this.shipCount
 				/ (this.nShipsHigh * this.nShipsWide);
+
 		this.movementSpeed = (double) (Math.pow(remainingProportion, 2)
 				* this.baseSpeed);
-		this.movementSpeed += MINIMUM_SPEED;
+
+		if (baseSpeed > 0)
+			this.movementSpeed += MINIMUM_SPEED;
 
 		movementInterval++;
 		if (movementInterval >= this.movementSpeed) {
@@ -346,8 +359,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				movementX = X_SPEED;
 			else if (currentDirection == Direction.LEFT)
 				movementX = -X_SPEED;
-			else if (currentDirection == Direction.UP)
-				movementY = -Y_SPEED;
+
 			else
 				movementY = Y_SPEED;
 
@@ -360,6 +372,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				destroyed = new ArrayList<EnemyShip>();
 				for (EnemyShip ship : column) {
 					if (ship != null && ship.isDestroyed()) {
+
 						destroyed.add(ship);
 						this.logger.info("Removed enemy "
 								+ column.indexOf(ship) + " from column "
@@ -369,29 +382,29 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				column.removeAll(destroyed);
 			}
 
-			for (List<EnemyShip> column : this.enemyShips)
+			if (isAtBottom) {
+				positionY = positionY * (-1);
+				inverse = 1;
+			} else if (isAtTop)
+				inverse = 0;
+
+			for (List<EnemyShip> column : this.enemyShips) {
+
 				for (EnemyShip enemyShip : column) {
 					if (Current_Level == 8) {
-
-						if (isAtBottom) {
-							inverse = 1;
-							this.logger.info("Inverse:" + inverse);
-						} else if (isAtTop) {
-							inverse = 0;
-							this.logger.info("Inverse:" + inverse);
-						}
 						if (inverse == 0) {
-							movementY = (int) Math.random() * 3 + 1;
-							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-						} else if (inverse == 1) {
-							movementY = ((int) Math.random() * 3 + 1) * (-1);
-							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-						}
+							movementY = SPEED_CONTROL;
 
+						} else if (inverse == 1) {
+							movementY = SPEED_CONTROL * (-1);
+
+
+						}
+						enemyShip.move(movementX, movementY);
+						enemyShip.update();
 					}
-					enemyShip.move(movementX, movementY);
-					enemyShip.update();
 				}
+			}
 		}
 	}
 

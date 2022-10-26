@@ -77,7 +77,7 @@ public class ItemManager {
 
         public void enenmyhasitem () {
             // 임시 토글메서드
-            //asdnaslkdnalsdknsalkd
+            //푸시만해도 코드가 반영돼서 너무 좋다~
         }
 
 

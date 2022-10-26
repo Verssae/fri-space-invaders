@@ -23,6 +23,8 @@ public class StoreScreen extends Screen {
     private Cooldown selectionCooldown;
     private PermanentState permanentState = PermanentState.getInstance();
 
+    private SoundPlay soundPlay = SoundPlay.getInstance();
+
     private int menuCode = 0;
     private int focusReroll = 0;
 
@@ -96,7 +98,7 @@ public class StoreScreen extends Screen {
                         rerollItem();
                     }
                 }
-                SoundPlay.getInstance().play(SoundType.menuClick);
+                soundPlay.play(SoundType.menuClick);
                 this.selectionCooldown.reset();
             }
         }
@@ -110,7 +112,7 @@ public class StoreScreen extends Screen {
             menuCode = 0;
         else
             menuCode++;
-        SoundPlay.getInstance().play(SoundType.menuSelect);
+        soundPlay.play(SoundType.menuSelect);
     }
 
     /**
@@ -121,7 +123,7 @@ public class StoreScreen extends Screen {
             menuCode = 4;
         else
             menuCode--;
-        SoundPlay.getInstance().play(SoundType.menuSelect);
+        soundPlay.play(SoundType.menuSelect);
     }
 
     private void rerollItem() {

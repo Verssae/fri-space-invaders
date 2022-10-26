@@ -88,7 +88,7 @@ public class SettingScreen extends Screen {
 			this.returnCode = 8;
 		else
 			this.returnCode++;
-		SoundPlay.getInstance().play(SoundType.menuSelect);
+		soundPlay.play(SoundType.menuSelect);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class SettingScreen extends Screen {
 			this.returnCode = 1;
 		else
 			this.returnCode--;
-		SoundPlay.getInstance().play(SoundType.menuSelect);
+		soundPlay.play(SoundType.menuSelect);
 	}
 
 	/**

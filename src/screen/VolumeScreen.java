@@ -92,7 +92,7 @@ public class VolumeScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)&&this.returnCode==6){
 				this.isRunning = false;
-				SoundPlay.getInstance().play(SoundType.menuClick);
+				soundPlay.play(SoundType.menuClick);
 			}
 
 		}

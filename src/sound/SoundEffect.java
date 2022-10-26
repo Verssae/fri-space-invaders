@@ -9,7 +9,7 @@ import java.net.URLDecoder;
 import java.util.logging.Logger;
 
 public class SoundEffect {
-    private static int volume = 70;
+    private static int volume;
     private Clip effectClip;
     public File effectFileLoader;
     private AudioInputStream effectInputStream;

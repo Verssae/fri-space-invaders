@@ -14,7 +14,8 @@ import engine.FileManager;
 public class SoundBgm {
     public Clip bgmClip;
     public File bgmFileLoader;
-    private int volume = 50;
+    private FloatControl volumeControl;
+    private int volume;
     protected Logger logger;
 
     public SoundBgm(String filename){
@@ -28,8 +29,10 @@ public class SoundBgm {
             bgmClip.open(bgmInputStream);
             bgmClip.loop(-1);
             // 볼륨 설정용
-            FloatControl volumeControl = (FloatControl) bgmClip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(20f * (float) Math.log10(volume / 100.0)); //백분율
+            if(bgmClip.isControlSupported(FloatControl.Type.MASTER_GAIN)){
+                volumeControl = (FloatControl) bgmClip.getControl(FloatControl.Type.MASTER_GAIN);
+                volumeControl.setValue(20f * (float) Math.log10(volume / 100.0)); //백분율
+            }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -48,7 +51,13 @@ public class SoundBgm {
     }
     public void stop(){ bgmClip.stop(); }
 
-    public void bgmVolume(int volume){ this.volume = volume; }
+    public void bgmVolume(int volume){ 
+        this.volume = volume;
+        if(bgmClip.isControlSupported(FloatControl.Type.MASTER_GAIN)){
+            volumeControl = (FloatControl) bgmClip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(20f * (float) Math.log10(volume / 100.0)); //백분율
+        } 
+    }
 
 //    public void random(String fileNames[]){
 //

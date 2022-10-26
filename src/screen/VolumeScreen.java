@@ -72,6 +72,7 @@ public class VolumeScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
 					|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+				soundPlay.play(SoundType.menuSelect);
 				if(isBgm()){
 					bgmVolumeControl(1);
 				}
@@ -82,6 +83,7 @@ public class VolumeScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
 					|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+				soundPlay.play(SoundType.menuSelect);
 				if(isBgm()){
 					bgmVolumeControl(-1);
 				}

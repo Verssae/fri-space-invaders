@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+import sound.SoundPlay;
+import sound.SoundType;
 
 /**
  * Implements the title screen.
@@ -18,6 +20,7 @@ public class SettingScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+	private SoundPlay soundPlay = SoundPlay.getInstance();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -68,8 +71,10 @@ public class SettingScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
 				this.isRunning = false;
+				soundPlay.play(SoundType.menuClick);
+			}
 		}
 	}
 
@@ -83,6 +88,7 @@ public class SettingScreen extends Screen {
 			this.returnCode = 8;
 		else
 			this.returnCode++;
+		soundPlay.play(SoundType.menuSelect);
 	}
 
 	/**
@@ -95,6 +101,7 @@ public class SettingScreen extends Screen {
 			this.returnCode = 1;
 		else
 			this.returnCode--;
+		soundPlay.play(SoundType.menuSelect);
 	}
 
 	/**

@@ -304,6 +304,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			moving();
 			movingCooldown = 90;
 		}
+		// this.logger.info("movingShipx " + movingShipx);
 		moving2();
 		movingCooldown--;
 	}
@@ -464,10 +465,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		int direction = 0;
 		boolean canMove = false;
 
-		this.logger.info("moving()");
-
 		// 이동 가능 확인
 		if (this.shooters.size() < this.nShipsWide) {
+			this.logger.info("start------------------------------");
+
+			for (int i = 0; i < this.shooters.size(); i++) {
+				this.logger.info("Shooter " + i + " is (" + this.shooters.get(i).getPositionX() + ", " + this.shooters.get(i).getPositionY() + ").");
+			}
 
 			// column 정보 확인
 			for (int i = 0; i < this.shooters.size(); i++) {
@@ -476,19 +480,27 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				} else {
 					columnRealPosition[i] = columnRealPosition[i - 1] + (int) ((this.enemyShips.get(i).get(0).getPositionX() - this.enemyShips.get(i - 1).get(0).getPositionX()) / 40 );
 				}
+				this.logger.info("Column " + i + " is " + columnRealPosition[i]);
 			}
 
 			// 이동 가능한 column 확인
 			// 1 -> 오른쪽으로 이동 가능, 2 -> 왼쪽으로 이동 가능, 3 -> 양쪽으로 이동 가능
 			for (int i = 0; i < this.shooters.size() - 1; i++) {
 				if (columnRealPosition[i + 1] - columnRealPosition[i] != 1) {
-					movableCheck[i] += 1;
-					movableCheck[i + 1] += 2;
-					canMove |= true;
-				}
-			}
+					if (this.enemyShips.get(i).size() > 1) {
+						movableCheck[i] += 1;
+						canMove |= true;
+					} else if (this.enemyShips.get(i + 1).size() > 1) {
+						movableCheck[i + 1] += 2;
+						canMove |= true;
+					}
 
-			if (canMove && this.enemyShips.get(rand).size() != 1) {
+				}
+				this.logger.info("Movable direction of " + i + " is " + movableCheck[i]);
+			}
+			this.logger.info("Movable direction of " + (this.shooters.size() - 1) + " is " + movableCheck[this.shooters.size() - 1]);
+
+			if (canMove && this.enemyShips.get(rand).size() > 1) {
 				// 랜덤 체크
 				int cnt = 0;
 				while (cnt < 10) {
@@ -498,39 +510,59 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 						break;
 				}
 
-				// 방향 설정
-				if (movableCheck[rand] == 3 && Math.random() < 0.5) {
-					direction = 1;
-				} else if (movableCheck[rand] == 3) {
-					direction = 2;
-				} else {
-					direction = movableCheck[rand];
+				if (movableCheck[rand] != 0) {
+					// 방향 설정
+					// 1 -> 오른쪽으로 이동, 2 -> 왼쪽으로 이동
+					if (movableCheck[rand] == 3 && Math.random() < 0.5) {
+						direction = 1;
+					} else if (movableCheck[rand] == 3) {
+						direction = 2;
+					} else {
+						direction = movableCheck[rand];
+					}
+
+					this.logger.info("Enemy ship (" + rand + ", 0) moves.");
+					this.logger.info("Direction is " + direction);
+					this.logger.info("Indexing start.");
+
+					// 인덱싱
+					List<EnemyShip> newColumn = new ArrayList<EnemyShip>();
+					newColumn.add(this.enemyShips.get(rand).get(0));
+					List<EnemyShip> changedColumn = new ArrayList<EnemyShip>();
+					for (int i = 1; i < this.enemyShips.get(rand).size(); i++) {
+						changedColumn.add(this.enemyShips.get(rand).get(i));
+					}
+					if (direction == 1) {
+						enemyShips.add(rand + 1, newColumn);
+						enemyShips.set(rand, changedColumn);
+						this.shooters.add(rand + 1, this.enemyShips.get(rand + 1).get(0));
+					} else {
+						enemyShips.add(rand, newColumn);
+						enemyShips.set(rand + 1, changedColumn);
+						this.shooters.add(rand, this.enemyShips.get(rand).get(0));
+					}
+
+					for(int i = 0; i < this.shooters.size(); i++) {
+						this.logger.info("Column " + i + " has " + this.enemyShips.get(i).size() + " ships.");
+					}
+
+					// 이동
+					if (direction == 1) {
+						movingShipx = rand + 1;
+					} else if (direction == 2) {
+						movingShipx = rand;
+					}
+					movingCount =  (2 * direction - 3) * 40;
+					this.logger.info("movingCount is " + movingCount);
+
+					this.logger.info("There are " + this.shooters.size() + " Shooters");
+					for (int i = 0; i < this.shooters.size(); i++) {
+
+						this.logger.info("Shooter " + i + "'s x pos is " + this.shooters.get(i).getPositionX());
+					}
 				}
 
-				// 이동
-				this.enemyShips.get(rand).get(0).move((int) ((direction - 1.5) * -2), 0);
-				this.logger.info("Enemy ship (" + rand + ", 0) moves.");
-				movingCount =  (2 * direction - 3) * 39;
-
-				// 인덱싱
-				List<EnemyShip> newColumn = new ArrayList<EnemyShip>();
-				newColumn.add(this.enemyShips.get(rand).get(0));
-				List<EnemyShip> changedColumn = new ArrayList<EnemyShip>();
-				for (int i = 1; i < this.enemyShips.get(rand).size(); i++) {
-					changedColumn.add(this.enemyShips.get(rand).get(i));
-				}
-				if (direction == 1) {
-					enemyShips.add(rand + 1, newColumn);
-					enemyShips.set(rand, changedColumn);
-					this.shooters.add(rand + 1, this.enemyShips.get(rand + 1).get(0));
-				} else {
-					enemyShips.add(rand, newColumn);
-					enemyShips.set(rand + 1, changedColumn);
-					this.shooters.add(rand, this.enemyShips.get(rand).get(0));
-				}
-
-				movingShipx = rand;
-				this.logger.info("New movingShipx " + movingShipx);
+				this.logger.info("end--------------------------------");
 			}
 		}
 	}
@@ -538,12 +570,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 	private void moving2() {
 		if (movingCount != 0) {
-			this.logger.info("movingCount " + movingCount);
-			this.logger.info("movingShipx " + movingShipx);
-			if (movingShipx < 0) {
+			if (movingCount < 0) {
+				// 오른쪽으로 이동
 				this.enemyShips.get(movingShipx).get(0).move(1, 0);
 				movingCount++;
-			} else if (movingShipx > 0) {
+			} else if (movingCount > 0) {
+				// 왼쪽으로 이동
 				this.enemyShips.get(movingShipx).get(0).move(- 1, 0);
 				movingCount--;
 			}

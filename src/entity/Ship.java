@@ -149,18 +149,26 @@ public class Ship extends Entity {
 	public final double getSpeed() {
 		return SPEED;
 	}
-	public final int getShootingInterval() {return SHOOTING_INTERVAL;}
+
+	public final int getInitShootingInterval() {return INIT_SHOOTING_INTERVAL;}
+
 	public final int getBulletSpeed() {return BULLET_SPEED;}
+
 	public void setShootingInterval(double setshootinterval){
 		SHOOTING_INTERVAL = (int)setshootinterval;
 		this.shootingCooldown = Core.getCooldown((int)setshootinterval);
 	}
+
+
 	public void setBulletSpeed(int setbulletspeed){BULLET_SPEED = setbulletspeed;}
+
+
 	public void setShipSpeed(double setshipspeed) {SPEED = setshipspeed;}
+
 
 	public void setInitState(){
 		SPEED = INIT_SPEED;
-		this.shootingCooldown = engine.Core.getCooldown(INIT_SHOOTING_INTERVAL);
+		this.shootingCooldown = engine.Core.getCooldown(getInitShootingInterval());
 		BULLET_SPEED = INIT_BULLET_SPEED;
 	}
 

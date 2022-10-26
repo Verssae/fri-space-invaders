@@ -7,6 +7,8 @@ import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
 import engine.FileManager;
+import sound.SoundPlay;
+import sound.SoundType;
 //import entity.Shield;
 
 /**
@@ -17,6 +19,7 @@ import engine.FileManager;
  */
 public class Ship extends Entity {
 
+	private static engine.Core Core;
 	/** Time between shots. */
 	private int SHOOTING_INTERVAL, INIT_SHOOTING_INTERVAL;
 	/** Speed of the bullets shot by the ship. */
@@ -106,6 +109,7 @@ public class Ship extends Entity {
 			this.shootingCooldown.reset();
 			bullets.add(BulletPool.getBullet(positionX + this.width / 2,
 					positionY, BULLET_SPEED));
+			SoundPlay.getInstance().play(SoundType.shoot);
 			return true;
 		}
 		return false;
@@ -147,13 +151,16 @@ public class Ship extends Entity {
 	}
 	public final int getShootingInterval() {return SHOOTING_INTERVAL;}
 	public final int getBulletSpeed() {return BULLET_SPEED;}
-	public void setShootingInterval(int setshootinterval){SHOOTING_INTERVAL = setshootinterval;}
+	public void setShootingInterval(double setshootinterval){
+		SHOOTING_INTERVAL = (int)setshootinterval;
+		this.shootingCooldown = Core.getCooldown((int)setshootinterval);
+	}
 	public void setBulletSpeed(int setbulletspeed){BULLET_SPEED = setbulletspeed;}
 	public void setShipSpeed(double setshipspeed) {SPEED = setshipspeed;}
 
 	public void setInitState(){
 		SPEED = INIT_SPEED;
-		SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL;
+		this.shootingCooldown = engine.Core.getCooldown(INIT_SHOOTING_INTERVAL);
 		BULLET_SPEED = INIT_BULLET_SPEED;
 	}
 

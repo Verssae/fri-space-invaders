@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import screen.GameScreen;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
 import entity.Life;
+import sound.SoundPlay;
 
 /**
  * Manages screen drawing.
@@ -52,7 +54,7 @@ public final class DrawManager {
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
 
-
+	Color[] colors = {Color.gray, Color.darkGray, Color.black};
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -117,7 +119,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.ItemDrop, new boolean[5][5]);
+			spriteMap.put(SpriteType.ItemDrop, new boolean[9][9]);
 			spriteMap.put(SpriteType.ItemGet, new boolean[5][5]);
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
 			spriteMap.put(SpriteType.Life, new boolean[13][13]);
@@ -175,7 +177,12 @@ public final class DrawManager {
 		graphics = frame.getGraphics();
 		backBufferGraphics = backBuffer.getGraphics();
 
-		backBufferGraphics.setColor(Color.BLACK);
+		if (GameScreen.lives <= 3 && GameScreen.lives > 0) {
+			backBufferGraphics.setColor(colors[GameScreen.lives - 1]);
+		} else {
+			backBufferGraphics.setColor(Color.BLACK);
+		}
+
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
 
@@ -244,7 +251,7 @@ public final class DrawManager {
 	 */
 	@SuppressWarnings("unused")
 	private void drawGrid(final Screen screen) {
-		backBufferGraphics.setColor(Color.DARK_GRAY);
+		backBufferGraphics.setColor(Color.darkGray);
 		for (int i = 0; i < screen.getHeight() - 1; i += 2)
 			backBufferGraphics.drawLine(0, i, screen.getWidth() - 1, i);
 		for (int j = 0; j < screen.getWidth() - 1; j += 2)
@@ -261,14 +268,15 @@ public final class DrawManager {
 	 */
 	public void drawScore(final Screen screen, final int score) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.GREEN);
+
+		backBufferGraphics.setColor(Color.cyan);
 		String scoreString = String.format("SCORE %04d", score);
 		backBufferGraphics.drawString(scoreString, screen.getWidth() - 120, 25);
 	}
 
 	public void drawLevels(final Screen screen, final int level) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.GREEN);
+		backBufferGraphics.setColor(Color.green);
 		String scoreString = String.format("Level: %02d", level);
 		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 25);
 	}
@@ -283,7 +291,7 @@ public final class DrawManager {
 	 */
 	public void drawLives(final Screen screen, final int lives) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.white);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
 		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
@@ -299,7 +307,7 @@ public final class DrawManager {
 	 *            Y coordinate of the line.
 	 */
 	public void drawHorizontalLine(final Screen screen, final int positionY) {
-		backBufferGraphics.setColor(Color.GREEN);
+		backBufferGraphics.setColor(Color.BLUE);
 		backBufferGraphics.drawLine(0, positionY, screen.getWidth(), positionY);
 		backBufferGraphics.drawLine(0, positionY + 1, screen.getWidth(),
 				positionY + 1);
@@ -323,11 +331,47 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
-	
-	public void drawVolume(final Screen screen, final int volume){
-		String volumeString = "Volume";
-		backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, volumeString, screen.getHeight()/3);
+	//mainmenu 1014
+	public void drawSetting(final Screen screen) {
+		String titleString = "Setting";
+		String instructionsString =
+				"select with w+s / arrows, confirm with space";
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 4);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
+	}
+	//mainmenu 1014
+	public void drawVolume(final Screen screen, final int volume, final int option){
+		String volumeString = "Bgm";
+		String effectString = "Effect";
+		String backString = "Back";
+		
+		if (option == 100)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, volumeString,
+				screen.getHeight()/3);
+		drawCenteredBigString(screen,"<        "+ SoundPlay.getInstance().getBgmVolume() +"        >",screen.getHeight()/3+fontRegularMetrics.getHeight() * 2);
+		if (option == 101)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, effectString,
+				screen.getHeight()/3 + fontBigMetrics.getHeight()*3);
+		drawCenteredBigString(screen,"<        "+ SoundPlay.getInstance().getEffectVolume() +"        >",screen.getHeight()/3+fontRegularMetrics.getHeight() * 7);
+		if (option == 6)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, backString,
+				screen.getHeight()/3 + fontBigMetrics.getHeight() * 7);
+		
+
 	}
 
 	public void drawVolumeTitle(final Screen screen){
@@ -404,6 +448,69 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
 				 3 + fontRegularMetrics.getHeight() * 12);
 		
+	}
+	//mainmenu 1014
+	public void drawSettingMenu(final Screen screen, final int option) {
+		String VolumeString = "Sound";
+		String BackString = "Back";
+
+		if (option == 8)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, VolumeString,
+				screen.getHeight()/3);
+		if (option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, BackString, screen.getHeight()/3
+				 + fontRegularMetrics.getHeight() * 2);
+		
+	}
+
+	/**
+	 * Draws main menu.
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 * @param option
+	 *            Option selected.
+	 */
+	public void drawItemInfo(final Screen screen, final int option) {
+		String bulletSpeedString = "Bullet Speed Up!";
+		String pointUpString = "Point Up!";
+		String shieldString = "Shield!";
+		String speedUpString = "Speed Up!";
+		String enemySpeedString = "Enemy Faster!";
+		String lifeString = "Extra Life!";
+
+		if (option == 0) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, bulletSpeedString,
+					screen.getHeight()*2/12);
+		} else if (option == 1) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, pointUpString,
+					screen.getHeight()*2/12);
+		} else if (option == 2) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, shieldString,
+					screen.getHeight()*2/12);
+		} else if (option == 3) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, speedUpString,
+					screen.getHeight()*2/12);
+		} else if (option == 4) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, enemySpeedString,
+					screen.getHeight()*2/12);
+		} else if (option == 5) {
+			backBufferGraphics.setColor(Color.WHITE);
+			drawCenteredRegularString(screen, lifeString,
+					screen.getHeight()*2/12);
+		}
+
 	}
 
 	/**
@@ -601,21 +708,133 @@ public final class DrawManager {
 				screen.getHeight() / 5);
 		
 	}
-	public void drawHelpMenu(final Screen screen) {
+	public void drawHelpMenu(final Screen screen, final int page) {
 		String helpString = "HELP";
-		String right = "right >";
-		String left = "left <";
-		String shoot = "shoot spacebar";
+		String right = "right:  >   (right arrow)";
+		String left = "left:  <   (left arrow)";
+		String shoot = "shoot:   spacebar";
+		String spaceBar = "Press Space to return"; // 뒤로 가기
+		String pageKey = "Press Number key to page"; // 페이지 변경
+		
+		String operationDescription = "Operation"; // 조작 키 
+		
+		String itemDescription = "Item Description"; // 아이템 설명 
+		String item1 = "shield";
+		String item1_1 = "get shield to protect bullet of one time "; // 아이템1 
+		
+		String item2 = "extra life"; // 아이템2
+		String item2_1 = "get extra life (maximum 4) "; // 아이템2
+		
+		String item3 = "move speed up"; // 아이템3 
+		String item3_1 = "move speed up of ship "; // 아이템3
+		
+		String item4 = "machinegun"; // 아이템4 
+		String item4_1 = "decrease bullet interval "; // 아이템4 
+		
+		String item5 = "bullet speed up"; // 아이템5 
+		String item5_1 = "increase bullet speed "; // 아이템5
+		
+		String item6 = "point up"; // 아이템6 
+		String item6_1 = "increase kill point earned per enermy "; // 아이템6 
+		
+		
+		
+		
+		
+		
+		String page_str = "page : "; // page 
+		
+		
+		switch (page) {
+			case 1:
+				backBufferGraphics.setColor(Color.GREEN);
+				drawCenteredRegularString(screen, operationDescription,
+						screen.getHeight()/3);
+			
+				backBufferGraphics.setColor(Color.WHITE);
+				drawCenteredRegularString(screen, right, screen.getHeight() / 3+20);
+				backBufferGraphics.setColor(Color.WHITE);
+				drawCenteredRegularString(screen, left, screen.getHeight() / 3 + 40);
+				backBufferGraphics.setColor(Color.WHITE);
+				drawCenteredRegularString(screen, shoot, screen.getHeight() / 3 + 60);
+				
+							
+				
+				
+				break;
+			case 2:
+				backBufferGraphics.setColor(Color.GREEN);
+				drawCenteredRegularString(screen, itemDescription,
+						screen.getHeight()/3);
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 -50);// 아이템1
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item1_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 -30);// 아이템1
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item2, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 -10);// 아이템2
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item2_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +10);// 아이템2
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item3, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +30);// 아이템3
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item3_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +50);// 아이템3
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item4, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +70);// 아이템4
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item4_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +90);// 아이템4
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item5, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +110);// 아이템5
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item5_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +130);// 아이템5
+				
+				backBufferGraphics.setColor(Color.ORANGE);
+				backBufferGraphics.drawString(item6, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +150);// 아이템6
+				
+				backBufferGraphics.setColor(Color.WHITE);
+				backBufferGraphics.drawString(item6_1, screen.getWidth() / 2 - 170,
+						screen.getHeight() / 2 +170);// 아이템6
+				
+				
+	
+				
+			
+				break;
+		}
 		
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, helpString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredRegularString(screen, right, screen.getHeight() / 3);
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredRegularString(screen, left, screen.getHeight() / 3 + 20);
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredRegularString(screen, shoot, screen.getHeight() / 3 + 40);
+		
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, pageKey,
+				screen.getHeight()/4);
+		
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, spaceBar,
+				screen.getHeight()/5);
+		
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, page_str + page, screen.getHeight() / 3 + 300);	
 		
 	}
 
@@ -744,11 +963,15 @@ public final class DrawManager {
 			if (permanentState.getShipColor() == 2)
 				drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 		}
-		else if(menu == 2){ // bullet efx
-
+		else if(menu == 2){ // bullet sfx
+			backBufferGraphics.setFont(fontBig);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getBulletSFX()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.setFont(fontRegular);
 		}
-		else{ // egm
-
+		else if(menu == 3){ // bgm
+			backBufferGraphics.setFont(fontBig);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getBGM()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.setFont(fontRegular);
 		}
 	}
 

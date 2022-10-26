@@ -9,6 +9,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameState;
 import engine.Score;
+import sound.*;
 
 /**
  * Implements the score screen.
@@ -74,6 +75,8 @@ public class ScoreScreen extends Screen {
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
 		this.per = (float)shipsDestroyed / bulletsShot;
+
+		SoundPlay.getInstance().play(SoundType.gameOverBGM);
 
 		try {
 			this.highScores = Core.getFileManager().loadHighScores();

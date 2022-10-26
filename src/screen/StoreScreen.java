@@ -6,6 +6,8 @@ import java.util.Random;
 import engine.Cooldown;
 import engine.Core;
 import engine.PermanentState;
+import sound.SoundPlay;
+import sound.SoundType;
 
 public class StoreScreen extends Screen {
 
@@ -20,6 +22,8 @@ public class StoreScreen extends Screen {
     /** Time between changes in user selection. */
     private Cooldown selectionCooldown;
     private PermanentState permanentState = PermanentState.getInstance();
+
+    private SoundPlay soundPlay = SoundPlay.getInstance();
 
     private int menuCode = 0;
     private int focusReroll = 0;
@@ -94,6 +98,7 @@ public class StoreScreen extends Screen {
                         rerollItem();
                     }
                 }
+                soundPlay.play(SoundType.menuClick);
                 this.selectionCooldown.reset();
             }
         }
@@ -107,6 +112,7 @@ public class StoreScreen extends Screen {
             menuCode = 0;
         else
             menuCode++;
+        soundPlay.play(SoundType.menuSelect);
     }
 
     /**
@@ -117,30 +123,46 @@ public class StoreScreen extends Screen {
             menuCode = 4;
         else
             menuCode--;
+        soundPlay.play(SoundType.menuSelect);
     }
 
     private void rerollItem() {
         if (menuCode == 0){ // ship shape
             if (permanentState.getCoin() >= COST_SHAPE) {
-                permanentState.setShipShape(new Random().nextInt(3));
+                int x = new Random().nextInt(3);
+                while (permanentState.getShipShape() == x)
+                    x = new Random().nextInt(3);
+
+                permanentState.setShipShape(x);
                 permanentState.setCoin(-COST_SHAPE);
             }
         }
         else if (menuCode == 1){ // ship color
             if (permanentState.getCoin() >= COST_COLOR) {
-                permanentState.setShipColor(new Random().nextInt(3));
+                int x = new Random().nextInt(3);
+                while (permanentState.getShipColor() == x)
+                    x = new Random().nextInt(3);
+
+                permanentState.setShipColor(x);
                 permanentState.setCoin(-COST_COLOR);
             }
         }
         else if (menuCode == 2){ // bullet effect
             if (permanentState.getCoin() >= COST_BULLET) {
-                permanentState.setBulletSFX(new Random().nextInt(3));
+                int x = new Random().nextInt(3) + 1;
+                while (permanentState.getBulletSFX() == x)
+                    x = new Random().nextInt(3) + 1;
+
+                permanentState.setBulletSFX(x);
                 permanentState.setCoin(-COST_BULLET);
             }
         }
         else { // BGM
             if (permanentState.getCoin() >= COST_BGM) {
-                permanentState.setBGM(new Random().nextInt(3));
+                int x = new Random().nextInt(3) + 1;
+                while (permanentState.getBGM() == x)
+                    x = new Random().nextInt(3) + 1;
+                permanentState.setBGM(x);
                 permanentState.setCoin(-COST_BGM);
             }
         }
@@ -154,7 +176,8 @@ public class StoreScreen extends Screen {
 
         drawManager.drawStoreTitle(this);
         drawManager.drawStoreMenu(this, menuCode, focusReroll);
-        drawManager.drawStoreGacha(this, menuCode, focusReroll);
+        if (menuCode < 4)
+            drawManager.drawStoreGacha(this, menuCode, focusReroll);
         drawManager.drawCoin(this, permanentState.getCoin());
 
         drawManager.completeDrawing(this);

@@ -4,7 +4,8 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
-import engine.PermanentState;
+import sound.SoundPlay;
+import sound.SoundType;
 
 /**
  * Implements the title screen.
@@ -19,7 +20,6 @@ public class TitleScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
-	private PermanentState permanentState = PermanentState.getInstance(); //
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -35,6 +35,7 @@ public class TitleScreen extends Screen {
 		super(width, height, fps);
 
 		// Defaults to play.
+		SoundPlay.getInstance().play(SoundType.mainGameBgm);
 		this.returnCode = 2;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
@@ -70,8 +71,15 @@ public class TitleScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
 				this.isRunning = false;
+				if(this.returnCode == 2 || this.returnCode == 5){
+					SoundPlay.getInstance().stopBgm();
+				}
+				sound.SoundPlay.getInstance().play(SoundType.menuClick);
+			}
+
+
 		}
 	}
 
@@ -85,6 +93,7 @@ public class TitleScreen extends Screen {
 			this.returnCode = 2;
 		else
 			this.returnCode++;
+		SoundPlay.getInstance().play(SoundType.menuSelect);
 	}
 
 	/**
@@ -97,6 +106,7 @@ public class TitleScreen extends Screen {
 			this.returnCode = 0;
 		else
 			this.returnCode--;
+		SoundPlay.getInstance().play(SoundType.menuSelect);
 	}
 
 	/**
@@ -108,8 +118,6 @@ public class TitleScreen extends Screen {
 		drawManager.drawTitle(this);
 		drawManager.drawMenu(this, this.returnCode);
 
-		drawManager.drawCoin(this, permanentState.getCoin());
 		drawManager.completeDrawing(this);
-
 	}
 }

@@ -14,6 +14,7 @@ import engine.DrawManager.SpriteType;
  */
 public class EnemyShip extends Entity {
 	//추가
+	Color color_dead = Color.RED;
 	private Item.ItemType itemtype;
 
 	private static int hasItem ;
@@ -77,6 +78,10 @@ public class EnemyShip extends Entity {
 		default:
 			this.pointValue = 0;
 			break;
+
+
+
+
 		}
 	}
 
@@ -188,8 +193,12 @@ public class EnemyShip extends Entity {
 	 * Destroys the ship, causing an explosion.
 	 */
 	public final void destroy() {
+		/*this.isDestroyed = true;
+		this.spriteType = SpriteType.Explosion;*/
 		this.isDestroyed = true;
-		this.spriteType = SpriteType.Explosion;
+		this.spriteType = spriteType.Explosion;
+		this.animationCooldown = Core.getCooldown(1000);
+		this.setColor(color_dead);
 	}
 
 	/**
@@ -201,5 +210,11 @@ public class EnemyShip extends Entity {
 		return this.isDestroyed;
 	}
 
+	public void setInitPointValue(){
+		if(this.spriteType == spriteType.EnemyShipA1 || this.spriteType == spriteType.EnemyShipA2) setPointValue(A_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipB1 || this.spriteType == spriteType.EnemyShipB2) setPointValue(B_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipC1 || this.spriteType == spriteType.EnemyShipC2) setPointValue(C_TYPE_POINTS);
+		else if(this.spriteType == spriteType.EnemyShipSpecial) setPointValue(BONUS_TYPE_POINTS);
+	}
 }
 

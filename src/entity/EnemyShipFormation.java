@@ -400,12 +400,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 
 						}
-						enemyShip.move(movementX, movementY);
-						enemyShip.update();
+					}
+					enemyShip.move(movementX, movementY);
+					enemyShip.update();
 					}
 				}
 			}
-		}
+
 	}
 
 	/**

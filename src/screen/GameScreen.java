@@ -522,6 +522,7 @@ public class GameScreen extends Screen {
 			if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
 
+				LOGGER.info("Obtained BulletSpeed Item");
 				this.returnCode = 0;
 				this.clearItem();//효과초기화
 				this.clearPointUp();
@@ -533,6 +534,7 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
 
+				LOGGER.info("Obtained PointUp Item");
 				this.returnCode = 1;
 				this.clearItem();//효과 초기화
 				this.itemInfoCooldown.reset();
@@ -540,38 +542,44 @@ public class GameScreen extends Screen {
 					enemyShip.setPointValue(2 * enemyShip.getPointValue());
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
 
+				LOGGER.info("Obtained MachineGun");
 				this.returnCode = 2;
 				this.clearItem();
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();
-				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
+				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
 
+			}
+			else if (item.getIsget() == false &&
+					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+
+				LOGGER.warning("Obtained Shield Item");
+				this.returnCode = 3;
+				this.clearItem();//효과 초기화
+				this.clearPointUp();
+				this.itemInfoCooldown.reset();
+				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
 			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
-				this.returnCode = 3;
+				LOGGER.warning("Obtained SpeedUp Item");
+				this.returnCode = 4;
 				this.clearItem();//효과 초기화
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 			}
-			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
-				this.returnCode = 4;
-				this.clearItem();//효과 초기화
-				this.itemInfoCooldown.reset();
-				this.ship.setShootingInterval(0.1 * this.ship.getInitShootingInterval());
 
-			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
 
 				this.clearItem();
 				this.clearPointUp();
 				if (this.lives < 4) {
+					LOGGER.warning("Obtained ExtraLife Item");
 					this.lives++;
 					this.returnCode = 5;
 					this.itemInfoCooldown.reset();

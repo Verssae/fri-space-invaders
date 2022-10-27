@@ -111,17 +111,17 @@ public class GameScreen extends Screen {
 	 * Constructor, establishes the properties of the screen.
 	 * 
 	 * @param gameState
-	 *            Current game state.
+	 *                     Current game state.
 	 * @param gameSettings
-	 *            Current game settings.
+	 *                     Current game settings.
 	 * @param bonusLife
-	 *            Checks if a bonus life is awarded this level.
+	 *                     Checks if a bonus life is awarded this level.
 	 * @param width
-	 *            Screen width.
+	 *                     Screen width.
 	 * @param height
-	 *            Screen height.
+	 *                     Screen height.
 	 * @param fps
-	 *            Frames per second, frame rate at which the game is run.
+	 *                     Frames per second, frame rate at which the game is run.
 	 */
 	public GameScreen(final GameState gameState,
 			final GameSettings gameSettings, final boolean bonusLife,
@@ -143,7 +143,7 @@ public class GameScreen extends Screen {
 
 		this.itemmanager = new ItemManager();
 
-		if(this.itempool == null){
+		if (this.itempool == null) {
 			this.itempool = new ItemPool();
 		}
 
@@ -177,7 +177,8 @@ public class GameScreen extends Screen {
 				this.ship = new Ship(this.width / 2, this.height - 30, playerShipShape, FileManager.ChangeIntToColor());
 				break;
 			case 2:
-				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipShape), FileManager.ChangeIntToColor());
+				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0' + playerShipShape),
+						FileManager.ChangeIntToColor());
 				break;
 		}
 		// Appears each 10-30 seconds.
@@ -186,7 +187,7 @@ public class GameScreen extends Screen {
 		this.enemyShipSpecialCooldown.reset();
 		this.enemyShipSpecialExplosionCooldown = Core
 				.getCooldown(BONUS_SHIP_EXPLOSION);
-		//add dangerous Ship
+		// add dangerous Ship
 		this.enemyShipdangerousCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);
 		this.enemyShipdangerousCooldown.reset();
@@ -239,12 +240,12 @@ public class GameScreen extends Screen {
 
 				if (moveRight && !isRightBorder) {
 					this.ship.moveRight();
-					if(shield != null)
-							shield.moveRight();
+					if (shield != null)
+						shield.moveRight();
 				}
 				if (moveLeft && !isLeftBorder) {
 					this.ship.moveLeft();
-					if(shield != null)
+					if (shield != null)
 						shield.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
@@ -297,8 +298,8 @@ public class GameScreen extends Screen {
 			this.enemyShipFormation.shoot(this.bullets);
 
 		}
-		for(Item item : this.itemiterator){
-			if(item != null) {
+		for (Item item : this.itemiterator) {
+			if (item != null) {
 				manageGetItem(item);
 			}
 		}
@@ -326,8 +327,6 @@ public class GameScreen extends Screen {
 	 */
 	private void draw() {
 		drawManager.initDrawing(this);
-
-
 		for(Item item : this.itemiterator) {
 			if (item != null) {
 				drawManager.drawEntity(item, item.getPositionX(),
@@ -345,13 +344,15 @@ public class GameScreen extends Screen {
 			drawManager.drawEntity(this.enemyShipDangerous,
 					this.enemyShipDangerous.getPositionX(),
 					this.enemyShipDangerous.getPositionY());
-		if(shield != null){
-				drawManager.drawEntity(shield, shield.getPositionX(),shield.getPositionY());}
+		if (shield != null) {
+			drawManager.drawEntity(shield, shield.getPositionX(), shield.getPositionY());
+		}
 
-		if(itempool.getItem() != null && this.shield != null &&
-				itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
-				drawManager.drawEntity(shield, shield.getPositionX(),
-				shield.getPositionY());}
+		if (itempool.getItem() != null && this.shield != null &&
+				itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+			drawManager.drawEntity(shield, shield.getPositionX(),
+					shield.getPositionY());
+		}
 
 		enemyShipFormation.draw();
 
@@ -369,7 +370,8 @@ public class GameScreen extends Screen {
 		if (!this.inputDelay.checkFinished()) {
 			int countdown = (int) ((INPUT_DELAY
 					- (System.currentTimeMillis()
-							- this.gameStartTime)) / 1000);
+							- this.gameStartTime))
+					/ 1000);
 			drawManager.drawCountDown(this, this.level, countdown,
 					this.bonusLife);
 			drawManager.drawHorizontalLine(this, this.height / 2 - this.height
@@ -440,12 +442,11 @@ public class GameScreen extends Screen {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
-
-						if(enemyShip.getItemType() != null) {
-						    enemyShip.itemDrop(itemiterator);
-							for(Item item : this.itemiterator)
-								if(item != null)
-								item.setSprite();
+						if (enemyShip.getItemType() != null) {
+							enemyShip.itemDrop(itemiterator);
+							for (Item item : this.itemiterator)
+								if (item != null)
+									item.setSprite();
 						}
 
 						this.enemyShipFormation.destroy(enemyShip);
@@ -481,9 +482,9 @@ public class GameScreen extends Screen {
 	 * Checks if two entities are colliding.
 	 * 
 	 * @param a
-	 *            First entity, the bullet.
+	 *          First entity, the bullet.
 	 * @param b
-	 *            Second entity, the ship.
+	 *          Second entity, the ship.
 	 * @return Result of the collision test.
 	 */
 	private boolean checkCollision(final Entity a, final Entity b) {
@@ -511,7 +512,6 @@ public class GameScreen extends Screen {
 		return new GameState(this.level, this.score, this.lives,
 				this.bulletsShot, this.shipsDestroyed);
 	}
-
 
 	private void manageGetItem(Item item) {
 		if (checkCollision(item, this.ship) && !this.levelFinished) {
@@ -591,12 +591,16 @@ public class GameScreen extends Screen {
 			item.isGet(true);
 		}
 	}
-
+	/**
+	 * initalize obtained item's effects.
+	 */
 	public void clearItem(){
 		ship.setInitState();
 		shield = null;
 	}
-
+	/**
+	 * Removing item that already obtained, or already get out of the gamescreen.
+	 */
 	private void cleanItems() {
 		Set<Item> recyclable = new HashSet<Item>();
 		for (Item item : this.itemiterator) {
@@ -607,7 +611,9 @@ public class GameScreen extends Screen {
 		}
 		this.itemiterator.removeAll(recyclable);
 	}
-
+	/**
+	 * initalize pointupitem effects.
+	 */
 	public void clearPointUp(){
 		for (EnemyShip enemyShip : this.enemyShipFormation)
 			enemyShip.setInitPointValue();

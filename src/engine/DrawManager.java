@@ -84,11 +84,11 @@ public final class DrawManager {
 		EnemyShipdangerous,
 
 		Explosion,
-
+		/** dropped item */
 		ItemDrop,
-
+		/** Obtained item */
 		ItemGet,
-
+		/** shield for playership */
 		Shield,
     
     /** Life shape */

@@ -595,12 +595,16 @@ public class GameScreen extends Screen {
 			item.isGet(true);
 		}
 	}
-
+	/**
+	 * initalize obtained item's effects.
+	 */
 	public void clearItem(){
 		ship.setInitState();
 		shield = null;
 	}
-
+	/**
+	 * Removing item that already obtained, or already get out of the gamescreen.
+	 */
 	private void cleanItems() {
 		Set<Item> recyclable = new HashSet<Item>();
 		for (Item item : this.itemiterator) {
@@ -611,7 +615,9 @@ public class GameScreen extends Screen {
 		}
 		this.itemiterator.removeAll(recyclable);
 	}
-
+	/**
+	 * initalize pointupitem effects.
+	 */
 	public void clearPointUp(){
 		for (EnemyShip enemyShip : this.enemyShipFormation)
 			enemyShip.setInitPointValue();

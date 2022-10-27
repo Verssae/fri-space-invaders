@@ -398,15 +398,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 						} else if (inverse == 1) {
 							movementY = SPEED_CONTROL * (-1);
 
-
 						}
 					}
 					enemyShip.move(movementX, movementY);
 					enemyShip.update();
-					}
 				}
 			}
-
+		}
 	}
 
 	/**

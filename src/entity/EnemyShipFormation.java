@@ -1,6 +1,5 @@
 package entity;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,9 +22,10 @@ import engine.GameSettings;
  */
 public class EnemyShipFormation implements Iterable<EnemyShip> {
 
-
 	private static int Current_Level = 0;
-	/** Initial position in the x-axis. */
+	/**
+	 * Initial position in the x-axis.
+	 */
 
 	private static final int INIT_POS_X = 20;
 	/**
@@ -55,7 +55,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Speed of the bullets shot by the members.
 	 */
-	private static final int BULLET_SPEED = 4;
 	/**
 	 * Proportion of differences between shooting times.
 	 */
@@ -76,6 +75,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 * Minimum speed allowed.
 	 */
 	private static final int MINIMUM_SPEED = 10;
+	/**
+	 * Speed control in update
+	 */
+	private static int SPEED_CONTROL = 1;
 
 	/**
 	 * DrawManager instance.
@@ -179,11 +182,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		 * Movement to the left side of the screen.
 		 */
 		LEFT,
-		/** Movement to the bottom of the screen. */
-		DOWN,
 
-		UP
-	};
+
+		/**
+		 * Movement to the bottom of the screen.
+		 */
+		DOWN
+	}
+
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -230,8 +236,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 				column.add(new EnemyShip((SEPARATION_DISTANCE
 						* this.enemyShips.indexOf(column))
-						+ positionX, (SEPARATION_DISTANCE * i)
-						+ positionY, spriteType));
+						+ positionX,
+						(SEPARATION_DISTANCE * i)
+								+ positionY,
+						spriteType));
 				this.shipCount++;
 			}
 		}
@@ -259,7 +267,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public List<List<EnemyShip>> getEnemyShip() {
 		return this.enemyShips;
 	}
-
 
 	/**
 	 * Associates the formation to a given screen.
@@ -294,11 +301,15 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		int inverse = 0;
 		int movementX = 0;
 		int movementY = 0;
+
 		double remainingProportion = (double) this.shipCount
 				/ (this.nShipsHigh * this.nShipsWide);
+
 		this.movementSpeed = (double) (Math.pow(remainingProportion, 2)
 				* this.baseSpeed);
-		this.movementSpeed += MINIMUM_SPEED;
+
+		if (baseSpeed > 0)
+			this.movementSpeed += MINIMUM_SPEED;
 
 		movementInterval++;
 		if (movementInterval >= this.movementSpeed) {
@@ -348,8 +359,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				movementX = X_SPEED;
 			else if (currentDirection == Direction.LEFT)
 				movementX = -X_SPEED;
-			else if (currentDirection == Direction.UP)
-				movementY =-Y_SPEED;
+
 			else
 				movementY = Y_SPEED;
 
@@ -362,6 +372,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				destroyed = new ArrayList<EnemyShip>();
 				for (EnemyShip ship : column) {
 					if (ship != null && ship.isDestroyed()) {
+
 						destroyed.add(ship);
 						this.logger.info("Removed enemy "
 								+ column.indexOf(ship) + " from column "
@@ -371,31 +382,28 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				column.removeAll(destroyed);
 			}
 
-			for (List<EnemyShip> column : this.enemyShips)
+			if (isAtBottom) {
+				positionY = positionY * (-1);
+				inverse = 1;
+			} else if (isAtTop)
+				inverse = 0;
+
+			for (List<EnemyShip> column : this.enemyShips) {
+
 				for (EnemyShip enemyShip : column) {
-					if(Current_Level == 8) {
+					if (Current_Level == 8) {
+						if (inverse == 0) {
+							movementY = SPEED_CONTROL;
 
-						if(isAtBottom) {
-							inverse = 1;
-							this.logger.info("Inverse:" + inverse);
-						}
-						else if (isAtTop) {
-							inverse = 0;
-							this.logger.info("Inverse:" + inverse);
-						}
-						if(inverse == 0) {
-							movementY = (int) Math.random() * 3 + 1;
-							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-						}
-						else if(inverse == 1) {
-							movementY = ((int) Math.random() * 3 + 1) * (-1);
-							this.logger.info("moveY:" + movementY + " > current:" + positionY);
-						}
+						} else if (inverse == 1) {
+							movementY = SPEED_CONTROL * (-1);
 
+						}
 					}
 					enemyShip.move(movementX, movementY);
 					enemyShip.update();
 				}
+			}
 		}
 	}
 
@@ -452,10 +460,30 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		int index = (int) (Math.random() * this.shooters.size());
 		EnemyShip shooter = this.shooters.get(index);
 
-		if (this.shootingCooldown.checkFinished()) {
-			this.shootingCooldown.reset();
-			bullets.add(BulletPool.getBullet(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED));
+		switch (shooter.spriteType) {
+			case EnemyShipB1:
+			case EnemyShipB2:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), Current_Level));
+				}
+				break;
+			case EnemyShipC1:
+			case EnemyShipC2:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), Current_Level + 3));
+				}
+				break;
+			default:
+				if (this.shootingCooldown.checkFinished()) {
+					this.shootingCooldown.reset();
+					bullets.add(BulletPool.getBullet(shooter.getPositionX()
+							+ shooter.width / 2, shooter.getPositionY(), 4));
+				}
+				break;
 		}
 	}
 
@@ -468,9 +496,20 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		for (List<EnemyShip> column : this.enemyShips)
 			for (int i = 0; i < column.size(); i++)
 				if (column.get(i).equals(destroyedShip)) {
-					column.get(i).destroy();
-					this.logger.info("Destroyed ship in ("
-							+ this.enemyShips.indexOf(column) + "," + i + ")");
+					if(this.Current_Level == 8) {
+						destroyedShip.bossLives--;
+						if (destroyedShip.bossLives == 0) {
+							column.get(i).destroy();
+							this.shipCount--;
+						}
+						this.logger.info("Destroyed ship in ("
+								+ this.enemyShips.indexOf(column) + "," + i + ")");
+					}else{
+						column.get(i).destroy();
+						this.shipCount--;
+						this.logger.info("Destroyed ship in ("
+								+ this.enemyShips.indexOf(column) + "," + i + ")");
+					}
 				}
 		// Updates the list of ships that can shoot the player.
 		if (this.shooters.contains(destroyedShip)) {
@@ -495,7 +534,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 
-		this.shipCount--;
+
 	}
 
 	/**
@@ -540,7 +579,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public final boolean isEmpty() {
 		return this.shipCount <= 0;
 	}
-
 
 	/**
 	 * Getter for the enemyship's speed.

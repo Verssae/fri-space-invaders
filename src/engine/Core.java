@@ -47,28 +47,30 @@ public final class Core {
 	private static boolean GO_MAIN;
 	/** Difficulty settings for level 1. */
 	private static final GameSettings SETTINGS_LEVEL_1 =
-			new GameSettings(1,5, 4, 60, 2000);
+
+			new GameSettings(1, 5, 4, 60, 2000);
 	/** Difficulty settings for level 2. */
 	private static final GameSettings SETTINGS_LEVEL_2 =
-			new GameSettings(2,5, 5, 50, 2500);
+			new GameSettings(2, 5, 5, 50, 2500);
 	/** Difficulty settings for level 3. */
 	private static final GameSettings SETTINGS_LEVEL_3 =
-			new GameSettings(3,6, 5, 40, 1500);
+			new GameSettings(3, 6, 5, 40, 1500);
 	/** Difficulty settings for level 4. */
 	private static final GameSettings SETTINGS_LEVEL_4 =
-			new GameSettings(4,6, 6, 30, 1500);
+			new GameSettings(4, 6, 6, 30, 1500);
 	/** Difficulty settings for level 5. */
 	private static final GameSettings SETTINGS_LEVEL_5 =
-			new GameSettings(5,7, 6, 20, 1000);
+			new GameSettings(5, 7, 6, 20, 1000);
 	/** Difficulty settings for level 6. */
 	private static final GameSettings SETTINGS_LEVEL_6 =
-			new GameSettings(6,7, 7, 10, 1000);
+			new GameSettings(6, 7, 7, 10, 1000);
 	/** Difficulty settings for level 7. */
 	private static final GameSettings SETTINGS_LEVEL_7 =
-			new GameSettings(7,8, 7, 2, 500);
+			new GameSettings(7,7, 8, 5, 500);
+
 	/** add boss stage **/
 	private static final GameSettings SETTINGS_Boss_Stage=
-			new GameSettings(8, 2,2, -100, 200);
+			new GameSettings(8, 3,3, 0, 200);
 
 	/** Frame to draw the screen on. */
 	private static Frame frame;
@@ -127,10 +129,14 @@ public final class Core {
 
 		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
+
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 
 		int returnCode = 1;
 		do {
+			gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+
+
 			switch (returnCode) {
 				case 1:
 					// Main menu.

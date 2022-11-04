@@ -74,6 +74,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Minimum speed allowed.
 	 */
+/*test*/
 	private static final int MINIMUM_SPEED = 10;
 	/**
 	 * Speed control in update

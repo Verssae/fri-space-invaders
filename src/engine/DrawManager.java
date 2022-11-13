@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import screen.GameScreen;
+import screen.MapScreen;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
@@ -124,8 +125,11 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Life, new boolean[13][13]);
 			spriteMap.put(SpriteType.EnemyShipdangerous, new boolean[16][7]);
 
+
 			fileManager.readship();//read ship파일
+
 			fileManager.loadSprite(spriteMap);
+
 			logger.info("Finished loading the sprites.");
 
 			// Font loading.
@@ -170,17 +174,20 @@ public final class DrawManager {
 	 *            Screen to draw in.
 	 */
 	public void initDrawing(final Screen screen) {
+		logger = Core.getLogger();
+
 		backBuffer = new BufferedImage(screen.getWidth(), screen.getHeight(),
 				BufferedImage.TYPE_INT_RGB);
 
 		graphics = frame.getGraphics();
 		backBufferGraphics = backBuffer.getGraphics();
 
-		if (GameScreen.lives <= 3 && GameScreen.lives > 0) {
-			backBufferGraphics.setColor(colors[GameScreen.lives - 1]);
-		} else {
-			backBufferGraphics.setColor(Color.BLACK);
-		}
+//		if (GameScreen.lives <= 3 && GameScreen.lives > 0) {
+//			backBufferGraphics.setColor(colors[GameScreen.lives - 1]);
+//		} else {
+//			backBufferGraphics.setColor(Color.BLACK);
+//		}
+		backBufferGraphics.setColor(Color.BLACK);
 
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
@@ -330,6 +337,10 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
+	public void clear(final Screen screen) {
+		logger.info("clear");
+		initDrawing(screen);
+	}
 	//mainmenu 1014
 	public void drawSetting(final Screen screen) {
 		String titleString = "Setting";
@@ -400,7 +411,7 @@ public final class DrawManager {
 		String loadString = "load";
 		String storeString = "store";
 		String helpString = "help";
-				
+		String maptestString = "map test";
 
 		if (option == 2)
 			backBufferGraphics.setColor(Color.GREEN);
@@ -438,12 +449,18 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, helpString, screen.getHeight() / 
 				 3 + fontRegularMetrics.getHeight() * 10);
+		if (option == 8)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, maptestString, screen.getHeight() /
+				3 + fontRegularMetrics.getHeight() * 12);
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, exitString, screen.getHeight() / 
-				 3 + fontRegularMetrics.getHeight() * 12);
+				 3 + fontRegularMetrics.getHeight() * 14);
 		
 	}
 	//mainmenu 1014
@@ -1080,4 +1097,67 @@ public final class DrawManager {
 				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
 	}
 
+	public void drawMap(final Screen screen, final int map_type[][], final int is_adj[][], final int map_moveable[][][], final int cur_x, final int cur_y) {
+		backBufferGraphics.setColor(Color.GREEN);
+
+		drawCenteredBigString(screen, "Chapter 1", 40);
+
+		int dx[] = {1,-1,0,0};
+		int dy[] = {0,0,1,-1};
+		int c_size = 40; // cell size
+		int cm_size = 70; // cell margin size
+		PermanentState permanentState = PermanentState.getInstance();
+
+		for (int i = 0; i < map_type.length; i++){ //row
+			for (int j = 0; j < map_type[0].length; j++){ //column
+				if (map_type[i][j] == MapScreen.Stage_Type.NONE.ordinal())
+					continue;
+				int cell_x = screen.getWidth() / 2 - ((map_type[0].length - 1) * cm_size + c_size) / 2 + j * cm_size;
+				int cell_y = screen.getHeight() / 2 - ((map_type.length - 1) * cm_size + c_size) / 2 + i * cm_size;
+
+				if (i == cur_y && j == cur_x) {
+					try {
+						fileManager.loadSprite_Temp(spriteMap);
+						FileManager.setPlayerShipShape();
+					} catch (IOException e) {
+						logger.warning("Loading failed.");
+					}
+
+					FileManager.setPlayerShipColor(permanentState.getShipColor());
+					if (permanentState.getShipColor() == 0)
+						drawEntity(new Ship(0, 0, FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
+					if (permanentState.getShipColor() == 1)
+						drawEntity(new Ship(0, 0, 0, FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
+					if (permanentState.getShipColor() == 2)
+						drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
+				}
+				if (map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal())
+					backBufferGraphics.setColor(Color.GRAY);
+				else if (is_adj[i][j] == 1)
+					backBufferGraphics.setColor(Color.GREEN);
+				else
+					backBufferGraphics.setColor(Color.MAGENTA);
+
+				backBufferGraphics.drawOval(cell_x,cell_y,c_size,c_size);
+				for (int k = 0; k < 4; k++){
+					if (map_moveable[i][j][k] == 0)
+						continue;
+					if (map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal() &&
+						map_type[i + dy[k]][j + dx[k]] == MapScreen.Stage_Type.CLEAR.ordinal())
+						backBufferGraphics.setColor(Color.GRAY);
+					else if((map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal() || is_adj[i][j] == 1) &&
+							(map_type[i + dy[k]][j + dx[k]] == MapScreen.Stage_Type.CLEAR.ordinal() || is_adj[i + dy[k]][j + dx[k]] == 1))
+						backBufferGraphics.setColor(Color.GREEN);
+					else
+						backBufferGraphics.setColor(Color.MAGENTA);
+
+					backBufferGraphics.drawLine(
+							cell_x + c_size / 2 + dx[k] * (c_size / 2),
+							cell_y + c_size / 2 + dy[k] * (c_size / 2),
+							cell_x + c_size / 2 + dx[k] * (c_size / 2) + dx[k] * (cm_size - c_size),
+							cell_y + c_size / 2 + dy[k] * (c_size / 2) + dy[k] * (cm_size - c_size));
+				}
+			}
+		}
+	}
 }

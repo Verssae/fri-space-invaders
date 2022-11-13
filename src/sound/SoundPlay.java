@@ -4,7 +4,7 @@ import engine.PermanentState;
 
 public class SoundPlay{
     private static SoundPlay instance;
-    private int effectVolume = 70;
+    private int effectVolume = 50;
     private int bgmVolume = 50;
     private SoundBgm sb;
 

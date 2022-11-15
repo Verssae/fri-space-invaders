@@ -18,6 +18,8 @@ public class ChapterState {
 	private int chapter;
 	/** Current score. */
 	private int score;
+	/** Current coin. */
+	private int coin;
 	/** Lives currently remaining. */
 	private int livesRemaining;
 	/** Bullets shot until now. */
@@ -62,12 +64,14 @@ public class ChapterState {
 	public ChapterState(final int map_size,
 						final int chapter,
 						final int score,
+						final int coin,
                         final int livesRemaining,
 						final int bulletsShot,
                         final int shipsDestroyed) {
 		this.map_size = map_size;
 		this.chapter = chapter;
 		this.score = score;
+		this.coin = coin;
 		this.livesRemaining = livesRemaining;
 		this.bulletsShot = bulletsShot;
 		this.shipsDestroyed = shipsDestroyed;
@@ -147,6 +151,13 @@ public class ChapterState {
 	 */
 	public final int getScore() {
 		return score;
+	}
+
+	/**
+	 * @return the coin
+	 */
+	public final int getCoin() {
+		return coin;
 	}
 
 	/**

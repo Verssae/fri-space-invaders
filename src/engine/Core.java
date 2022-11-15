@@ -245,7 +245,7 @@ public final class Core {
 					break;
 
 				case 8: //Map testing
-					ChapterState chapterState = new ChapterState(4, 1, 0, 3,0 ,0);
+					ChapterState chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
 					currentScreen = new MapScreen(chapterState, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " map screen at " + FPS + " fps.");

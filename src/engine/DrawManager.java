@@ -276,8 +276,8 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 
 		backBufferGraphics.setColor(Color.cyan);
-		String scoreString = String.format("SCORE %04d", score);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 120, 25);
+		String scoreString = String.format("SCORE: %04d", score);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 140, 20);
 	}
 
 	public void drawLevels(final Screen screen, final int level) {
@@ -991,10 +991,9 @@ public final class DrawManager {
 
 	public void drawCoin(final Screen screen, final int coin) {
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
-		String coinString = String.format("%d", coin);
-		backBufferGraphics.drawString("Coin : ", screen.getWidth() - 140, 25);
-		backBufferGraphics.drawString(coinString, screen.getWidth() - 11 * (coinString.length() + 1), 25);
+		backBufferGraphics.setColor(Color.YELLOW);
+		String coinString = String.format("COIN:     %04d", coin);
+		backBufferGraphics.drawString(coinString, screen.getWidth() - 141, 40);
 	}
 
 	/**
@@ -1100,7 +1099,7 @@ public final class DrawManager {
 	public void drawMap(final Screen screen, final ChapterState chapterState) {
 		backBufferGraphics.setColor(Color.GREEN);
 
-		drawCenteredBigString(screen, "Chapter 1", 40);
+		drawCenteredBigString(screen, "Chapter 1", 110);
 
 		int map_type[][] = chapterState.map_type;
 		int is_adj[][] = chapterState.is_adj;
@@ -1116,7 +1115,7 @@ public final class DrawManager {
 				if (map_type[i][j] == ChapterState.Stage_Type.NONE.ordinal())
 					continue;
 				int cell_x = screen.getWidth() / 2 - ((map_type[0].length - 1) * cm_size + c_size) / 2 + j * cm_size;
-				int cell_y = screen.getHeight() / 2 - ((map_type.length - 1) * cm_size + c_size) / 2 + i * cm_size;
+				int cell_y = screen.getHeight() * 4 / 7 - ((map_type.length - 1) * cm_size + c_size) / 2 + i * cm_size;
 
 				if (chapterState.isCur(i, j)) {
 					try {

@@ -118,6 +118,7 @@ public final class Core {
 
 		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
+
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 
 
@@ -244,7 +245,8 @@ public final class Core {
 					break;
 
 				case 8: //Map testing
-					currentScreen = new MapScreen(width, height, FPS);
+					ChapterState chapterState = new ChapterState(4, 1, 0, 3,0 ,0);
+					currentScreen = new MapScreen(chapterState, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " map screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);

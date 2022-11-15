@@ -1097,11 +1097,14 @@ public final class DrawManager {
 				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
 	}
 
-	public void drawMap(final Screen screen, final int map_type[][], final int is_adj[][], final int map_moveable[][][], final int cur_x, final int cur_y) {
+	public void drawMap(final Screen screen, final ChapterState chapterState) {
 		backBufferGraphics.setColor(Color.GREEN);
 
 		drawCenteredBigString(screen, "Chapter 1", 40);
 
+		int map_type[][] = chapterState.map_type;
+		int is_adj[][] = chapterState.is_adj;
+		int map_moveable[][][] = chapterState.map_moveable;
 		int dx[] = {1,-1,0,0};
 		int dy[] = {0,0,1,-1};
 		int c_size = 40; // cell size
@@ -1110,12 +1113,12 @@ public final class DrawManager {
 
 		for (int i = 0; i < map_type.length; i++){ //row
 			for (int j = 0; j < map_type[0].length; j++){ //column
-				if (map_type[i][j] == MapScreen.Stage_Type.NONE.ordinal())
+				if (map_type[i][j] == ChapterState.Stage_Type.NONE.ordinal())
 					continue;
 				int cell_x = screen.getWidth() / 2 - ((map_type[0].length - 1) * cm_size + c_size) / 2 + j * cm_size;
 				int cell_y = screen.getHeight() / 2 - ((map_type.length - 1) * cm_size + c_size) / 2 + i * cm_size;
 
-				if (i == cur_y && j == cur_x) {
+				if (chapterState.isCur(i, j)) {
 					try {
 						fileManager.loadSprite_Temp(spriteMap);
 						FileManager.setPlayerShipShape();
@@ -1131,7 +1134,7 @@ public final class DrawManager {
 					if (permanentState.getShipColor() == 2)
 						drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
 				}
-				if (map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal())
+				if (map_type[i][j] == ChapterState.Stage_Type.CLEAR.ordinal())
 					backBufferGraphics.setColor(Color.GRAY);
 				else if (is_adj[i][j] == 1)
 					backBufferGraphics.setColor(Color.GREEN);
@@ -1142,11 +1145,11 @@ public final class DrawManager {
 				for (int k = 0; k < 4; k++){
 					if (map_moveable[i][j][k] == 0)
 						continue;
-					if (map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal() &&
-						map_type[i + dy[k]][j + dx[k]] == MapScreen.Stage_Type.CLEAR.ordinal())
+					if (map_type[i][j] == ChapterState.Stage_Type.CLEAR.ordinal() &&
+						map_type[i + dy[k]][j + dx[k]] == ChapterState.Stage_Type.CLEAR.ordinal())
 						backBufferGraphics.setColor(Color.GRAY);
-					else if((map_type[i][j] == MapScreen.Stage_Type.CLEAR.ordinal() || is_adj[i][j] == 1) &&
-							(map_type[i + dy[k]][j + dx[k]] == MapScreen.Stage_Type.CLEAR.ordinal() || is_adj[i + dy[k]][j + dx[k]] == 1))
+					else if((map_type[i][j] == ChapterState.Stage_Type.CLEAR.ordinal() || is_adj[i][j] == 1) &&
+							(map_type[i + dy[k]][j + dx[k]] == ChapterState.Stage_Type.CLEAR.ordinal() || is_adj[i + dy[k]][j + dx[k]] == 1))
 						backBufferGraphics.setColor(Color.GREEN);
 					else
 						backBufferGraphics.setColor(Color.MAGENTA);

@@ -54,15 +54,13 @@ public final class DrawManager {
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
 
-	Color[] colors = {Color.gray, Color.darkGray, Color.black};
-
 	/** Sprite types. */
 	public static enum SpriteType {
-		/** Player ship. */
+		/** First Player ship. */
 		ShipA,
-		/** Player ship. */
+		/** Second Player ship. */
 		ShipB,
-		/** Player ship. */
+		/** Third Player ship. */
 		ShipC,
 		/** Destroyed player ship. */
 		ShipDestroyed,
@@ -340,10 +338,7 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 6);
 	}
-	public void clear(final Screen screen) {
-		logger.info("clear");
-		initDrawing(screen);
-	}
+
 	//mainmenu 1014
 	public void drawSetting(final Screen screen) {
 		String titleString = "Setting";
@@ -711,20 +706,7 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, instructionsString,
 				screen.getHeight() / 5);
 	}
-	
-	//Draw Setting
-	public void drawSettingMenu(final Screen screen) {
-		String volumeString = "VOLUME";
-		String screenSizeString = "SCREEN SIZE";
-		
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, volumeString, screen.getHeight() / 8);
 
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, screenSizeString,
-				screen.getHeight() / 5);
-		
-	}
 	public void drawHelpMenu(final Screen screen, final int page) {
 		String helpString = "HELP";
 		String right = "right:  >   (right arrow)";

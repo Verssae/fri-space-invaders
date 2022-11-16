@@ -273,7 +273,7 @@ public final class FileManager {
 		}
 	}
 
-	private LinkedHashMap loadDefaultP_State() throws IOException {
+	private LinkedHashMap loadDefaultP_state() throws IOException {
 		LinkedHashMap<PermanentState.State, Integer> stateMap = new LinkedHashMap<PermanentState.State, Integer>();
 
 		InputStream inputStream = null;
@@ -298,7 +298,7 @@ public final class FileManager {
 		return stateMap;
 	}
 
-	public LinkedHashMap loadP_State() throws IOException {
+	public LinkedHashMap loadP_state() throws IOException {
 		LinkedHashMap<PermanentState.State, Integer> stateMap = new LinkedHashMap<PermanentState.State, Integer>();
 
 		InputStream inputStream = null;
@@ -309,12 +309,12 @@ public final class FileManager {
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
-			String coinsPath = new File(jarPath).getParent();
-			coinsPath += File.separator;
-			coinsPath += "p_state";
+			String p_statePath = new File(jarPath).getPath();
+			p_statePath += File.separator;
+			p_statePath += "p_state";
 
-			File coinsFile = new File(coinsPath);
-			inputStream = new FileInputStream(coinsFile);
+			File p_stateFile = new File(p_statePath);
+			inputStream = new FileInputStream(p_stateFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
 					inputStream, Charset.forName("UTF-8")));
 
@@ -329,7 +329,7 @@ public final class FileManager {
 			}
 		} catch (FileNotFoundException e) {
 			logger.info("Loading default permanent state.");
-			stateMap = loadDefaultP_State();
+			stateMap = loadDefaultP_state();
 		} finally {
 			if (bufferedReader != null)
 				bufferedReader.close();
@@ -347,16 +347,16 @@ public final class FileManager {
 					.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
-			String coinsPath = new File(jarPath).getParent();
-			coinsPath += File.separator;
-			coinsPath += "p_state";
+			String p_statePath = new File(jarPath).getPath();;
+			p_statePath += File.separator;
+			p_statePath += "p_state";
 
-			File coinsFile = new File(coinsPath);
+			File p_stateFile = new File(p_statePath);
 
-			if (!coinsFile.exists())
-				coinsFile.createNewFile();
+			//if (!p_stateFile.exists())
+			//	p_stateFile.createNewFile();
 
-			outputStream = new FileOutputStream(coinsFile);
+			outputStream = new FileOutputStream(p_stateFile);
 			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
 					outputStream, Charset.forName("UTF-8")));
 

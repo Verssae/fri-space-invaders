@@ -20,7 +20,6 @@ import sound.SoundType;
  */
 public class Ship extends Entity {
 
-	private static engine.Core Core;
 	/** Time between shots. */
 	private int SHOOTING_INTERVAL, INIT_SHOOTING_INTERVAL;
 	/** Speed of the bullets shot by the ship. */

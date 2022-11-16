@@ -27,13 +27,13 @@ public final class PermanentState {
 
 	private static PermanentState ps;
 
-	private FileManager fileManager = FileManager.getInstance();
+	private final FileManager fileManager = FileManager.getInstance();
 
 	private PermanentState() {
 		try {
-			this.p_state = fileManager.loadP_State();
+			this.p_state = fileManager.loadP_state();
 		} catch (IOException e) {
-			logger.warning("Couldn't load coins!");
+			logger.warning("Couldn't load p_state!");
 		}
 	}
 

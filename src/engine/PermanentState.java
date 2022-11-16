@@ -22,16 +22,6 @@ public final class PermanentState {
 	}
 	LinkedHashMap<State, Integer> p_state;
 
-	/** Money used in game. */
-	private static int coin = 0;
-	/** Current ship shape. */
-	private int shipShape = 0;
-	/** Current ship color. */
-	private int shipColor = 0;
-	/** Current background Music. */
-	private int BGM = 1;
-	/** Current bullet sound effect. */
-	private int bulletSFX = 1;
 	/** Application logger. */
 	private static Logger logger;
 

@@ -471,7 +471,7 @@ public final class DrawManager {
 		String VolumeString = "Sound";
 		String BackString = "Back";
 
-		if (option == 8)
+		if (option == 9)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);

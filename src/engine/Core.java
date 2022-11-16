@@ -255,6 +255,14 @@ public final class Core {
 					LOGGER.info("Closing map screen.");
 					break;
 
+				case 9: //Volume //mainmenu 1014
+					currentScreen = new VolumeScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " setting screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing help screen.");
+					break;
+
 				default:
 					break;
 			}

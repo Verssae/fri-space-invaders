@@ -116,6 +116,7 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		gameSettings.add(SETTINGS_Boss_Stage);
 
+		ChapterState chapterState = null;
 		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
 
@@ -154,7 +155,7 @@ public final class Core {
 						gameState = ((GameScreen) currentScreen).getGameState();
 
 						if (gameState.getScore() > 500)
-							permanentState.setCoin(gameState.getScore() - 500); // earn coin
+							permanentState.setP_state(PermanentState.State.coin, gameState.getScore() - 500); // earn coin
 
 
 						if (gameState.getLivesRemaining() > 0) {
@@ -245,7 +246,8 @@ public final class Core {
 					break;
 
 				case 8: //Map testing
-					ChapterState chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
+					if (chapterState == null)
+						chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
 					currentScreen = new MapScreen(chapterState, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " map screen at " + FPS + " fps.");

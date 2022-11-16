@@ -20,7 +20,7 @@ public class SoundPlay{
                 playEffect("Hit_001.wav");
                 break;
             case shoot:
-                playEffect("Shoot_" + String.format("%03d",PermanentState.getInstance().getBulletSFX()) + ".wav");
+                playEffect("Shoot_" + String.format("%03d",PermanentState.getInstance().getP_state(PermanentState.State.bulletSFX)) + ".wav");
                 break;
             case enemyKill:
                 playEffect("EnemyKill_001.wav");
@@ -32,7 +32,7 @@ public class SoundPlay{
                 playEffect("MenuSelect_001.wav");
                 break;
             case inGameBGM:
-                playBgm("BGM_MainGame_" + String.format("%03d",PermanentState.getInstance().getBGM()) + ".wav");
+                playBgm("BGM_MainGame_" + String.format("%03d",PermanentState.getInstance().getP_state(PermanentState.State.BGM)) + ".wav");
                 break;
             case mainGameBgm:
                 playBgm("MainScreen_BGM_001.wav");

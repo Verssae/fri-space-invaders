@@ -1,6 +1,7 @@
 package screen;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Random;
 
 import engine.Cooldown;
@@ -85,8 +86,9 @@ public class StoreScreen extends Screen {
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
-                if (menuCode == 4)
+                if (menuCode == 4){
                     this.isRunning = false;
+                }
                 else {
                     if (focusReroll == 0)
                         focusReroll = 1;
@@ -121,42 +123,42 @@ public class StoreScreen extends Screen {
 
     private void rerollItem() {
         if (menuCode == 0){ // ship shape
-            if (permanentState.getCoin() >= COST_SHAPE) {
+            if (permanentState.getP_state(PermanentState.State.coin) >= COST_SHAPE) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getShipShape() == x)
+                while (permanentState.getP_state(PermanentState.State.shipShape) == x)
                     x = new Random().nextInt(3);
 
-                permanentState.setShipShape(x);
-                permanentState.setCoin(-COST_SHAPE);
+                permanentState.setP_state(PermanentState.State.shipShape, x);
+                permanentState.gainP_state(PermanentState.State.coin, -COST_SHAPE);
             }
         }
         else if (menuCode == 1){ // ship color
-            if (permanentState.getCoin() >= COST_COLOR) {
+            if (permanentState.getP_state(PermanentState.State.coin) >= COST_COLOR) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getShipColor() == x)
+                while (permanentState.getP_state(PermanentState.State.shipColor) == x)
                     x = new Random().nextInt(3);
 
-                permanentState.setShipColor(x);
-                permanentState.setCoin(-COST_COLOR);
+                permanentState.setP_state(PermanentState.State.shipColor, x);
+                permanentState.gainP_state(PermanentState.State.coin, -COST_COLOR);
             }
         }
         else if (menuCode == 2){ // bullet effect
-            if (permanentState.getCoin() >= COST_BULLET) {
-                int x = new Random().nextInt(3) + 1;
-                while (permanentState.getBulletSFX() == x)
-                    x = new Random().nextInt(3) + 1;
+            if (permanentState.getP_state(PermanentState.State.coin) >= COST_BULLET) {
+                int x = new Random().nextInt(3);
+                while (permanentState.getP_state(PermanentState.State.bulletSFX) == x)
+                    x = new Random().nextInt(3);
 
-                permanentState.setBulletSFX(x);
-                permanentState.setCoin(-COST_BULLET);
+                permanentState.setP_state(PermanentState.State.bulletSFX, x);
+                permanentState.gainP_state(PermanentState.State.coin, -COST_BULLET);
             }
         }
         else { // BGM
-            if (permanentState.getCoin() >= COST_BGM) {
-                int x = new Random().nextInt(3) + 1;
-                while (permanentState.getBGM() == x)
-                    x = new Random().nextInt(3) + 1;
-                permanentState.setBGM(x);
-                permanentState.setCoin(-COST_BGM);
+            if (permanentState.getP_state(PermanentState.State.coin) >= COST_BGM) {
+                int x = new Random().nextInt(3);
+                while (permanentState.getP_state(PermanentState.State.BGM) == x)
+                    x = new Random().nextInt(3);
+                permanentState.setP_state(PermanentState.State.BGM, x);
+                permanentState.gainP_state(PermanentState.State.coin, -COST_BGM);
             }
         }
     }
@@ -171,7 +173,7 @@ public class StoreScreen extends Screen {
         drawManager.drawStoreMenu(this, menuCode, focusReroll);
         if (menuCode < 4)
             drawManager.drawStoreGacha(this, menuCode, focusReroll);
-        drawManager.drawCoin(this, permanentState.getCoin());
+        drawManager.drawCoin(this, permanentState.getP_state(PermanentState.State.coin));
 
         drawManager.completeDrawing(this);
     }

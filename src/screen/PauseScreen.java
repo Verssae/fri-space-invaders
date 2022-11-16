@@ -30,7 +30,7 @@ public class PauseScreen extends Screen {
     private Cooldown selectionCooldown;
 
 
-    private static int coin = PermanentState.getInstance().getCoin();
+    private static int coin = PermanentState.getInstance().getP_state(PermanentState.State.coin);
 
     /**
      * Constructor, establishes the properties of the screen.

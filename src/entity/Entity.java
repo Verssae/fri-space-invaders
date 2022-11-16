@@ -21,7 +21,7 @@ public class Entity {
 	/** Height of the entity. */
 	protected int height;
 	/** Color of the entity. */
-	private Color color;
+	protected Color color;
 	/** Sprite type assigned to the entity. */
 	protected SpriteType spriteType;
 
@@ -46,6 +46,14 @@ public class Entity {
 		this.width = width;
 		this.height = height;
 		this.color = color;
+	}
+
+	public Entity(final int positionX, final int positionY, final int width,
+				  final int height) {
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.width = width;
+		this.height = height;
 	}
 
 	/**

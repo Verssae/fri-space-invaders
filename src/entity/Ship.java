@@ -7,6 +7,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
 import engine.FileManager;
+import engine.PermanentState;
 import sound.SoundPlay;
 import sound.SoundType;
 //import entity.Shield;
@@ -32,6 +33,8 @@ public class Ship extends Entity {
 	/** Time spent inactive between hits. */
 	private Cooldown destructionCooldown;
 
+	private int shipShape, shipColor;
+
 //	private Shield shield;
 
 	/**
@@ -42,40 +45,44 @@ public class Ship extends Entity {
 	 * @param positionY
 	 *            Initial position of the ship in the Y axis.
 	 */
-	public Ship(final int positionX, final int positionY, Color shipColor) {
-		super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
 
-		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 750;
-		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
-		this.SPEED = INIT_SPEED = 2;
-		this.spriteType = SpriteType.Ship;
-		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
-		this.destructionCooldown = Core.getCooldown(1000);
+	public Ship(final int positionX, final int positionY) {
+		super(positionX, positionY, 26, 16);
+		shipShape = PermanentState.getInstance().getP_state(PermanentState.State.shipShape);
+		shipColor = PermanentState.getInstance().getP_state(PermanentState.State.shipColor);
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.width = 26;
+		this.height = 16;
+		if (shipColor == 0) this.color = Color.BLUE;
+		if (shipColor == 1) this.color = Color.GRAY;
+		if (shipColor == 2) this.color = Color.GREEN;
+
+		if (shipShape == 0) {
+			this.spriteType = SpriteType.ShipA;
+			this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 750;
+			this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
+			this.SPEED = INIT_SPEED = 2;
+			this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
+			this.destructionCooldown = Core.getCooldown(1000);
+		}
+		if (shipShape == 1) {
+			this.spriteType = SpriteType.ShipB;
+			this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 700;
+			this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
+			this.SPEED = INIT_SPEED = 3;
+			this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
+			this.destructionCooldown = Core.getCooldown(1000);
+		}
+		if (shipShape == 2) {
+			this.spriteType = SpriteType.ShipC;
+			this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 650;
+			this.BULLET_SPEED = INIT_BULLET_SPEED = -8;
+			this.SPEED = INIT_SPEED = 3;
+			this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
+			this.destructionCooldown = Core.getCooldown(1000);
+		}
 	}
-	public Ship(final int positionX, final int positionY, int shipShape, Color shipColor) {
-        super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
-
-		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 700;
-		this.BULLET_SPEED = INIT_BULLET_SPEED = -6;
-		this.SPEED = INIT_SPEED = 3;
-		this.spriteType = SpriteType.Ship;
-		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
-		this.destructionCooldown = Core.getCooldown(1000);
-    }
-	public Ship(final int positionX, final int positionY, char shipShape, Color shipColor) {
-		super(positionX, positionY, 13 * 2, 8 * 2, shipColor);
-
-		this.SHOOTING_INTERVAL = INIT_SHOOTING_INTERVAL = 650;
-		this.BULLET_SPEED = INIT_BULLET_SPEED = -8;
-		this.SPEED = INIT_SPEED = 3;
-		this.spriteType = SpriteType.Ship;
-		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
-		this.destructionCooldown = Core.getCooldown(1000);
-	}
-
-
-
-
 
 	/**
 	 * Moves the ship speed uni ts right, or until the right screen border is
@@ -121,8 +128,14 @@ public class Ship extends Entity {
 	public final void update() {
 		if (!this.destructionCooldown.checkFinished())
 			this.spriteType = SpriteType.ShipDestroyed;
-		else
-			this.spriteType = SpriteType.Ship;
+		else {
+			if (shipShape == 0)
+				this.spriteType = SpriteType.ShipA;
+			if (shipShape == 1)
+				this.spriteType = SpriteType.ShipB;
+			if (shipShape == 2)
+				this.spriteType = SpriteType.ShipC;
+		}
 	}
 
 	/**
@@ -163,5 +176,4 @@ public class Ship extends Entity {
 		this.shootingCooldown = engine.Core.getCooldown(INIT_SHOOTING_INTERVAL);
 		BULLET_SPEED = INIT_BULLET_SPEED;
 	}
-
 }

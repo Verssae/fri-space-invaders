@@ -59,7 +59,11 @@ public final class DrawManager {
 	/** Sprite types. */
 	public static enum SpriteType {
 		/** Player ship. */
-		Ship,
+		ShipA,
+		/** Player ship. */
+		ShipB,
+		/** Player ship. */
+		ShipC,
 		/** Destroyed player ship. */
 		ShipDestroyed,
 		/** Player bullet. */
@@ -107,7 +111,9 @@ public final class DrawManager {
 		try {
 			spriteMap = new LinkedHashMap<SpriteType, boolean[][]>();
 
-			spriteMap.put(SpriteType.Ship, new boolean[13][8]);
+			spriteMap.put(SpriteType.ShipA, new boolean[13][8]);
+			spriteMap.put(SpriteType.ShipB, new boolean[13][8]);
+			spriteMap.put(SpriteType.ShipC, new boolean[13][8]);
 			spriteMap.put(SpriteType.ShipDestroyed, new boolean[13][8]);
 			spriteMap.put(SpriteType.Bullet, new boolean[3][5]);
 			spriteMap.put(SpriteType.EnemyBullet, new boolean[3][5]);
@@ -124,9 +130,6 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Shield, new boolean[13][1]);
 			spriteMap.put(SpriteType.Life, new boolean[13][13]);
 			spriteMap.put(SpriteType.EnemyShipdangerous, new boolean[16][7]);
-
-
-			fileManager.readship();//read ship파일
 
 			fileManager.loadSprite(spriteMap);
 
@@ -951,7 +954,7 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		else {
 			backBufferGraphics.setColor(Color.GREEN);
-			if (permanentState.getCoin() < 100) {
+			if (permanentState.getP_state(PermanentState.State.coin) < 100) {
 				backBufferGraphics.setColor(Color.RED);
 				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
 						screen.getHeight() / 2 + 180);
@@ -961,30 +964,17 @@ public final class DrawManager {
 		backBufferGraphics.drawString(rerollString, screen.getWidth() / 2 + 100 - fontRegularMetrics.stringWidth(rerollString) / 2, screen.getWidth() / 2 + 180);
 
 		if(menu < 2) { // shape, color
-			try{
-				fileManager.loadSprite_Temp(spriteMap);
-				FileManager.setPlayerShipShape();
-			}
-			catch (IOException e){
-				logger.warning("Loading failed.");
-			}
-
-			FileManager.setPlayerShipColor(permanentState.getShipColor());
-			if (permanentState.getShipColor() == 0)
-				drawEntity(new Ship(0, 0, FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
-			if (permanentState.getShipColor() == 1)
-				drawEntity(new Ship(0, 0, 0, FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
-			if (permanentState.getShipColor() == 2)
-				drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
+			drawEntity(new Ship(0, 0),
+					screen.getWidth() / 2 + 89, screen.getHeight() / 2 + 42);
 		}
 		else if(menu == 2){ // bullet sfx
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getBulletSFX()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 		else if(menu == 3){ // bgm
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getBGM()), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 	}
@@ -1118,21 +1108,10 @@ public final class DrawManager {
 				int cell_y = screen.getHeight() * 4 / 7 - ((map_type.length - 1) * cm_size + c_size) / 2 + i * cm_size;
 
 				if (chapterState.isCur(i, j)) {
-					try {
-						fileManager.loadSprite_Temp(spriteMap);
-						FileManager.setPlayerShipShape();
-					} catch (IOException e) {
-						logger.warning("Loading failed.");
-					}
-
-					FileManager.setPlayerShipColor(permanentState.getShipColor());
-					if (permanentState.getShipColor() == 0)
-						drawEntity(new Ship(0, 0, FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
-					if (permanentState.getShipColor() == 1)
-						drawEntity(new Ship(0, 0, 0, FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
-					if (permanentState.getShipColor() == 2)
-						drawEntity(new Ship(0, 0, '0', FileManager.ChangeIntToColor()), cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
+					drawEntity(new Ship(0, 0),
+							cell_x + (c_size - 26) / 2, cell_y + (c_size - 16) / 2);
 				}
+
 				if (map_type[i][j] == ChapterState.Stage_Type.CLEAR.ordinal())
 					backBufferGraphics.setColor(Color.GRAY);
 				else if (is_adj[i][j] == 1)

@@ -4,10 +4,8 @@ import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
@@ -28,9 +26,7 @@ public final class FileManager {
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
 
-	private static int playerShipShape,playerShipColor;
-
-	private static int shipShape;
+	PermanentState.State[] ps = PermanentState.State.values();
 
 	/**
 	 * private constructor.
@@ -64,55 +60,7 @@ public final class FileManager {
 		InputStream inputStream = null;
 
 		try {
-			String graphicsName;
-			if(playerShipShape == 0){
-				graphicsName = "graphics";
-			}else if(playerShipShape == 1){
-				graphicsName = "graphics_1";
-			}else
-				graphicsName = "graphics_2";
-			inputStream = DrawManager.class.getClassLoader()
-					.getResourceAsStream(graphicsName);
-			char c;
-
-			// Sprite loading.
-			for (Map.Entry<SpriteType, boolean[][]> sprite : spriteMap
-					.entrySet()) {
-				for (int i = 0; i < sprite.getValue().length; i++)
-					for (int j = 0; j < sprite.getValue()[i].length; j++) {
-						do
-							c = (char) inputStream.read();
-						while (c != '0' && c != '1');
-
-						if (c == '1')
-							sprite.getValue()[i][j] = true;
-						else
-							sprite.getValue()[i][j] = false;
-					}
-				logger.fine("Sprite " + sprite.getKey() + " loaded.");
-			}
-			if (inputStream != null)
-				inputStream.close();
-		} finally {
-			if (inputStream != null)
-				inputStream.close();
-		}
-	}
-
-	public void loadSprite_Temp(final Map<SpriteType, boolean[][]> spriteMap)
-			throws IOException {
-		InputStream inputStream = null;
-		PermanentState permanentState = PermanentState.getInstance();
-		shipShape = permanentState.getShipShape();
-
-		try {
-			String graphicsName;
-			if(shipShape == 0){
-				graphicsName = "graphics";
-			}else if(shipShape == 1){
-				graphicsName = "graphics_1";
-			}else
-				graphicsName = "graphics_2";
+			String graphicsName = "graphics";
 			inputStream = DrawManager.class.getClassLoader()
 					.getResourceAsStream(graphicsName);
 			char c;
@@ -325,26 +273,34 @@ public final class FileManager {
 		}
 	}
 
-	private int loadDefaultCoins() throws IOException {
-		int savedCoins = 0;
+	private LinkedHashMap loadDefaultP_State() throws IOException {
+		LinkedHashMap<PermanentState.State, Integer> stateMap = new LinkedHashMap<PermanentState.State, Integer>();
+
 		InputStream inputStream = null;
-		BufferedReader reader = null;
+		BufferedReader bufferedReader = null;
 		try {
 			inputStream = FileManager.class.getClassLoader()
-					.getResourceAsStream("coins");
-			reader = new BufferedReader(new InputStreamReader(inputStream));
+					.getResourceAsStream("p_state");
+			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-			savedCoins = Integer.parseInt(reader.readLine());
+			for (int i = 0; i < ps.length; i++) {
+				String tmp = bufferedReader.readLine();
+				if (tmp == null)
+					stateMap.put(ps[i], 0);
+				else
+					stateMap.put(ps[i], Integer.parseInt(tmp));
+			}
 		} finally {
 			if (inputStream != null)
 				inputStream.close();
 		}
 
-		return savedCoins;
+		return stateMap;
 	}
 
-	public int loadCoins() throws IOException {
-		int savedCoins = 0;
+	public LinkedHashMap loadP_State() throws IOException {
+		LinkedHashMap<PermanentState.State, Integer> stateMap = new LinkedHashMap<PermanentState.State, Integer>();
+
 		InputStream inputStream = null;
 		BufferedReader bufferedReader = null;
 
@@ -355,28 +311,34 @@ public final class FileManager {
 
 			String coinsPath = new File(jarPath).getParent();
 			coinsPath += File.separator;
-			coinsPath += "coins";
+			coinsPath += "p_state";
 
 			File coinsFile = new File(coinsPath);
 			inputStream = new FileInputStream(coinsFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
 					inputStream, Charset.forName("UTF-8")));
 
-			logger.info("Loading user coins");
+			logger.info("Loading permanent state");
 
-			savedCoins = Integer.parseInt(bufferedReader.readLine());
+			for (int i = 0; i < ps.length; i++) {
+				String tmp = bufferedReader.readLine();
+				if (tmp == null)
+					stateMap.put(ps[i], 0);
+				else
+					stateMap.put(ps[i], Integer.parseInt(tmp));
+			}
 		} catch (FileNotFoundException e) {
-			logger.info("Loading default coins.");
-			savedCoins = loadDefaultCoins();
+			logger.info("Loading default permanent state.");
+			stateMap = loadDefaultP_State();
 		} finally {
 			if (bufferedReader != null)
 				bufferedReader.close();
 		}
 
-		return savedCoins;
+		return stateMap;
 	}
 
-	public void saveCoins(final int coins) throws IOException {
+	public void saveP_state(final LinkedHashMap stateMap) throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
 
@@ -387,7 +349,7 @@ public final class FileManager {
 
 			String coinsPath = new File(jarPath).getParent();
 			coinsPath += File.separator;
-			coinsPath += "coins";
+			coinsPath += "p_state";
 
 			File coinsFile = new File(coinsPath);
 
@@ -398,9 +360,10 @@ public final class FileManager {
 			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
 					outputStream, Charset.forName("UTF-8")));
 
-			logger.info("Saving coins");
+			logger.info("Saving permanent state");
 
-			bufferedWriter.write(String.valueOf(coins));
+			for (int i = 0; i < stateMap.size(); i++)
+				bufferedWriter.write(String.valueOf(stateMap.get(ps[i])) + "\n");
 		} finally {
 			if (bufferedWriter != null)
 				bufferedWriter.close();
@@ -453,64 +416,6 @@ public final class FileManager {
 		finally{
 			return array;
 		}
-	}
-
-	public void readship()
-			throws IOException {
-
-		InputStream inputStream = null;
-		try {
-			inputStream = DrawManager.class.getClassLoader().getResourceAsStream("ship");
-			playerShipShape = inputStream.read() - 48 - 1;
-			playerShipColor = inputStream.read() - 48 - 1;
-			logger.fine("ship read.");
-			if (inputStream != null)
-				inputStream.close();
-		} finally {
-			if (inputStream != null)
-				inputStream.close();
-		}
-	}
-
-	public static int getPlayerShipShape() {
-		return playerShipShape;
-	}
-
-	public static void setPlayerShipShape() throws IOException {
-		FileReader fileReader = new FileReader("res/ship");
-		fileReader.read();
-		int colorNum = fileReader.read();
-		fileReader.close();
-		FileWriter fileWriter = new FileWriter("res/ship");
-		PrintWriter printWriter = new PrintWriter(fileWriter);
-		printWriter.print(shipShape+1);
-		playerShipShape = shipShape;
-		printWriter.print(colorNum - 48);
-		fileWriter.close();
-	}
-
-	public static int getPlayerShipColor() {
-		return playerShipColor;
-	}
-	public static void setPlayerShipColor(int shipColor) {
-		try {
-			FileReader fileReader = new FileReader("res/ship");
-			int shapeNum = fileReader.read();
-			fileReader.close();
-			FileWriter fileWriter = new FileWriter("res/ship");
-			PrintWriter printWriter = new PrintWriter(fileWriter);
-			printWriter.print(shapeNum - 48);
-			printWriter.print(shipColor+1);
-			playerShipColor = shipColor;
-			fileWriter.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	public static Color ChangeIntToColor(){
-		if(playerShipColor == 1) return Color.blue;
-		else if(playerShipColor == 2) return Color.darkGray;
-		else return Color.GREEN;
 	}
 }
 

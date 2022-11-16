@@ -10,17 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import entity.ItemPool;
-import screen.GameScreen;
-import screen.HighScoreScreen;
-import screen.ScoreScreen;
-import screen.Screen;
-import screen.TitleScreen;
-import screen.GameSaveScreen;
-import screen.SettingScreen;
-import screen.HelpScreen;
-import screen.VolumeScreen;
-import screen.StoreScreen;
-import screen.PauseScreen;
+import screen.*;
 
 /**
  * Implements core game logic.
@@ -115,6 +105,7 @@ public final class Core {
 		int width = frame.getWidth();
 		int height = frame.getHeight();
 
+
 		gameSettings = new ArrayList<GameSettings>();
 		gameSettings.add(SETTINGS_LEVEL_1);
 		gameSettings.add(SETTINGS_LEVEL_2);
@@ -127,7 +118,9 @@ public final class Core {
 
 		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
+
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+
 
 		int returnCode = 1;
 		do {
@@ -139,7 +132,9 @@ public final class Core {
 							+ " title screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing title screen.");
+
 					break;
+
 				case 2:
 					// Game & score.
 					GO_MAIN = true;
@@ -206,6 +201,7 @@ public final class Core {
 					if (gameState.getLivesRemaining() == 0 || gameState.getLevel() == NUM_LEVELS + 1)
 						gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 					break;
+
 				case 3:
 					// High scores.
 					currentScreen = new HighScoreScreen(width, height, FPS);
@@ -214,100 +210,51 @@ public final class Core {
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing high score screen.");
 					break;
-				default:
-					break;
 
 				case 4:
 					// Store
-				/* returnCode = 1;
-				do {
-					switch (returnCode) {
-						case 1:
-							// Main store
-							currentScreen = new StoreScreen(width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " store screen at " + FPS + " fps.");
-							returnCode = frame.setScreen(currentScreen);
-							LOGGER.info("Closing store screen.");
-							break;
-						case 2:
-							// Ship shape
-							currentScreen = new ShipShapeScreen(width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " ship shape screen at " + FPS + " fps.");
-							returnCode = frame.setScreen(currentScreen);
-							LOGGER.info("Closing ship shape screen.");
-							break;
-						case 3:
-							// Ship color
-							currentScreen = new ShipColorScreen(width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " ship color screen at " + FPS + " fps.");
-							returnCode = frame.setScreen(currentScreen);
-							LOGGER.info("Closing ship color screen.");
-							break;
-						case 4:
-							// Bullet effect
-							currentScreen = new BulletEffectScreen(width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " bullet effect screen at " + FPS + " fps.");
-							returnCode = frame.setScreen(currentScreen);
-							LOGGER.info("Closing bullet effect screen.");
-							break;
-						case 5:
-							// BGM
-							currentScreen = new BGMScreen(width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " background music screen at " + FPS + " fps.");
-							returnCode = frame.setScreen(currentScreen);
-							LOGGER.info("Closing background music screen.");
-							break;
-						default:
-							break;
-					}
-				} while (returnCode != 0);
+					currentScreen = new StoreScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " store screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing store screen.");
+					break;
 
-				returnCode = 1; */
-        
-				currentScreen = new StoreScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " store screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing store screen.");
-				break;
+				case 5:
+					// Load
+					String save_info [] = getFileManager().loadInfo();
+					gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
+					returnCode = 2;
+					break;
 
-			case 5:
-				// Load
-				String save_info [] = getFileManager().loadInfo();
-				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
-				returnCode = 2;
-				break;
-				
-			case 6:
-				// Setting.
-				currentScreen = new SettingScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " setting screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing setting screen.");
-				break;
-				
-			case 7: //Help
-				currentScreen = new HelpScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " setting screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing help screen.");
-				break;
-				
-			case 8: //Volume //mainmenu 1014
-				currentScreen = new VolumeScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " setting screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing help screen.");
-				break;
+				case 6:
+					// Setting.
+					currentScreen = new SettingScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " setting screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing setting screen.");
+					break;
 
+				case 7: //Help
+					currentScreen = new HelpScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " setting screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing help screen.");
+					break;
+
+				case 8: //Map testing
+					ChapterState chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
+					currentScreen = new MapScreen(chapterState, width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " map screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing map screen.");
+					break;
+
+				default:
+					break;
 			}
 
 		} while (returnCode != 0);

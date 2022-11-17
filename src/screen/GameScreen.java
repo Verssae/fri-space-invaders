@@ -168,18 +168,7 @@ public class GameScreen extends Screen {
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings);
 		itemmanager.assignHasItem(enemyShipFormation);
 		enemyShipFormation.attach(this);
-		int playerShipShape = FileManager.getPlayerShipShape();
-		switch (playerShipShape) {
-			case 0:
-				this.ship = new Ship(this.width / 2, this.height - 30, FileManager.ChangeIntToColor());
-				break;
-			case 1:
-				this.ship = new Ship(this.width / 2, this.height - 30, playerShipShape, FileManager.ChangeIntToColor());
-				break;
-			case 2:
-				this.ship = new Ship(this.width / 2, this.height - 30, (char) ('0'+playerShipShape), FileManager.ChangeIntToColor());
-				break;
-		}
+		this.ship = new Ship(this.width / 2, this.height - 30);
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
 				BONUS_SHIP_INTERVAL, BONUS_SHIP_VARIANCE);

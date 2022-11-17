@@ -33,7 +33,7 @@ public class SettingScreen extends Screen {
 		super(width, height, fps);
 
 		// Defaults to play.
-		this.returnCode = 8;
+		this.returnCode = 9;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
 	}
@@ -77,10 +77,10 @@ public class SettingScreen extends Screen {
 	 * Shifts the focus to the next menu item.
 	 */
 	private void nextMenuItem() {
-		if (this.returnCode == 8)
+		if (this.returnCode == 9)
 			this.returnCode = 1;
 		else if(this.returnCode == 1)
-			this.returnCode = 8;
+			this.returnCode = 9;
 		else
 			this.returnCode++;
 	}
@@ -90,8 +90,8 @@ public class SettingScreen extends Screen {
 	 */
 	private void previousMenuItem() {
 		if (this.returnCode == 1)
-			this.returnCode = 8;
-		else if (this.returnCode == 8)
+			this.returnCode = 9;
+		else if (this.returnCode == 9)
 			this.returnCode = 1;
 		else
 			this.returnCode--;

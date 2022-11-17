@@ -14,6 +14,7 @@ import engine.DrawManager;
 import engine.DrawManager.SpriteType;
 import engine.GameSettings;
 
+
 /**
  * Groups enemy ships into a formation that moves together.
  * 

@@ -41,6 +41,7 @@ public class EnemyShip extends Entity {
 
 	/** lives of the boss. */
 	public int bossLives = 2;
+	//bossMeteor
 
 	/**
 	 * Constructor, establishes the ship's properties.

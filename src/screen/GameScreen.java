@@ -337,10 +337,11 @@ public class GameScreen extends Screen {
 		if(shield != null){
 				drawManager.drawEntity(shield, shield.getPositionX(),shield.getPositionY());}
 
-		if(itempool.getItem() != null && this.shield != null &&
-				itempool.getItem().getItemType() == Item.ItemType.ShieldItem){
-				drawManager.drawEntity(shield, shield.getPositionX(),
-				shield.getPositionY());}
+		if (itempool.getItem() != null && this.shield != null &&
+				itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+			drawManager.drawEntity(shield, shield.getPositionX(),
+					shield.getPositionY());
+		}
 
 		enemyShipFormation.draw();
 
@@ -429,12 +430,11 @@ public class GameScreen extends Screen {
 						this.score += enemyShip.getPointValue();
 						this.shipsDestroyed++;
 
-
-						if(enemyShip.getItemType() != null) {
-						    enemyShip.itemDrop(itemiterator);
-							for(Item item : this.itemiterator)
-								if(item != null)
-								item.setSprite();
+						if (enemyShip.getItemType() != null) {
+							enemyShip.itemDrop(itemiterator);
+							for (Item item : this.itemiterator)
+								if (item != null)
+									item.setSprite();
 						}
 
 						this.enemyShipFormation.destroy(enemyShip);
@@ -511,6 +511,7 @@ public class GameScreen extends Screen {
 			if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
 
+				LOGGER.info("Obtained BulletSpeed Item");
 				this.returnCode = 0;
 				this.clearItem();//효과초기화
 				this.clearPointUp();
@@ -522,6 +523,7 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
 
+				LOGGER.info("Obtained PointUp Item");
 				this.returnCode = 1;
 				this.clearItem();//효과 초기화
 				this.itemInfoCooldown.reset();
@@ -532,17 +534,19 @@ public class GameScreen extends Screen {
 					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
 
 				LOGGER.info("Obtained MachineGun");
-
-				this.clearItem();//효과 초기화
-
+				this.returnCode = 2;
+				this.clearItem();
+				this.clearPointUp();
+				this.itemInfoCooldown.reset();
 				this.ship.setShootingInterval(0.1 * this.ship.getShootingInterval());
 
 			}
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
 
-				this.returnCode = 2;
-				this.clearItem();
+				LOGGER.warning("Obtained Shield Item");
+				this.returnCode = 3;
+				this.clearItem();//효과 초기화
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();
 				shield = new Shield(this.ship.getPositionX(), this.ship.getPositionY() - 3, this.ship);
@@ -551,7 +555,8 @@ public class GameScreen extends Screen {
 			else if (item.getIsget() == false &&
 					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
 
-				this.returnCode = 3;
+				LOGGER.warning("Obtained SpeedUp Item");
+				this.returnCode = 4;
 				this.clearItem();//효과 초기화
 				this.clearPointUp();
 				this.itemInfoCooldown.reset();
@@ -573,6 +578,7 @@ public class GameScreen extends Screen {
 				this.clearItem();
 				this.clearPointUp();
 				if (this.lives < 4) {
+					LOGGER.warning("Obtained ExtraLife Item");
 					this.lives++;
 					this.returnCode = 5;
 					this.itemInfoCooldown.reset();
@@ -584,12 +590,16 @@ public class GameScreen extends Screen {
 			item.isGet(true);
 		}
 	}
-
+	/**
+	 * initalize obtained item's effects.
+	 */
 	public void clearItem(){
 		ship.setInitState();
 		shield = null;
 	}
-
+	/**
+	 * Removing item that already obtained, or already get out of the gamescreen.
+	 */
 	private void cleanItems() {
 		Set<Item> recyclable = new HashSet<Item>();
 		for (Item item : this.itemiterator) {
@@ -600,7 +610,9 @@ public class GameScreen extends Screen {
 		}
 		this.itemiterator.removeAll(recyclable);
 	}
-
+	/**
+	 * initalize pointupitem effects.
+	 */
 	public void clearPointUp(){
 		for (EnemyShip enemyShip : this.enemyShipFormation)
 			enemyShip.setInitPointValue();

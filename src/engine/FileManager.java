@@ -13,9 +13,9 @@ import engine.DrawManager;
 
 /**
  * Manages files used in the application.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 public final class FileManager {
 
@@ -56,18 +56,18 @@ public final class FileManager {
 	 *             In case of loading problems.
 	 */
 	public void loadSprite(final Map<SpriteType, boolean[][]> spriteMap)
-			throws IOException {
+		throws IOException {
 		InputStream inputStream = null;
 
 		try {
 			String graphicsName = "graphics";
 			inputStream = DrawManager.class.getClassLoader()
-					.getResourceAsStream(graphicsName);
+				.getResourceAsStream(graphicsName);
 			char c;
 
 			// Sprite loading.
 			for (Map.Entry<SpriteType, boolean[][]> sprite : spriteMap
-					.entrySet()) {
+				.entrySet()) {
 				for (int i = 0; i < sprite.getValue().length; i++)
 					for (int j = 0; j < sprite.getValue()[i].length; j++) {
 						do
@@ -101,16 +101,16 @@ public final class FileManager {
 	 *             In case of incorrect font format.
 	 */
 	public Font loadFont(final float size) throws IOException,
-			FontFormatException {
+		FontFormatException {
 		InputStream inputStream = null;
 		Font font;
 
 		try {
 			// Font loading.
 			inputStream = FileManager.class.getClassLoader()
-					.getResourceAsStream("font.ttf");
+				.getResourceAsStream("font.ttf");
 			font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(
-					size);
+				size);
 		} finally {
 			if (inputStream != null)
 				inputStream.close();
@@ -134,7 +134,7 @@ public final class FileManager {
 
 		try {
 			inputStream = FileManager.class.getClassLoader()
-					.getResourceAsStream("scores");
+				.getResourceAsStream("scores");
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 
 			Score highScore = null;
@@ -174,7 +174,7 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
 			String scoresPath = new File(jarPath).getParent();
@@ -184,7 +184,7 @@ public final class FileManager {
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
-					inputStream, Charset.forName("UTF-8")));
+				inputStream, Charset.forName("UTF-8")));
 
 			logger.info("Loading user high scores.");
 
@@ -227,13 +227,13 @@ public final class FileManager {
 	 *             In case of loading problems.
 	 */
 	public void saveHighScores(final List<Score> highScores)
-			throws IOException {
+		throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
 			String scoresPath = new File(jarPath).getParent();
@@ -247,7 +247,7 @@ public final class FileManager {
 
 			outputStream = new FileOutputStream(scoresFile);
 			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-					outputStream, Charset.forName("UTF-8")));
+				outputStream, Charset.forName("UTF-8")));
 
 			logger.info("Saving user high scores.");
 
@@ -280,7 +280,7 @@ public final class FileManager {
 		BufferedReader bufferedReader = null;
 		try {
 			inputStream = FileManager.class.getClassLoader()
-					.getResourceAsStream("p_state");
+				.getResourceAsStream("p_state");
 			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
 			for (int i = 0; i < ps.length; i++) {
@@ -306,7 +306,7 @@ public final class FileManager {
 
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
 			String p_statePath = new File(jarPath).getPath();
@@ -316,7 +316,7 @@ public final class FileManager {
 			File p_stateFile = new File(p_statePath);
 			inputStream = new FileInputStream(p_stateFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
-					inputStream, Charset.forName("UTF-8")));
+				inputStream, Charset.forName("UTF-8")));
 
 			logger.info("Loading permanent state");
 
@@ -344,7 +344,7 @@ public final class FileManager {
 
 		try	{
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 
 			String p_statePath = new File(jarPath).getPath();;
@@ -358,7 +358,7 @@ public final class FileManager {
 
 			outputStream = new FileOutputStream(p_stateFile);
 			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-					outputStream, Charset.forName("UTF-8")));
+				outputStream, Charset.forName("UTF-8")));
 
 			logger.info("Saving permanent state");
 
@@ -373,16 +373,16 @@ public final class FileManager {
 	public void Savefile(GameState gamestate) {
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			File file = new File(jarPath + "../save");
 			BufferedWriter save = new BufferedWriter(new FileWriter(file));
 
-					String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
-					Integer.toString(gamestate.getScore()) + ' ' +
-					Integer.toString(gamestate.getLivesRemaining()) + ' ' +
-					Integer.toString(gamestate.getBulletsShot()) + ' ' +
-					Integer.toString(gamestate.getShipsDestroyed());
+			String state = Integer.toString(gamestate.getLevel() + 1) + ' ' +
+				Integer.toString(gamestate.getScore()) + ' ' +
+				Integer.toString(gamestate.getLivesRemaining()) + ' ' +
+				Integer.toString(gamestate.getBulletsShot()) + ' ' +
+				Integer.toString(gamestate.getShipsDestroyed());
 
 			save.write(state);
 
@@ -396,7 +396,7 @@ public final class FileManager {
 		String[] array = {"1","0","3","0","0"};
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath();
+				.getCodeSource().getLocation().getPath();
 			jarPath = URLDecoder.decode(jarPath, "UTF-8");
 			String savePath = new File(jarPath).getParent();
 			savePath += File.separator;
@@ -418,4 +418,3 @@ public final class FileManager {
 		}
 	}
 }
-

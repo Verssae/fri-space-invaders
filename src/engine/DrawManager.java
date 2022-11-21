@@ -939,7 +939,7 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		else {
 			backBufferGraphics.setColor(Color.GREEN);
-			if (permanentState.getP_state(PermanentState.State.coin) < 100) {
+			if (permanentState.getP_state(PermanentState.P_State.coin) < 100) {
 				backBufferGraphics.setColor(Color.RED);
 				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
 						screen.getHeight() / 2 + 180);
@@ -954,12 +954,12 @@ public final class DrawManager {
 		}
 		else if(menu == 2){ // bullet sfx
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.P_State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 		else if(menu == 3){ // bgm
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.P_State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 	}

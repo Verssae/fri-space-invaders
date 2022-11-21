@@ -47,8 +47,8 @@ public class Ship extends Entity {
 
 	public Ship(final int positionX, final int positionY) {
 		super(positionX, positionY, 26, 16);
-		shipShape = PermanentState.getInstance().getP_state(PermanentState.State.shipShape);
-		shipColor = PermanentState.getInstance().getP_state(PermanentState.State.shipColor);
+		shipShape = PermanentState.getInstance().getP_state(PermanentState.P_State.shipShape);
+		shipColor = PermanentState.getInstance().getP_state(PermanentState.P_State.shipColor);
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.width = 26;

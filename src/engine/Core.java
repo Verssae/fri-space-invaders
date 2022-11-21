@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import entity.ItemPool;
 import screen.*;
 
+
 /**
  * Implements core game logic.
  *
@@ -157,7 +158,7 @@ public final class Core {
 						gameState = ((GameScreen) currentScreen).getGameState();
 
 						if (gameState.getScore() > 500)
-							permanentState.setP_state(PermanentState.State.coin, gameState.getScore() - 500); // earn coin
+							permanentState.setP_state(PermanentState.P_State.coin, gameState.getScore() - 500); // earn coin
 
 
 						if (gameState.getLivesRemaining() > 0) {
@@ -248,8 +249,9 @@ public final class Core {
 					break;
 
 				case 8: //Map testing
-					if (chapterState == null)
-						chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
+					if (chapterState == null){
+						chapterState = new ChapterState(4);
+					}
 					currentScreen = new MapScreen(chapterState, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " map screen at " + FPS + " fps.");
@@ -263,6 +265,19 @@ public final class Core {
 							+ " setting screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing help screen.");
+					break;
+
+				case 100:
+					currentScreen = new BattleScreen(new BattleState(chapterState.getC_state()),
+							gameSettings.get(chapterState.getC_state(ChapterState.C_State.difficulty)),
+							false, width, height, FPS); // bonus life is false...? need condition
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " battle screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing battle screen.");
+					frame.setScreen(currentScreen);
+					chapterState.setC_state(((BattleScreen)currentScreen).getBattleState());
+					returnCode = 8;
 					break;
 
 				default:

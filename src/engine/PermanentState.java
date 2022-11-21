@@ -13,14 +13,14 @@ import java.util.logging.Logger;
  */
 public final class PermanentState {
 
-	public enum State {
+	public enum P_State {
 		coin,
 		shipShape,
 		shipColor,
 		BGM,
 		bulletSFX
 	}
-	LinkedHashMap<State, Integer> p_state;
+	LinkedHashMap<P_State, Integer> p_state;
 
 	/** Application logger. */
 	private static Logger logger;
@@ -42,26 +42,23 @@ public final class PermanentState {
 			ps = new PermanentState();
 		return ps;
 	}
-	public void saveP_state() throws IOException {
-		fileManager.saveP_state(p_state);
-	}
-	public int getP_state(State key) {
+	public int getP_state(P_State key) {
 		return p_state.get(key);
 	}
 
-	public void gainP_state(State key, int value) {
+	public void gainP_state(P_State key, int value) {
 		p_state.replace(key, getP_state(key) + value);
 		try {
-			saveP_state();
+			fileManager.saveP_state(p_state); // current P_State save to file
 		} catch (IOException e) {
 			logger.info(e.toString());
 		}
 	}
 
-	public void setP_state(State key, int value){
+	public void setP_state(P_State key, int value){
 		p_state.replace(key, value);
 		try {
-			saveP_state();
+			fileManager.saveP_state(p_state); // current P_State save to file
 		} catch (IOException e) {
 			logger.info(e.toString());
 		}

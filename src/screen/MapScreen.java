@@ -75,7 +75,8 @@ public class MapScreen extends Screen {
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
                 sound.SoundPlay.getInstance().play(SoundType.menuClick);
                 chapterState.curStageClear();
-                this.inputDelay.reset();
+                returnCode = 100; // Enemy
+                isRunning = false;
             }
         }
     }
@@ -83,9 +84,9 @@ public class MapScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
 
-        drawManager.drawLives(this, chapterState.getLivesRemaining());
-        drawManager.drawScore(this, chapterState.getScore());
-        drawManager.drawCoin(this, chapterState.getCoin());
+        drawManager.drawLives(this, chapterState.getC_state(ChapterState.C_State.livesRemaining));
+        drawManager.drawScore(this, chapterState.getC_state(ChapterState.C_State.score));
+        drawManager.drawCoin(this, chapterState.getC_state(ChapterState.C_State.coin));
         drawManager.drawHorizontalLine(this, 50);
         drawManager.drawMap(this, chapterState);
 

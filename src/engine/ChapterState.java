@@ -1,5 +1,7 @@
 package engine;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -14,18 +16,17 @@ import java.util.logging.Logger;
 public class ChapterState {
 	/** Current map size.*/
 	private int map_size;
-	/** Current chapter. */
-	private int chapter;
-	/** Current score. */
-	private int score;
-	/** Current coin. */
-	private int coin;
-	/** Lives currently remaining. */
-	private int livesRemaining;
-	/** Bullets shot until now. */
-	private int bulletsShot;
-	/** Ships destroyed until now. */
-	private int shipsDestroyed;
+	public enum C_State {
+		chapter,
+		difficulty,
+		score,
+		coin,
+		livesRemaining,
+		bulletsShot,
+		shipsDestroyed
+	};
+
+	LinkedHashMap<C_State, Integer> c_state;
 
 	public enum Stage_Type {
 		NONE,
@@ -39,6 +40,7 @@ public class ChapterState {
 	public int map_type[][];
 	public int is_adj[][];
 	public int map_moveable[][][];
+	public int map_difficulty[][];
 	private int dx[] = {1,-1,0,0};
 	private int dy[] = {0,0,1,-1};
 	private int cur_x = 0; // <= initialization to start x
@@ -50,45 +52,38 @@ public class ChapterState {
 	/**
 	 * Constructor.
 	 *
-	 * @param chapter
-	 *            Current chapter.
-	 * @param score
-	 *            Current score.
-	 * @param livesRemaining
-	 *            Lives currently remaining.
-	 * @param bulletsShot
-	 *            Bullets shot until now.
-	 * @param shipsDestroyed
-	 *            Ships destroyed until now.
+	 * @param map_size
+	 *            Current map size.
 	 */
-	public ChapterState(final int map_size,
-						final int chapter,
-						final int score,
-						final int coin,
-                        final int livesRemaining,
-						final int bulletsShot,
-                        final int shipsDestroyed) {
+
+	public ChapterState(final int map_size) {
 		this.map_size = map_size;
-		this.chapter = chapter;
-		this.score = score;
-		this.coin = coin;
-		this.livesRemaining = livesRemaining;
-		this.bulletsShot = bulletsShot;
-		this.shipsDestroyed = shipsDestroyed;
 
 		initialize_map(); // 맵 생성 후 저장
+
+		c_state = new LinkedHashMap<>();
+		c_state.put(C_State.chapter, 1);
+		c_state.put(C_State.difficulty, map_difficulty[cur_y][cur_x]);
+		c_state.put(C_State.score, 0);
+		c_state.put(C_State.coin, 0);
+		c_state.put(C_State.livesRemaining, 3);
+		c_state.put(C_State.bulletsShot, 0);
+		c_state.put(C_State.shipsDestroyed, 0);
 	}
 
 	private void initialize_map(){
 		map_type = new int[map_size][map_size];
 		is_adj = new int[map_size][map_size];
 		map_moveable = new int[map_size][map_size][4];
+		map_difficulty = new int[map_size][map_size];
 
 		Random rd = new Random();
 		do {
 			for (int i = 0; i < map_size; i++){
 				for (int j = 0; j < map_size; j++){
 					map_type[i][j] = rd.nextInt(Stage_Type.values().length - 2); // Exclude type { CLEAR, BOSS }
+					if (map_type[i][j] == Stage_Type.ENEMY.ordinal())
+						map_difficulty[i][j] = rd.nextInt(7);
 				}
 			}
 			for (int i = 0; i < map_size; i++){
@@ -138,47 +133,22 @@ public class ChapterState {
 					return 1;
 		return 0;
 	}
-
-	/**
-	 * @return the level
-	 */
-	public final int getChapter() {
-		return chapter;
+	public LinkedHashMap getC_state() {
+		return c_state;
+	}
+	public void setC_state(LinkedHashMap c_state) {
+		this.c_state = c_state;
+	}
+	public int getC_state(C_State key) {
+		return c_state.get(key);
 	}
 
-	/**
-	 * @return the score
-	 */
-	public final int getScore() {
-		return score;
+	public void gainC_state(C_State key, int value) {
+		c_state.replace(key, getC_state(key) + value);
 	}
 
-	/**
-	 * @return the coin
-	 */
-	public final int getCoin() {
-		return coin;
-	}
-
-	/**
-	 * @return the livesRemaining
-	 */
-	public final int getLivesRemaining() {
-		return livesRemaining;
-	}
-
-	/**
-	 * @return the bulletsShot
-	 */
-	public final int getBulletsShot() {
-		return bulletsShot;
-	}
-
-	/**
-	 * @return the shipsDestroyed
-	 */
-	public final int getShipsDestroyed() {
-		return shipsDestroyed;
+	public void setC_state(C_State key, int value){
+		c_state.replace(key, value);
 	}
 
 	public void curStageClear(){
@@ -192,6 +162,7 @@ public class ChapterState {
 		if (map_moveable[cur_y][cur_x][dir] == 1 && is_adj[cur_y+dy[dir]][cur_x+dx[dir]] == 1){
 			cur_x += dx[dir];
 			cur_y += dy[dir];
+			c_state.replace(C_State.difficulty, map_difficulty[cur_y][cur_x]);
 		}
 	}
 

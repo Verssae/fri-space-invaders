@@ -158,7 +158,7 @@ public final class Core {
 						gameState = ((GameScreen) currentScreen).getGameState();
 
 						if (gameState.getScore() > 500)
-							permanentState.setP_state(PermanentState.P_State.coin, gameState.getScore() - 500); // earn coin
+							permanentState.setP_state(P_State.gem, gameState.getScore() - 500); // earn gem
 
 
 						if (gameState.getLivesRemaining() > 0) {
@@ -269,7 +269,7 @@ public final class Core {
 
 				case 100:
 					currentScreen = new BattleScreen(new BattleState(chapterState.getC_state()),
-							gameSettings.get(chapterState.getC_state(ChapterState.C_State.difficulty)),
+							gameSettings.get(chapterState.getC_state(C_State.difficulty)),
 							false, width, height, FPS); // bonus life is false...? need condition
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " battle screen at " + FPS + " fps.");
@@ -277,7 +277,35 @@ public final class Core {
 					LOGGER.info("Closing battle screen.");
 					frame.setScreen(currentScreen);
 					chapterState.setC_state(((BattleScreen)currentScreen).getBattleState());
-					returnCode = 8;
+
+					if(gameState.getLivesRemaining() > 0){
+
+					}
+					else{
+						//currentScreen = new resultScreen();
+					}
+					returnCode = 8; // go to map screen
+
+//					if (gameState.getLivesRemaining() > 0) {
+//						currentScreen = new PauseScreen(width, height, FPS, gameState);
+//						returnCode = frame.setScreen(currentScreen);
+//					}
+//
+//					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
+//						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+//								+ " game save screen at " + FPS + " fps.");
+//						currentScreen = new GameSaveScreen(gameState, width, height, FPS);
+//						returnCode = frame.setScreen(currentScreen);
+//						LOGGER.info("Closing game save screen.");
+//						if (returnCode == 2) {
+//							getFileManager().Savefile(gameState);
+//							LOGGER.info("Complete Save.");
+//							GO_MAIN = false;
+//							gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
+//							returnCode = 1;
+//							break;
+//						}
+//					}
 					break;
 
 				default:

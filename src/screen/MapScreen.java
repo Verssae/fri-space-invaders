@@ -3,6 +3,7 @@ package screen;
 
 import engine.*;
 import entity.Ship;
+import sound.SoundPlay;
 import sound.SoundType;
 
 import java.awt.event.KeyEvent;
@@ -32,7 +33,7 @@ public class MapScreen extends Screen {
 
     public MapScreen(final ChapterState chapterState,final int width, final int height, final int fps) {
         super(width, height, fps);
-
+        SoundPlay.getInstance().play(SoundType.mainGameBgm);
         this.chapterState = chapterState;
         this.returnCode = 1;
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
@@ -73,6 +74,7 @@ public class MapScreen extends Screen {
                 this.inputDelay.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
+                sound.SoundPlay.getInstance().stopBgm();
                 sound.SoundPlay.getInstance().play(SoundType.menuClick);
                 chapterState.curStageClear();
                 returnCode = 100; // Enemy
@@ -84,9 +86,9 @@ public class MapScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
 
-        drawManager.drawLives(this, chapterState.getC_state(ChapterState.C_State.livesRemaining));
-        drawManager.drawScore(this, chapterState.getC_state(ChapterState.C_State.score));
-        drawManager.drawCoin(this, chapterState.getC_state(ChapterState.C_State.coin));
+        drawManager.drawLives(this, chapterState.getC_state(C_State.livesRemaining));
+        drawManager.drawScore(this, chapterState.getC_state(C_State.score));
+        drawManager.drawCoin(this, chapterState.getC_state(C_State.coin));
         drawManager.drawHorizontalLine(this, 50);
         drawManager.drawMap(this, chapterState);
 

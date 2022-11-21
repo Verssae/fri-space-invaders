@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  * 
  */
 public class BattleState {
-	LinkedHashMap<ChapterState.C_State, Integer> b_state;
+	LinkedHashMap<C_State, Integer> b_state;
 
 	/**
 	 * Constructor.
@@ -28,15 +28,15 @@ public class BattleState {
 	public void setB_state(LinkedHashMap b_state) {
 		this.b_state = b_state;
 	}
-	public int getB_state(ChapterState.C_State key) {
+	public int getB_state(C_State key) {
 		return b_state.get(key);
 	}
 
-	public void gainB_state(ChapterState.C_State key, int value) {
+	public void gainB_state(C_State key, int value) {
 		b_state.replace(key, getB_state(key) + value);
 	}
 
-	public void setB_state(ChapterState.C_State key, int value){
+	public void setB_state(C_State key, int value){
 		b_state.replace(key, value);
 	}
 }

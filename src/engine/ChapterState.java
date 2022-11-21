@@ -13,18 +13,10 @@ import java.util.logging.Logger;
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
  * 
  */
+
 public class ChapterState {
 	/** Current map size.*/
 	private int map_size;
-	public enum C_State {
-		chapter,
-		difficulty,
-		score,
-		coin,
-		livesRemaining,
-		bulletsShot,
-		shipsDestroyed
-	};
 
 	LinkedHashMap<C_State, Integer> c_state;
 

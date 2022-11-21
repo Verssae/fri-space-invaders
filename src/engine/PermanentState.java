@@ -12,14 +12,6 @@ import java.util.logging.Logger;
  * 
  */
 public final class PermanentState {
-
-	public enum P_State {
-		coin,
-		shipShape,
-		shipColor,
-		BGM,
-		bulletSFX
-	}
 	LinkedHashMap<P_State, Integer> p_state;
 
 	/** Application logger. */

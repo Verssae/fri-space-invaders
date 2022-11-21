@@ -26,7 +26,7 @@ public final class FileManager {
 	/** Max number of high scores. */
 	private static final int MAX_SCORES = 7;
 
-	PermanentState.P_State[] ps = PermanentState.P_State.values();
+	P_State[] ps = P_State.values();
 
 	/**
 	 * private constructor.
@@ -274,7 +274,7 @@ public final class FileManager {
 	}
 
 	private LinkedHashMap loadDefaultP_state() throws IOException {
-		LinkedHashMap<PermanentState.P_State, Integer> stateMap = new LinkedHashMap<PermanentState.P_State, Integer>();
+		LinkedHashMap<P_State, Integer> stateMap = new LinkedHashMap<P_State, Integer>();
 
 		InputStream inputStream = null;
 		BufferedReader bufferedReader = null;
@@ -299,7 +299,7 @@ public final class FileManager {
 	}
 
 	public LinkedHashMap loadP_state() throws IOException {
-		LinkedHashMap<PermanentState.P_State, Integer> stateMap = new LinkedHashMap<PermanentState.P_State, Integer>();
+		LinkedHashMap<P_State, Integer> stateMap = new LinkedHashMap<P_State, Integer>();
 
 		InputStream inputStream = null;
 		BufferedReader bufferedReader = null;

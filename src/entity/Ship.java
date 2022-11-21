@@ -3,11 +3,8 @@ package entity;
 import java.awt.Color;
 import java.util.Set;
 
-import engine.Cooldown;
-import engine.Core;
+import engine.*;
 import engine.DrawManager.SpriteType;
-import engine.FileManager;
-import engine.PermanentState;
 import sound.SoundPlay;
 import sound.SoundType;
 //import entity.Shield;
@@ -47,8 +44,8 @@ public class Ship extends Entity {
 
 	public Ship(final int positionX, final int positionY) {
 		super(positionX, positionY, 26, 16);
-		shipShape = PermanentState.getInstance().getP_state(PermanentState.P_State.shipShape);
-		shipColor = PermanentState.getInstance().getP_state(PermanentState.P_State.shipColor);
+		shipShape = PermanentState.getInstance().getP_state(P_State.shipShape);
+		shipColor = PermanentState.getInstance().getP_state(P_State.shipColor);
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.width = 26;

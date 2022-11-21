@@ -110,8 +110,8 @@ public class BattleScreen extends Screen {
 		this.gameSettings = gameSettings;
 		this.bonusLife = bonusLife;
 		if (this.bonusLife)
-			this.battleState.gainB_state(ChapterState.C_State.livesRemaining, 1);
-		if(battleState.getB_state(ChapterState.C_State.livesRemaining) == 0){
+			this.battleState.gainB_state(C_State.livesRemaining, 1);
+		if(battleState.getB_state(C_State.livesRemaining) == 0){
 			SoundPlay.getInstance().stopBgm();
 		}
 
@@ -132,7 +132,6 @@ public class BattleScreen extends Screen {
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				logger.info("이게 안 된다고?");
 				SoundPlay.getInstance().play(SoundType.inGameBGM);
 			}
 		};
@@ -177,9 +176,9 @@ public class BattleScreen extends Screen {
 		super.run();
 
 		SoundPlay.getInstance().stopBgm();
-		battleState.gainB_state(ChapterState.C_State.score,
-				LIFE_SCORE * (battleState.getB_state(ChapterState.C_State.livesRemaining) - 1));
-		this.logger.info("Screen cleared with a score of " + battleState.getB_state(ChapterState.C_State.score)); // 정상 출력
+		battleState.gainB_state(C_State.score,
+				LIFE_SCORE * (battleState.getB_state(C_State.livesRemaining) - 1));
+		this.logger.info("Screen cleared with a score of " + battleState.getB_state(C_State.score)); // 정상 출력
 		return this.returnCode;
 	}
 
@@ -214,7 +213,7 @@ public class BattleScreen extends Screen {
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets))
-						battleState.gainB_state(ChapterState.C_State.bulletsShot, 1);
+						battleState.gainB_state(C_State.bulletsShot, 1);
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -252,7 +251,7 @@ public class BattleScreen extends Screen {
 			}
 			if (this.enemyShipDangerous != null
 					&& this.enemyShipDangerous.getPositionX() > this.width) {
-				battleState.gainB_state(ChapterState.C_State.livesRemaining, -1);
+				battleState.gainB_state(C_State.livesRemaining, -1);
 				this.enemyShipDangerous = null;
 				this.logger.info("The dangerous ship has escaped and you has lost lives");
 			}
@@ -271,7 +270,7 @@ public class BattleScreen extends Screen {
 		cleanItems();
 		cleanBullets();
 		draw();
-		if ((this.enemyShipFormation.isEmpty() || battleState.getB_state(ChapterState.C_State.livesRemaining) == 0)
+		if ((this.enemyShipFormation.isEmpty() || battleState.getB_state(C_State.livesRemaining) == 0)
 				&& !this.levelFinished) {
 			this.levelFinished = true;
 			this.screenFinishedCooldown.reset();
@@ -326,9 +325,9 @@ public class BattleScreen extends Screen {
 					bullet.getPositionY());
 
 		// Interface.
-		drawManager.drawLevels(this, battleState.getB_state(ChapterState.C_State.difficulty) + 1);
-		drawManager.drawScore(this, battleState.getB_state(ChapterState.C_State.score));
-		drawManager.drawLives(this, battleState.getB_state(ChapterState.C_State.livesRemaining));
+		drawManager.drawLevels(this, battleState.getB_state(C_State.difficulty) + 1);
+		drawManager.drawScore(this, battleState.getB_state(C_State.score));
+		drawManager.drawLives(this, battleState.getB_state(C_State.livesRemaining));
 		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
 
 		// Countdown to game start.
@@ -336,7 +335,7 @@ public class BattleScreen extends Screen {
 			int countdown = (int) ((INPUT_DELAY
 					- (System.currentTimeMillis()
 							- this.gameStartTime)) / 1000);
-			drawManager.drawCountDown(this, battleState.getB_state(ChapterState.C_State.difficulty) + 1, countdown,
+			drawManager.drawCountDown(this, battleState.getB_state(C_State.difficulty) + 1, countdown,
 					this.bonusLife);
 			drawManager.drawHorizontalLine(this, this.height / 2 - this.height
 					/ 12);
@@ -389,8 +388,8 @@ public class BattleScreen extends Screen {
 					if (shield == null && !this.ship.isDestroyed()) {
 						SoundPlay.getInstance().play(SoundType.hit);
 						this.ship.destroy();
-						battleState.gainB_state(ChapterState.C_State.livesRemaining, -1);
-						this.logger.info("Hit on player ship, " + battleState.getB_state(ChapterState.C_State.livesRemaining)
+						battleState.gainB_state(C_State.livesRemaining, -1);
+						this.logger.info("Hit on player ship, " + battleState.getB_state(C_State.livesRemaining)
 								+ " lives remaining.");
 							this.clearItem();
 
@@ -403,8 +402,8 @@ public class BattleScreen extends Screen {
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
 						SoundPlay.getInstance().play(SoundType.enemyKill);
-						battleState.gainB_state(ChapterState.C_State.score, enemyShip.getPointValue());
-						battleState.gainB_state(ChapterState.C_State.shipsDestroyed, 1);
+						battleState.gainB_state(C_State.score, enemyShip.getPointValue());
+						battleState.gainB_state(C_State.shipsDestroyed, 1);
 
 						if (enemyShip.getItemType() != null) {
 							enemyShip.itemDrop(itemiterator);
@@ -420,9 +419,9 @@ public class BattleScreen extends Screen {
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
 					SoundPlay.getInstance().play(SoundType.bonusEnemyKill);
-					battleState.gainB_state(ChapterState.C_State.score, enemyShipSpecial.getPointValue());
+					battleState.gainB_state(C_State.score, enemyShipSpecial.getPointValue());
+					battleState.gainB_state(C_State.shipsDestroyed, 1);
 
-					battleState.gainB_state(ChapterState.C_State.shipsDestroyed, 1);
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
 					recyclable.add(bullet);
@@ -431,9 +430,9 @@ public class BattleScreen extends Screen {
 						&& !this.enemyShipDangerous.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipDangerous)) {
 					SoundPlay.getInstance().play(SoundType.bonusEnemyKill);
-					battleState.gainB_state(ChapterState.C_State.score, enemyShipDangerous.getPointValue());
+					battleState.gainB_state(C_State.score, enemyShipDangerous.getPointValue());
+					battleState.gainB_state(C_State.shipsDestroyed, 1);
 
-					battleState.gainB_state(ChapterState.C_State.shipsDestroyed, 1);
 					this.enemyShipDangerous.destroy();
 					this.enemyShipdangerousExplosionCooldown.reset();
 					recyclable.add(bullet);
@@ -553,9 +552,9 @@ public class BattleScreen extends Screen {
 
 				this.clearItem();
 				this.clearPointUp();
-				if (battleState.getB_state(ChapterState.C_State.livesRemaining) < 4) {
+				if (battleState.getB_state(C_State.livesRemaining) < 4) {
 					LOGGER.warning("Obtained ExtraLife Item");
-					battleState.gainB_state(ChapterState.C_State.livesRemaining, 1);
+					battleState.gainB_state(C_State.livesRemaining, 1);
 					this.returnCode = 5;
 					this.itemInfoCooldown.reset();
 				}

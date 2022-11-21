@@ -6,6 +6,7 @@ import java.util.Random;
 
 import engine.Cooldown;
 import engine.Core;
+import engine.P_State;
 import engine.PermanentState;
 import sound.SoundPlay;
 import sound.SoundType;
@@ -130,42 +131,42 @@ public class StoreScreen extends Screen {
 
     private void rerollItem() {
         if (menuCode == 0){ // ship shape
-            if (permanentState.getP_state(PermanentState.P_State.coin) >= COST_SHAPE) {
+            if (permanentState.getP_state(P_State.gem) >= COST_SHAPE) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getP_state(PermanentState.P_State.shipShape) == x)
+                while (permanentState.getP_state(P_State.shipShape) == x)
                     x = new Random().nextInt(3);
 
-                permanentState.setP_state(PermanentState.P_State.shipShape, x);
-                permanentState.gainP_state(PermanentState.P_State.coin, -COST_SHAPE);
+                permanentState.setP_state(P_State.shipShape, x);
+                permanentState.gainP_state(P_State.gem, -COST_SHAPE);
             }
         }
         else if (menuCode == 1){ // ship color
-            if (permanentState.getP_state(PermanentState.P_State.coin) >= COST_COLOR) {
+            if (permanentState.getP_state(P_State.gem) >= COST_COLOR) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getP_state(PermanentState.P_State.shipColor) == x)
+                while (permanentState.getP_state(P_State.shipColor) == x)
                     x = new Random().nextInt(3);
 
-                permanentState.setP_state(PermanentState.P_State.shipColor, x);
-                permanentState.gainP_state(PermanentState.P_State.coin, -COST_COLOR);
+                permanentState.setP_state(P_State.shipColor, x);
+                permanentState.gainP_state(P_State.gem, -COST_COLOR);
             }
         }
         else if (menuCode == 2){ // bullet effect
-            if (permanentState.getP_state(PermanentState.P_State.coin) >= COST_BULLET) {
+            if (permanentState.getP_state(P_State.gem) >= COST_BULLET) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getP_state(PermanentState.P_State.bulletSFX) == x)
+                while (permanentState.getP_state(P_State.bulletSFX) == x)
                     x = new Random().nextInt(3);
 
-                permanentState.setP_state(PermanentState.P_State.bulletSFX, x);
-                permanentState.gainP_state(PermanentState.P_State.coin, -COST_BULLET);
+                permanentState.setP_state(P_State.bulletSFX, x);
+                permanentState.gainP_state(P_State.gem, -COST_BULLET);
             }
         }
         else { // BGM
-            if (permanentState.getP_state(PermanentState.P_State.coin) >= COST_BGM) {
+            if (permanentState.getP_state(P_State.gem) >= COST_BGM) {
                 int x = new Random().nextInt(3);
-                while (permanentState.getP_state(PermanentState.P_State.BGM) == x)
+                while (permanentState.getP_state(P_State.BGM) == x)
                     x = new Random().nextInt(3);
-                permanentState.setP_state(PermanentState.P_State.BGM, x);
-                permanentState.gainP_state(PermanentState.P_State.coin, -COST_BGM);
+                permanentState.setP_state(P_State.BGM, x);
+                permanentState.gainP_state(P_State.gem, -COST_BGM);
             }
         }
     }
@@ -180,7 +181,7 @@ public class StoreScreen extends Screen {
         drawManager.drawStoreMenu(this, menuCode, focusReroll);
         if (menuCode < 4)
             drawManager.drawStoreGacha(this, menuCode, focusReroll);
-        drawManager.drawCoin(this, permanentState.getP_state(PermanentState.P_State.coin));
+        drawManager.drawGem(this, permanentState.getP_state(P_State.gem));
 
         drawManager.completeDrawing(this);
     }

@@ -278,7 +278,7 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 
 		backBufferGraphics.setColor(Color.cyan);
-		String scoreString = String.format("SCORE: %04d", score);
+		String scoreString = String.format("SCORE: %05d", score);
 		backBufferGraphics.drawString(scoreString, screen.getWidth() - 140, 20);
 	}
 
@@ -939,7 +939,7 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		else {
 			backBufferGraphics.setColor(Color.GREEN);
-			if (permanentState.getP_state(PermanentState.P_State.coin) < 100) {
+			if (permanentState.getP_state(P_State.gem) < 100) {
 				backBufferGraphics.setColor(Color.RED);
 				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
 						screen.getHeight() / 2 + 180);
@@ -954,20 +954,27 @@ public final class DrawManager {
 		}
 		else if(menu == 2){ // bullet sfx
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.P_State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(P_State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 		else if(menu == 3){ // bgm
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.P_State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(P_State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
+	}
+
+	public void drawGem(final Screen screen, final int gem) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.MAGENTA);
+		String coinString = String.format("GEM:     %04d", gem);
+		backBufferGraphics.drawString(coinString, screen.getWidth() - 141, 40);
 	}
 
 	public void drawCoin(final Screen screen, final int coin) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.YELLOW);
-		String coinString = String.format("COIN:     %04d", coin);
+		String coinString = String.format("COIN:     %05d", coin);
 		backBufferGraphics.drawString(coinString, screen.getWidth() - 141, 40);
 	}
 

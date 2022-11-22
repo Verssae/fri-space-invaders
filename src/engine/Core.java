@@ -9,8 +9,9 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entity.ItemPool;
 import screen.*;
+import to_be_delete.*;
+
 
 /**
  * Implements core game logic.
@@ -157,7 +158,7 @@ public final class Core {
 						gameState = ((GameScreen) currentScreen).getGameState();
 
 						if (gameState.getScore() > 500)
-							permanentState.setP_state(PermanentState.State.coin, gameState.getScore() - 500); // earn coin
+							permanentState.setP_state(P_State.gem, gameState.getScore() - 500); // earn gem
 
 
 						if (gameState.getLivesRemaining() > 0) {
@@ -248,8 +249,9 @@ public final class Core {
 					break;
 
 				case 8: //Map testing
-					if (chapterState == null)
-						chapterState = new ChapterState(4, 1, 0, 0, 3,0 ,0);
+					if (chapterState == null){
+						chapterState = new ChapterState(4);
+					}
 					currentScreen = new MapScreen(chapterState, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " map screen at " + FPS + " fps.");
@@ -263,6 +265,39 @@ public final class Core {
 							+ " setting screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing help screen.");
+					break;
+
+				case 100:
+					BattleState battleState = new BattleState(chapterState.getC_state());
+					currentScreen = new BattleScreen(battleState,
+							gameSettings.get(chapterState.getC_state(C_State.difficulty)),
+							false, width, height, FPS); // bonus life is false...? need condition
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " battle screen at " + FPS + " fps.");
+					frame.setScreen(currentScreen);
+					LOGGER.info("Closing battle screen.");
+					battleState = ((BattleScreen)currentScreen).getBattleState();
+					chapterState.setC_state(battleState.getB_state());
+
+					if(battleState.getB_state(C_State.livesRemaining) > 0){
+						//저장
+						//중간결과
+						currentScreen = new BattleResultScreen(width, height, FPS, battleState);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " battle result screen at " + FPS + " fps.");
+						returnCode = frame.setScreen(currentScreen); // is 8.
+						LOGGER.info("Closing battle result screen.");
+					}
+					else{
+						//최종결과
+						currentScreen = new ResultScreen(width, height, FPS, chapterState);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " result screen at " + FPS + " fps.");
+						returnCode = frame.setScreen(currentScreen); // is 1.
+						LOGGER.info("Closing result screen.");
+						chapterState = null; // current chapterstate delete
+						returnCode = 1;
+					}
 					break;
 
 				default:

@@ -1,15 +1,14 @@
 package screen;
 
+import engine.*;
+import sound.SoundPlay;
+import sound.SoundType;
+import to_be_delete.GameState;
+
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-
-import engine.Cooldown;
-import engine.Core;
-import engine.GameState;
-import engine.Score;
-import sound.*;
 
 /**
  * Implements the score screen.
@@ -17,7 +16,7 @@ import sound.*;
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
  * 
  */
-public class ScoreScreen extends Screen {
+public class ResultScreen extends Screen {
 
 	/** Milliseconds between changes in user selection. */
 	private static final int SELECTION_TIME = 200;
@@ -51,24 +50,24 @@ public class ScoreScreen extends Screen {
 
 	/**
 	 * Constructor, establishes the properties of the screen.
-	 * 
+	 *
 	 * @param width
 	 *            Screen width.
 	 * @param height
 	 *            Screen height.
 	 * @param fps
 	 *            Frames per second, frame rate at which the game is run.
-	 * @param gameState
-	 *            Current game state.
+	 * @param chapterState
+	 *            Current chapter state.
 	 */
-	public ScoreScreen(final int width, final int height, final int fps,
-			final GameState gameState) {
+	public ResultScreen(final int width, final int height, final int fps,
+                        final ChapterState chapterState) {
 		super(width, height, fps);
-		this.score = gameState.getScore();
+		this.score = chapterState.getC_state(C_State.score);
 		//System.out.println(this.score); --> 0
-		this.livesRemaining = gameState.getLivesRemaining();
-		this.bulletsShot = gameState.getBulletsShot();
-		this.shipsDestroyed = gameState.getShipsDestroyed();
+		this.livesRemaining = chapterState.getC_state(C_State.livesRemaining);
+		this.bulletsShot = chapterState.getC_state(C_State.bulletsShot);
+		this.shipsDestroyed = chapterState.getC_state(C_State.shipsDestroyed);
 		this.isNewRecord = false;
 		this.name = "AAA".toCharArray();
 		this.nameCharSelected = 0;

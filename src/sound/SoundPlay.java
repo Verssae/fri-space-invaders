@@ -1,10 +1,11 @@
 package sound;
 
+import engine.P_State;
 import engine.PermanentState;
 
 public class SoundPlay{
     private static SoundPlay instance;
-    private int effectVolume = 70;
+    private int effectVolume = 50;
     private int bgmVolume = 50;
     private SoundBgm sb;
 
@@ -20,7 +21,7 @@ public class SoundPlay{
                 playEffect("Hit_001.wav");
                 break;
             case shoot:
-                playEffect("Shoot_" + String.format("%03d",PermanentState.getInstance().getP_state(PermanentState.State.bulletSFX)) + ".wav");
+                playEffect("Shoot_" + String.format("%03d",PermanentState.getInstance().getP_state(P_State.bulletSFX)) + ".wav");
                 break;
             case enemyKill:
                 playEffect("EnemyKill_001.wav");
@@ -32,7 +33,7 @@ public class SoundPlay{
                 playEffect("MenuSelect_001.wav");
                 break;
             case inGameBGM:
-                playBgm("BGM_MainGame_" + String.format("%03d",PermanentState.getInstance().getP_state(PermanentState.State.BGM)) + ".wav");
+                playBgm("BGM_MainGame_" + String.format("%03d",PermanentState.getInstance().getP_state(P_State.BGM)) + ".wav");
                 break;
             case mainGameBgm:
                 playBgm("MainScreen_BGM_001.wav");

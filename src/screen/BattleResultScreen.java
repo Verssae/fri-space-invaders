@@ -1,14 +1,14 @@
 package screen;
 
+import engine.*;
+import to_be_delete.GameState;
+
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-
-import engine.*;
-
-public class PauseScreen extends Screen {
+public class BattleResultScreen extends Screen {
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 30;
     /** Maximum number of high scores. */
@@ -30,7 +30,7 @@ public class PauseScreen extends Screen {
     private Cooldown selectionCooldown;
 
 
-    private static int coin = PermanentState.getInstance().getP_state(PermanentState.State.coin);
+    private static int coin = PermanentState.getInstance().getP_state(P_State.gem);
 
     /**
      * Constructor, establishes the properties of the screen.
@@ -41,18 +41,18 @@ public class PauseScreen extends Screen {
      *            Screen height.
      * @param fps
      *            Frames per second, frame rate at which the game is run.
-     * @param gameState
-     *            Current game state.
+     * @param battleState
+     *            Current battle state.
      */
-    public PauseScreen(final int width, final int height, final int fps,
-                       final GameState gameState) {
+    public BattleResultScreen(final int width, final int height, final int fps,
+                              final BattleState battleState) {
 
         super(width, height, fps);
 
-        this.score = gameState.getScore();
-        this.livesRemaining = gameState.getLivesRemaining();
-        this.bulletsShot = gameState.getBulletsShot();
-        this.shipsDestroyed = gameState.getShipsDestroyed();
+        this.score = battleState.getB_state(C_State.score);
+        this.livesRemaining = battleState.getB_state(C_State.livesRemaining);
+        this.bulletsShot = battleState.getB_state(C_State.bulletsShot);
+        this.shipsDestroyed = battleState.getB_state(C_State.shipsDestroyed);
         this.isNewRecord = false;
 
         if (this.score > 500)
@@ -108,13 +108,9 @@ public class PauseScreen extends Screen {
 
         draw();
         if (this.inputDelay.checkFinished()) {
-            if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {
-                // Return to main menu.
-                this.returnCode = 1;
-                this.isRunning = false;
-            } else if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
+            if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
                 // Play again.
-                this.returnCode = 2;
+                this.returnCode = 8;
                 this.isRunning = false;
             }
         }

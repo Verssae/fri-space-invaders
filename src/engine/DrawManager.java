@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import screen.GameScreen;
-import screen.MapScreen;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
@@ -278,7 +276,7 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 
 		backBufferGraphics.setColor(Color.cyan);
-		String scoreString = String.format("SCORE: %04d", score);
+		String scoreString = String.format("SCORE: %05d", score);
 		backBufferGraphics.drawString(scoreString, screen.getWidth() - 140, 20);
 	}
 
@@ -286,7 +284,14 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.green);
 		String scoreString = String.format("Level: %02d", level);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 25);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 30);
+	}
+
+	public void drawChapters(final Screen screen, final int chapter) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.green);
+		String scoreString = String.format("Chapter: %02d", chapter);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 265, 30);
 	}
 
 	/**
@@ -300,10 +305,10 @@ public final class DrawManager {
 	public void drawLives(final Screen screen, final int lives) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.white);
-		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
+		backBufferGraphics.drawString(Integer.toString(lives), 20, 30);
 		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
-			drawEntity(remainLife, 40 + 35 * i, 6);
+			drawEntity(remainLife, 40 + 35 * i, 12);
 	}
 
 	/**
@@ -656,7 +661,7 @@ public final class DrawManager {
 			final boolean isNewRecord) {
 		String gameOverString = "Stage Clear";
 		String continueOrExitString =
-				"Press Space to play again";
+				"Press Space to continue";
 
 		int height = isNewRecord ? 4 : 2;
 
@@ -939,7 +944,7 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		else {
 			backBufferGraphics.setColor(Color.GREEN);
-			if (permanentState.getP_state(PermanentState.State.coin) < 100) {
+			if (permanentState.getP_state(P_State.gem) < 100) {
 				backBufferGraphics.setColor(Color.RED);
 				backBufferGraphics.drawString(coinLackString, screen.getWidth() / 2 + 20,
 						screen.getHeight() / 2 + 180);
@@ -954,20 +959,27 @@ public final class DrawManager {
 		}
 		else if(menu == 2){ // bullet sfx
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(P_State.bulletSFX)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
 		else if(menu == 3){ // bgm
 			backBufferGraphics.setFont(fontBig);
-			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(PermanentState.State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
+			backBufferGraphics.drawString(Integer.toString(permanentState.getP_state(P_State.BGM)), screen.getWidth() / 2 + 96, screen.getHeight() / 2 + 60);
 			backBufferGraphics.setFont(fontRegular);
 		}
+	}
+
+	public void drawGem(final Screen screen, final int gem) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.MAGENTA);
+		String coinString = String.format("GEM:     %04d", gem);
+		backBufferGraphics.drawString(coinString, screen.getWidth() - 141, 40);
 	}
 
 	public void drawCoin(final Screen screen, final int coin) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.YELLOW);
-		String coinString = String.format("COIN:     %04d", coin);
+		String coinString = String.format("COIN:     %05d", coin);
 		backBufferGraphics.drawString(coinString, screen.getWidth() - 141, 40);
 	}
 

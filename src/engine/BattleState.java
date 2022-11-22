@@ -33,6 +33,7 @@ public class BattleState {
 	}
 
 	public void gainB_state(C_State key, int value) {
+		Core.getLogger().info(key + "," + value);
 		b_state.replace(key, getB_state(key) + value);
 	}
 

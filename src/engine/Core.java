@@ -10,10 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import screen.*;
-import to_be_delete.GameSaveScreen;
-import to_be_delete.GameScreen;
-import to_be_delete.GameState;
-import to_be_delete.PauseScreen;
+import to_be_delete.*;
 
 
 /**
@@ -285,7 +282,6 @@ public final class Core {
 					if(battleState.getB_state(C_State.livesRemaining) > 0){
 						//저장
 						//중간결과
-						LOGGER.info("안 되나");
 						currentScreen = new BattleResultScreen(width, height, FPS, battleState);
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " battle result screen at " + FPS + " fps.");
@@ -294,11 +290,11 @@ public final class Core {
 					}
 					else{
 						//최종결과
-						//currentScreen = new ResultScreen(width, height, FPS, chapterState);
-						//LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						//		+ " result screen at " + FPS + " fps.");
-						//returnCode = frame.setScreen(currentScreen); // is 1.
-						//LOGGER.info("Closing result screen.");
+						currentScreen = new ResultScreen(width, height, FPS, chapterState);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " result screen at " + FPS + " fps.");
+						returnCode = frame.setScreen(currentScreen); // is 1.
+						LOGGER.info("Closing result screen.");
 
 						returnCode = 1;
 					}

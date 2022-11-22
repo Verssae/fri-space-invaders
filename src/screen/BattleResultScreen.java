@@ -110,7 +110,7 @@ public class BattleResultScreen extends Screen {
         if (this.inputDelay.checkFinished()) {
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
                 // Play again.
-                this.returnCode = 8;
+                this.returnCode = 1;
                 this.isRunning = false;
             }
         }

@@ -291,7 +291,7 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.green);
 		String scoreString = String.format("Chapter: %02d", chapter);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 30);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 265, 30);
 	}
 
 	/**

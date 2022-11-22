@@ -89,6 +89,7 @@ public class MapScreen extends Screen {
         drawManager.drawLives(this, chapterState.getC_state(C_State.livesRemaining));
         drawManager.drawScore(this, chapterState.getC_state(C_State.score));
         drawManager.drawCoin(this, chapterState.getC_state(C_State.coin));
+        drawManager.drawChapters(this, chapterState.getC_state(C_State.chapter));
         drawManager.drawHorizontalLine(this, 50);
         drawManager.drawMap(this, chapterState);
 

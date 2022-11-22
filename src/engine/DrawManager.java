@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import screen.GameScreen;
-import screen.MapScreen;
 import screen.Screen;
 import entity.Entity;
 import entity.Ship;
@@ -286,7 +284,14 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.green);
 		String scoreString = String.format("Level: %02d", level);
-		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 25);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 30);
+	}
+
+	public void drawChapters(final Screen screen, final int chapter) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.green);
+		String scoreString = String.format("Chapter: %02d", chapter);
+		backBufferGraphics.drawString(scoreString, screen.getWidth() - 255, 30);
 	}
 
 	/**
@@ -300,10 +305,10 @@ public final class DrawManager {
 	public void drawLives(final Screen screen, final int lives) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.white);
-		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
+		backBufferGraphics.drawString(Integer.toString(lives), 20, 30);
 		Life remainLife = new Life(0, 0);
 		for (int i = 0; i < lives; i++)
-			drawEntity(remainLife, 40 + 35 * i, 6);
+			drawEntity(remainLife, 40 + 35 * i, 12);
 	}
 
 	/**

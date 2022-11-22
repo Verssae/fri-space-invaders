@@ -9,8 +9,11 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entity.ItemPool;
 import screen.*;
+import to_be_delete.GameSaveScreen;
+import to_be_delete.GameScreen;
+import to_be_delete.GameState;
+import to_be_delete.PauseScreen;
 
 
 /**
@@ -268,44 +271,37 @@ public final class Core {
 					break;
 
 				case 100:
-					currentScreen = new BattleScreen(new BattleState(chapterState.getC_state()),
+					BattleState battleState = new BattleState(chapterState.getC_state());
+					currentScreen = new BattleScreen(battleState,
 							gameSettings.get(chapterState.getC_state(C_State.difficulty)),
 							false, width, height, FPS); // bonus life is false...? need condition
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " battle screen at " + FPS + " fps.");
-					returnCode = frame.setScreen(currentScreen);
-					LOGGER.info("Closing battle screen.");
 					frame.setScreen(currentScreen);
-					chapterState.setC_state(((BattleScreen)currentScreen).getBattleState());
+					LOGGER.info("Closing battle screen.");
+					battleState = ((BattleScreen)currentScreen).getBattleState();
+					chapterState.setC_state(battleState.getB_state());
 
-					if(gameState.getLivesRemaining() > 0){
-
+					if(battleState.getB_state(C_State.livesRemaining) > 0){
+						//저장
+						//중간결과
+						LOGGER.info("안 되나");
+						currentScreen = new BattleResultScreen(width, height, FPS, battleState);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " battle result screen at " + FPS + " fps.");
+						returnCode = frame.setScreen(currentScreen); // is 8.
+						LOGGER.info("Closing battle result screen.");
 					}
 					else{
-						//currentScreen = new resultScreen();
-					}
-					returnCode = 8; // go to map screen
+						//최종결과
+						//currentScreen = new ResultScreen(width, height, FPS, chapterState);
+						//LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						//		+ " result screen at " + FPS + " fps.");
+						//returnCode = frame.setScreen(currentScreen); // is 1.
+						//LOGGER.info("Closing result screen.");
 
-//					if (gameState.getLivesRemaining() > 0) {
-//						currentScreen = new PauseScreen(width, height, FPS, gameState);
-//						returnCode = frame.setScreen(currentScreen);
-//					}
-//
-//					if (gameState.getLivesRemaining() > 0 && gameState.getLevel() < NUM_LEVELS){
-//						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-//								+ " game save screen at " + FPS + " fps.");
-//						currentScreen = new GameSaveScreen(gameState, width, height, FPS);
-//						returnCode = frame.setScreen(currentScreen);
-//						LOGGER.info("Closing game save screen.");
-//						if (returnCode == 2) {
-//							getFileManager().Savefile(gameState);
-//							LOGGER.info("Complete Save.");
-//							GO_MAIN = false;
-//							gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
-//							returnCode = 1;
-//							break;
-//						}
-//					}
+						returnCode = 1;
+					}
 					break;
 
 				default:

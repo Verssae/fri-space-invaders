@@ -33,7 +33,7 @@ public class BattleScreen extends Screen {
 	/** Time from finishing the level to screen change. */
 	private static final int SCREEN_CHANGE_INTERVAL = 1500;
 	/** Height of the interface separation line. */
-	private static final int SEPARATION_LINE_HEIGHT = 40;
+	private static final int SEPARATION_LINE_HEIGHT = 50;
 	/** Milliseconds during the screen display the item info. */
 	private static final int ITEM_DISPLAY_TIME = 2000;
 
@@ -327,8 +327,9 @@ public class BattleScreen extends Screen {
 		// Interface.
 		drawManager.drawLevels(this, battleState.getB_state(C_State.difficulty) + 1);
 		drawManager.drawScore(this, battleState.getB_state(C_State.score));
+		drawManager.drawCoin(this, battleState.getB_state(C_State.coin));
 		drawManager.drawLives(this, battleState.getB_state(C_State.livesRemaining));
-		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
+		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT);
 
 		// Countdown to game start.
 		if (!this.inputDelay.checkFinished()) {
@@ -472,8 +473,8 @@ public class BattleScreen extends Screen {
 	 * 
 	 * @return Current game state.
 	 */
-	public final LinkedHashMap getBattleState() {
-		return battleState.getB_state();
+	public final BattleState getBattleState() {
+		return battleState;
 	}
 
 

@@ -1,10 +1,11 @@
-package screen;
+package to_be_delete;
 
 import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
-import engine.GameState;
+import screen.Screen;
+import to_be_delete.GameState;
 
 public class GameSaveScreen extends Screen {
 

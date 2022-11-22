@@ -295,7 +295,7 @@ public final class Core {
 								+ " result screen at " + FPS + " fps.");
 						returnCode = frame.setScreen(currentScreen); // is 1.
 						LOGGER.info("Closing result screen.");
-
+						chapterState = null; // current chapterstate delete
 						returnCode = 1;
 					}
 					break;

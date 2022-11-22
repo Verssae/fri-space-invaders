@@ -661,7 +661,7 @@ public final class DrawManager {
 			final boolean isNewRecord) {
 		String gameOverString = "Stage Clear";
 		String continueOrExitString =
-				"Press Space to play again";
+				"Press Space to continue";
 
 		int height = isNewRecord ? 4 : 2;
 

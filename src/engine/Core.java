@@ -122,6 +122,7 @@ public final class Core {
 		ChapterState chapterState = null;
 		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
+		ItemState itemState = ItemState.getInstance();
 
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
 

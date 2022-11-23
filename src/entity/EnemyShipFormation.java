@@ -397,7 +397,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			} else if (isAtTop) {
 				inverse = 0;
 			}
-			int rand = random("99","1","0","1");
+			int rand = random("95","5","0","1");
 
 			for (List<EnemyShip> column : this.enemyShips) {
 				for (EnemyShip enemyShip : column) {

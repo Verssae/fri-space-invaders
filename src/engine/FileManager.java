@@ -4,11 +4,14 @@ import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import engine.DrawManager.SpriteType;
+import entity.I_State;
 import to_be_delete.GameState;
 
 /**
@@ -27,6 +30,7 @@ public final class FileManager {
 	private static final int MAX_SCORES = 7;
 
 	P_State[] ps = P_State.values();
+	I_State[] itemStates = I_State.values();
 
 	/**
 	 * private constructor.
@@ -364,6 +368,96 @@ public final class FileManager {
 
 			for (int i = 0; i < stateMap.size(); i++)
 				bufferedWriter.write(String.valueOf(stateMap.get(ps[i])) + "\n");
+		} finally {
+			if (bufferedWriter != null)
+				bufferedWriter.close();
+		}
+	}
+
+	private LinkedHashMap<I_State, Integer> loadDefaultItemState() throws IOException {
+		LinkedHashMap<I_State, Integer> itemMap = new LinkedHashMap<I_State, Integer>();
+
+		BufferedReader bufferedReader = null;
+		try (InputStream inputStream = FileHandler.class.getClassLoader()
+				.getResourceAsStream("items")) {
+			assert inputStream != null;
+			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+			for (I_State i_State : itemStates) {
+				String tmp = bufferedReader.readLine();
+				if (tmp == null)
+					itemMap.put(i_State, 0);
+				else
+					itemMap.put(i_State, Integer.parseInt(tmp));
+			}
+		}
+		return itemMap;
+	}
+
+	public LinkedHashMap<I_State, Integer> loadItemState() throws IOException {
+		LinkedHashMap<I_State, Integer> itemMap = new LinkedHashMap<I_State, Integer>();
+
+		InputStream inputStream = null;
+		BufferedReader bufferedReader = null;
+
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
+
+			String itemStatePath = new File(jarPath).getPath();
+			itemStatePath += File.separator;
+			itemStatePath += "items";
+
+			File itemStateFile = new File(itemStatePath);
+			inputStream = new FileInputStream(itemStateFile);
+			bufferedReader = new BufferedReader(new InputStreamReader(
+					inputStream, StandardCharsets.UTF_8
+			));
+
+			logger.info("Loading item state");
+
+			for (I_State i_State : itemStates) {
+				String tmp = bufferedReader.readLine();
+				if (tmp == null)
+					itemMap.put(i_State, 0);
+				else
+					itemMap.put(i_State, Integer.parseInt(tmp));
+			}
+		} catch (FileNotFoundException e) {
+			logger.info("Loading default item state");
+			itemMap = loadDefaultItemState();
+		} finally {
+			if (bufferedReader != null)
+				bufferedReader.close();
+		}
+		return itemMap;
+	}
+
+	public void saveItemState(final LinkedHashMap<I_State, Integer> itemMap) throws IOException {
+		OutputStream outputStream = null;
+		BufferedWriter bufferedWriter = null;
+
+		try {
+			String jarPath = FileManager.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath();
+			jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
+
+			String itemStatePath = new File(jarPath).getPath();
+			itemStatePath += File.separator;
+			itemStatePath += "items";
+
+			File itemStateFile = new File(itemStatePath);
+
+			outputStream = new FileOutputStream(itemStateFile);
+			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+					outputStream, StandardCharsets.UTF_8
+			));
+
+			logger.info("Saving item state");
+
+			for (int i = 0; i < itemMap.size(); i++)
+				bufferedWriter.write(String.valueOf(itemMap.get(itemStates[i])) + "\n");
 		} finally {
 			if (bufferedWriter != null)
 				bufferedWriter.close();

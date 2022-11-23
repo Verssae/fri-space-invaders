@@ -14,7 +14,7 @@ import entity.*;
 import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
-import entity.I_State;
+import engine.I_State;
 import screen.Screen;
 import entity.Bullet;
 import entity.BulletPool;

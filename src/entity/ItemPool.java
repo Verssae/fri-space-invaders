@@ -1,5 +1,7 @@
 package entity;
 
+import engine.I_State;
+
 /**
  * Pools of player's items.
  *

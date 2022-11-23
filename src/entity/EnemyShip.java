@@ -5,6 +5,7 @@ import java.util.Set;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import engine.I_State;
 
 /**
  * Implements a enemy ship, to be destroyed by the player.

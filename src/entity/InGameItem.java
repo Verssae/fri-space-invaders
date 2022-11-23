@@ -1,6 +1,7 @@
 package entity;
 
 import engine.DrawManager;
+import engine.I_State;
 
 import java.awt.*;
 /**

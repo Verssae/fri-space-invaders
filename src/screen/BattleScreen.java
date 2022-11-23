@@ -2,7 +2,7 @@ package screen;
 
 import engine.*;
 import entity.*;
-import entity.I_State;
+import engine.I_State;
 import sound.SoundPlay;
 import sound.SoundType;
 

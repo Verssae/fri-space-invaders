@@ -302,6 +302,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		cleanUp();
+		int fixed_mvX = 80;
+		int fixed_mvY = 10;
 		int inverse = 0;
 		int movementX = 0;
 		int movementY = 0;
@@ -361,11 +363,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			if (currentDirection == Direction.RIGHT)
 				movementX = X_SPEED;
-			else if (currentDirection == Direction.LEFT)
+			else if (currentDirection == Direction.LEFT) {
 				movementX = -X_SPEED;
-
+				fixed_mvX *= -1;
+			}
 			else
 				movementY = Y_SPEED;
+
 
 			positionX += movementX;
 			positionY += movementY;
@@ -389,10 +393,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			if (isAtBottom) {
 				positionY = positionY * (-1);
 				inverse = 1;
-			} else if (isAtTop)
+				fixed_mvY *= -1;
+			} else if (isAtTop) {
 				inverse = 0;
-			int rand = 0;
-			int count = 9;
+			}
+			int rand = random("99","1","0","1");
+
 			for (List<EnemyShip> column : this.enemyShips) {
 				for (EnemyShip enemyShip : column) {
 					if (Current_Level == 8) {
@@ -401,11 +407,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 						} else if (inverse == 1) {
 							movementY = SPEED_CONTROL * (-1);
-
 						}
-					}
-					if(random() == 1){
-						enemyShip.teleport(10,2);
+						if(rand == 1){
+							if(currentDirection == Direction.RIGHT)
+								enemyShip.move(fixed_mvX,fixed_mvY);
+							else
+								enemyShip.move(fixed_mvX,fixed_mvY);
+						}
+						else {
+							enemyShip.move(movementX, movementY);
+						}
+						enemyShip.update();
 					}
 					else {
 						enemyShip.move(movementX, movementY);
@@ -415,7 +427,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 	}
-	private int random(){
+	private int random(String rate1, String rate2, String rs1, String rs2){
 		double tmpRandom = (Math.random() * 100);
 		double tmpRatePrev = 0, tmpRateNext = 0;
 		int result = 0;
@@ -425,14 +437,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		HashMap<String, String> map = new HashMap<String, String>();
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
 
-		map.put("rate", "99");
-		map.put("value", "0");
+		map.put("rate", rate1);
+		map.put("value", rs1);
 		list.add(map);
 
 		map = new HashMap<String, String>();
 
-		map.put("rate", "1");
-		map.put("value", "1");
+		map.put("rate", rate2);
+		map.put("value", rs2);
 		list.add(map);
 		map = new HashMap<String, String>();
 

@@ -161,10 +161,6 @@ public class EnemyShip extends Entity {
 		this.positionY += distanceY;
 	}
 
-	public final void teleport(final double distanceX, final double distanceY){
-		this.positionX += distanceX;
-		this.positionY += distanceY;
-	}
 	/**
 	 * Updates attributes, mainly used for animation purposes.
 	 */

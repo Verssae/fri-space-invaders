@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Implements a item.
  */
-public class Item extends Entity {
+public class InGameItem extends Entity {
     /** Item drop speed */
     private int speed;
     /** Item types. */
@@ -26,7 +26,7 @@ public class Item extends Entity {
      * @param itemState
      *            set the item's type.
      */
-    public Item(final int positionX, final int positionY, final int speed, final ItemState itemState) {
+    public InGameItem(final int positionX, final int positionY, final int speed, final ItemState itemState) {
         super(positionX, positionY, 9 * 2, 9 * 2, Color.ORANGE);
         this.setPositionX(positionX -this.getWidth()/2);
         this.speed = speed;

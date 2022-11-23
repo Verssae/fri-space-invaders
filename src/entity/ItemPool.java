@@ -6,13 +6,13 @@ package entity;
  */
 public class ItemPool {
     /** Array of obtained items. */
-    private static Item[] item = new Item[1];
+    private static InGameItem[] inGameItems = new InGameItem[1];
     /** Attributes of obtained items. */
     private static ItemState itemState;
     /** Initialize item array. */
     static {
         for(int i =0 ; i < 1 ; i++){
-            item[i] = null;
+            inGameItems[i] = null;
         }
     }
 
@@ -21,7 +21,7 @@ public class ItemPool {
      * has player's obtained item.
      */
     public ItemPool() {
-        this.item = item;
+        this.inGameItems = inGameItems;
     }
 
     /**
@@ -29,18 +29,18 @@ public class ItemPool {
      *
      * @return item ,in itempool.
      */
-    public Item getItem(){
-        return item[0];
+    public InGameItem getItem(){
+        return inGameItems[0];
     }
 
     /**
      * Setter for the item of itempool.
      *
-     * @param item
+     * @param inGameItem
      *        add obtained item in itempool
      */
-    public void add(Item item){
-        this.item[0] = item;
+    public void add(InGameItem inGameItem){
+        this.inGameItems[0] = inGameItem;
     }
 
 }

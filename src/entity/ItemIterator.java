@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class ItemIterator {
     /** Set of already created items. */
-    private static Set<Item> iterator = new HashSet<Item>();
+    private static Set<InGameItem> iterator = new HashSet<InGameItem>();
 
     /**
      * Constructor, not called.
@@ -27,20 +27,19 @@ public class ItemIterator {
      *            Requested itemtype of item, for calling constructor of Item class.
      * @return Requested item.
      */
-    public static Item drop(final int positionX,
+    public static InGameItem drop(final int positionX,
                                final int positionY,  ItemState itemState) {
-        Item item;
+        InGameItem inGameItem;
         if (!iterator.isEmpty()) {
-            item = iterator.iterator().next();
-            iterator.remove(item);
-            item.setPositionX(positionX - item.getWidth() / 2);
-            item.setPositionY(positionY);
-
+            inGameItem = iterator.iterator().next();
+            iterator.remove(inGameItem);
+            inGameItem.setPositionX(positionX - inGameItem.getWidth() / 2);
+            inGameItem.setPositionY(positionY);
         } else {
-            item = new Item(positionX, positionY, 2, itemState);
-            item.setPositionX(positionX - item.getWidth() / 2);
+            inGameItem = new InGameItem(positionX, positionY, 2, itemState);
+            inGameItem.setPositionX(positionX - inGameItem.getWidth() / 2);
         }
-        return item;
+        return inGameItem;
     }
 
 

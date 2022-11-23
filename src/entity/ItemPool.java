@@ -1,4 +1,7 @@
 package entity;
+
+import entity.item.ItemState;
+
 /**
  * Pools of player's items.
  *
@@ -7,7 +10,7 @@ public class ItemPool {
     /** Array of obtained items. */
     private static Item[] item = new Item[1];
     /** Attributes of obtained items. */
-    private static Item.ItemType itemtype;
+    private static ItemState itemState;
     /** Initialize item array. */
     static {
         for(int i =0 ; i < 1 ; i++){

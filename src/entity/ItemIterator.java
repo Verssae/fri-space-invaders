@@ -1,5 +1,7 @@
 package entity;
 
+import entity.item.ItemState;
+
 import java.util.HashSet;
 import java.util.Set;
 /**
@@ -23,12 +25,12 @@ public class ItemIterator {
      *            Requested position of the item in the X axis.
      * @param positionY
      *            Requested position of the item in the Y axis.
-     * @param itemtype
+     * @param itemState
      *            Requested itemtype of item, for calling constructor of Item class.
      * @return Requested item.
      */
     public static Item drop(final int positionX,
-                               final int positionY,  Item.ItemType itemtype) {
+                               final int positionY,  ItemState itemState) {
         Item item;
         if (!iterator.isEmpty()) {
             item = iterator.iterator().next();
@@ -37,7 +39,7 @@ public class ItemIterator {
             item.setPositionY(positionY);
 
         } else {
-            item = new Item(positionX,positionY, 2 ,itemtype);
+            item = new Item(positionX, positionY, 2, itemState);
             item.setPositionX(positionX - item.getWidth() / 2);
         }
         return item;

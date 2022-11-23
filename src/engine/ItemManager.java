@@ -2,6 +2,7 @@ package engine;
 
 import entity.EnemyShipFormation;
 import entity.Item;
+import entity.item.ItemState;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,24 +17,24 @@ import java.util.Queue;
 public class ItemManager {
 
     /** item list for shuffle items randomly. */
-    private ArrayList<Item.ItemType> item_list = new ArrayList<Item.ItemType>();
+    private ArrayList<ItemState> item_list = new ArrayList<ItemState>();
     /** randomly shuffled queue that has items, for assigning items to enemyship. */
-    private Queue<Item.ItemType> item_queue = new LinkedList<Item.ItemType>();
+    private Queue<ItemState> item_queue = new LinkedList<ItemState>();
     /** pointUpItem itemtype  */
-    private Item.ItemType pointupitem = Item.ItemType.PointUpItem;
+    private ItemState pointupitem = ItemState.PointUpItem;
     /** speedUpItem itemtype  */
-    private Item.ItemType speedupitem = Item.ItemType.SpeedUpItem;
+    private ItemState speedupitem = ItemState.SpeedUpItem;
     /** shield itemtype  */
-    private Item.ItemType shielditem = Item.ItemType.ShieldItem;
+    private ItemState shielditem = ItemState.ShieldItem;
     /** extralifeitem itemtype  */
-    private Item.ItemType extralifeitem = Item.ItemType.ExtraLifeItem;
+    private ItemState extralifeitem = ItemState.ExtraLifeItem;
     /** bulletspeed itemtype  */
-    private Item.ItemType bulletspeeditem = Item.ItemType.BulletSpeedItem;
+    private ItemState bulletspeeditem = ItemState.BulletSpeedItem;
     /** machinegun itemtype  */
-    private Item.ItemType machinegun = Item.ItemType.MachineGun;
+    private ItemState machinegun = ItemState.MachineGun;
     /** enemyshipspeeditem itemtype, not used */
 
-    private Item.ItemType  enemyshipspeeditem = Item.ItemType.EnemyShipSpeedItem;
+    private ItemState  enemyshipspeeditem = ItemState.EnemyShipSpeedItem;
     /** information that has the num of enemyship, init state of gamescreen  */
     private int enemyshipssize;
 
@@ -84,7 +85,7 @@ public class ItemManager {
             //노은솔
             /*enemyshipformation의 enemyship의 hasItem값이 1이면 item_queue에서 아이템타입 할당
              */
-            Item.ItemType tmpitem = null;
+            ItemState tmpitem = null;
             tmpitem = item_queue.remove();
             enemyshipformation.getEnemyShip().get(i).get(j).setItemType(tmpitem);
             item_queue.add(tmpitem);

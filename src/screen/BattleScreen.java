@@ -2,6 +2,7 @@ package screen;
 
 import engine.*;
 import entity.*;
+import entity.item.ItemState;
 import sound.SoundPlay;
 import sound.SoundType;
 
@@ -313,7 +314,7 @@ public class BattleScreen extends Screen {
 				drawManager.drawEntity(shield, shield.getPositionX(),shield.getPositionY());}
 
 		if (itempool.getItem() != null && this.shield != null &&
-				itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+				itempool.getItem().getItemType() == ItemState.ShieldItem) {
 			drawManager.drawEntity(shield, shield.getPositionX(),
 					shield.getPositionY());
 		}
@@ -485,7 +486,7 @@ public class BattleScreen extends Screen {
 			item.setSprite();
 
 			if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.BulletSpeedItem) {
+					itempool.getItem().getItemType() == ItemState.BulletSpeedItem) {
 
 				LOGGER.info("Obtained BulletSpeed Item");
 				this.returnCode = 0;
@@ -497,7 +498,7 @@ public class BattleScreen extends Screen {
 
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.PointUpItem) {
+					itempool.getItem().getItemType() == ItemState.PointUpItem) {
 
 				LOGGER.info("Obtained PointUp Item");
 				this.returnCode = 1;
@@ -507,7 +508,7 @@ public class BattleScreen extends Screen {
 					enemyShip.setPointValue(2 * enemyShip.getPointValue());
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.MachineGun) {
+					itempool.getItem().getItemType() == ItemState.MachineGun) {
 
 				LOGGER.info("Obtained MachineGun");
 				this.returnCode = 2;
@@ -518,7 +519,7 @@ public class BattleScreen extends Screen {
 
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.ShieldItem) {
+					itempool.getItem().getItemType() == ItemState.ShieldItem) {
 
 				LOGGER.warning("Obtained Shield Item");
 				this.returnCode = 3;
@@ -529,7 +530,7 @@ public class BattleScreen extends Screen {
 
 			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.SpeedUpItem) {
+					itempool.getItem().getItemType() == ItemState.SpeedUpItem) {
 
 				LOGGER.warning("Obtained SpeedUp Item");
 				this.returnCode = 4;
@@ -539,7 +540,7 @@ public class BattleScreen extends Screen {
 				this.ship.setShipSpeed(2 * this.ship.getSpeed());
 			}
 //			else if (item.getIsget() == false &&
-//					itempool.getItem().getItemType() == Item.ItemType.EnemyShipSpeedItem) {
+//					itempool.getItem().getItemType() == ItemState.EnemyShipSpeedItem) {
 //
 //				this.returnCode = 4;
 //				this.clearItem();//효과 초기화
@@ -549,7 +550,7 @@ public class BattleScreen extends Screen {
 //
 //			}
 			else if (item.getIsget() == false &&
-					itempool.getItem().getItemType() == Item.ItemType.ExtraLifeItem) {
+					itempool.getItem().getItemType() == ItemState.ExtraLifeItem) {
 
 				this.clearItem();
 				this.clearPointUp();

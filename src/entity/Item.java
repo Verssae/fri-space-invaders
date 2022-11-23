@@ -1,6 +1,7 @@
 package entity;
 
 import engine.DrawManager;
+import entity.item.ItemState;
 
 import java.awt.*;
 /**
@@ -10,26 +11,8 @@ public class Item extends Entity {
     /** Item drop speed */
     private int speed;
     /** Item types. */
-    public static enum ItemType{
-        /** BulletSpeedItem */
-        BulletSpeedItem,
-        /** pointupitem */
-        PointUpItem,
-        /** shield item */
-        ShieldItem,
-        /** speeduptiem */
-        SpeedUpItem,
-        /** extraLifeItem */
-        ExtraLifeItem,
-        /** MachineGun item*/
-        MachineGun,
-        /** item, not used*/
-        EnemyShipSpeedItem
 
-    };
-
-    private ItemType itemtype;
-
+    private ItemState itemState;
     private boolean isget;
 
     /**
@@ -41,21 +24,23 @@ public class Item extends Entity {
      *            Initial position of the item in the Y axis.
      * @param speed
      *            Initial set of the item's drop-speed
-     * @param itemtype
+     * @param itemState
      *            set the item's type.
      */
-    public Item(final int positionX, final int positionY, final int speed, final ItemType itemtype) {
-            super(positionX, positionY, 9 * 2, 9 * 2, Color.ORANGE);
-            this.setPositionX(positionX -this.getWidth()/2);
-            this.speed = speed;
-            this.itemtype = itemtype;
-            this.isget = false;
-        }
+    public Item(final int positionX, final int positionY, final int speed, final ItemState itemState) {
+        super(positionX, positionY, 9 * 2, 9 * 2, Color.ORANGE);
+        this.setPositionX(positionX -this.getWidth()/2);
+        this.speed = speed;
+        this.itemState = itemState;
+        this.isget = false;
+    }
 
     /**
      * Updates the item's position.
      */
-    public void update () {this.positionY += this.speed;}
+    public void update () {
+        this.positionY += this.speed;
+    }
 
     /**
      * Sets correct sprite for the item, based on for player to Obtained item.
@@ -87,8 +72,7 @@ public class Item extends Entity {
      *
      * @return itemtype that dropped item has.
      */
-    public ItemType getItemType(){
-        return this.itemtype;
+    public ItemState getItemType(){
+        return this.itemState;
     }
-
-    }
+}

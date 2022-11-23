@@ -5,6 +5,7 @@ import java.util.Set;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import entity.item.ItemState;
 
 /**
  * Implements a enemy ship, to be destroyed by the player.
@@ -15,7 +16,7 @@ import engine.DrawManager.SpriteType;
 public class EnemyShip extends Entity {
 	//추가
 	Color color_dead = Color.RED;
-	private Item.ItemType itemtype;
+	private ItemState itemState;
 
 	private static int hasItem ;
 	/** Point value of a type A enemy. */
@@ -57,7 +58,7 @@ public class EnemyShip extends Entity {
 		super(positionX, positionY, 12 * 2, 8 * 2, Color.WHITE);
 
 		//추가
-		this.itemtype = null;
+		this.itemState = null;
 		this.hasItem = 0;
 		//
 
@@ -99,12 +100,12 @@ public class EnemyShip extends Entity {
 		return this.hasItem;
 	}
 
-	public void setItemType(Item.ItemType itemtype){
-		this.itemtype = itemtype;
+	public void setItemType(ItemState itemState){
+		this.itemState = itemState;
 	}
 
-	public Item.ItemType getItemType(){
-		return this.itemtype;
+	public ItemState getItemType(){
+		return this.itemState;
 	}
 
 	public void itemDrop(final Set<Item> items){

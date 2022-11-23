@@ -220,7 +220,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		// Each sub-list is a column on the formation.
 		for (int i = 0; i < this.nShipsWide; i++)
 			this.enemyShips.add(new ArrayList<EnemyShip>());
-
 		for (List<EnemyShip> column : this.enemyShips) {
 			Current_Level = gameSettings.getLevel();
 			for (int i = 0; i < this.nShipsHigh; i++) {

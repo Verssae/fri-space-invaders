@@ -404,8 +404,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 						}
 					}
-					if(rand == 1){
-						enemyShip.teleport(2,2);
+					if(random() == 1){
+						enemyShip.teleport(10,2);
 					}
 					else {
 						enemyShip.move(movementX, movementY);

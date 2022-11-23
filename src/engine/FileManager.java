@@ -373,7 +373,7 @@ public final class FileManager {
 		}
 	}
 
-	private LinkedHashMap<I_State, Integer> loadDefaultItemState() throws IOException {
+	private LinkedHashMap<I_State, Integer> loadDefaultI_State() throws IOException {
 		LinkedHashMap<I_State, Integer> itemMap = new LinkedHashMap<I_State, Integer>();
 
 		BufferedReader bufferedReader = null;
@@ -393,7 +393,7 @@ public final class FileManager {
 		return itemMap;
 	}
 
-	public LinkedHashMap<I_State, Integer> loadItemState() throws IOException {
+	public LinkedHashMap<I_State, Integer> loadI_State() throws IOException {
 		LinkedHashMap<I_State, Integer> itemMap = new LinkedHashMap<I_State, Integer>();
 
 		InputStream inputStream = null;
@@ -425,7 +425,7 @@ public final class FileManager {
 			}
 		} catch (FileNotFoundException e) {
 			logger.info("Loading default item state");
-			itemMap = loadDefaultItemState();
+			itemMap = loadDefaultI_State();
 		} finally {
 			if (bufferedReader != null)
 				bufferedReader.close();
@@ -433,7 +433,7 @@ public final class FileManager {
 		return itemMap;
 	}
 
-	public void saveItemState(final LinkedHashMap<I_State, Integer> itemMap) throws IOException {
+	public void saveI_State(final LinkedHashMap<I_State, Integer> itemMap) throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
 

@@ -190,6 +190,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		DOWN
 	}
 
+	private int rushDistance = 0;
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -388,18 +389,31 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			} else if (isAtTop)
 				inverse = 0;
 
+			if (positionY < 150 && inverse == 0 && Current_Level == 8 && rushDistance <= 0 && Math.random() < 0.02) {
+				this.logger.info("Rush Start!");
+				rushDistance = 30;
+			}
+
+			if (Current_Level == 8) {
+				if (inverse == 0) {
+					movementY += SPEED_CONTROL;
+
+				} else if (inverse == 1) {
+					movementY += SPEED_CONTROL * (-1);
+
+				}
+
+				if (rushDistance > 0) {
+					movementY *= 10;
+					movementX /= 2;
+					rushDistance--;
+				}
+			}
+
 			for (List<EnemyShip> column : this.enemyShips) {
 
 				for (EnemyShip enemyShip : column) {
-					if (Current_Level == 8) {
-						if (inverse == 0) {
-							movementY = SPEED_CONTROL;
 
-						} else if (inverse == 1) {
-							movementY = SPEED_CONTROL * (-1);
-
-						}
-					}
 					enemyShip.move(movementX, movementY);
 					enemyShip.update();
 				}

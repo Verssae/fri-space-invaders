@@ -100,7 +100,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * List of summon enemy ship
 	 */
-	private List<List<EnemyShip>> summonShips;
+	private List<EnemyShip> summonShips;
 	/**
 	 * Minimum time between shots.
 	 */
@@ -216,6 +216,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.positionX = INIT_POS_X;
 		this.positionY = INIT_POS_Y;
 		this.shooters = new ArrayList<EnemyShip>();
+		this.summonShips = new ArrayList<EnemyShip>();
 		SpriteType spriteType;
 
 		this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh
@@ -389,6 +390,23 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 			if (reachAtBottom) {
 				logger.info("BossShip reached Bottom");
+				for (List<EnemyShip> column : this.enemyShips) {
+					for (int i = 0; i < this.nShipsHigh; i++) {
+						if (i / (float) this.nShipsHigh < PROPORTION_C)
+							spriteType = SpriteType.EnemyShipC1;
+						else if (i / (float) this.nShipsHigh < PROPORTION_B
+								+ PROPORTION_C)
+							spriteType = SpriteType.EnemyShipB1;
+						else
+							spriteType = SpriteType.EnemyShipA1;
+
+						column.add(new EnemyShip(0,0,spriteType));
+						this.shipCount++;
+					}
+				}
+
+				this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
+				this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 			}
 			if (isAtBottom) {
 				positionY = positionY * (-1);

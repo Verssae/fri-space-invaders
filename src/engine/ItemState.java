@@ -52,4 +52,18 @@ public class ItemState {
             logger.info(e.toString());
         }
     }
+
+    /**
+     * When you die, go back to First!
+     * */
+    public void initI_state() {
+        for (int i = 0; i < I_State.values().length; i++) {
+            i_state.replace(I_State.values()[i], 0);
+        }
+        try {
+            fileManager.saveI_State(i_state);
+        } catch (IOException e) {
+            logger.info(e.toString());
+        }
+    }
 }

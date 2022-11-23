@@ -1,7 +1,5 @@
 package entity;
 
-import entity.item.ItemState;
-
 /**
  * Pools of player's items.
  *

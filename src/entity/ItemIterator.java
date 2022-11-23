@@ -1,7 +1,5 @@
 package entity;
 
-import entity.item.ItemState;
-
 import java.util.HashSet;
 import java.util.Set;
 /**

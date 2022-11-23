@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.HashMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,6 +15,7 @@ import engine.Core;
 import engine.DrawManager;
 import engine.DrawManager.SpriteType;
 import engine.GameSettings;
+
 
 /**
  * Groups enemy ships into a formation that moves together.
@@ -74,6 +77,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Minimum speed allowed.
 	 */
+/*test*/
 	private static final int MINIMUM_SPEED = 10;
 	/**
 	 * Speed control in update
@@ -299,6 +303,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		cleanUp();
+		int fixed_mvX = 80;
+		int fixed_mvY = 10;
 		int inverse = 0;
 		int movementX = 0;
 		int movementY = 0;
@@ -358,11 +364,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 			if (currentDirection == Direction.RIGHT)
 				movementX = X_SPEED;
-			else if (currentDirection == Direction.LEFT)
+			else if (currentDirection == Direction.LEFT) {
 				movementX = -X_SPEED;
-
+				fixed_mvX *= -1;
+			}
 			else
 				movementY = Y_SPEED;
+
 
 			positionX += movementX;
 			positionY += movementY;
@@ -386,15 +394,19 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			if (isAtBottom) {
 				positionY = positionY * (-1);
 				inverse = 1;
-			} else if (isAtTop)
+				fixed_mvY *= -1;
+			} else if (isAtTop) {
 				inverse = 0;
+			}
+
 
 			if (positionY < 150 && inverse == 0 && Current_Level == 8 && rushDistance <= 0 && Math.random() < 0.02) {
 				this.logger.info("Rush Start!");
 				rushDistance = 30;
 			}
-
+			int rand = 0;
 			if (Current_Level == 8) {
+				rand = random("98","2","1","2");
 				if (inverse == 0) {
 					movementY += SPEED_CONTROL;
 
@@ -411,14 +423,61 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 
 			for (List<EnemyShip> column : this.enemyShips) {
-
 				for (EnemyShip enemyShip : column) {
-
-					enemyShip.move(movementX, movementY);
+					switch (rand) {
+						case 2:
+							enemyShip.move(fixed_mvX, fixed_mvY);
+							break;
+						default:
+							enemyShip.move(movementX,movementY);
+					}
 					enemyShip.update();
 				}
 			}
 		}
+	}
+	private int random(String rate1, String rate2, String rs1, String rs2){
+		double tmpRandom = (Math.random() * 100);
+		double tmpRatePrev = 0, tmpRateNext = 0;
+		int result = 0;
+		//소수 둘째자리까지 절삭
+		tmpRandom = Math.round(tmpRandom * 100) / 100.0;
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
+
+		map.put("rate", rate1);
+		map.put("value", rs1);
+		list.add(map);
+
+		map = new HashMap<String, String>();
+
+		map.put("rate", rate2);
+		map.put("value", rs2);
+		list.add(map);
+		map = new HashMap<String, String>();
+
+		map.clear();
+		map = new HashMap<String, String>();
+
+
+		for(int i = 0; i < list.size(); i++) {
+			if(tmpRandom == 100) {
+				//만약 난수가 100이라면 가장 마지막에있는 list 인덱스에 있는 value 적용
+				result = Integer.parseInt(list.get(list.size()-1).get("value"));
+				break;
+			} else {
+				double rate = Double.parseDouble(list.get(i).get("rate"));
+				tmpRateNext = tmpRatePrev + rate;
+				if(tmpRandom >= tmpRatePrev && tmpRandom < tmpRateNext) {
+					result = Integer.parseInt(list.get(i).get("value"));
+					break;
+				} else {
+					tmpRatePrev = tmpRateNext;
+				}
+			}
+		}
+		return result;
 	}
 
 	/**

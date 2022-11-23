@@ -11,7 +11,7 @@ public class InGameItem extends Entity {
     private int speed;
     /** Item types. */
 
-    private ItemState itemState;
+    private I_State i_state;
     private boolean isget;
 
     /**
@@ -23,14 +23,14 @@ public class InGameItem extends Entity {
      *            Initial position of the item in the Y axis.
      * @param speed
      *            Initial set of the item's drop-speed
-     * @param itemState
+     * @param i_state
      *            set the item's type.
      */
-    public InGameItem(final int positionX, final int positionY, final int speed, final ItemState itemState) {
+    public InGameItem(final int positionX, final int positionY, final int speed, final I_State i_state) {
         super(positionX, positionY, 9 * 2, 9 * 2, Color.ORANGE);
         this.setPositionX(positionX -this.getWidth()/2);
         this.speed = speed;
-        this.itemState = itemState;
+        this.i_state = i_state;
         this.isget = false;
     }
 
@@ -71,7 +71,7 @@ public class InGameItem extends Entity {
      *
      * @return itemtype that dropped item has.
      */
-    public ItemState getItemType(){
-        return this.itemState;
+    public I_State getItemType(){
+        return this.i_state;
     }
 }

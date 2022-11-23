@@ -8,7 +8,7 @@ public class ItemPool {
     /** Array of obtained items. */
     private static InGameItem[] inGameItems = new InGameItem[1];
     /** Attributes of obtained items. */
-    private static ItemState itemState;
+    private static I_State i_state;
     /** Initialize item array. */
     static {
         for(int i =0 ; i < 1 ; i++){

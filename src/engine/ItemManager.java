@@ -1,7 +1,7 @@
 package engine;
 
 import entity.EnemyShipFormation;
-import entity.ItemState;
+import entity.I_State;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,24 +15,24 @@ import java.util.Queue;
 public class ItemManager {
 
     /** item list for shuffle items randomly. */
-    private ArrayList<ItemState> item_list = new ArrayList<ItemState>();
+    private ArrayList<I_State> item_list = new ArrayList<I_State>();
     /** randomly shuffled queue that has items, for assigning items to enemyship. */
-    private Queue<ItemState> item_queue = new LinkedList<ItemState>();
+    private Queue<I_State> item_queue = new LinkedList<I_State>();
     /** pointUpItem itemtype  */
-    private ItemState pointupitem = ItemState.PointUpItem;
+    private I_State pointupitem = I_State.PointUpItem;
     /** speedUpItem itemtype  */
-    private ItemState speedupitem = ItemState.SpeedUpItem;
+    private I_State speedupitem = I_State.SpeedUpItem;
     /** shield itemtype  */
-    private ItemState shielditem = ItemState.ShieldItem;
+    private I_State shielditem = I_State.ShieldItem;
     /** extralifeitem itemtype  */
-    private ItemState extralifeitem = ItemState.ExtraLifeItem;
+    private I_State extralifeitem = I_State.ExtraLifeItem;
     /** bulletspeed itemtype  */
-    private ItemState bulletspeeditem = ItemState.BulletSpeedItem;
+    private I_State bulletspeeditem = I_State.BulletSpeedItem;
     /** machinegun itemtype  */
-    private ItemState machinegun = ItemState.MachineGun;
+    private I_State machinegun = I_State.MachineGun;
     /** enemyshipspeeditem itemtype, not used */
 
-    private ItemState  enemyshipspeeditem = ItemState.EnemyShipSpeedItem;
+    private I_State  enemyshipspeeditem = I_State.EnemyShipSpeedItem;
     /** information that has the num of enemyship, init state of gamescreen  */
     private int enemyshipssize;
 
@@ -83,7 +83,7 @@ public class ItemManager {
             //노은솔
             /*enemyshipformation의 enemyship의 hasItem값이 1이면 item_queue에서 아이템타입 할당
              */
-            ItemState tmpitem = null;
+            I_State tmpitem = null;
             tmpitem = item_queue.remove();
             enemyshipformation.getEnemyShip().get(i).get(j).setItemType(tmpitem);
             item_queue.add(tmpitem);

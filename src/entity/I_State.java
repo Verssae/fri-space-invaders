@@ -1,6 +1,6 @@
 package entity;
 
-public enum ItemState {
+public enum I_State {
     /** BulletSpeedItem */
     BulletSpeedItem,
     /** pointupitem */

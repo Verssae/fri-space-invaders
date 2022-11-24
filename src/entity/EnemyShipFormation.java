@@ -194,6 +194,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		DOWN
 	}
 
+	private int rushDistance = 0;
 
 	/**
 	 * Constructor, sets the initial conditions.
@@ -397,32 +398,40 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			} else if (isAtTop) {
 				inverse = 0;
 			}
-			int rand = random("95","5","0","1");
+
+
+			if (positionY < 150 && inverse == 0 && Current_Level == 8 && rushDistance <= 0 && Math.random() < 0.02) {
+				this.logger.info("Rush Start!");
+				rushDistance = 30;
+			}
+			int rand = 0;
+			if (Current_Level == 8) {
+				rand = random("98","2","1","2");
+				if (inverse == 0) {
+					movementY += SPEED_CONTROL;
+
+				} else if (inverse == 1) {
+					movementY += SPEED_CONTROL * (-1);
+
+				}
+
+				if (rushDistance > 0) {
+					movementY *= 10;
+					movementX /= 2;
+					rushDistance--;
+				}
+			}
 
 			for (List<EnemyShip> column : this.enemyShips) {
 				for (EnemyShip enemyShip : column) {
-					if (Current_Level == 8) {
-						if (inverse == 0) {
-							movementY = SPEED_CONTROL;
-
-						} else if (inverse == 1) {
-							movementY = SPEED_CONTROL * (-1);
-						}
-						if(rand == 1){
-							if(currentDirection == Direction.RIGHT)
-								enemyShip.move(fixed_mvX,fixed_mvY);
-							else
-								enemyShip.move(fixed_mvX,fixed_mvY);
-						}
-						else {
-							enemyShip.move(movementX, movementY);
-						}
-						enemyShip.update();
+					switch (rand) {
+						case 2:
+							enemyShip.move(fixed_mvX, fixed_mvY);
+							break;
+						default:
+							enemyShip.move(movementX,movementY);
 					}
-					else {
-						enemyShip.move(movementX, movementY);
-						enemyShip.update();
-					}
+					enemyShip.update();
 				}
 			}
 		}

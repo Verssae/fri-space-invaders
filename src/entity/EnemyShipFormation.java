@@ -1,10 +1,6 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 import screen.Screen;
@@ -100,7 +96,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * List of summon enemy ship
 	 */
-	private List<EnemyShip> summonShips;
+	private List<List<EnemyShip>> summonShips;
 	/**
 	 * Minimum time between shots.
 	 */
@@ -216,7 +212,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.positionX = INIT_POS_X;
 		this.positionY = INIT_POS_Y;
 		this.shooters = new ArrayList<EnemyShip>();
-		this.summonShips = new ArrayList<EnemyShip>();
 		SpriteType spriteType;
 
 		this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh
@@ -389,24 +384,32 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				column.removeAll(destroyed);
 			}
 			if (reachAtBottom) {
-				logger.info("BossShip reached Bottom");
-				for (List<EnemyShip> column : this.enemyShips) {
-					for (int i = 0; i < this.nShipsHigh; i++) {
-						if (i / (float) this.nShipsHigh < PROPORTION_C)
-							spriteType = SpriteType.EnemyShipC1;
-						else if (i / (float) this.nShipsHigh < PROPORTION_B
-								+ PROPORTION_C)
-							spriteType = SpriteType.EnemyShipB1;
-						else
-							spriteType = SpriteType.EnemyShipA1;
+				/**for (int i = 0; i < this.nShipsWide; i++)
+					summonShips.add(new ArrayList<EnemyShip>());
+				 */
+				System.out.println(countAtBottom());
+				List<EnemyShip> summonShips = new ArrayList<EnemyShip>();
+				if(countAtBottom()%2==0)
+					for (List<EnemyShip> column : this.enemyShips) {
+						for (int i = 0; i < 1; i++) {
+							spriteType = SpriteType.EnemyShipSpecial;
+							if (i / (float) this.nShipsHigh < PROPORTION_C)
+								spriteType = SpriteType.EnemyShipC1;
+							else if (i / (float) this.nShipsHigh < PROPORTION_B
+									+ PROPORTION_C)
+								spriteType = SpriteType.EnemyShipB1;
+							else
+								spriteType = SpriteType.EnemyShipA1;
 
-						column.add(new EnemyShip(0,0,spriteType));
-						this.shipCount++;
+							column.add(new EnemyShip((SEPARATION_DISTANCE
+									* this.enemyShips.indexOf(column)*3)
+									+ positionX,positionY,
+									spriteType));
+							this.shipCount++;
+							final Random RAND = new Random();
+							logger.info("BossShip reached Bottom");
 					}
 				}
-
-				this.shipWidth = this.enemyShips.get(0).get(0).getWidth();
-				this.shipHeight = this.enemyShips.get(0).get(0).getHeight();
 			}
 			if (isAtBottom) {
 				positionY = positionY * (-1);
@@ -416,7 +419,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				inverse = 0;
 
 			for (List<EnemyShip> column : this.enemyShips) {
-
 				for (EnemyShip enemyShip : column) {
 					if (Current_Level == 8) {
 						if (inverse == 0) {
@@ -618,5 +620,16 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 	public void setMovementSpeed(double setmovementspeed) {
 		baseSpeed = setmovementspeed;
+	}
+	int count=1;
+	public int countAtBottom(){
+		boolean reachAtBottom = positionY
+				+ this.height == screen.getHeight() - BOTTOM_MARGIN;
+		if (reachAtBottom)
+			if (count == 2)
+				count=0;
+			else
+				count+=1;
+		return count;
 	}
 }

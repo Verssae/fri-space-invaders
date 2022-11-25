@@ -170,7 +170,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 */
 	private int shipCount;
 
-	private int SummonCount = 1;
+	private int SummonCount = 2;
 
 	/**
 	 * Directions the formation can move.
@@ -389,7 +389,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				column.removeAll(destroyed);
 			}
 
-			if (reachAtBottom) {
+			if (countAtBottom()==6) {
 				System.out.println(countAtBottom());
 				this.summonShips.add(new ArrayList<EnemyShip>());
 				for (List<EnemyShip> summonShips : this.enemyShips){
@@ -400,8 +400,6 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 							(SEPARATION_DISTANCE)
 									+ positionY +(SEPARATION_DISTANCE * SummonCount), spriteType));
 					this.shipCount++;
-					final Random RAND = new Random();
-					logger.info("BossShip reached Bottom");
 					System.out.println(SummonCount);
 				}
 				SummonCount += 1;
@@ -621,7 +619,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		boolean reachAtBottom = positionY
 				+ this.height == screen.getHeight() - BOTTOM_MARGIN;
 		if (reachAtBottom)
-			if (count == 2)
+			if (count == 7)
 				count=0;
 			else
 				count+=1;

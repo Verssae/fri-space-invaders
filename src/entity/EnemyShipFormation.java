@@ -170,6 +170,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 */
 	private int shipCount;
 
+	private int SummonCount = 1;
+
 	/**
 	 * Directions the formation can move.
 	 */
@@ -200,6 +202,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.drawManager = Core.getDrawManager();
 		this.logger = Core.getLogger();
 		this.enemyShips = new ArrayList<List<EnemyShip>>();
+		this.summonShips = new ArrayList<List<EnemyShip>>();
 		this.currentDirection = Direction.RIGHT;
 		this.movementInterval = 0;
 		this.nShipsWide = gameSettings.getFormationWidth();
@@ -216,7 +219,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 		this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh
 				+ " ship formation in (" + positionX + "," + positionY + ")");
-
+		/** ooo    nships = 3 nshipshigh=2
+		 *  ooo
+		 */
 		// Each sub-list is a column on the formation.
 		for (int i = 0; i < this.nShipsWide; i++)
 			this.enemyShips.add(new ArrayList<EnemyShip>());
@@ -383,33 +388,23 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				}
 				column.removeAll(destroyed);
 			}
-			if (reachAtBottom) {
-				/**for (int i = 0; i < this.nShipsWide; i++)
-					summonShips.add(new ArrayList<EnemyShip>());
-				 */
-				System.out.println(countAtBottom());
-				List<EnemyShip> summonShips = new ArrayList<EnemyShip>();
-				if(countAtBottom()%2==0)
-					for (List<EnemyShip> column : this.enemyShips) {
-						for (int i = 0; i < 1; i++) {
-							spriteType = SpriteType.EnemyShipSpecial;
-							if (i / (float) this.nShipsHigh < PROPORTION_C)
-								spriteType = SpriteType.EnemyShipC1;
-							else if (i / (float) this.nShipsHigh < PROPORTION_B
-									+ PROPORTION_C)
-								spriteType = SpriteType.EnemyShipB1;
-							else
-								spriteType = SpriteType.EnemyShipA1;
 
-							column.add(new EnemyShip((SEPARATION_DISTANCE
-									* this.enemyShips.indexOf(column)*3)
-									+ positionX,positionY,
-									spriteType));
-							this.shipCount++;
-							final Random RAND = new Random();
-							logger.info("BossShip reached Bottom");
-					}
+			if (reachAtBottom) {
+				System.out.println(countAtBottom());
+				this.summonShips.add(new ArrayList<EnemyShip>());
+				for (List<EnemyShip> summonShips : this.enemyShips){
+					spriteType = SpriteType.EnemyShipA1;
+					summonShips.add(new EnemyShip((SEPARATION_DISTANCE
+							* this.enemyShips.indexOf(summonShips))
+							+ positionX,
+							(SEPARATION_DISTANCE)
+									+ positionY +(SEPARATION_DISTANCE * SummonCount), spriteType));
+					this.shipCount++;
+					final Random RAND = new Random();
+					logger.info("BossShip reached Bottom");
+					System.out.println(SummonCount);
 				}
+				SummonCount += 1;
 			}
 			if (isAtBottom) {
 				positionY = positionY * (-1);

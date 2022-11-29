@@ -2,12 +2,13 @@ package screen;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import engine.*;
 import entity.*;
 import engine.Cooldown;
@@ -60,16 +61,11 @@ public class GameScreen extends Screen {
 	private EnemyShipFormation enemyShipFormation;
 	/** Player's ship. */
 	private Ship ship;
-	/** */
-	private List<EnemyShip> summonShips;
-
 	/** Bonus enemy ship that appears sometimes. */
 	private EnemyShip enemyShipSpecial;
 	/** Dangerous enemy ship tahat appears sometimes. */
 	private EnemyShip enemyShipDangerous;
 	/** Minimum time between bonus ship appearances. */
-	private EnemyShip enemyShipSummon;
-	/** if bossShip reached at bottom summoned enemy ship */
 	private Cooldown enemyShipSpecialCooldown;
 	/** Minimum time between dangerous ship appearances. */
 	private Cooldown enemyShipdangerousCooldown;
@@ -197,7 +193,7 @@ public class GameScreen extends Screen {
 		this.enemyShipdangerousCooldown.reset();
 		this.enemyShipdangerousExplosionCooldown = Core
 				.getCooldown(BONUS_SHIP_EXPLOSION);
-		// add summon ship
+		///////////////////////////////////
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
 		this.itemiterator = new HashSet<Item>();
@@ -214,7 +210,6 @@ public class GameScreen extends Screen {
 	 * 
 	 * @return Next screen code.
 	 */
-
 	public final int run() {
 		super.run();
 
@@ -227,8 +222,6 @@ public class GameScreen extends Screen {
 	/**
 	 * Updates the elements on screen and checks for events.
 	 */
-
-
 	protected final void update() {
 		super.update();
 
@@ -287,16 +280,6 @@ public class GameScreen extends Screen {
 					this.enemyShipDangerous = null;
 
 			}
-
-			if(this.ship.getPositionY() == 315) {
-				this.logger.info("소환 적 개체");
-
-				if (!this.enemyShipSummon.isDestroyed())
-					this.enemyShipSummon.move(1, 0);
-				else
-					this.enemyShipSummon = null;
-
-			}
 			if (this.enemyShipDangerous == null
 					&& this.enemyShipdangerousCooldown.checkFinished()) {
 				this.enemyShipDangerous = new EnemyShip(Color.BLUE);
@@ -308,12 +291,6 @@ public class GameScreen extends Screen {
 				this.lives--;
 				this.enemyShipDangerous = null;
 				this.logger.info("The dangerous ship has escaped and you has lost lives");
-			}
-			if (this.enemyShipSummon != null
-			&& this.enemyShipSummon.getPositionY() > this.height) {
-				this.lives--;
-				this.enemyShipSummon = null;
-				this.logger.info("The summon ship has disappeared and you has lost lives");
 			}
 
 			this.ship.update();

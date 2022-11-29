@@ -1,5 +1,6 @@
 package entity;
 import java.awt.Color;
+import java.util.Random;
 import java.util.Set;
 
 import engine.Cooldown;

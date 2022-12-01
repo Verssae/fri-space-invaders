@@ -438,6 +438,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		this.positionY = minPositionY;
 	}
 
+	public final int random_speed() { return (int) (Math.random()*1000); }
+
 	/**
 	 * Shoots a bullet downwards.
 	 *
@@ -470,6 +472,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 					this.shootingCooldown.reset();
 					bullets.add(BulletPool.getBullet(shooter.getPositionX()
 							+ shooter.width / 2, shooter.getPositionY(), 4));
+				}
+
+				if (this.Current_Level == 8) {
+					if (this.shootingCooldown.checkFinished()) {
+						this.shootingCooldown.reset();
+						bullets.add(BulletPool.getBullet(shooter.getPositionX()
+								+ shooter.width / 2, shooter.getPositionY(), random_speed()));
+					}
 				}
 				break;
 		}

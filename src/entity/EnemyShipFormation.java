@@ -83,16 +83,16 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Speed control in update
 	 */
-	private static int SPEED_CONTROL = 1;
+	private static final int SPEED_CONTROL = 1;
 
 	/**
 	 * DrawManager instance.
 	 */
-	private DrawManager drawManager;
+	private final DrawManager drawManager;
 	/**
 	 * Application logger.
 	 */
-	private Logger logger;
+	private final Logger logger;
 	/**
 	 * Screen to draw ships on.
 	 */
@@ -101,7 +101,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * List of enemy ships forming the formation.
 	 */
-	private List<List<EnemyShip>> enemyShips;
+	private final List<List<EnemyShip>> enemyShips;
 	/**
 	 * List of summon enemy ship
 	 */
@@ -113,19 +113,19 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Number of ships in the formation - horizontally.
 	 */
-	private int nShipsWide;
+	private final int nShipsWide;
 	/**
 	 * Number of ships in the formation - vertically.
 	 */
-	private int nShipsHigh;
+	private final int nShipsHigh;
 	/**
 	 * Time between shots.
 	 */
-	private int shootingInterval;
+	private final int shootingInterval;
 	/**
 	 * Variance in the time between shots.
 	 */
-	private int shootingVariance;
+	private final int shootingVariance;
 	/**
 	 * Initial ship speed.
 	 */
@@ -165,15 +165,15 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/**
 	 * Width of one ship.
 	 */
-	private int shipWidth;
+	private final int shipWidth;
 	/**
 	 * Height of one ship.
 	 */
-	private int shipHeight;
+	private final int shipHeight;
 	/**
 	 * List of ships that are able to shoot.
 	 */
-	private List<EnemyShip> shooters;
+	private final List<EnemyShip> shooters;
 	/**
 	 * Number of not destroyed ships.
 	 */
@@ -322,8 +322,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		double remainingProportion = (double) this.shipCount
 				/ (this.nShipsHigh * this.nShipsWide);
 
-		this.movementSpeed = (double) (Math.pow(remainingProportion, 2)
-				* this.baseSpeed);
+		this.movementSpeed = Math.pow(remainingProportion, 2)
+				* this.baseSpeed;
 
 		if (baseSpeed > 0)
 			this.movementSpeed += MINIMUM_SPEED;
@@ -606,7 +606,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		for (List<EnemyShip> column : this.enemyShips)
 			for (int i = 0; i < column.size(); i++)
 				if (column.get(i).equals(destroyedShip)) {
-					if(this.Current_Level == 8) {
+					if(Current_Level == 8) {
 						destroyedShip.bossLives--;
 						if (destroyedShip.bossLives == 0) {
 							column.get(i).destroy();

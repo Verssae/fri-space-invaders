@@ -258,6 +258,10 @@ public class GameScreen extends Screen {
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets))
 						this.bulletsShot++;
+
+				if (inputManager.isKeyDown(KeyEvent.VK_C))
+					if (this.ship.shoot(this.bullets))
+						this.bulletsShot += 3;
 			}
 
 			if (this.enemyShipSpecial != null) {

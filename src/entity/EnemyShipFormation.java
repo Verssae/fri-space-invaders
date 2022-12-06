@@ -313,7 +313,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		}
 
 		cleanUp();
-		int fixed_mvX = 80;
+		int fixed_mvX = 90;
 		int fixed_mvY = 10;
 		int inverse = 0;
 		int movementX = 0;
@@ -427,13 +427,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				inverse = 0;
 			}
 
-			if (positionY < 150 && inverse == 0 && Current_Level == 8 && rushDistance <= 0 && Math.random() < 0.02) {
-				this.logger.info("Rush Start!");
-				rushDistance = 30;
-			}
+//			if (positionY < 150 && inverse == 0 && Current_Level == 8 && rushDistance <= 0 && Math.random() < 0.02) {
+//				this.logger.info("Rush Start!");
+//				rushDistance = 30;
+//			}
 			int rand = 0;
 			if (Current_Level == 8) {
-				rand = random("98","2","1","2");
+				rand = random("98","1","1","1","2","3");
+
 				if (inverse == 0) {
 					movementY += SPEED_CONTROL;
 
@@ -443,6 +444,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				}
 
 				if (rushDistance > 0) {
+					this.logger.info("Rush Start!");
 					movementY *= 10;
 					movementX /= 2;
 					rushDistance--;
@@ -453,6 +455,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				for (EnemyShip enemyShip : column) {
 					switch (rand) {
 						case 2:
+							if (positionY < 150 && inverse == 0 && rushDistance <= 0) {
+								rushDistance = 30;
+							}
+							enemyShip.move(movementX,movementY);
+						case 3:
 							enemyShip.move(fixed_mvX, fixed_mvY);
 							break;
 						default:
@@ -463,7 +470,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			}
 		}
 	}
-	private int random(String rate1, String rate2, String rs1, String rs2){
+	private int random(String rate1, String rate2, String rate3, String rs1, String rs2, String rs3){
 		double tmpRandom = (Math.random() * 100);
 		double tmpRatePrev = 0, tmpRateNext = 0;
 		int result = 0;
@@ -481,6 +488,12 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 
 		map.put("rate", rate2);
 		map.put("value", rs2);
+		list.add(map);
+		map = new HashMap<String, String>();
+
+
+		map.put("rate", rate3);
+		map.put("value", rs3);
 		list.add(map);
 		map = new HashMap<String, String>();
 
